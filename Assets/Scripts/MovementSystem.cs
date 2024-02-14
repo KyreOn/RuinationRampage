@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(Animator))]
 public class MovementSystem : MonoBehaviour
 {
-    [SerializeField] private float     speed;
-    [SerializeField] private float     rotationSpeed;
-    [SerializeField] private Transform playerModel; 
-    [SerializeField] private Transform cameraOffset;
-    [SerializeField] private float     offsetStrength;
+    [SerializeField] private float      speed;
+    [SerializeField] private float      rotationSpeed;
+    [SerializeField] private Transform  playerModel; 
+    [SerializeField] private Transform  cameraOffset;
+    [SerializeField] private float      offsetStrength;
+    [SerializeField] private GameObject model;
     
     private CharacterController _controller;
     private Animator            _animator;
