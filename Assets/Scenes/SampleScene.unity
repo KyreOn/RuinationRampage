@@ -187,8 +187,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51366706}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39975026, y: -0.11183458, z: 0.049211495, w: 0.9084443}
-  m_LocalPosition: {x: 2.332, y: 10.32, z: -7.55}
+  m_LocalRotation: {x: 0.4331887, y: 0.000000014357469, z: -0.000000006900555, w: 0.9013033}
+  m_LocalPosition: {x: 0.332, y: 11.32, z: -7.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -360,8 +360,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39975026, y: -0.11183458, z: 0.049211495, w: 0.9084443}
-  m_LocalPosition: {x: 2.332, y: 10.32, z: -7.55}
+  m_LocalRotation: {x: 0.4331887, y: 0.000000014357469, z: -0.000000006900555, w: 0.9013033}
+  m_LocalPosition: {x: 0.332, y: 11.32, z: -7.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 2, y: 9, z: -8}
+  m_FollowOffset: {x: 0, y: 10, z: -8}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -1137,11 +1137,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136273660}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 783329c8b52ec734ea56e22aaed8ddda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crosshair: {fileID: 2800000, guid: 06162fb10550a5741a7d1cbe1d54a3dd, type: 3}
 --- !u!143 &1136273662
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1155,7 +1156,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1204,9 +1205,6 @@ MonoBehaviour:
   model: {fileID: 1192010978}
   arrowObject: {fileID: 5336553875213618851, guid: cda6fb2c4ef70db4a898941c91ba62f8,
     type: 3}
-  aimLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &1136273668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,8 +1264,11 @@ MonoBehaviour:
   rotationSpeed: 500
   playerModel: {fileID: 1719082510}
   cameraOffset: {fileID: 758640436}
-  offsetStrength: 0.03
+  offsetStrength: 0.06
   model: {fileID: 1192010978}
+  aimLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &1136273671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1698,7 +1699,7 @@ GameObject:
   - component: {fileID: 1892992348}
   - component: {fileID: 1892992346}
   m_Layer: 7
-  m_Name: Plane (1)
+  m_Name: AimPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,7 +9,7 @@ public class CombatSystem : MonoBehaviour
 {
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject arrowObject;
-    [SerializeField] private LayerMask  aimLayer;
+    
     
     private Animator            _animator;
     private bool                _isAttacking;
@@ -24,27 +24,22 @@ public class CombatSystem : MonoBehaviour
     public void Weak()
     {
         _isAttacking = !_isAttacking;
-        _controller.enabled = false;
         _animator.SetBool("isAttacking", _isAttacking);
     }
 
+    public void Draw()
+    {
+        _controller.enabled = false;
+    }
     public void Shoot()
     {
         Debug.Log("Shoot");
         _controller.enabled = true;
-        Instantiate(arrowObject, transform.position, model.transform.rotation);
+        Instantiate(arrowObject, transform.position + model.transform.forward, model.transform.rotation);
     }
 
     private void Update()
     {
-        if (_controller.enabled) return;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit, float.MaxValue, aimLayer))
-        {
-            var direction  = hit.point - transform.position;
-            direction.Scale(new Vector3(1, 0, 1));
-            var toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, toRotation, 1000);
-        }
+        
     }
 }
