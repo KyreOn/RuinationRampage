@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField] private float lifeSpan;
+    [SerializeField] private float    speed;
+    [SerializeField] private float    lifeSpan;
+    
+    private Collider _collider;
+
+    private void Awake()
+    {
+        _collider = GetComponent<BoxCollider>();
+    }
 
     private void Update()
     {
@@ -16,6 +24,17 @@ public class Arrow : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(Vector3.forward);
+        transform.Translate(Vector3.forward * speed);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<HitEffect>().ApplyDamage();
+            Destroy(gameObject);
+        }
+            
+        
     }
 }

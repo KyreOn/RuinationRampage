@@ -9,7 +9,7 @@ public class CombatSystem : MonoBehaviour
 {
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject arrowObject;
-    
+    [SerializeField] private Transform  spawnPoint;
     
     private Animator            _animator;
     private bool                _isAttacking;
@@ -29,13 +29,20 @@ public class CombatSystem : MonoBehaviour
 
     public void Draw()
     {
+        Debug.Log("Draw");
         _controller.enabled = false;
+        _animator.speed = 2;
     }
     public void Shoot()
     {
+        Instantiate(arrowObject, spawnPoint.position, model.transform.rotation);
+    }
+
+    public void ShootEnd()
+    {
         Debug.Log("Shoot");
         _controller.enabled = true;
-        Instantiate(arrowObject, transform.position + model.transform.forward, model.transform.rotation);
+        _animator.speed = 1;
     }
 
     private void Update()
