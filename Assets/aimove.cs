@@ -49,17 +49,12 @@ public class aimove : MonoBehaviour
         _jumpCooldownTimer = Mathf.Clamp(_jumpCooldownTimer + Time.deltaTime, 0, jumpCooldown);
         _navCooldownTimer = Mathf.Clamp(_navCooldownTimer   + Time.deltaTime, 0, navCooldown);
         var distance = Vector3.Distance(transform.position, _target.position);
-        if (distance <= jumpMaxDistance && distance >= jumpMinDistance && _jumpCooldownTimer >= jumpCooldown && !_isAttacking)
+        if (distance <= jumpMaxDistance && distance >= jumpMinDistance && _jumpCooldownTimer >= jumpCooldown && !_isAttacking && !_isJump)
         {
             _jumpCooldownTimer = 0;
             _navCooldownTimer = 0;
             _isJump = true;
-        }
-
-        if (_isJump)
-        {
             StartJump();
-            _isJump = false;
         }
 
         if (distance <= attackRange)
@@ -69,7 +64,7 @@ public class aimove : MonoBehaviour
             var toRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1000);
         }
-        if (distance <= attackRange && _attackCooldownTimer >= attackCooldown)
+        if (distance <= attackRange && _attackCooldownTimer >= attackCooldown && !_isJump)
         {
             _isAttacking = true;
             _attackCooldownTimer = 0;
@@ -95,13 +90,14 @@ public class aimove : MonoBehaviour
         navMeshAgent.speed = 100;
         _animator.speed = 1;
         var distance = _target.position - transform.position;
-        distance.Scale(new Vector3(1f, 0, 1f));
+        distance.Scale(new Vector3(0.9f, 0, 0.9f));
         var jumpTarget = transform.position + distance;
         navMeshAgent.SetDestination(jumpTarget);
     }
 
     void EndJump()
     {
+        _isJump = false;
         navMeshAgent.speed = 0;
     }
 
@@ -122,11 +118,5 @@ public class aimove : MonoBehaviour
     void StopAttack()
     {
         _isAttacking = false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(transform.position + Vector3.forward + Vector3.up, new Vector3(1, 2, 1));
     }
 }

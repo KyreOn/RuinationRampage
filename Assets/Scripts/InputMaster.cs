@@ -44,6 +44,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c5f2f9c-62a2-4fc2-9076-dced25be4ab0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""weak"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cf7c759-11cf-48d7-a5b1-91cabbd1403c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""MnK"",
+                    ""action"": ""dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -139,6 +159,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_move = m_Character.FindAction("move", throwIfNotFound: true);
         m_Character_weak = m_Character.FindAction("weak", throwIfNotFound: true);
+        m_Character_dodge = m_Character.FindAction("dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -202,12 +223,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<ICharacterActions> m_CharacterActionsCallbackInterfaces = new List<ICharacterActions>();
     private readonly InputAction m_Character_move;
     private readonly InputAction m_Character_weak;
+    private readonly InputAction m_Character_dodge;
     public struct CharacterActions
     {
         private @PlayerInput m_Wrapper;
         public CharacterActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_Character_move;
         public InputAction @weak => m_Wrapper.m_Character_weak;
+        public InputAction @dodge => m_Wrapper.m_Character_dodge;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -223,6 +246,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @weak.started += instance.OnWeak;
             @weak.performed += instance.OnWeak;
             @weak.canceled += instance.OnWeak;
+            @dodge.started += instance.OnDodge;
+            @dodge.performed += instance.OnDodge;
+            @dodge.canceled += instance.OnDodge;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -233,6 +259,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @weak.started -= instance.OnWeak;
             @weak.performed -= instance.OnWeak;
             @weak.canceled -= instance.OnWeak;
+            @dodge.started -= instance.OnDodge;
+            @dodge.performed -= instance.OnDodge;
+            @dodge.canceled -= instance.OnDodge;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -263,5 +292,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnWeak(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }

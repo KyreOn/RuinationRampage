@@ -8,9 +8,10 @@ public class HitEffect : MonoBehaviour
     [SerializeField] private float      effectTime;
     
     private bool     _isHit;
+    private bool     _isInvincible;
     private float    _effectTimer;
     private Renderer _renderer;
-
+    
     private void Awake()
     {
         _renderer = model.GetComponent<Renderer>();
@@ -19,6 +20,7 @@ public class HitEffect : MonoBehaviour
 
     public void ApplyDamage()
     {
+        if (_isInvincible) return;
         _isHit = true;
         _effectTimer = 0;
         _renderer.sharedMaterial.SetInt("_Hit", 1);
@@ -32,5 +34,10 @@ public class HitEffect : MonoBehaviour
             _isHit = false;
             _renderer.material.SetInt("_Hit", 0);
         }
+    }
+
+    public void SetInvincible(bool status)
+    {
+        _isInvincible = status;
     }
 }

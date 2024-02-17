@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "dodge",
+                    "type": "Button",
+                    "id": "9c5f2f9c-62a2-4fc2-9076-dced25be4ab0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -88,6 +97,17 @@
                     "processors": "",
                     "groups": "MnK",
                     "action": "weak",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cf7c759-11cf-48d7-a5b1-91cabbd1403c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "MnK",
+                    "action": "dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

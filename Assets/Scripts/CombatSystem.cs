@@ -20,7 +20,7 @@ public class CombatSystem : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
     }
-    
+
     public void Weak()
     {
         _isAttacking = !_isAttacking;
@@ -29,9 +29,8 @@ public class CombatSystem : MonoBehaviour
 
     public void Draw()
     {
-        Debug.Log("Draw");
         _controller.enabled = false;
-        _animator.speed = 2;
+        _animator.speed = 3;
     }
     public void Shoot()
     {
@@ -40,7 +39,6 @@ public class CombatSystem : MonoBehaviour
 
     public void ShootEnd()
     {
-        Debug.Log("Shoot");
         _controller.enabled = true;
         _animator.speed = 1;
     }
