@@ -41,6 +41,7 @@ public class MovementSystem : MonoBehaviour
     {
         if (_canMove)
             _movementDir = _inputBuffer;
+        if (!_controller.enabled) return;
         _controller.Move(direction * (_curSpeed * Time.fixedDeltaTime));
     }
 

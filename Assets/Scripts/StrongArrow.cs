@@ -8,13 +8,6 @@ public class StrongArrow : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float lifeSpan;
     [SerializeField] private int   pierceCount;
-    
-    private Collider _collider;
-
-    private void Awake()
-    {
-        _collider = GetComponent<BoxCollider>();
-    }
 
     private void Update()
     {
@@ -30,15 +23,15 @@ public class StrongArrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player")
-        {
-            pierceCount--;
-            if (pierceCount == 0) Destroy(gameObject);
-        }
-            
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<HitEffect>().ApplyDamage();
+            pierceCount--;
         }
+        else
+            pierceCount = 0;
+
+        if (pierceCount == 0)
+            Destroy(gameObject);
     }
 }

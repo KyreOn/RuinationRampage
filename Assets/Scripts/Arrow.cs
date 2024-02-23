@@ -8,13 +8,6 @@ public class Arrow : MonoBehaviour
     [SerializeField] private float    speed;
     [SerializeField] private float    lifeSpan;
     
-    private Collider _collider;
-
-    private void Awake()
-    {
-        _collider = GetComponent<BoxCollider>();
-    }
-
     private void Update()
     {
         lifeSpan -= Time.deltaTime;
@@ -29,11 +22,8 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player")
-            Destroy(gameObject);
-        if (other.gameObject.tag == "Enemy")
-        {
+        if (other.gameObject.tag == "Enemy") 
             other.gameObject.GetComponent<HitEffect>().ApplyDamage();
-        }
+        Destroy(gameObject);
     }
 }
