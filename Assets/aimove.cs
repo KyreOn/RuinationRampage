@@ -57,13 +57,7 @@ public class aimove : MonoBehaviour
             StartJump();
         }
 
-        if (distance <= attackRange)
-        {
-            var direction = _target.position - transform.position;
-            direction.Scale(new Vector3(1, 0, 1));
-            var toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1000);
-        }
+        
         if (distance <= attackRange && _attackCooldownTimer >= attackCooldown && !_isJump)
         {
             _isAttacking = true;
@@ -85,21 +79,21 @@ public class aimove : MonoBehaviour
         _animator.speed = 0.3f;
     }
 
-    void Jump()
-    {
-        navMeshAgent.speed = 100;
-        _animator.speed = 1;
-        var distance = _target.position - transform.position;
-        distance.Scale(new Vector3(0.9f, 0, 0.9f));
-        var jumpTarget = transform.position + distance;
-        navMeshAgent.SetDestination(jumpTarget);
-    }
+    //void Jump()
+    //{
+    //    navMeshAgent.speed = 100;
+    //    _animator.speed = 1;
+    //    var distance = _target.position - transform.position;
+    //    distance.Scale(new Vector3(0.9f, 0, 0.9f));
+    //    var jumpTarget = transform.position + distance;
+    //    navMeshAgent.SetDestination(jumpTarget);
+    //}
 
-    void EndJump()
-    {
-        _isJump = false;
-        navMeshAgent.speed = 0;
-    }
+    //void EndJump()
+    //{
+    //    _isJump = false;
+    //    navMeshAgent.speed = 0;
+    //}
 
     void StartAttack()
     {

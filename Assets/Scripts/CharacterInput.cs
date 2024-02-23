@@ -26,6 +26,11 @@ public class CharacterInput : MonoBehaviour
     {
         _combatSystem.Weak();
     }
+
+    public void OnStrong()
+    {
+        _combatSystem.Strong();
+    }
     
     public void OnDodge()
     {

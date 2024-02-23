@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class StrongArrow : MonoBehaviour
 {
-    [SerializeField] private float    speed;
-    [SerializeField] private float    lifeSpan;
+    [SerializeField] private float speed;
+    [SerializeField] private float lifeSpan;
+    [SerializeField] private int   pierceCount;
     
     private Collider _collider;
 
@@ -30,7 +31,11 @@ public class Arrow : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Player")
-            Destroy(gameObject);
+        {
+            pierceCount--;
+            if (pierceCount == 0) Destroy(gameObject);
+        }
+            
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<HitEffect>().ApplyDamage();

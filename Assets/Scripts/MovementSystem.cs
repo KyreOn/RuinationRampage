@@ -111,7 +111,6 @@ public class MovementSystem : MonoBehaviour
     }
     public void DodgeEnd()
     {
-        Debug.Log("end");
         _animator.speed = 1;
         _canMove = true;
         _canRotate = true;

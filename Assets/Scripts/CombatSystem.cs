@@ -9,6 +9,7 @@ public class CombatSystem : MonoBehaviour
 {
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject arrowObject;
+    [SerializeField] private GameObject strongArrowObject;
     [SerializeField] private Transform  spawnPoint;
     
     private Animator            _animator;
@@ -30,7 +31,7 @@ public class CombatSystem : MonoBehaviour
     public void Draw()
     {
         _controller.enabled = false;
-        _animator.speed = 3;
+        _animator.speed = 2.5f;
     }
     public void Shoot()
     {
@@ -46,5 +47,22 @@ public class CombatSystem : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    public void Strong()
+    {
+        _isAttacking = !_isAttacking;
+        _animator.SetBool("isStrongAttack", _isAttacking);
+    }
+
+    public void StrongDraw()
+    {
+        _controller.enabled = false;
+        _animator.speed = 1.2f;
+    }
+    
+    public void StrongShoot()
+    {
+        Instantiate(strongArrowObject, spawnPoint.position, model.transform.rotation);
     }
 }

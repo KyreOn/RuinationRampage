@@ -1,22 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using BehaviorTree;
+using Node = BehaviorTree.Node;
+using Tree = BehaviorTree.Tree;
 
 public class UIUpdate : MonoBehaviour
 {
     [SerializeField] private TMP_Text   speedText;
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject enemy;
 
-    private MovementSystem _playerMS;
+    private Tree   tree;
+    private string text; 
+        
     void Start()
     {
-        _playerMS = player.GetComponent<MovementSystem>();
+        tree = enemy.GetComponent<Tree>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        speedText.text = _playerMS.GetSpeed().ToString();
+        text = "";
+        GetNode(tree.root, 0);
+        speedText.text = text;
     }
+
+    private void GetNode(Node node, int level)
+    {
+        text += string.Concat(Enumerable.Repeat("\t", level)) + node.GetType() + " " + node.state + "\n";
+        foreach (var child in node.children)
+        {
+            GetNode(child, level+1);
+        }
+    }
+    
 }

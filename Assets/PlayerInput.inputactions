@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "strong",
+                    "type": "Button",
+                    "id": "95100852-8086-4f60-a5e5-21b382a20513",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "dodge",
                     "type": "Button",
                     "id": "9c5f2f9c-62a2-4fc2-9076-dced25be4ab0",
@@ -108,6 +117,17 @@
                     "processors": "",
                     "groups": "MnK",
                     "action": "dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "976635fe-2aa1-4c12-90f7-2d2075e25558",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "MnK",
+                    "action": "strong",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
