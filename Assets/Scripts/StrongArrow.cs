@@ -25,7 +25,7 @@ public class StrongArrow : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<HitEffect>().ApplyDamage();
+            other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
             pierceCount--;
         }
         else

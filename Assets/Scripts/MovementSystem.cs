@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController))]
 public class MovementSystem : MonoBehaviour
 {
-    [SerializeField] private float      speed;
+    [SerializeField] private float      baseSpeed;
     [SerializeField] private float      rotationSpeed;
     [SerializeField] private Transform  playerModel; 
     [SerializeField] private Transform  cameraOffset;
@@ -13,28 +14,32 @@ public class MovementSystem : MonoBehaviour
     [SerializeField] private GameObject model;
     [SerializeField] private LayerMask  aimLayer;
     [SerializeField] private Transform  shootPoint;
+    [SerializeField] private float      dodgeCooldown;
     
     private CharacterController _controller;
-    private HitEffect           _hitEffect;
+    private DamageSystem        _damageSystem;
     private Animator            _animator;
+    private EffectSystem        _effectSystem;
     private Vector3             _movementDir;
     private Camera              _camera;
     private bool                _canMove;
     private bool                _canRotate;
     private Vector3             _inputBuffer;
-    private float               _curSpeed;
+    private float               _dodgeCooldownTimer;
+    
+    public float curSpeed;
     
 
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _hitEffect = GetComponent<HitEffect>();
+        _damageSystem = GetComponent<DamageSystem>();
         _animator = GetComponent<Animator>();
+        _effectSystem = GetComponent<EffectSystem>();
         Cursor.lockState = CursorLockMode.Confined;
         _camera = Camera.main;
         _canMove = true;
         _canRotate = true;
-        _curSpeed = speed;
     }
     
     private void Move(Vector3 direction)
@@ -42,7 +47,7 @@ public class MovementSystem : MonoBehaviour
         if (_canMove)
             _movementDir = _inputBuffer;
         if (!_controller.enabled) return;
-        _controller.Move(direction * (_curSpeed * Time.fixedDeltaTime));
+        _controller.Move(direction * (curSpeed * Time.fixedDeltaTime));
     }
 
     private void FixedUpdate()
@@ -63,7 +68,7 @@ public class MovementSystem : MonoBehaviour
 
     private void Update()
     {
-        _curSpeed = Mathf.Lerp(_curSpeed, speed, Time.deltaTime);
+        CalculateSpeed();
         var mousePos = Input.mousePosition;
         var offset   = new Vector3(Screen.width / 2 - mousePos.x, 0, Screen.height / 2 - mousePos.y);
         offset.Scale(new Vector3(-0.01f * offsetStrength * 9,     0, -0.01f * offsetStrength * 16));
@@ -95,7 +100,7 @@ public class MovementSystem : MonoBehaviour
     public void DodgeStart()
     {
         _animator.speed = 2;
-        _curSpeed = 10;
+        _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f));
         _canMove = false;
         _canRotate = false;
         if (_movementDir == Vector3.zero)
@@ -103,7 +108,7 @@ public class MovementSystem : MonoBehaviour
             _movementDir = model.transform.forward;
         }
         DodgeRotate();
-        _hitEffect.SetInvincible(true);
+        _damageSystem.SetInvincible(true);
     }
     private void DodgeRotate()
     {
@@ -115,9 +120,14 @@ public class MovementSystem : MonoBehaviour
         _animator.speed = 1;
         _canMove = true;
         _canRotate = true;
-        _hitEffect.SetInvincible(false);
-        _curSpeed = 10;
+        _damageSystem.SetInvincible(false);
+        _effectSystem.AddEffect(new SlowEffect(1f, 0.8f));
     }
 
-    public float GetSpeed() => _curSpeed;
+    public float GetSpeed() => curSpeed;
+
+    private void CalculateSpeed()
+    {
+        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers();
+    }
 }

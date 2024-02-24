@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitEffect : MonoBehaviour
+public class DamageSystem : MonoBehaviour
 {
     [SerializeField] private GameObject model;
     [SerializeField] private float      effectTime;
     
-    private bool     _isHit;
-    private bool     _isInvincible;
-    private float    _effectTimer;
-    private Renderer _renderer;
+    private EffectSystem _effectSystem;
+    private bool         _isHit;
+    private bool         _isInvincible;
+    private float        _effectTimer;
+    private Renderer     _renderer;
     
     private void Awake()
     {
+        _effectSystem = GetComponent<EffectSystem>();
         _renderer = model.GetComponent<Renderer>();
         _renderer.material.SetInt("_Hit", 0);
     }
@@ -24,6 +26,7 @@ public class HitEffect : MonoBehaviour
         _isHit = true;
         _effectTimer = 0;
         _renderer.sharedMaterial.SetInt("_Hit", 1);
+        _effectSystem.AddEffect(new DamageEffect(0.2f, 2), false);
     }
 
     public void Update()

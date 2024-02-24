@@ -10,6 +10,7 @@ public class CharacterInput : MonoBehaviour
 {
     private MovementSystem _movementSystem;
     private CombatSystem   _combatSystem;
+    
 
     private void Awake()
     {
