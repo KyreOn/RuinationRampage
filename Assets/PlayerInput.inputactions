@@ -42,12 +42,30 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "spell1",
+                    "name": "spellQ",
                     "type": "Button",
                     "id": "ca49ac5a-d0bd-47d9-b2cf-c3db01c0fe16",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "spellE",
+                    "type": "Button",
+                    "id": "7ebedafa-9522-4d17-8081-306a0dd35e6c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "spellR",
+                    "type": "Button",
+                    "id": "b9573044-b826-4e17-a01e-bac56330e499",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -143,11 +161,33 @@
                 {
                     "name": "",
                     "id": "7ba42ec8-6834-4fe9-b56b-5ff0ca09977f",
-                    "path": "",
-                    "interactions": "",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
-                    "groups": "",
-                    "action": "spell1",
+                    "groups": "MnK",
+                    "action": "spellQ",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e88c723-a01f-4d15-ac1c-61167e54c6bf",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "MnK",
+                    "action": "spellE",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "744fa491-6d51-47db-a6f7-2c43677d309c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "MnK",
+                    "action": "spellR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

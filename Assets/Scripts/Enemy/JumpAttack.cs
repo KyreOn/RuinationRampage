@@ -14,7 +14,8 @@ public class JumpAttack : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private Animator     _animator;
     private GameObject   _target;
-
+    private Vector3      _jumpTarget;
+    
     public bool isJump;
 
     private void Awake()
@@ -36,6 +37,7 @@ public class JumpAttack : MonoBehaviour
         _jumpCooldownTimer = 0;
         isJump = true;
         _isPreparing = true;
+        _navMeshAgent.radius = 0.11f;
         return true;
     }
     
@@ -51,6 +53,7 @@ public class JumpAttack : MonoBehaviour
     {
         _navMeshAgent.speed = 0;
         _navMeshAgent.angularSpeed = 10000;
+        _navMeshAgent.radius = 0.5f;
         isJump = false;
     }
 
@@ -62,15 +65,23 @@ public class JumpAttack : MonoBehaviour
             {
                 var distance = _target.transform.position - transform.position;
                 distance.Scale(new Vector3(0.8f, 0, 0.8f));
-                var jumpTarget = transform.position + distance;
-                _navMeshAgent.SetDestination(jumpTarget);
+                _jumpTarget = transform.position + distance;
+                _navMeshAgent.SetDestination(_jumpTarget);
             }
         }
+
+        if (isJump)
+        {
+            _navMeshAgent.avoidancePriority = (int)(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime * 100);
+        }
+        
         if (_canJump) return;
         _jumpCooldownTimer += Time.deltaTime;
         if (_jumpCooldownTimer >= jumpCooldown)
         {
             _canJump = true;
         }
+
+        
     }
 }

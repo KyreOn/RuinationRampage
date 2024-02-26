@@ -6,8 +6,7 @@ using UnityEngine;
 public enum EffectType
 {
     SPEED,
-    DAMAGE,
-    FAILURE
+    DISABLE,
 }
 public class Effect
 {

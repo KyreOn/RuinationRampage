@@ -13,6 +13,7 @@ public class MovementSystem : MonoBehaviour
     [SerializeField] private float      offsetStrength;
     [SerializeField] private GameObject model;
     [SerializeField] private LayerMask  aimLayer;
+    [SerializeField] private LayerMask  dodgeLayer;
     [SerializeField] private Transform  shootPoint;
     [SerializeField] private float      dodgeCooldown;
     
@@ -28,7 +29,7 @@ public class MovementSystem : MonoBehaviour
     private float               _dodgeCooldownTimer;
     
     public float curSpeed;
-    
+    public bool  isAttacking;
 
     private void Awake()
     {
@@ -53,11 +54,11 @@ public class MovementSystem : MonoBehaviour
     private void FixedUpdate()
     {
         Move(_movementDir);
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (!_canRotate) return;
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, aimLayer))
         {
-            var direction = hit.point - shootPoint.position;
+            var direction = hit.point - (isAttacking ? shootPoint.position : transform.position);
             if (direction.magnitude <= 0.6f)
                 return;
             direction.Scale(new Vector3(1, 0, 1));
@@ -109,6 +110,7 @@ public class MovementSystem : MonoBehaviour
         }
         DodgeRotate();
         _damageSystem.SetInvincible(true);
+        _controller.excludeLayers = dodgeLayer;
     }
     private void DodgeRotate()
     {
@@ -122,6 +124,7 @@ public class MovementSystem : MonoBehaviour
         _canRotate = true;
         _damageSystem.SetInvincible(false);
         _effectSystem.AddEffect(new SlowEffect(1f, 0.8f));
+        _controller.excludeLayers = aimLayer;
     }
 
     public float GetSpeed() => curSpeed;

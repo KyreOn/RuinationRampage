@@ -49,6 +49,6 @@ public class ChaseTask : Node
     
     private void CalculateSpeed()
     {
-        _curSpeed = _baseSpeed * _effectSystem.CalculateSpeedModifiers();
+        _curSpeed = _baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfDisabled() ? 0 : 1);
     }
 }

@@ -35,6 +35,11 @@ public class EffectSystem : MonoBehaviour
         return _effects.Where(effect => effect.effectType == EffectType.SPEED).Aggregate(1f, (current, effect) => current * effect.ApplyEffect());
     }
 
+    public bool CheckIfDisabled()
+    {
+        return _effects.Any(effect => effect.effectType == EffectType.DISABLE);
+    }
+    
     private Effect GetEffectById(int id)
     {
         foreach (var effect in _effects)

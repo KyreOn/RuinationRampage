@@ -12,6 +12,9 @@ public class CharacterInput : MonoBehaviour
     [SerializeField] private InputActionReference weakAttack;
     [SerializeField] private InputActionReference strongAttack;
     [SerializeField] private InputActionReference dodge;
+    [SerializeField] private InputActionReference spellQ;
+    [SerializeField] private InputActionReference spellE;
+    [SerializeField] private InputActionReference spellR;
     
     private MovementSystem _movementSystem;
     private CombatSystem   _combatSystem;
@@ -29,6 +32,13 @@ public class CharacterInput : MonoBehaviour
         strongAttack.action.started += StrongAttackStart;
         strongAttack.action.canceled += StrongAttackStop;
         dodge.action.performed += OnDodge;
+        spellQ.action.started += OnPrepareSpellQ;
+        spellQ.action.canceled += OnCastSpellQ;
+        spellE.action.started += OnPrepareSpellE;
+        spellE.action.canceled += OnCastSpellE;
+        spellR.action.started += OnPrepareSpellR;
+        spellR.action.canceled += OnCastSpellR;
+        
     }
 
     private void OnDisable()
@@ -38,6 +48,12 @@ public class CharacterInput : MonoBehaviour
         strongAttack.action.started -= StrongAttackStart;
         strongAttack.action.canceled -= StrongAttackStop;
         dodge.action.performed -= OnDodge;
+        spellQ.action.started -= OnPrepareSpellQ;
+        spellQ.action.canceled -= OnCastSpellQ;
+        spellE.action.started -= OnPrepareSpellE;
+        spellE.action.canceled -= OnCastSpellE;
+        spellR.action.started -= OnPrepareSpellR;
+        spellR.action.canceled -= OnCastSpellR;
     }
     
     private void WeakAttackStart(InputAction.CallbackContext obj)
@@ -65,6 +81,36 @@ public class CharacterInput : MonoBehaviour
         _movementSystem.Dodge();
     }
 
+    private void OnPrepareSpellQ(InputAction.CallbackContext obj)
+    {
+        _combatSystem.PrepareSpellQ();
+    }
+    
+    private void OnCastSpellQ(InputAction.CallbackContext obj)
+    {
+        _combatSystem.CastSpellQ();
+    }
+    
+    private void OnPrepareSpellE(InputAction.CallbackContext obj)
+    {
+        _combatSystem.PrepareSpellE();
+    }
+    
+    private void OnCastSpellE(InputAction.CallbackContext obj)
+    {
+        _combatSystem.CastSpellE();
+    }
+    
+    private void OnPrepareSpellR(InputAction.CallbackContext obj)
+    {
+        _combatSystem.PrepareSpellR();
+    }
+    
+    private void OnCastSpellR(InputAction.CallbackContext obj)
+    {
+        _combatSystem.CastSpellR();
+    }
+    
     private void Update()
     {
         _movementSystem.UpdateDirection(movement.action.ReadValue<Vector2>());

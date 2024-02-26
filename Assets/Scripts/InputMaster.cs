@@ -64,12 +64,30 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""spell1"",
+                    ""name"": ""spellQ"",
                     ""type"": ""Button"",
                     ""id"": ""ca49ac5a-d0bd-47d9-b2cf-c3db01c0fe16"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""spellE"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ebedafa-9522-4d17-8081-306a0dd35e6c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""spellR"",
+                    ""type"": ""Button"",
+                    ""id"": ""b9573044-b826-4e17-a01e-bac56330e499"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -165,11 +183,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7ba42ec8-6834-4fe9-b56b-5ff0ca09977f"",
-                    ""path"": """",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""spell1"",
+                    ""groups"": ""MnK"",
+                    ""action"": ""spellQ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e88c723-a01f-4d15-ac1c-61167e54c6bf"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""MnK"",
+                    ""action"": ""spellE"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""744fa491-6d51-47db-a6f7-2c43677d309c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""MnK"",
+                    ""action"": ""spellR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -201,7 +241,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Character_weak = m_Character.FindAction("weak", throwIfNotFound: true);
         m_Character_strong = m_Character.FindAction("strong", throwIfNotFound: true);
         m_Character_dodge = m_Character.FindAction("dodge", throwIfNotFound: true);
-        m_Character_spell1 = m_Character.FindAction("spell1", throwIfNotFound: true);
+        m_Character_spellQ = m_Character.FindAction("spellQ", throwIfNotFound: true);
+        m_Character_spellE = m_Character.FindAction("spellE", throwIfNotFound: true);
+        m_Character_spellR = m_Character.FindAction("spellR", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -267,7 +309,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_weak;
     private readonly InputAction m_Character_strong;
     private readonly InputAction m_Character_dodge;
-    private readonly InputAction m_Character_spell1;
+    private readonly InputAction m_Character_spellQ;
+    private readonly InputAction m_Character_spellE;
+    private readonly InputAction m_Character_spellR;
     public struct CharacterActions
     {
         private @PlayerInput m_Wrapper;
@@ -276,7 +320,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @weak => m_Wrapper.m_Character_weak;
         public InputAction @strong => m_Wrapper.m_Character_strong;
         public InputAction @dodge => m_Wrapper.m_Character_dodge;
-        public InputAction @spell1 => m_Wrapper.m_Character_spell1;
+        public InputAction @spellQ => m_Wrapper.m_Character_spellQ;
+        public InputAction @spellE => m_Wrapper.m_Character_spellE;
+        public InputAction @spellR => m_Wrapper.m_Character_spellR;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -298,9 +344,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @dodge.started += instance.OnDodge;
             @dodge.performed += instance.OnDodge;
             @dodge.canceled += instance.OnDodge;
-            @spell1.started += instance.OnSpell1;
-            @spell1.performed += instance.OnSpell1;
-            @spell1.canceled += instance.OnSpell1;
+            @spellQ.started += instance.OnSpellQ;
+            @spellQ.performed += instance.OnSpellQ;
+            @spellQ.canceled += instance.OnSpellQ;
+            @spellE.started += instance.OnSpellE;
+            @spellE.performed += instance.OnSpellE;
+            @spellE.canceled += instance.OnSpellE;
+            @spellR.started += instance.OnSpellR;
+            @spellR.performed += instance.OnSpellR;
+            @spellR.canceled += instance.OnSpellR;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -317,9 +369,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @dodge.started -= instance.OnDodge;
             @dodge.performed -= instance.OnDodge;
             @dodge.canceled -= instance.OnDodge;
-            @spell1.started -= instance.OnSpell1;
-            @spell1.performed -= instance.OnSpell1;
-            @spell1.canceled -= instance.OnSpell1;
+            @spellQ.started -= instance.OnSpellQ;
+            @spellQ.performed -= instance.OnSpellQ;
+            @spellQ.canceled -= instance.OnSpellQ;
+            @spellE.started -= instance.OnSpellE;
+            @spellE.performed -= instance.OnSpellE;
+            @spellE.canceled -= instance.OnSpellE;
+            @spellR.started -= instance.OnSpellR;
+            @spellR.performed -= instance.OnSpellR;
+            @spellR.canceled -= instance.OnSpellR;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -352,6 +410,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnWeak(InputAction.CallbackContext context);
         void OnStrong(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
-        void OnSpell1(InputAction.CallbackContext context);
+        void OnSpellQ(InputAction.CallbackContext context);
+        void OnSpellE(InputAction.CallbackContext context);
+        void OnSpellR(InputAction.CallbackContext context);
     }
 }

@@ -38,6 +38,7 @@ public class ZombieBT : Tree
         });
         var jumpSequence = new Sequence(new List<Node>
         {
+            new CheckIsStunned(_effectSystem),
             new CheckInRange(6, 4),
             new CheckIsIdle(_jumpAttack, _zombieAttack),
             new RotateToTargetTask(gameObject, player),
@@ -45,14 +46,11 @@ public class ZombieBT : Tree
         });
         var attackSequence = new Sequence(new List<Node>
         {
-            new Sequence(new List<Node>
-            {
-                new CheckInRange(2),
-                new CheckIsIdle(_jumpAttack, _zombieAttack),
-                new RotateToTargetTask(gameObject, player),
-                new AttackTask(_zombieAttack)
-            })
-            
+            new CheckIsStunned(_effectSystem),
+            new CheckInRange(2),
+            new CheckIsIdle(_jumpAttack, _zombieAttack),
+            new RotateToTargetTask(gameObject, player),
+            new AttackTask(_zombieAttack)
         });
         
         root.Attach(jumpSequence);
