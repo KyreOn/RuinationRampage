@@ -9,6 +9,7 @@ public class JumpAttack : MonoBehaviour
     [SerializeField] private float jumpCooldown;
     
     private float        _jumpCooldownTimer;
+    private bool         _isPreparing;
     private bool         _canJump = true;
     private NavMeshAgent _navMeshAgent;
     private Animator     _animator;
@@ -26,6 +27,7 @@ public class JumpAttack : MonoBehaviour
     public bool StartJump(GameObject target)
     {
         if (!_canJump) return false;
+        if (_navMeshAgent.path.corners.Length > 2) return false;
         _target = target;
         _navMeshAgent.speed = 0;
         _animator.SetTrigger("isJumping");
@@ -33,6 +35,7 @@ public class JumpAttack : MonoBehaviour
         _canJump = false;
         _jumpCooldownTimer = 0;
         isJump = true;
+        _isPreparing = true;
         return true;
     }
     
@@ -41,10 +44,7 @@ public class JumpAttack : MonoBehaviour
         _navMeshAgent.speed = 100;
         _navMeshAgent.angularSpeed = 0;
         _animator.speed = 1;
-        var distance = _target.transform.position - transform.position;
-        distance.Scale(new Vector3(0.9f, 0, 0.9f));
-        var jumpTarget = transform.position + distance;
-        _navMeshAgent.SetDestination(jumpTarget);
+        _isPreparing = false;
     }
 
     void EndJump()
@@ -56,6 +56,16 @@ public class JumpAttack : MonoBehaviour
 
     private void Update()
     {
+        if (_isPreparing)
+        {
+            if (_navMeshAgent.path.corners.Length <= 2)
+            {
+                var distance = _target.transform.position - transform.position;
+                distance.Scale(new Vector3(0.8f, 0, 0.8f));
+                var jumpTarget = transform.position + distance;
+                _navMeshAgent.SetDestination(jumpTarget);
+            }
+        }
         if (_canJump) return;
         _jumpCooldownTimer += Time.deltaTime;
         if (_jumpCooldownTimer >= jumpCooldown)

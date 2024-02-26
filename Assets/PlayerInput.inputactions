@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "spell1",
+                    "type": "Button",
+                    "id": "ca49ac5a-d0bd-47d9-b2cf-c3db01c0fe16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "MnK",
                     "action": "strong",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ba42ec8-6834-4fe9-b56b-5ff0ca09977f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "spell1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

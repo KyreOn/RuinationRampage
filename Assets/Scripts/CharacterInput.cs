@@ -8,9 +8,13 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CombatSystem))]
 public class CharacterInput : MonoBehaviour
 {
+    [SerializeField] private InputActionReference movement;
+    [SerializeField] private InputActionReference weakAttack;
+    [SerializeField] private InputActionReference strongAttack;
+    [SerializeField] private InputActionReference dodge;
+    
     private MovementSystem _movementSystem;
     private CombatSystem   _combatSystem;
-    
 
     private void Awake()
     {
@@ -18,23 +22,51 @@ public class CharacterInput : MonoBehaviour
         _combatSystem = GetComponent<CombatSystem>();
     }
     
-    public void OnMove(InputValue value)
+    private void OnEnable()
     {
-        _movementSystem.UpdateDirection(value.Get<Vector2>());
+        weakAttack.action.started += WeakAttackStart;
+        weakAttack.action.canceled += WeakAttackStop;
+        strongAttack.action.started += StrongAttackStart;
+        strongAttack.action.canceled += StrongAttackStop;
+        dodge.action.performed += OnDodge;
     }
 
-    public void OnWeak()
+    private void OnDisable()
     {
-        _combatSystem.Weak();
-    }
-
-    public void OnStrong()
-    {
-        _combatSystem.Strong();
+        weakAttack.action.started -= WeakAttackStart;
+        weakAttack.action.canceled -= WeakAttackStop;
+        strongAttack.action.started -= StrongAttackStart;
+        strongAttack.action.canceled -= StrongAttackStop;
+        dodge.action.performed -= OnDodge;
     }
     
-    public void OnDodge()
+    private void WeakAttackStart(InputAction.CallbackContext obj)
+    {
+        _combatSystem.StartWeak();
+    }
+
+    private void WeakAttackStop(InputAction.CallbackContext obj)
+    {
+        _combatSystem.StopWeak();
+    }
+    
+    private void StrongAttackStart(InputAction.CallbackContext obj)
+    {
+        _combatSystem.StartStrong();
+    }
+    
+    private void StrongAttackStop(InputAction.CallbackContext obj)
+    {
+        _combatSystem.StopStrong();
+    }
+    
+    private void OnDodge(InputAction.CallbackContext obj)
     {
         _movementSystem.Dodge();
+    }
+
+    private void Update()
+    {
+        _movementSystem.UpdateDirection(movement.action.ReadValue<Vector2>());
     }
 }

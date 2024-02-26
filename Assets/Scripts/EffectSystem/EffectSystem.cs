@@ -1,45 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EffectSystem : MonoBehaviour
 {
-    private List<Effect> _effects = new();
-
-    // Update is called once per frame
+    private List<Effect> _effects         = new();
+    private List<Effect> _markedForDelete = new();
+    
     void Update()
     {
         foreach (var effect in _effects)
         {
             effect.UpdateEffect();
-            if (effect.CheckForEnd())
-            {
-                _effects.Remove(effect);
-            }
-                
+            if (effect.CheckForEnd()) 
+                _markedForDelete.Add(effect);
         }
+
+        foreach (var effect in _markedForDelete) 
+            _effects.Remove(effect);
+        _markedForDelete.Clear();
     }
 
     public void AddEffect(Effect effect, bool stackable = true)
     {
         if (!stackable)
-        {
             if (CheckForEffectById(effect.effectId))
                 _effects.Remove(GetEffectById(effect.effectId));
-        }
         _effects.Add(effect);
     }
 
     public float CalculateSpeedModifiers()
     {
-        var resultModifier = 1f;
-        foreach (var effect in _effects)
-        {
-            if (effect.effectType != EffectType.SPEED) continue;
-            resultModifier *= effect.ApplyEffect();
-        }
-
-        return resultModifier;
+        return _effects.Where(effect => effect.effectType == EffectType.SPEED).Aggregate(1f, (current, effect) => current * effect.ApplyEffect());
     }
 
     private Effect GetEffectById(int id)

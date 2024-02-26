@@ -62,6 +62,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""spell1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca49ac5a-d0bd-47d9-b2cf-c3db01c0fe16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""strong"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ba42ec8-6834-4fe9-b56b-5ff0ca09977f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""spell1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -181,6 +201,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Character_weak = m_Character.FindAction("weak", throwIfNotFound: true);
         m_Character_strong = m_Character.FindAction("strong", throwIfNotFound: true);
         m_Character_dodge = m_Character.FindAction("dodge", throwIfNotFound: true);
+        m_Character_spell1 = m_Character.FindAction("spell1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +267,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_weak;
     private readonly InputAction m_Character_strong;
     private readonly InputAction m_Character_dodge;
+    private readonly InputAction m_Character_spell1;
     public struct CharacterActions
     {
         private @PlayerInput m_Wrapper;
@@ -254,6 +276,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @weak => m_Wrapper.m_Character_weak;
         public InputAction @strong => m_Wrapper.m_Character_strong;
         public InputAction @dodge => m_Wrapper.m_Character_dodge;
+        public InputAction @spell1 => m_Wrapper.m_Character_spell1;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -275,6 +298,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @dodge.started += instance.OnDodge;
             @dodge.performed += instance.OnDodge;
             @dodge.canceled += instance.OnDodge;
+            @spell1.started += instance.OnSpell1;
+            @spell1.performed += instance.OnSpell1;
+            @spell1.canceled += instance.OnSpell1;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -291,6 +317,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @dodge.started -= instance.OnDodge;
             @dodge.performed -= instance.OnDodge;
             @dodge.canceled -= instance.OnDodge;
+            @spell1.started -= instance.OnSpell1;
+            @spell1.performed -= instance.OnSpell1;
+            @spell1.canceled -= instance.OnSpell1;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -323,5 +352,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnWeak(InputAction.CallbackContext context);
         void OnStrong(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnSpell1(InputAction.CallbackContext context);
     }
 }

@@ -13,7 +13,8 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private Transform  spawnPoint;
     
     private Animator            _animator;
-    private bool                _isAttacking;
+    private bool                _isWeakAttacking;
+    private bool                _isStrongAttacking;
     private CharacterController _controller;
     
     private void Awake()
@@ -22,10 +23,34 @@ public class CombatSystem : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    public void StartWeak()
+    {
+        _isWeakAttacking = true;
+        _animator.SetBool("isAttacking", _isWeakAttacking);
+    }
+    
+    public void StopWeak()
+    {
+        _isWeakAttacking = false;
+        _animator.SetBool("isAttacking", _isWeakAttacking);
+    }
+
+    public void StartStrong()
+    {
+        _isStrongAttacking = true;
+        _animator.SetBool("isStrongAttack", _isStrongAttacking);
+    }
+
+    public void StopStrong()
+    {
+        _isStrongAttacking = false;
+        _animator.SetBool("isStrongAttack", _isStrongAttacking);
+    }
+
     public void Weak()
     {
-        _isAttacking = !_isAttacking;
-        _animator.SetBool("isAttacking", _isAttacking);
+        _isWeakAttacking = !_isWeakAttacking;
+        _animator.SetBool("isAttacking", _isWeakAttacking);
     }
 
     public void Draw()
@@ -51,8 +76,8 @@ public class CombatSystem : MonoBehaviour
 
     public void Strong()
     {
-        _isAttacking = !_isAttacking;
-        _animator.SetBool("isStrongAttack", _isAttacking);
+        _isWeakAttacking = !_isWeakAttacking;
+        _animator.SetBool("isStrongAttack", _isWeakAttacking);
     }
 
     public void StrongDraw()

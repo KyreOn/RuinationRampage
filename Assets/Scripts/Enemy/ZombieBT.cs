@@ -11,6 +11,7 @@ public class ZombieBT : Tree
     [SerializeField] private GameObject player;
     
     private NavMeshAgent _navMeshAgent;
+    private EffectSystem _effectSystem;
     private Animator     _animator;
     private JumpAttack   _jumpAttack;
     private ZombieAttack _zombieAttack;
@@ -18,6 +19,7 @@ public class ZombieBT : Tree
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
         _jumpAttack = GetComponent<JumpAttack>();
         _zombieAttack = GetComponent<ZombieAttack>();
@@ -32,7 +34,7 @@ public class ZombieBT : Tree
         {
             new CheckIsIdle(_jumpAttack, _zombieAttack),
             new CheckInRange(float.MaxValue, 0),
-            new ChaseTask(_navMeshAgent, 0)
+            new ChaseTask(_navMeshAgent, _effectSystem,0,4)
         });
         var jumpSequence = new Sequence(new List<Node>
         {
