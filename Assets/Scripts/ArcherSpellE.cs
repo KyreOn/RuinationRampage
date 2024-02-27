@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherSpellE : MonoBehaviour
+public class ArcherSpellE : Spell
 {
     [SerializeField] private GameObject projectile;
 
@@ -12,23 +12,22 @@ public class ArcherSpellE : MonoBehaviour
     private Vector3    _clampedPosition;
     private Transform    _spawnTransform;
     
-    public void Prepare()
+    protected override void OnPrepare()
     {
-        _isCasting = true;
+        
     }
 
-    public void Cast()
+    protected override void OnCast()
     {
         Instantiate(projectile, transform.position, _spawnTransform.rotation);
-        _isCasting = false;
     }
 
     public void SetSpawnTransform(Transform spawnTransform)
     {
         _spawnTransform = spawnTransform;
     }
-    
-    private void Update()
+
+    protected override void OnUpdate()
     {
         
     }

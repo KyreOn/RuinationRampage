@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherSpellQ : MonoBehaviour
+public class ArcherSpellQ : Spell
 {
     [SerializeField] private GameObject indicator;
     [SerializeField] private GameObject projectile;
@@ -15,24 +15,21 @@ public class ArcherSpellQ : MonoBehaviour
     private bool       _isCasting;
     private Vector3    _clampedPosition;
     
-    public void Prepare()
+    protected override void OnPrepare()
     {
-        _isCasting = true;
         _indicator = Instantiate(indicator);
     }
-
-    public void Cast()
+    
+    protected override void OnCast()
     {
-        Instantiate(projectile, _clampedPosition, Quaternion.identity);
-        _isCasting = false;
         Destroy(_indicator);
         _indicator = null;
+        Instantiate(projectile, _clampedPosition, Quaternion.identity);
     }
 
-    private void Update()
+    protected override void OnUpdate()
     {
-        if (!_isCasting) return;
-        
+        if (!isPreparing) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
         {

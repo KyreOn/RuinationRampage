@@ -12,6 +12,9 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private GameObject arrowObject;
     [SerializeField] private GameObject strongArrowObject;
     [SerializeField] private Transform  spawnPoint;
+    [SerializeField] private float      spellQCooldown;
+    [SerializeField] private float      spellECooldown;
+    [SerializeField] private float      spellRCooldown;
     
     private Animator            _animator;
     private bool                _isWeakAttacking;
@@ -20,6 +23,10 @@ public class CombatSystem : MonoBehaviour
     private MovementSystem      _movementSystem;
     private ArcherSpellQ        _archerSpellQ;
     private ArcherSpellE        _archerSpellE;
+    private ArcherSpellR        _archerSpellR;
+    private float               _spellQCooldownTimer;
+    private float               _spellECooldownTimer;
+    private float               _spellRCooldownTimer;
     
     private void Awake()
     {
@@ -28,6 +35,10 @@ public class CombatSystem : MonoBehaviour
         _movementSystem = GetComponent<MovementSystem>();
         _archerSpellQ = GetComponent<ArcherSpellQ>();
         _archerSpellE = GetComponent<ArcherSpellE>();
+        _archerSpellR = GetComponent<ArcherSpellR>();
+        _spellQCooldownTimer = spellQCooldown;
+        _spellECooldownTimer = spellECooldown;
+        _spellRCooldownTimer = spellRCooldown;
     }
 
     public void StartWeak()
@@ -82,7 +93,9 @@ public class CombatSystem : MonoBehaviour
 
     private void Update()
     {
-        
+        _spellQCooldownTimer = Mathf.Clamp(_spellQCooldownTimer + Time.deltaTime, 0, spellQCooldown);
+        _spellECooldownTimer = Mathf.Clamp(_spellECooldownTimer + Time.deltaTime, 0, spellECooldown);
+        _spellRCooldownTimer = Mathf.Clamp(_spellRCooldownTimer + Time.deltaTime, 0, spellRCooldown);
     }
 
     public void Strong()
@@ -108,6 +121,7 @@ public class CombatSystem : MonoBehaviour
     }
     public void CastSpellQ()
     {
+        //_archerSpellQ.StopPrepare();
         _archerSpellQ.Cast();
     }
     
@@ -124,11 +138,18 @@ public class CombatSystem : MonoBehaviour
     
     public void PrepareSpellR()
     {
-        
+        _archerSpellR.Prepare();
     }
 
     public void CastSpellR()
     {
-        
+        _archerSpellR.SetModel(model);
+        _archerSpellR.Cast();
+    }
+
+    public string GetSpellsCD()
+    {
+        return (spellQCooldown - _spellQCooldownTimer) + " " + (spellECooldown - _spellECooldownTimer) + " " +
+               (spellRCooldown - _spellRCooldownTimer);
     }
 }

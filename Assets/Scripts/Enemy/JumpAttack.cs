@@ -57,6 +57,11 @@ public class JumpAttack : MonoBehaviour
         isJump = false;
     }
 
+    public bool isInAir()
+    {
+        return isJump && !_isPreparing;
+    }
+
     private void Update()
     {
         if (_isPreparing)

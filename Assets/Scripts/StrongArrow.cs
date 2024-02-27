@@ -26,6 +26,7 @@ public class StrongArrow : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
+            other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
             other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f));
             pierceCount--;
         }
