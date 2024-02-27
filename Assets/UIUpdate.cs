@@ -46,6 +46,6 @@ public class UIUpdate : MonoBehaviour
 
     private void UpdateCD()
     {
-        _cdText = _combatSystem.GetSpellsCD();
+        //_cdText = _combatSystem.GetSpellsCD();
     }
 }

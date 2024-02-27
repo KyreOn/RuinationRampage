@@ -7,11 +7,11 @@ using UnityEngine;
 public class Spell : MonoBehaviour
 {
     [SerializeField] private float baseCooldown;
-    [SerializeField] protected int   maxCharges;
+    [SerializeField] private int   maxCharges = 1;
 
     private   float _effectedCooldown;
     private   float _cooldownTimer;
-    protected int   curCharges;
+    private   int   curCharges;
     protected bool  isPreparing;
     
     public void Prepare()
