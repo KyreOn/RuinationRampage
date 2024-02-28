@@ -23,6 +23,7 @@ public class ZombieBT : Tree
         _animator = GetComponent<Animator>();
         _jumpAttack = GetComponent<JumpAttack>();
         _zombieAttack = GetComponent<ZombieAttack>();
+        player = GameObject.FindWithTag("Player");
     }
 
     protected override Node SetupTree()
