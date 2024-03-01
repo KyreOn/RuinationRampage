@@ -37,6 +37,10 @@ public class DamageSystem : MonoBehaviour
             _isHit = false;
             _renderer.material.SetInt("_Hit", 0);
         }
+
+        var DOT = _effectSystem.CalculateDOT();
+        if (DOT > 0)
+            ApplyDamage();
     }
 
     public void SetInvincible(bool status)

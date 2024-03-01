@@ -27,7 +27,8 @@ public class StrongArrow : MonoBehaviour
         {
             other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
             other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
-            other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f));
+            other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
+            other.gameObject.GetComponent<EffectSystem>().AddEffect(new DOTEffect(5, 0.5f, 10), false);
             pierceCount--;
         }
         else

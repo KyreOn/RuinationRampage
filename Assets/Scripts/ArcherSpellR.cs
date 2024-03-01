@@ -10,13 +10,11 @@ public class ArcherSpellR : Spell
     [SerializeField] private LayerMask  enemyLayer;
 
     private GameObject _indicator;
-    private bool       _isCasting;
     private Vector3    _clampedPosition;
     private GameObject _model;
     
     protected override void OnPrepare()
     {
-        _isCasting = true;
     }
 
     public void SetModel(GameObject model)
@@ -31,7 +29,6 @@ public class ArcherSpellR : Spell
         if (Physics.Raycast(ray, out var hit, float.MaxValue, wallLayer))
         {
             var position = playerTransform.position;
-            //Debug.Log((hit.point - position).magnitude);
             var halfDistance = (hit.point - position) / 2;
             var enemies = Physics.OverlapBox(position + halfDistance,
                 new Vector3(1, 2, halfDistance.magnitude), playerTransform.rotation, enemyLayer);

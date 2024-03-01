@@ -11,7 +11,7 @@ public class StunEffect : Effect
 
     public StunEffect(float duration) : base(duration)
     {
-        effectId = 3;
+        effectId = 2;
         effectType = EffectType.DISABLE;
     }
 }

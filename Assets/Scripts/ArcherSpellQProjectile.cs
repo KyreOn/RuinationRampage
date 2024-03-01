@@ -26,7 +26,7 @@ public class ArcherSpellQProjectile : MonoBehaviour
         foreach (var enemy in enemiesInRange)
         {
             enemy.gameObject.GetComponent<DamageSystem>().ApplyDamage();
-            enemy.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1,2));
+            enemy.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1,2), false);
         }
 
         _tickTimer = timeBetweenTicks;

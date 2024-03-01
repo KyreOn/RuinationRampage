@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,17 +16,34 @@ public class ChaseTask : Node
     private bool         _isToUpdate;
     private float        _baseSpeed;
     private float        _curSpeed;
+    private bool         _isInit;
     
-    public ChaseTask(NavMeshAgent navAgent, EffectSystem effectSystem, float updateTime, float baseSpeed)
+    public ChaseTask(float updateTime)
     {
-        _navAgent = navAgent;
-        _effectSystem = effectSystem;
         _updateTime = updateTime;
-        _baseSpeed = baseSpeed;
+    }
+
+    private void Initialize()
+    {
+        try
+        {
+            _baseSpeed = (float)GetData("speed");
+            _navAgent = ((GameObject)GetData("self")).GetComponent<NavMeshAgent>();
+            _effectSystem = ((GameObject)GetData("self")).GetComponent<EffectSystem>();
+        }
+        catch (NullReferenceException)
+        {
+            _isInit = false;
+            return;
+        }
+        _isInit = true;
     }
     
     public override NodeState Evaluate()
     {
+        if (!_isInit)
+            Initialize();
+        
         if (_isToUpdate)
         {
             _updateCounter += Time.deltaTime;

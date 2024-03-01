@@ -41,7 +41,14 @@ namespace BehaviorTree
 
         public void SetData(string key, object value)
         {
-            _dataContext[key] = value;
+            if (parent == null)
+            {
+                _dataContext[key] = value;
+            }
+            else
+            {
+                parent.SetData(key, value);
+            }
         }
 
         public object GetData(string key)

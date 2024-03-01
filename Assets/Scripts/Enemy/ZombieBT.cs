@@ -28,14 +28,16 @@ public class ZombieBT : Tree
 
     protected override Node SetupTree()
     {
-        var root = new Selector();
-        root.SetData("self",   gameObject);
-        root.SetData("player", player);
+        var rootNode = new Selector();
+        rootNode.SetData("speed", 4f);
+        rootNode.SetData("self",   gameObject);
+        rootNode.SetData("player", player);
+        
         var moveSequence = new Sequence(new List<Node>
         {
             new CheckIsIdle(_jumpAttack, _zombieAttack),
             new CheckInRange(float.MaxValue, 0),
-            new ChaseTask(_navMeshAgent, _effectSystem,0,4)
+            new ChaseTask(0.1f)
         });
         var jumpSequence = new Sequence(new List<Node>
         {
@@ -43,7 +45,7 @@ public class ZombieBT : Tree
             new CheckInRange(6, 4),
             new CheckIsIdle(_jumpAttack, _zombieAttack),
             new RotateToTargetTask(gameObject, player),
-            new JumpTask(_jumpAttack, 3)
+            new JumpTask()
         });
         var attackSequence = new Sequence(new List<Node>
         {
@@ -51,13 +53,13 @@ public class ZombieBT : Tree
             new CheckInRange(2),
             new CheckIsIdle(_jumpAttack, _zombieAttack),
             new RotateToTargetTask(gameObject, player),
-            new AttackTask(_zombieAttack)
+            new AttackTask()
         });
         
-        root.Attach(jumpSequence);
-        root.Attach(attackSequence);
-        root.Attach(moveSequence);
+        rootNode.Attach(jumpSequence);
+        rootNode.Attach(attackSequence);
+        rootNode.Attach(moveSequence);
         
-        return root;
+        return rootNode;
     }
 }

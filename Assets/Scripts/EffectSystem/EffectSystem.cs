@@ -39,6 +39,11 @@ public class EffectSystem : MonoBehaviour
     {
         return _effects.Any(effect => effect.effectType == EffectType.DISABLE);
     }
+
+    public float CalculateDOT()
+    {
+        return _effects.Where(effect => effect.effectType == EffectType.DOT).Sum(effect => effect.ApplyEffect());
+    }
     
     private Effect GetEffectById(int id)
     {

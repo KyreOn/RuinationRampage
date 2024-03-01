@@ -7,6 +7,7 @@ public enum EffectType
 {
     SPEED,
     DISABLE,
+    DOT,
 }
 public class Effect
 {
