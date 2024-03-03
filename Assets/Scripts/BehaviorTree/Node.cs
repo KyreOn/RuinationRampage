@@ -6,8 +6,8 @@ namespace BehaviorTree
 {
     public enum NodeState
     {
-        RUNNING,
         SUCCESS,
+        RUNNING,
         FAILURE
     }
     public class Node
@@ -38,6 +38,8 @@ namespace BehaviorTree
         }
 
         public virtual NodeState Evaluate() => NodeState.FAILURE;
+
+        public virtual NodeState CheckState() => NodeState.FAILURE;
 
         public void SetData(string key, object value)
         {

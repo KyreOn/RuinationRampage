@@ -100,6 +100,7 @@ public class MovementSystem : MonoBehaviour
 
     public void DodgeStart()
     {
+        _controller.enabled = true;
         _animator.speed = 2;
         _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f));
         _canMove = false;

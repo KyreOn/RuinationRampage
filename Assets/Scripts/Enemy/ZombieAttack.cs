@@ -25,6 +25,7 @@ public class ZombieAttack : MonoBehaviour
         if (!_canAttack) return false;
         _target = target;
         _playerCollider = new []{_target.GetComponent<Collider>()};
+        _canAttack = false;
         isAttacking = true;
         _animator.SetTrigger("Attack");
         return true;
@@ -48,9 +49,8 @@ public class ZombieAttack : MonoBehaviour
     {
         if (_canAttack) return;
         _attackCooldownTimer += Time.deltaTime;
-        if (_attackCooldownTimer >= attackCooldown)
-        {
-            _canAttack = true;
-        }
+        if (!(_attackCooldownTimer >= attackCooldown)) return;
+        _canAttack = true;
+        _attackCooldownTimer = 0;
     }
 }

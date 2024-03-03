@@ -64,15 +64,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 1
-        functionName: EndJump
+      - time: 0.33467743
+        functionName: Attack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.33467743
-        functionName: Attack
+      - time: 1
+        functionName: EndJump
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

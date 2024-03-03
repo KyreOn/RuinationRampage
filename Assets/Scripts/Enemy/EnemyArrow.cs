@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class EnemyArrow : MonoBehaviour
 {
     [SerializeField] private float    speed;
     [SerializeField] private float    lifeSpan;
@@ -23,7 +23,7 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy") 
+        if (other.gameObject.CompareTag("Player")) 
             other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
         Destroy(gameObject);
     }

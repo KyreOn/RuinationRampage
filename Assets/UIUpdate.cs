@@ -31,8 +31,8 @@ public class UIUpdate : MonoBehaviour
         _btText = "";
         GetNode(tree.root, 0);
         speedText.text = _btText;
-        UpdateCD();
-        cdText.text = _cdText;
+        //UpdateCD();
+        //cdText.text = _cdText;
     }
 
     private void GetNode(Node node, int level)
