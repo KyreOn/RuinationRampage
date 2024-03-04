@@ -54,7 +54,7 @@ public class JumpAttack : MonoBehaviour
 
     void EndJump()
     {
-        _navMeshAgent.speed = 0;
+        _navMeshAgent.speed = 4;
         _navMeshAgent.angularSpeed = 10000;
         _navMeshAgent.radius = 0.2f;
         isJump = false;
