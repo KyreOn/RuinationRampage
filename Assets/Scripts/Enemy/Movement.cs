@@ -22,8 +22,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        var isStunned = _effectSystem.CheckIfDisabled() && !_jumpAttack.IsInAir();
-        _animator.SetBool("Stunned", isStunned);
+        //var isStunned = _effectSystem.CheckIfDisabled() && !_jumpAttack.IsInAir();
+        //_animator.SetBool("Stunned", isStunned);
         _animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);
     }
 }

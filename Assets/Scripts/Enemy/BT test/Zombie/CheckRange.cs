@@ -12,8 +12,8 @@ namespace Conditions
         protected override bool OnCheck()
         {
             if (Agent == null) { return false; }
-            var zombie   = Agent as Zombie;
-            var distance = Vector3.Distance(zombie.Player.Position, zombie.transform.position);
+            var enemy   = Agent as Enemy;
+            var distance = Vector3.Distance(enemy.Player.Position, enemy.transform.position);
             
             return distance <= maxDistance && distance >= minDistance;
         }

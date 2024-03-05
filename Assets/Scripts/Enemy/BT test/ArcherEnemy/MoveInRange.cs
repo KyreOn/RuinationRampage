@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using BTree;
 using UnityEngine;
 
-public class MoveToPlayer : Leaf<ITreeContext>
+public class MoveInRange : Leaf<ITreeContext>
 {
-    private Enemy  _enemy;
+    [SerializeField] private float _minRange;
+    [SerializeField] private float _maxRange;
+    
+    private Enemy   _enemy;
     private Vector3 _target;
     
     protected override void OnSetup()
@@ -17,7 +20,7 @@ public class MoveToPlayer : Leaf<ITreeContext>
     {
         if (_enemy.CheckIsIdle())
         {
-            var pos = GetPlayerPos();
+            var pos = GetPointInRange();
             _target = _enemy.MoveTo(pos);
             _enemy.MovingToPlayer = true;
         }
@@ -35,14 +38,15 @@ public class MoveToPlayer : Leaf<ITreeContext>
             return;
         }
 
-        if ((_target - _enemy.Player.Position).magnitude > 1.4f)
+        if ((_target - _enemy.Player.Position).magnitude > _maxRange)
         {
-            var pos = GetPlayerPos();
+            var pos = GetPointInRange();
             _target = _enemy.MoveTo(pos);
             Debug.DrawLine(_enemy.Position, _target, Color.black, 1f);
         }
 
-        if ((_enemy.transform.position - _enemy.Player.Position).sqrMagnitude < 3f)
+        var distance = (_enemy.transform.position - _enemy.Player.Position).magnitude;
+        if (distance >= _minRange && distance <= _maxRange)
         {
             Response.Result = Result.Success;
         }
@@ -60,11 +64,12 @@ public class MoveToPlayer : Leaf<ITreeContext>
 
     protected override void OnFail()
     {
-        
     }
 
-    private Vector3 GetPlayerPos()
+    private Vector3 GetPointInRange()
     {
-        return _enemy.Player.Position;
+        var range     = Random.Range(_minRange, _maxRange);
+        var direction = (_enemy.transform.position - _enemy.Player.Position).normalized;
+        return _enemy.Player.Position + direction * range;
     }
 }

@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class StayIdle : Leaf<ITreeContext>
 {
-    private Zombie _zombie;
+    private Enemy _enemy;
     
     protected override void OnSetup()
     {
-        _zombie = Agent as Zombie;
+        _enemy = Agent as Enemy;
     }
 
     protected override void OnEnter()
     {
-        var pos = _zombie.transform.position;
-        var target = _zombie.MoveTo(pos);
+        var pos = _enemy.transform.position;
+        var target = _enemy.MoveTo(pos);
     }
 
     protected override void OnExecute()
