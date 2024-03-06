@@ -17,6 +17,7 @@ public class MoveToPlayer : Leaf<ITreeContext>
     {
         if (_enemy.CheckIsIdle())
         {
+            _enemy.RotateOnMove = true;
             var pos = GetPlayerPos();
             _target = _enemy.MoveTo(pos);
             _enemy.MovingToPlayer = true;
@@ -42,7 +43,7 @@ public class MoveToPlayer : Leaf<ITreeContext>
             Debug.DrawLine(_enemy.Position, _target, Color.black, 1f);
         }
 
-        if ((_enemy.transform.position - _enemy.Player.Position).sqrMagnitude < 3f)
+        if ((_enemy.transform.position - _enemy.Player.Position).magnitude <= 2)
         {
             Response.Result = Result.Success;
         }

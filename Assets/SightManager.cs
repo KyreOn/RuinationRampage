@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SightManager : MonoBehaviour
 {
+    [SerializeField] private LayerMask layerMask;
+    
     private Enemy      _enemy;
     private GameObject _player;
     
@@ -18,7 +20,7 @@ public class SightManager : MonoBehaviour
     {
         var rayDirection = _player.transform.position - transform.position;
         rayDirection.y = 0;
-        if (Physics.Raycast(transform.position, rayDirection, out var hit))
+        if (Physics.Raycast(transform.position, rayDirection, out var hit, float.PositiveInfinity, layerMask))
         {
             if (hit.transform.CompareTag("Player"))
             {

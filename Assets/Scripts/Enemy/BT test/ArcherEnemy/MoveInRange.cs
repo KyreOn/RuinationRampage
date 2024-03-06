@@ -20,6 +20,7 @@ public class MoveInRange : Leaf<ITreeContext>
     {
         if (_enemy.CheckIsIdle())
         {
+            _enemy.RotateOnMove = false;
             var pos = GetPointInRange();
             _target = _enemy.MoveTo(pos);
             _enemy.MovingToPlayer = true;

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -23,6 +22,7 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Enemy") 
             other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
         Destroy(gameObject);

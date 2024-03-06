@@ -10,6 +10,7 @@ public class ArcherAttack : MonoBehaviour
     [SerializeField] private GameObject arrowObject;
     [SerializeField] private Transform  spawnPoint;
     [SerializeField] private float      attackCooldown;
+    [SerializeField] private LayerMask  layerMask;
 
     private GameObject   _target;
     private EffectSystem _effectSystem;
@@ -77,7 +78,7 @@ public class ArcherAttack : MonoBehaviour
         if (!_isDrawing) return;
         var rayDirection = _target.transform.position - spawnPoint.position;
         rayDirection.y = 0;
-        if (!Physics.Raycast(spawnPoint.position, rayDirection, out var hit)) return;
+        if (!Physics.Raycast(spawnPoint.position, rayDirection, out var hit, float.PositiveInfinity, layerMask)) return;
         if (!hit.transform.CompareTag("Player")) return;
         var direction = _target.transform.position - spawnPoint.position;
         direction.Scale(new Vector3(1, 0, 1));

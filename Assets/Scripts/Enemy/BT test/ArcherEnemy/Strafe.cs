@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public class Strafe : Leaf<ITreeContext>
 {
-    [SerializeField] private int strafeLength;
-
+    [SerializeField] private int   strafeLength;
+    
     private NavMeshAgent _navMeshAgent;
     private int          _strafeCounter;
     private Enemy        _enemy;
@@ -28,6 +28,7 @@ public class Strafe : Leaf<ITreeContext>
         _strafeCounter = strafeLength;
         if (_enemy.CheckIsIdle())
         {
+            _enemy.RotateOnMove = false;
             var pos = GetStrafePosition();
             _target = _enemy.MoveTo(pos);
             _enemy.MovingToPlayer = true;
@@ -76,9 +77,9 @@ public class Strafe : Leaf<ITreeContext>
 
     private Vector3 GetStrafePosition()
     {
-        var direction    = Random.insideUnitCircle;
-        var distance     = _enemy.Player.Position - _enemy.transform.position;
-        var horDirection = Vector3.Cross(distance, Vector3.up) * _horDirection;
+        var direction     = Random.insideUnitCircle;
+        var distance      = _enemy.Player.Position - _enemy.transform.position;
+        var horDirection  = Vector3.Cross(distance, Vector3.up) * _horDirection;
         return _enemy.transform.position + horDirection.normalized;
     }
 }

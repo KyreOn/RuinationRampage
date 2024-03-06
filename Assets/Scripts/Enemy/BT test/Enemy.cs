@@ -14,6 +14,7 @@ public class Enemy : TreeAgent
     public PlayerTest Player         { get; set; }
     public bool       MovingToPlayer { get; set; }
     public bool       PlayerInSight  { get; set; }
+    public bool       RotateOnMove   { get; set; }
     
     protected override void Awake()
     {
@@ -37,6 +38,7 @@ public class Enemy : TreeAgent
             pos = Vector3.zero;
         }
 
+        navMeshAgent.updateRotation = RotateOnMove;
         navMeshAgent.SetDestination(pos);
         navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers();
         Debug.DrawLine(transform.position, pos, Color.red, 2f);

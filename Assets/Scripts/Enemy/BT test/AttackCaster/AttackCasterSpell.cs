@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Serialization;
+
+public class AttackCasterSpell : MonoBehaviour
+{
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private float      attackCooldown;
+
+    private GameObject   _target;
+    private EffectSystem _effectSystem;
+    private NavMeshAgent _navMeshAgent;
+    private Animator     _animator;
+    private bool         _isDrawing;
+    private float        _castCooldownTimer;
+
+    public bool canCast = true;
+    public bool isAttacking;
+    
+    private void Awake()
+    {
+        _effectSystem = GetComponent<EffectSystem>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+    }
+    
+    public bool StartAttack(GameObject target)
+    {
+        if (!canCast) return false;
+        
+        _effectSystem.AddEffect(new SlowEffect(1, 100000));
+        _target = target;
+        canCast = false;
+        Cast();
+        Cast();
+        Cast();
+        _navMeshAgent.ResetPath();
+        return true;
+    }
+
+    private void Cast()
+    {
+        var proj = Instantiate(projectile, transform.position, Quaternion.identity);
+        var offset = Random.insideUnitCircle * 3;
+        proj.GetComponent<CasterProjectile>().Initialize(_target.transform.position + new Vector3(offset.x, 0, offset.y));
+    }
+    
+    private void Update()
+    {
+        if (!canCast)
+        {
+            _castCooldownTimer += Time.deltaTime;
+            if (_castCooldownTimer >= attackCooldown)
+            {
+                canCast = true;
+                _castCooldownTimer = 0;
+            }
+        }
+    }
+}
