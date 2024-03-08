@@ -38,13 +38,10 @@ public class MoveInRange : Leaf<ITreeContext>
             Response.Result = Result.Failure;
             return;
         }
-
-        if ((_target - _enemy.Player.Position).magnitude > _maxRange)
-        {
-            var pos = GetPointInRange();
-            _target = _enemy.MoveTo(pos);
-            Debug.DrawLine(_enemy.Position, _target, Color.black, 1f);
-        }
+        
+        var pos = GetPointInRange();
+        _target = _enemy.MoveTo(pos);
+        Debug.DrawLine(_enemy.Position, _target, Color.black, 1f);
 
         var distance = (_enemy.transform.position - _enemy.Player.Position).magnitude;
         if (distance >= _minRange && distance <= _maxRange)

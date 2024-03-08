@@ -22,6 +22,7 @@ public class Enemy : TreeAgent
         navMeshAgent = GetComponent<NavMeshAgent>();
         effectSystem = GetComponent<EffectSystem>();
         Player = FindObjectOfType<PlayerTest>();
+        RotateOnMove = true;
     }
 
     public Vector3 MoveTo(Vector3 position)

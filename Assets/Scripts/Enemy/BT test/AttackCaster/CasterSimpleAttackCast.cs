@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using BTree;
 using UnityEngine;
 
-public class AttackCasterCast : Leaf<ITreeContext>
+public class CasterSimpleAttackCast : Leaf<ITreeContext>
 {
-    private CasterEnemy _caster;
-    private AttackCasterSpell _attackCasterSpell;
-    private bool         _started;
-    
+    private                  CasterEnemy  _caster;
+    private                  CasterSimpleAttack _casterSimpleAttack;
+    private                  bool         _started;
+
     protected override void OnSetup()
     {
         _caster = Agent as CasterEnemy;
-        _attackCasterSpell = _caster.GetComponent<AttackCasterSpell>();
+        _casterSimpleAttack = _caster.GetComponent<CasterSimpleAttack>();
     }
 
     protected override void OnEnter()
     {
         if (_caster.CheckIsIdle())
         {
-            var result = _attackCasterSpell.StartAttack(_caster.Player.gameObject);
+            var result = _casterSimpleAttack.StartAttack(_caster.Player.gameObject);
             if (!result)
                 Response.Result = Result.Failure;
             else
@@ -38,7 +38,7 @@ public class AttackCasterCast : Leaf<ITreeContext>
             Response.Result = Result.Failure;
             return;
         }
-        if (_started && !_attackCasterSpell.isAttacking)
+        if (_started && !_casterSimpleAttack.isAttacking)
         {
             Response.Result = Result.Success;
         }
@@ -51,6 +51,7 @@ public class AttackCasterCast : Leaf<ITreeContext>
 
     protected override void OnReset()
     {
+        
     }
 
     protected override void OnFail()

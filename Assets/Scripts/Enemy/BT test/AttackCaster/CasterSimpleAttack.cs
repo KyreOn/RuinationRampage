@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
-public class AttackCasterSpell : MonoBehaviour
+public class CasterSimpleAttack : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform  spawnPoint;
     [SerializeField] private float      attackCooldown;
+    [SerializeField] private LayerMask  layerMask;
 
     private GameObject   _target;
     private EffectSystem _effectSystem;
@@ -30,30 +30,26 @@ public class AttackCasterSpell : MonoBehaviour
     public bool StartAttack(GameObject target)
     {
         if (!canCast) return false;
-        
         _target = target;
         canCast = false;
+        _animator.SetTrigger("SimpleAttack");
         isAttacking = true;
-        _animator.SetTrigger("StrongAttack");
         _navMeshAgent.ResetPath();
         return true;
     }
 
-    public void CastStart()
+    public void SimpleCast()
     {
-        _animator.speed = 0.5f;
+        var rayDirection = _target.transform.position - spawnPoint.position;
+        rayDirection.y = 0;
+        if (!Physics.Raycast(spawnPoint.position, rayDirection, out var hit, float.PositiveInfinity, layerMask)) return;
+        if (!hit.transform.CompareTag("Player")) return;
+        transform.rotation = Quaternion.LookRotation(rayDirection);
+        Instantiate(projectile, spawnPoint.position, transform.rotation);
     }
-    
-    public void StrongCast(float accuracy)
-    {
-        var proj = Instantiate(projectile, spawnPoint.position, Quaternion.identity);
-        var offset = Random.insideUnitCircle * accuracy;
-        proj.GetComponent<CasterProjectile>().Initialize(_target.transform.position + new Vector3(offset.x, 0, offset.y));
-    }
-    
+
     public void CastEnd()
     {
-        _animator.speed = 1;
         isAttacking = false;
     }
     

@@ -46,7 +46,6 @@ public class Strafe : Leaf<ITreeContext>
             Response.Result = Result.Failure;
             return;
         }
-        
         if (_strafeCounter > 0 && _navMeshAgent.remainingDistance <= 0.5f)
         {
             var pos = GetStrafePosition();

@@ -171,7 +171,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: output
-        node: {fileID: 3113423764226054608}
+        node: {fileID: -47100697364599686}
         reroutePoints: []
       _direction: 0
       _connectionType: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: Strafe
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1560, y: 488}
+  position: {x: -1560, y: 648}
   ports:
     keys:
     - output
@@ -278,6 +278,82 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   strafeLength: 4
+--- !u!114 &-47100697364599686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6550016bb346e4f92153756890a060, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1544, y: 376}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    values:
+    - _fieldName: input
+      _node: {fileID: -47100697364599686}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -47100697364599686}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: -7693068870557931220}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: -47100697364599686}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: -47100697364599686}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 3113423764226054608}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: -47100697364599686}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 9097460299577628891}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +381,8 @@ MonoBehaviour:
   - {fileID: 4765153585712334905}
   - {fileID: 7891365868083671001}
   - {fileID: 3113423764226054608}
+  - {fileID: 9097460299577628891}
+  - {fileID: -47100697364599686}
 --- !u!114 &176358836814182337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,7 +523,7 @@ MonoBehaviour:
   m_Name: Attack Caster Cast
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1560, y: 328}
+  position: {x: -1976, y: 328}
   ports:
     keys:
     - output
@@ -456,7 +534,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: input 0
-        node: {fileID: -7693068870557931220}
+        node: {fileID: -47100697364599686}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -767,3 +845,38 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   invert: 1
+--- !u!114 &9097460299577628891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2258e3cadf5ec294b95dc73c93367a38, type: 3}
+  m_Name: Caster Simple Attack Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1992, y: 536}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 9097460299577628891}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: -47100697364599686}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0

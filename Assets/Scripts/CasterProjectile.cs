@@ -28,7 +28,8 @@ public class CasterProjectile : MonoBehaviour
         
         _timer += Time.deltaTime * speed;
         transform.position = _trajectory.Evaluate(_timer);
-        transform.forward = _trajectory.Evaluate(_timer + 0.001f) - _trajectory.Evaluate(_timer);
+        var forward = _trajectory.Evaluate(_timer + 0.001f) - _trajectory.Evaluate(_timer);
+        transform.forward = forward == Vector3.zero ? Vector3.down : forward;
 
         if (_timer >= 1)
         {

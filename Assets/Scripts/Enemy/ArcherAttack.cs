@@ -80,9 +80,6 @@ public class ArcherAttack : MonoBehaviour
         rayDirection.y = 0;
         if (!Physics.Raycast(spawnPoint.position, rayDirection, out var hit, float.PositiveInfinity, layerMask)) return;
         if (!hit.transform.CompareTag("Player")) return;
-        var direction = _target.transform.position - spawnPoint.position;
-        direction.Scale(new Vector3(1, 0, 1));
-        transform.rotation = Quaternion.LookRotation(direction);
-
+        transform.rotation = Quaternion.LookRotation(rayDirection);
     }
 }
