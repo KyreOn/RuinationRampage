@@ -22,7 +22,11 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "Reaction")
+        {
+            other.gameObject.GetComponentInParent<Reaction>().TryReact(gameObject);
+            return;
+        }
         if (other.gameObject.tag == "Enemy") 
             other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
         Destroy(gameObject);

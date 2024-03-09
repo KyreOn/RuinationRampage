@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DamageSystem : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class DamageSystem : MonoBehaviour
     
     private EffectSystem _effectSystem;
     private bool         _isHit;
-    private bool         _isInvincible;
     private float        _effectTimer;
     private Renderer     _renderer;
+    
+    public bool isInvincible;
     
     private void Awake()
     {
@@ -22,7 +24,7 @@ public class DamageSystem : MonoBehaviour
 
     public void ApplyDamage()
     {
-        if (_isInvincible) return;
+        if (isInvincible) return;
         _isHit = true;
         _effectTimer = 0;
         _renderer.materials[1].SetInt("_Hit", 1);
@@ -45,6 +47,6 @@ public class DamageSystem : MonoBehaviour
 
     public void SetInvincible(bool status)
     {
-        _isInvincible = status;
+        isInvincible = status;
     }
 }

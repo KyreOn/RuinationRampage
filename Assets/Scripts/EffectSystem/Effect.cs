@@ -8,6 +8,7 @@ public enum EffectType
     SPEED,
     DISABLE,
     DOT,
+    DISPLACEMENT,
 }
 public class Effect
 {

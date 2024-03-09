@@ -44,6 +44,21 @@ public class EffectSystem : MonoBehaviour
     {
         return _effects.Where(effect => effect.effectType == EffectType.DOT).Sum(effect => effect.ApplyEffect());
     }
+
+    public bool CheckForDisplacementEffect()
+    {
+        return _effects.Any(effect => effect.effectType == EffectType.DISPLACEMENT);
+    }
+
+    public Vector3 GetDisplacementDirection()
+    {
+        foreach (var effect in _effects)
+        {
+            if (effect.effectType == EffectType.DISPLACEMENT)
+                return ((DisplacementEffect)effect).direction;
+        }
+        return Vector3.zero;
+    }
     
     private Effect GetEffectById(int id)
     {

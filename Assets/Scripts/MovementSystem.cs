@@ -27,6 +27,7 @@ public class MovementSystem : MonoBehaviour
     private bool                _canRotate;
     private Vector3             _inputBuffer;
     private float               _dodgeCooldownTimer;
+    private bool                _isDisplaced;
     
     public float curSpeed;
     public bool  isAttacking;
@@ -47,7 +48,7 @@ public class MovementSystem : MonoBehaviour
     {
         if (_canMove)
             _movementDir = _inputBuffer;
-        if (!_controller.enabled) return;
+        if (!_controller.enabled || _isDisplaced) return;
         _controller.Move(direction * (curSpeed * Time.fixedDeltaTime));
     }
 
@@ -69,6 +70,16 @@ public class MovementSystem : MonoBehaviour
 
     private void Update()
     {
+        _isDisplaced = _effectSystem.CheckForDisplacementEffect();
+        if (_isDisplaced)
+        {
+            var position  = transform.position;
+            var direction = _effectSystem.GetDisplacementDirection();
+            if (Physics.Raycast(position, direction, 1))
+                _isDisplaced = false;
+            else
+                transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50);
+        }
         CalculateSpeed();
         var mousePos = Input.mousePosition;
         var offset   = new Vector3(Screen.width / 2 - mousePos.x, 0, Screen.height / 2 - mousePos.y);
@@ -132,6 +143,6 @@ public class MovementSystem : MonoBehaviour
 
     private void CalculateSpeed()
     {
-        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers();
+        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfDisabled() ? 0 : 1);
     }
 }

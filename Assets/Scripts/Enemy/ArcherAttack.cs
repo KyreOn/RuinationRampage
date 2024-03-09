@@ -70,6 +70,7 @@ public class ArcherAttack : MonoBehaviour
             if (_attackCooldownTimer >= attackCooldown)
             {
                 canAttack = true;
+                isAttacking = false;
                 _attackCooldownTimer = 0;
             }
         }

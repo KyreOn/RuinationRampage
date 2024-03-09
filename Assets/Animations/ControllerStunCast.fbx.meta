@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8692461656b17c84981f4c64c15341fc
+guid: 8d587bed3b670e64bbe140c751e51f4e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -416,7 +416,7 @@ ModelImporter:
     second: WizardBody
   - first:
       74: 7400000
-    second: Attack04
+    second: Attack01
   - first:
       95: 9500000
     second: //RootNode
@@ -453,11 +453,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack04
+      name: Attack01
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -477,8 +477,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.07301263
-        functionName: CastReact
+      - time: 0.40711462
+        functionName: StunCast
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.97527474
+        functionName: CastEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -987,18 +994,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Attack04(Clone)
+    - name: Attack01(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: WizardBody
-      parentName: Attack04(Clone)
+      parentName: Attack01(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 0.01, y: 0.01, z: 0.01}
     - name: root
-      parentName: Attack04(Clone)
+      parentName: Attack01(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
       scale: {x: 0.01, y: 0.01, z: 0.01}

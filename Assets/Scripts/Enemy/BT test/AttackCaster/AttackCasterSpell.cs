@@ -65,6 +65,7 @@ public class AttackCasterSpell : MonoBehaviour
             if (_castCooldownTimer >= attackCooldown)
             {
                 canCast = true;
+                isAttacking = false;
                 _castCooldownTimer = 0;
             }
         }

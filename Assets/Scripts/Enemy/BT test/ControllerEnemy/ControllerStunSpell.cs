@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CasterSimpleAttack : MonoBehaviour
+public class ControllerStunSpell : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform  spawnPoint;
@@ -32,13 +32,13 @@ public class CasterSimpleAttack : MonoBehaviour
         if (!canCast) return false;
         _target = target;
         canCast = false;
-        _animator.SetTrigger("SimpleAttack");
+        _animator.SetTrigger("StunCast");
         isAttacking = true;
         _navMeshAgent.ResetPath();
         return true;
     }
 
-    public void SimpleCast()
+    public void StunCast()
     {
         var rayDirection = _target.transform.position - spawnPoint.position;
         rayDirection.y = 0;

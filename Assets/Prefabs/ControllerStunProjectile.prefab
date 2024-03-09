@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 8997530756615111661}
   - component: {fileID: 5663130124510398248}
   - component: {fileID: 7870532808276407490}
-  - component: {fileID: -3046936081995310992}
+  - component: {fileID: 1153618873645684458}
   - component: {fileID: 135527469846539421}
   - component: {fileID: 7634799471056198862}
   m_Layer: 11
-  m_Name: CasterSimpleProjectile
+  m_Name: ControllerStunProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f84e7cff74598a849b2fb18a06d28efd, type: 2}
+  - {fileID: 2100000, guid: 0bc65837560c79442a85666e93e3325d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-3046936081995310992
+--- !u!114 &1153618873645684458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,11 +95,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1486242915857561789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: facada7da9972fc4da3193399d79a525, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fbcc2020b066454daab7d41c01f2ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
+  speed: 0.2
   lifeSpan: 1
+  onHitSpell: {fileID: 7889806527387032674, guid: 5d9db10819f260a4cbc43e9fb63ad0ff,
+    type: 3}
 --- !u!65 &135527469846539421
 BoxCollider:
   m_ObjectHideFlags: 0
