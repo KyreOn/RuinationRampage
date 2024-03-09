@@ -14,7 +14,7 @@ public class CasterEnemy : Enemy
         _attackCasterSpell = GetComponent<AttackCasterSpell>();
     }
 
-    public override bool CheckIsIdle()
+    public override bool OnCheckIsIdle()
     {
         return !(_casterSimpleAttack.isAttacking || _attackCasterSpell.isAttacking);
     }

@@ -41,12 +41,17 @@ public class Enemy : TreeAgent
 
         navMeshAgent.updateRotation = RotateOnMove;
         navMeshAgent.SetDestination(pos);
-        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers();
+        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (effectSystem.CheckIfDisabled() ? 0 : 1);
         Debug.DrawLine(transform.position, pos, Color.red, 2f);
         return pos;
     }
 
-    public virtual bool CheckIsIdle()
+    public bool CheckIsIdle()
+    {
+        return !effectSystem.CheckIfDisabled() && OnCheckIsIdle();
+    }
+
+    public virtual bool OnCheckIsIdle()
     {
         return true;
     }

@@ -17,7 +17,7 @@ public class Zombie : Enemy
         _jumpAttack = GetComponent<JumpAttack>();
     }
 
-    public override bool CheckIsIdle()
+    public override bool OnCheckIsIdle()
     {
         return !(_simpleAttack.isAttacking || _jumpAttack.isJump);
     }

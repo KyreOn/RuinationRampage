@@ -25,7 +25,7 @@ public class DamageSystem : MonoBehaviour
         if (_isInvincible) return;
         _isHit = true;
         _effectTimer = 0;
-        _renderer.sharedMaterial.SetInt("_Hit", 1);
+        _renderer.materials[1].SetInt("_Hit", 1);
         _effectSystem.AddEffect(new DamageEffect(0.2f, 2), false);
     }
 
@@ -35,7 +35,7 @@ public class DamageSystem : MonoBehaviour
         if (_effectTimer >= effectTime && _isHit)
         {
             _isHit = false;
-            _renderer.material.SetInt("_Hit", 0);
+            _renderer.materials[1].SetInt("_Hit", 0);
         }
 
         var DOT = _effectSystem.CalculateDOT();
