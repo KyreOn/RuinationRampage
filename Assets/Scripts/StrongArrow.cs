@@ -23,6 +23,12 @@ public class StrongArrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Reaction")
+        {
+            other.gameObject.GetComponentInParent<Reaction>().TryReact(gameObject);
+            return;
+        }
+        
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<DamageSystem>().ApplyDamage();

@@ -1,14 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CasterEnemyReaction : Reaction
 {
-    [SerializeField] private LayerMask  layerMask;
+    [SerializeField] private GameObject illusion;
     
-
-    private Animator _animator;
+    private Animator   _animator;
 
     protected override void OnAwake()
     {
@@ -22,24 +20,34 @@ public class CasterEnemyReaction : Reaction
         var rotation = Quaternion.LookRotation(rotationDir);
         transform.rotation = rotation;
         _animator.SetTrigger("React");
+        _animator.speed = 4;
     }
 
     public void CastReact()
     {
-        var colliders = Physics.OverlapBox(transform.position + transform.forward * 3,
-            new Vector3(3, 3, 3), transform.rotation, layerMask);
-        foreach (var collider in colliders)
-        {
-            if (collider.CompareTag("Projectile"))
-            {
-                collider.transform.rotation = Quaternion.Inverse(collider.transform.rotation);
-            }
+        _animator.speed = 1;
 
-            if (collider.CompareTag("Player"))
-            {
-                collider.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.15f));
-                collider.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.15f, transform.forward));
-            }
+        var choice    = Random.value;
+
+        var firstPos  = transform.position;
+        var secondPos = transform.position + transform.right * 2;
+        var thirdPos  = transform.position - transform.right * 2;
+        switch (choice)
+        {
+            case < 0.33f:
+                transform.position = secondPos;
+                Instantiate(illusion, firstPos, transform.rotation);
+                Instantiate(illusion, thirdPos, transform.rotation);
+                break;
+            case > 0.67f:
+                transform.position = thirdPos;
+                Instantiate(illusion, firstPos,  transform.rotation);
+                Instantiate(illusion, secondPos, transform.rotation);
+                break;
+            default:
+                Instantiate(illusion, secondPos, transform.rotation);
+                Instantiate(illusion, thirdPos,  transform.rotation);
+                break;
         }
     }
 }

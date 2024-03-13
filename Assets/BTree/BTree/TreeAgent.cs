@@ -56,6 +56,7 @@ namespace BTree
 
         protected virtual void Update()
         {
+            OnUpdate();
             if (current.CheckConditions())
             {
                 current.Origin.Execute();
@@ -73,6 +74,11 @@ namespace BTree
             //Restart();
             //TryEvaluate();
             //}
+        }
+
+        protected virtual void OnUpdate()
+        {
+            
         }
 
         /// <summary>

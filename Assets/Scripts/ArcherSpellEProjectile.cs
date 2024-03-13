@@ -25,6 +25,12 @@ public class ArcherSpellEProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Reaction")
+        {
+            other.gameObject.GetComponentInParent<Reaction>().TryReact(gameObject);
+            return;
+        }
+        
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(3));

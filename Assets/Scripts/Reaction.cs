@@ -8,6 +8,7 @@ public class Reaction : MonoBehaviour
     [SerializeField] private float      reactionCooldown;
     [SerializeField] private GameObject player;
     [SerializeField] private float      reactionRadius;
+    [SerializeField] private LayerMask  reactLayerMask;
     
     private float _cooldownTimer;
     private bool  _canReact = true;
@@ -15,6 +16,13 @@ public class Reaction : MonoBehaviour
     public bool TryReact(GameObject stimuli)
     {
         if (!_canReact) return false;
+        var ray = new Ray(transform.position, stimuli.transform.position - transform.position);
+        if (Physics.Raycast(ray, out var hit, reactionRadius, reactLayerMask))
+        {
+            if (hit.transform.gameObject != stimuli)
+                return false;
+        }
+            
         OnReact(stimuli);
         _canReact = false;
         return true;

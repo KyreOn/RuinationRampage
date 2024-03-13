@@ -21,6 +21,10 @@ public class CasterSimpleAttackProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Reaction")
+        {
+            return;
+        }
         if (other.gameObject.CompareTag("Player")) 
             other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
         Destroy(gameObject);

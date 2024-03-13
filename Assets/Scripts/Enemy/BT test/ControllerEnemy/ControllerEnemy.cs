@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ControllerEnemy : Enemy
 {
+    private ControllerStunSpell _controllerStunSpell;
+    
     protected override void Awake()
     {
         base.Awake();
+        _controllerStunSpell = GetComponent<ControllerStunSpell>();
     }
 
     public override bool OnCheckIsIdle()
     {
-        return true;
+        return !_controllerStunSpell.isAttacking;
     }
 }

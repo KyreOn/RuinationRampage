@@ -22,6 +22,10 @@ public class ControllerStunProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Reaction")
+        {
+            return;
+        }
         if (other.gameObject.CompareTag("Player"))
         {
             var damageSystem = other.gameObject.GetComponent<DamageSystem>();
