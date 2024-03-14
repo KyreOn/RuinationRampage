@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -25,9 +26,10 @@ public class DamageSystem : MonoBehaviour
     public void ApplyDamage()
     {
         if (isInvincible) return;
+        if (_effectSystem.CheckForInvincibility()) return;
         _isHit = true;
         _effectTimer = 0;
-        _renderer.materials[1].SetInt("_Hit", 1);
+        _renderer.materials.Last().SetInt("_Hit", 1);
         _effectSystem.AddEffect(new DamageEffect(0.2f, 2), false);
     }
 
@@ -37,7 +39,7 @@ public class DamageSystem : MonoBehaviour
         if (_effectTimer >= effectTime && _isHit)
         {
             _isHit = false;
-            _renderer.materials[1].SetInt("_Hit", 0);
+            _renderer.materials.Last().SetInt("_Hit", 0);
         }
 
         var DOT = _effectSystem.CalculateDOT();

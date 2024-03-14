@@ -9,6 +9,7 @@ public enum EffectType
     DISABLE,
     DOT,
     DISPLACEMENT,
+    INVINCIBILITY,
 }
 public class Effect
 {

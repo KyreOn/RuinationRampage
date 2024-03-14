@@ -59,6 +59,11 @@ public class EffectSystem : MonoBehaviour
         }
         return Vector3.zero;
     }
+
+    public bool CheckForInvincibility()
+    {
+        return _effects.Any(effect => effect.effectType == EffectType.INVINCIBILITY);
+    }
     
     private Effect GetEffectById(int id)
     {

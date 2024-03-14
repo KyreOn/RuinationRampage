@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour, ITreeContext
 {
-    // Start is called before the first frame update
+    [SerializeField] private Transform model;
+    
     void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Vector3 Forward => model.forward;
 
     public Vector3 Position
     {

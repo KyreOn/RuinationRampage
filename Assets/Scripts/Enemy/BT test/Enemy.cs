@@ -40,6 +40,15 @@ public class Enemy : TreeAgent
         }
 
         navMeshAgent.updateRotation = RotateOnMove;
+        
+        if (!RotateOnMove)
+        {
+            var dir = Player.Position - transform.position;
+            dir.y = 0;
+            var rot = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, 10);
+        }
+        
         navMeshAgent.SetDestination(pos);
         navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (effectSystem.CheckIfDisabled() ? 0 : 1);
         Debug.DrawLine(transform.position, pos, Color.red, 2f);
