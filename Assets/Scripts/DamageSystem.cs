@@ -6,31 +6,37 @@ using UnityEngine.Serialization;
 
 public class DamageSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject model;
-    [SerializeField] private float      effectTime;
+    [SerializeField] private float        effectTime;
+    [SerializeField] private GameObject[] models;
     
-    private EffectSystem _effectSystem;
-    private bool         _isHit;
-    private float        _effectTimer;
-    private Renderer     _renderer;
+    private EffectSystem   _effectSystem;
+    private bool           _isHit;
+    private float          _effectTimer;
+    private List<Renderer> _renderers = new();
     
     public bool isInvincible;
     
     private void Awake()
     {
         _effectSystem = GetComponent<EffectSystem>();
-        _renderer = model.GetComponent<Renderer>();
-        _renderer.material.SetInt("_Hit", 0);
+        foreach (var model in models)
+        {
+            _renderers.Add(model.GetComponent<Renderer>());
+        }
     }
 
-    public void ApplyDamage()
+    public bool ApplyDamage()
     {
-        if (isInvincible) return;
-        if (_effectSystem.CheckForInvincibility()) return;
+        if (isInvincible) return false;
+        if (_effectSystem.CheckForInvincibility()) return false;
         _isHit = true;
         _effectTimer = 0;
-        _renderer.materials.Last().SetInt("_Hit", 1);
-        _effectSystem.AddEffect(new DamageEffect(0.2f, 2), false);
+        foreach (var renderer in _renderers)
+        {
+            renderer.materials.Last().SetInt("_Hit", 1);
+        }
+        _effectSystem.AddEffect(new DamageEffect(0.2f, 1.25f), false);
+        return true;
     }
 
     public void Update()
@@ -39,7 +45,10 @@ public class DamageSystem : MonoBehaviour
         if (_effectTimer >= effectTime && _isHit)
         {
             _isHit = false;
-            _renderer.materials.Last().SetInt("_Hit", 0);
+            foreach (var renderer in _renderers)
+            {
+                renderer.materials.Last().SetInt("_Hit", 0);
+            }
         }
 
         var DOT = _effectSystem.CalculateDOT();

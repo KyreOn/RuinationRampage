@@ -17,6 +17,7 @@ public class SummonerEnemy : Enemy
 
     protected override void OnUpdate()
     {
+        base.OnUpdate();
         _animator.SetBool("RunAway", runFromPlayer);
     }
 

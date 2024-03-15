@@ -25,6 +25,7 @@ public class Effect
     }
     public void UpdateEffect()
     {
+        if (_duration == -1) return;
         _durationTimer += Time.deltaTime;
     }
 
@@ -33,5 +34,9 @@ public class Effect
         return 1;
     }
 
-    public bool CheckForEnd() => _durationTimer >= _duration;
+    public bool CheckForEnd()
+    {
+        if (_duration         == -1) return false;
+        return _durationTimer >= _duration;
+    }
 }

@@ -10,6 +10,7 @@ public class CasterEnemyIllusion : CasterEnemy
 
     protected override void OnUpdate()
     {
+        base.OnUpdate();
         _lifespanTimer += Time.deltaTime;
         if (_lifespanTimer >= lifespan)
             Destroy(gameObject);

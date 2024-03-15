@@ -10,12 +10,15 @@ public class Reaction : MonoBehaviour
     [SerializeField] private float      reactionRadius;
     [SerializeField] private LayerMask  reactLayerMask;
     
-    private float _cooldownTimer;
-    private bool  _canReact = true;
+    private float        _cooldownTimer;
+    private bool         _canReact = true;
+    
+    protected EffectSystem effectSystem;
     
     public bool TryReact(GameObject stimuli)
     {
         if (!_canReact) return false;
+        if (effectSystem.CheckForInvincibility()) return false;
         var ray = new Ray(transform.position, stimuli.transform.position - transform.position);
         if (Physics.Raycast(ray, out var hit, reactionRadius, reactLayerMask))
         {
@@ -40,6 +43,7 @@ public class Reaction : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        effectSystem = GetComponent<EffectSystem>();
         OnAwake();
     }
 

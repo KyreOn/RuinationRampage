@@ -32,6 +32,7 @@ public class SummonerBuffSpell : MonoBehaviour
     public void BuffCast()
     {
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        _effectSystem.AddEffect(new InvincibilityEffect(0.5f));
         foreach (var enemy in enemies)
         {
             enemy.GetComponent<EffectSystem>().AddEffect(new SlowEffect(0.5f, 0.5f), false);

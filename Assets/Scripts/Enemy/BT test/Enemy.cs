@@ -25,6 +25,12 @@ public class Enemy : TreeAgent
         RotateOnMove = true;
     }
 
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (effectSystem.CheckIfDisabled() ? 0 : 1);
+    }
+
     public Vector3 MoveTo(Vector3 position)
     {
         if (navMeshAgent.enabled == false)
@@ -50,7 +56,6 @@ public class Enemy : TreeAgent
         }
         
         navMeshAgent.SetDestination(pos);
-        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (effectSystem.CheckIfDisabled() ? 0 : 1);
         Debug.DrawLine(transform.position, pos, Color.red, 2f);
         return pos;
     }

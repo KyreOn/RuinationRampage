@@ -36,7 +36,7 @@ public class MoveToPlayer : Leaf<ITreeContext>
             return;
         }
 
-        if ((_target - _enemy.Player.Position).magnitude > 1.4f)
+        if ((_target - _enemy.Player.Position).magnitude > 0.25f)
         {
             var pos = GetPlayerPos();
             _target = _enemy.MoveTo(pos);

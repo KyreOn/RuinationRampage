@@ -14,7 +14,6 @@ public class AssassinReaction : Reaction
     private Vector3           _direction;
     private NavMeshAgent      _navMeshAgent;
     private AssassinEnemyDash _assassinEnemyDash;
-    private EffectSystem      _effectSystem;
     private AssassinEnemy     _assassinEnemy;
     
     protected override void OnAwake()
@@ -22,7 +21,6 @@ public class AssassinReaction : Reaction
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _assassinEnemyDash = GetComponent<AssassinEnemyDash>();
-        _effectSystem = GetComponent<EffectSystem>();
         _assassinEnemy = GetComponent<AssassinEnemy>();
     }
 
@@ -31,7 +29,7 @@ public class AssassinReaction : Reaction
         if (_assassinEnemyDash.isAttacking) return;
         //_animator.SetTrigger("React");
         //_animator.speed = 4;
-        if (_effectSystem.CheckIfDisabled()) return;
+        if (effectSystem.CheckIfDisabled()) return;
         var stimuliDir = stimuli.transform.position - transform.position;
         var hor       = Math.Sign(Vector3.SignedAngle(transform.forward, stimuliDir, Vector3.up)) * -1;
         var direction = transform.right * (hor * strafeLength);
@@ -39,8 +37,8 @@ public class AssassinReaction : Reaction
         _direction = direction;
         NavMesh.SamplePosition(transform.position + _direction, out var hit, strafeLength, NavMesh.AllAreas);
         transform.position = hit.position;
-        _effectSystem.AddEffect(new SlowEffect(0.25f, 10000));
-        _effectSystem.AddEffect(new InvincibilityEffect(0.5f));
+        effectSystem.AddEffect(new SlowEffect(0.25f, 10000));
+        effectSystem.AddEffect(new InvincibilityEffect(0.5f));
         _assassinEnemy.Reset();
     }
 
