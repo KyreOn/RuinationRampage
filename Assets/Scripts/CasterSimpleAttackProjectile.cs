@@ -26,7 +26,7 @@ public class CasterSimpleAttackProjectile : MonoBehaviour
             return;
         }
         if (other.gameObject.CompareTag("Player")) 
-            other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
+            other.gameObject.GetComponent<DamageSystem>().ApplyDamage(10);
         Destroy(gameObject);
     }
 }

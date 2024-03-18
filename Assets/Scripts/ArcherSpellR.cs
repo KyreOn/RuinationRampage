@@ -34,7 +34,7 @@ public class ArcherSpellR : Spell
                 new Vector3(1, 2, halfDistance.magnitude), playerTransform.rotation, enemyLayer);
             foreach (var enemy in enemies)
             {
-                enemy.GetComponent<DamageSystem>().ApplyDamage();
+                enemy.GetComponent<DamageSystem>().ApplyDamage(10);
             }
         }
     }

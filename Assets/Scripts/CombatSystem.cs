@@ -14,6 +14,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private Transform  spawnPoint;
     
     private Animator            _animator;
+    private EffectSystem        _effectSystem;
     private bool                _isWeakAttacking;
     private bool                _isStrongAttacking;
     private CharacterController _controller;
@@ -26,6 +27,7 @@ public class CombatSystem : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _effectSystem = GetComponent<EffectSystem>();
         _movementSystem = GetComponent<MovementSystem>();
         _archerSpellQ = GetComponent<ArcherSpellQ>();
         _archerSpellE = GetComponent<ArcherSpellE>();
@@ -73,7 +75,8 @@ public class CombatSystem : MonoBehaviour
     }
     public void Shoot()
     {
-        Instantiate(arrowObject, spawnPoint.position, model.transform.rotation);
+        var arrow = Instantiate(arrowObject, spawnPoint.position, model.transform.rotation);
+        arrow.GetComponent<Arrow>().Init(20 * _effectSystem.CalculateOutcomeDamage());
     }
 
     public void ShootEnd()

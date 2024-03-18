@@ -43,7 +43,7 @@ public class CasterProjectile : MonoBehaviour
             foreach (var target in hitTargets)
             {
                 if (target.CompareTag("Player"))
-                    target.GetComponent<DamageSystem>().ApplyDamage();
+                    target.GetComponent<DamageSystem>().ApplyDamage(10);
             }
         }
     }

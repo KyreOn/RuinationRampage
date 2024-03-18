@@ -105,7 +105,7 @@ public class aimove : MonoBehaviour
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(1.2f, 2, 1.2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
-            player.GetComponent<DamageSystem>().ApplyDamage();
+            player.GetComponent<DamageSystem>().ApplyDamage(10);
         }
     }
 

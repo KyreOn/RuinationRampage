@@ -34,7 +34,6 @@ public class GiantSimpleAttack : MonoBehaviour
         var rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;
         _animator.SetTrigger("SimpleAttack");
-        //_effectSystem.AddEffect(new SlowEffect(1f, 10000));
         return true;
     }
 
@@ -43,7 +42,7 @@ public class GiantSimpleAttack : MonoBehaviour
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(3f, 3, 3f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
-            if (_target.GetComponent<DamageSystem>().ApplyDamage())
+            if (_target.GetComponent<DamageSystem>().ApplyDamage(10))
             {
                 _target.GetComponent<EffectSystem>().AddEffect(new StunEffect(2));
                 _target.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.05f, transform.forward));

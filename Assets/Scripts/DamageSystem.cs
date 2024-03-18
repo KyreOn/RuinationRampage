@@ -25,12 +25,13 @@ public class DamageSystem : MonoBehaviour
         }
     }
 
-    public bool ApplyDamage()
+    public bool ApplyDamage(float damage)
     {
         if (isInvincible) return false;
         if (_effectSystem.CheckForInvincibility()) return false;
         _isHit = true;
         _effectTimer = 0;
+        Debug.Log(damage * _effectSystem.CalculateIncomeDamage());
         foreach (var renderer in _renderers)
         {
             renderer.materials.Last().SetInt("_Hit", 1);
@@ -53,7 +54,7 @@ public class DamageSystem : MonoBehaviour
 
         var DOT = _effectSystem.CalculateDOT();
         if (DOT > 0)
-            ApplyDamage();
+            ApplyDamage(DOT);
     }
 
     public void SetInvincible(bool status)

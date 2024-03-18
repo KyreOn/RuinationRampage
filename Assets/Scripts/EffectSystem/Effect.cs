@@ -11,6 +11,8 @@ public enum EffectType
     DISPLACEMENT,
     INVINCIBILITY,
     UNSTOPPABLE,
+    INCOMEDAMAGE,
+    OUTCOMEDAMAGE,
 }
 public class Effect
 {

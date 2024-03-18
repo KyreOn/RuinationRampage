@@ -7,6 +7,13 @@ public class Arrow : MonoBehaviour
 {
     [SerializeField] private float    speed;
     [SerializeField] private float    lifeSpan;
+
+    private float _damage;
+
+    public void Init(float damage)
+    {
+        _damage = damage;
+    }
     
     private void Update()
     {
@@ -28,7 +35,7 @@ public class Arrow : MonoBehaviour
             return;
         }
         if (other.gameObject.tag == "Enemy") 
-            other.gameObject.GetComponent<DamageSystem>().ApplyDamage();
+            other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage);
         Destroy(gameObject);
     }
 }

@@ -83,6 +83,20 @@ public class EffectSystem : MonoBehaviour
         return _effects.Any(effect => effect.effectType == EffectType.UNSTOPPABLE);
     }
     
+    public float CalculateIncomeDamage()
+    {
+        return _effects.Where(effect => effect.effectType == EffectType.INCOMEDAMAGE)
+            .Aggregate(1f, (current, effect) => 
+                current * effect.ApplyEffect());
+    }
+    
+    public float CalculateOutcomeDamage()
+    {
+        return _effects.Where(effect => effect.effectType == EffectType.OUTCOMEDAMAGE)
+            .Aggregate(1f, (current, effect) => 
+                current * effect.ApplyEffect());
+    }
+    
     private Effect GetEffectById(int id)
     {
         foreach (var effect in _effects)

@@ -38,7 +38,6 @@ public class RevenantSimpleAttack : MonoBehaviour
         var random = Random.value;
         _animator.SetTrigger(random > 0.5 ? "SimpleAttack1" : "SimpleAttack2");
         _animator.speed = _revenantEnemy.revived ? 1.5f : 1;
-        //_effectSystem.AddEffect(new SlowEffect(0.75f, 10000));
         return true;
     }
 
@@ -47,7 +46,7 @@ public class RevenantSimpleAttack : MonoBehaviour
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(2f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
-            if (_target.GetComponent<DamageSystem>().ApplyDamage() && _revenantEnemy.revived)
+            if (_target.GetComponent<DamageSystem>().ApplyDamage(10) && _revenantEnemy.revived)
                 _target.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.25f));
         }
     }
