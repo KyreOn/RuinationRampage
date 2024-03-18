@@ -18,5 +18,7 @@ public class UnstoppableEffect : Effect
 
     public UnstoppableEffect(float duration) : base(duration)
     {
+        effectId = 6;
+        effectType = EffectType.UNSTOPPABLE;
     }
 }

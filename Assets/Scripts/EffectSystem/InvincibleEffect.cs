@@ -11,7 +11,7 @@ public class InvincibilityEffect : Effect
 
     public InvincibilityEffect(float duration) : base(duration)
     {
-        effectId = 0;
+        effectId = 5;
         effectType = EffectType.INVINCIBILITY;
     }
 }

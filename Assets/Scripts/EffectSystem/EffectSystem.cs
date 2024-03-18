@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,9 @@ public class EffectSystem : MonoBehaviour
 
     public float CalculateSpeedModifiers()
     {
-        return _effects.Where(effect => effect.effectType == EffectType.SPEED).Aggregate(1f, (current, effect) => current * effect.ApplyEffect());
+        return _effects.Where(effect => effect.effectType == EffectType.SPEED)
+            .Aggregate(1f, (current, effect) => 
+                current * (CheckForUnstoppable() ? Math.Clamp(effect.ApplyEffect(), 1, float.MaxValue) : effect.ApplyEffect()));
     }
 
     public bool CheckIfDisabled()
@@ -73,6 +76,11 @@ public class EffectSystem : MonoBehaviour
     public bool CheckForInvincibility()
     {
         return _effects.Any(effect => effect.effectType == EffectType.INVINCIBILITY);
+    }
+
+    public bool CheckForUnstoppable()
+    {
+        return _effects.Any(effect => effect.effectType == EffectType.UNSTOPPABLE);
     }
     
     private Effect GetEffectById(int id)

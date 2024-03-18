@@ -42,7 +42,8 @@ public class RevenantEnemy : Enemy
             _animator.SetBool("Revived", revived);
             _revenantSimpleAttack.isAttacking = false;
             _revenantStrongAttack.isAttacking = false;
-            _effectSystem.AddEffect(new SlowEffect(-1, 0.5f));
+            _effectSystem.AddEffect(new RevenantRageEffect(-1));
+            _effectSystem.AddEffect(new UnstoppableEffect(-1));
             _effectSystem.AddEffect(new StunEffect(2.5f));
         }
         
