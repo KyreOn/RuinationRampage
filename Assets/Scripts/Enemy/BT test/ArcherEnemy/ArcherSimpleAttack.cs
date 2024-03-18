@@ -19,8 +19,11 @@ public class ArcherSimpleAttack : Leaf<ITreeContext>
     {
         if (_archer.CheckIsIdle())
         {
-            _archerAttack.StartAttack(_archer.Player.gameObject);
-            _started = true;
+            var result = _archerAttack.StartAttack(_archer.Player.gameObject);
+            if (!result)
+                Response.Result = Result.Failure;
+            else
+                _started = true;
         }
         else
         {

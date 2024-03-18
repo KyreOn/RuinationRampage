@@ -26,7 +26,7 @@ public class RevenantEnemy : Enemy
 
     public override bool OnCheckIsIdle()
     {
-        return !(_revenantSimpleAttack.isAttacking || _revenantStrongAttack.isAttacking || _effectSystem.CheckIfDisabled());
+        return !(_revenantSimpleAttack.isAttacking || _revenantStrongAttack.isAttacking);
     }
 
     protected override void OnUpdate()

@@ -18,6 +18,6 @@ public class ArcherEnemy : Enemy
 
     public override bool OnCheckIsIdle()
     {
-        return !(_archerAttack.isAttacking || _effectSystem.CheckIfDisabled());
+        return !(_archerAttack.isAttacking);
     }
 }

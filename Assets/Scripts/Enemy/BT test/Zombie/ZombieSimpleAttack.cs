@@ -19,12 +19,11 @@ public class ZombieSimpleAttack : Leaf<ITreeContext>
     {
         if (_zombie.CheckIsIdle())
         {
-            var direction = _zombie.Player.Position - _zombie.transform.position;
-            direction.Scale(new Vector3(1, 0, 1));
-            var rotation = Quaternion.LookRotation(direction, Vector3.up);
-            _zombie.transform.rotation = rotation;
-            _zombieAttack.StartAttack(_zombie.Player.gameObject);
-            _started = true;
+            var result = _zombieAttack.StartAttack(_zombie.Player.gameObject);
+            if (!result)
+                Response.Result = Result.Failure;
+            else
+                _started = true;
         }
         else
         {

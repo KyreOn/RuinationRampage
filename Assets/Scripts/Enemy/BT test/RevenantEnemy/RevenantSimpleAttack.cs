@@ -38,7 +38,7 @@ public class RevenantSimpleAttack : MonoBehaviour
         var random = Random.value;
         _animator.SetTrigger(random > 0.5 ? "SimpleAttack1" : "SimpleAttack2");
         _animator.speed = _revenantEnemy.revived ? 1.5f : 1;
-        _effectSystem.AddEffect(new SlowEffect(0.75f, 10000));
+        //_effectSystem.AddEffect(new SlowEffect(0.75f, 10000));
         return true;
     }
 

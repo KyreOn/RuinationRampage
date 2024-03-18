@@ -55,9 +55,19 @@ public class EffectSystem : MonoBehaviour
         foreach (var effect in _effects)
         {
             if (effect.effectType == EffectType.DISPLACEMENT)
-                return ((DisplacementEffect)effect).direction;
+                return ((DisplacementEffect)effect).direction.normalized;
         }
         return Vector3.zero;
+    }
+    
+    public float GetDisplacementSpeed()
+    {
+        foreach (var effect in _effects)
+        {
+            if (effect.effectType == EffectType.DISPLACEMENT)
+                return ((DisplacementEffect)effect).speed;
+        }
+        return 0;
     }
 
     public bool CheckForInvincibility()

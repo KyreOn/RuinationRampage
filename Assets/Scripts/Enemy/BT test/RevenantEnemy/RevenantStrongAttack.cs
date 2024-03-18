@@ -37,7 +37,7 @@ public class RevenantStrongAttack : MonoBehaviour
         transform.rotation = rotation;
         _animator.SetTrigger("StrongAttack");
         _animator.speed = _revenantEnemy.revived ? 1.5f : 1;
-        _effectSystem.AddEffect(new SlowEffect(0.75f, 10000));
+        //_effectSystem.AddEffect(new SlowEffect(0.75f, 10000));
         return true;
     }
 

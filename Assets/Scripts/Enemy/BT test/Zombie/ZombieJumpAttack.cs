@@ -19,8 +19,11 @@ public class ZombieJumpAttack : Leaf<ITreeContext>
     {
         if (_zombie.CheckIsIdle())
         {
-            _jumpAttack.StartJump(_zombie.Player.gameObject);
-            _started = true;
+            var result = _jumpAttack.StartJump(_zombie.Player.gameObject);
+            if (!result)
+                Response.Result = Result.Failure;
+            else
+                _started = true;
         }
         else
         {

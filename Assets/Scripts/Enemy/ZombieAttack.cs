@@ -27,6 +27,10 @@ public class ZombieAttack : MonoBehaviour
         _playerCollider = new []{_target.GetComponent<Collider>()};
         _canAttack = false;
         isAttacking = true;
+        var direction = target.transform.position - transform.position;
+        direction.Scale(new Vector3(1, 0, 1));
+        var rotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = rotation;
         _animator.SetTrigger("Attack");
         return true;
     }

@@ -28,7 +28,7 @@ public class Enemy : TreeAgent
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (effectSystem.CheckIfDisabled() ? 0 : 1);
+        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (CheckIsIdle() ? 1 : 0);
     }
 
     public Vector3 MoveTo(Vector3 position)

@@ -78,7 +78,7 @@ public class MovementSystem : MonoBehaviour
             if (Physics.Raycast(position, direction, 1))
                 _isDisplaced = false;
             else
-                transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50);
+                transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * _effectSystem.GetDisplacementSpeed());
         }
         CalculateSpeed();
         var mousePos = Input.mousePosition;

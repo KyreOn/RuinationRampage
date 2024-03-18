@@ -43,7 +43,7 @@ public class AssassinEnemyDash : MonoBehaviour
     public void DashCast()
     {
         transform.position = _target.transform.position - transform.forward * 1.5f;
-        _effectSystem.AddEffect(new SlowEffect(1.5f, 100000));
+        //_effectSystem.AddEffect(new SlowEffect(1.5f, 100000));
         Strike();
     }
 
