@@ -5,6 +5,7 @@ using UnityEngine;
 public class RevenantEnemy : Enemy
 {
     private EffectSystem         _effectSystem;
+    private DamageSystem         _damageSystem;
     private Animator             _animator;
     private RevenantSimpleAttack _revenantSimpleAttack;
     private RevenantStrongAttack _revenantStrongAttack;
@@ -19,6 +20,7 @@ public class RevenantEnemy : Enemy
     {
         base.Awake();
         _effectSystem = GetComponent<EffectSystem>();
+        _damageSystem = GetComponent<DamageSystem>();
         _animator = GetComponent<Animator>();
         _revenantSimpleAttack = GetComponent<RevenantSimpleAttack>();
         _revenantStrongAttack = GetComponent<RevenantStrongAttack>();
@@ -33,8 +35,9 @@ public class RevenantEnemy : Enemy
     {
         base.OnUpdate();
         _reviveTimer += Time.deltaTime;
-        if (_reviveTimer >= 10)
+        if (_damageSystem.health <= 60)
             toRevive = true;
+        
         if (revived) return;
         if (toRevive)
         {
@@ -42,10 +45,15 @@ public class RevenantEnemy : Enemy
             _animator.SetBool("Revived", revived);
             _revenantSimpleAttack.isAttacking = false;
             _revenantStrongAttack.isAttacking = false;
-            _effectSystem.AddEffect(new RevenantRageEffect(-1));
-            _effectSystem.AddEffect(new UnstoppableEffect(-1));
-            _effectSystem.AddEffect(new StunEffect(2.5f));
+            _effectSystem.AddEffect(new InvincibilityEffect(1.5f));
+            _effectSystem.AddEffect(new StunEffect(1.5f));
         }
         
+    }
+
+    public void ReviveEnd()
+    {
+        _effectSystem.AddEffect(new RevenantRageEffect(-1));
+        _effectSystem.AddEffect(new UnstoppableEffect(-1));
     }
 }

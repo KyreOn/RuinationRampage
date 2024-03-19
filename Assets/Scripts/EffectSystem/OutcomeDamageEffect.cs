@@ -14,7 +14,7 @@ public class OutcomeDamageEffect : Effect
     public OutcomeDamageEffect(float duration, float strength) : base(duration)
     {
         effectId = 9;
-        effectType = EffectType.OUTCOMEDAMAGE;
+        effectType = EffectType.OUTCOME_DAMAGE;
         _strength = strength;
     }
 }

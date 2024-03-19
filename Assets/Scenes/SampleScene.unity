@@ -1036,6 +1036,7 @@ MonoBehaviour:
   - {fileID: 913566138}
   - {fileID: 1782571585}
   - {fileID: 1463634188}
+  health: 1000
   isInvincible: 0
 --- !u!136 &211484867
 CapsuleCollider:
@@ -2340,6 +2341,7 @@ MonoBehaviour:
   effectTime: 0.1
   models:
   - {fileID: 452978919}
+  health: 0
   isInvincible: 0
 --- !u!114 &592955621
 MonoBehaviour:
@@ -5682,6 +5684,7 @@ MonoBehaviour:
   effectTime: 0.1
   models:
   - {fileID: 451475390}
+  health: 1000
   isInvincible: 0
 --- !u!114 &1136273674
 MonoBehaviour:
@@ -6251,6 +6254,7 @@ MonoBehaviour:
   - {fileID: 972222950}
   - {fileID: 400154577}
   - {fileID: 824496634}
+  health: 0
   isInvincible: 0
 --- !u!114 &1241996795
 MonoBehaviour:
@@ -6555,6 +6559,7 @@ MonoBehaviour:
   effectTime: 0.1
   models:
   - {fileID: 1435436029}
+  health: 0
   isInvincible: 0
 --- !u!114 &1342245940
 MonoBehaviour:
@@ -9089,6 +9094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8364244729771357214, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
+      propertyPath: health
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364244729771357214, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
       propertyPath: models.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -10879,6 +10889,7 @@ MonoBehaviour:
   effectTime: 0.1
   models:
   - {fileID: 8358588854234680750}
+  health: 0
   isInvincible: 0
 --- !u!114 &8357606956738603632
 MonoBehaviour:

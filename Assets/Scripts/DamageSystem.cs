@@ -9,12 +9,14 @@ public class DamageSystem : MonoBehaviour
     [SerializeField] private float        effectTime;
     [SerializeField] private GameObject[] models;
     
+    [SerializeField] public float        health;
+    
     private EffectSystem   _effectSystem;
     private bool           _isHit;
     private float          _effectTimer;
     private List<Renderer> _renderers = new();
     
-    public bool isInvincible;
+    public bool  isInvincible;
     
     private void Awake()
     {
@@ -31,11 +33,15 @@ public class DamageSystem : MonoBehaviour
         if (_effectSystem.CheckForInvincibility()) return false;
         _isHit = true;
         _effectTimer = 0;
-        Debug.Log(damage * _effectSystem.CalculateIncomeDamage());
+        health -= damage * _effectSystem.CalculateIncomeDamage();
+        Debug.Log(health);
+        if (health <= 0)
+            Destroy(gameObject);
         foreach (var renderer in _renderers)
         {
             renderer.materials.Last().SetInt("_Hit", 1);
         }
+        _effectSystem.AddEffect(new StunEffect(0.2f));
         _effectSystem.AddEffect(new DamageEffect(0.2f, 1.25f), false);
         return true;
     }

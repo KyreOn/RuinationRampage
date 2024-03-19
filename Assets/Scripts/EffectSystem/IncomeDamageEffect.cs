@@ -14,7 +14,7 @@ public class IncomeDamageEffect : Effect
     public IncomeDamageEffect(float duration, float strength) : base(duration)
     {
         effectId = 8;
-        effectType = EffectType.INCOMEDAMAGE;
+        effectType = EffectType.INCOME_DAMAGE;
         _strength = strength;
     }
 }

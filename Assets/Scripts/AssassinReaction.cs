@@ -29,7 +29,7 @@ public class AssassinReaction : Reaction
         if (_assassinEnemyDash.isAttacking) return;
         //_animator.SetTrigger("React");
         //_animator.speed = 4;
-        if (effectSystem.CheckIfDisabled()) return;
+        if (effectSystem.CheckIfStunned()) return;
         var stimuliDir = stimuli.transform.position - transform.position;
         var hor       = Math.Sign(Vector3.SignedAngle(transform.forward, stimuliDir, Vector3.up)) * -1;
         var direction = transform.right * (hor * strafeLength);

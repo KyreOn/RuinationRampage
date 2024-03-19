@@ -29,7 +29,7 @@ public class AssassinEnemyDash : MonoBehaviour
     {
         if (!canCast) return false;
         var dot = Vector3.Dot(forward, transform.forward);
-        if (dot < 0.7 && !target.GetComponent<EffectSystem>().CheckIfDisabled()) return false;
+        if (dot < 0.7) return false;
         _target = target;
         _playerCollider = new []{_target.GetComponent<Collider>()};
         canCast = false;

@@ -6,13 +6,15 @@ using UnityEngine;
 public enum EffectType
 {
     SPEED,
-    DISABLE,
+    STUN,
+    ROOT,
+    SLOW_IMMUNE,
+    DISABLE_IMMUNE,
     DOT,
     DISPLACEMENT,
     INVINCIBILITY,
-    UNSTOPPABLE,
-    INCOMEDAMAGE,
-    OUTCOMEDAMAGE,
+    INCOME_DAMAGE,
+    OUTCOME_DAMAGE,
 }
 public class Effect
 {

@@ -14,7 +14,7 @@ public class CheckIsStunned : Node
 
     public override NodeState Evaluate()
     {
-        state = _effectSystem.CheckIfDisabled() ? NodeState.FAILURE : NodeState.SUCCESS;
+        state = _effectSystem.CheckIfStunned() ? NodeState.FAILURE : NodeState.SUCCESS;
         return state;
     }
 }

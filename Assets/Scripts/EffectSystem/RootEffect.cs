@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunEffect : Effect
+public class RootEffect : Effect
 {
     public override float ApplyEffect()
     {
         return 1;
     }
 
-    public StunEffect(float duration) : base(duration)
+    public RootEffect(float duration) : base(duration)
     {
-        effectId = 2;
-        effectType = EffectType.STUN;
+        effectId = 10;
+        effectType = EffectType.ROOT;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnstoppableEffect : Effect
+public class StunImmuneEffect : Effect
 {
     // Start is called before the first frame update
     void Start()
@@ -16,9 +16,9 @@ public class UnstoppableEffect : Effect
         
     }
 
-    public UnstoppableEffect(float duration) : base(duration)
+    public StunImmuneEffect(float duration) : base(duration)
     {
-        effectId = 6;
-        effectType = EffectType.SLOW_IMMUNE;
+        effectId = 11;
+        effectType = EffectType.DISABLE_IMMUNE;
     }
 }

@@ -62,7 +62,7 @@ public class Enemy : TreeAgent
 
     public bool CheckIsIdle()
     {
-        return !effectSystem.CheckIfDisabled() && OnCheckIsIdle();
+        return !effectSystem.CheckIfStunned() && OnCheckIsIdle();
     }
 
     public virtual bool OnCheckIsIdle()

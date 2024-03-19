@@ -35,12 +35,17 @@ public class EffectSystem : MonoBehaviour
     {
         return _effects.Where(effect => effect.effectType == EffectType.SPEED)
             .Aggregate(1f, (current, effect) => 
-                current * (CheckForUnstoppable() ? Math.Clamp(effect.ApplyEffect(), 1, float.MaxValue) : effect.ApplyEffect()));
+                current * (CheckForSlowImmune() || CheckForDisableImmune() ? Math.Clamp(effect.ApplyEffect(), 1, float.MaxValue) : effect.ApplyEffect()));
     }
 
-    public bool CheckIfDisabled()
+    public bool CheckIfStunned()
     {
-        return _effects.Any(effect => effect.effectType == EffectType.DISABLE);
+        return !CheckForDisableImmune() && _effects.Any(effect => effect.effectType == EffectType.STUN);
+    }
+    
+    public bool CheckIfRooted()
+    {
+        return !CheckForDisableImmune() && _effects.Any(effect => effect.effectType == EffectType.ROOT);
     }
 
     public float CalculateDOT()
@@ -78,21 +83,26 @@ public class EffectSystem : MonoBehaviour
         return _effects.Any(effect => effect.effectType == EffectType.INVINCIBILITY);
     }
 
-    public bool CheckForUnstoppable()
+    public bool CheckForSlowImmune()
     {
-        return _effects.Any(effect => effect.effectType == EffectType.UNSTOPPABLE);
+        return _effects.Any(effect => effect.effectType == EffectType.SLOW_IMMUNE);
+    }
+    
+    public bool CheckForDisableImmune()
+    {
+        return _effects.Any(effect => effect.effectType == EffectType.DISABLE_IMMUNE);
     }
     
     public float CalculateIncomeDamage()
     {
-        return _effects.Where(effect => effect.effectType == EffectType.INCOMEDAMAGE)
+        return _effects.Where(effect => effect.effectType == EffectType.INCOME_DAMAGE)
             .Aggregate(1f, (current, effect) => 
                 current * effect.ApplyEffect());
     }
     
     public float CalculateOutcomeDamage()
     {
-        return _effects.Where(effect => effect.effectType == EffectType.OUTCOMEDAMAGE)
+        return _effects.Where(effect => effect.effectType == EffectType.OUTCOME_DAMAGE)
             .Aggregate(1f, (current, effect) => 
                 current * effect.ApplyEffect());
     }

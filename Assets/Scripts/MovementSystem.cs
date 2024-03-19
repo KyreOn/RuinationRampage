@@ -143,6 +143,6 @@ public class MovementSystem : MonoBehaviour
 
     private void CalculateSpeed()
     {
-        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfDisabled() ? 0 : 1);
+        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfStunned() ? 0 : 1);
     }
 }
