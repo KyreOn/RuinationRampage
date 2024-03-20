@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2259a4fa8fd92b4da8e0fb4b3a60208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 5984629781596825973, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b, type: 3}
+  enemy: {fileID: 2228653314053538744, guid: 55bb1ec192dc2b545bef6e84f8805bd5, type: 3}
 --- !u!1 &5133835578692231969
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7975109044982862082}
   m_Layer: 0
-  m_Name: Enemies
+  m_Name: Enemies1-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

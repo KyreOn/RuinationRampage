@@ -33,7 +33,7 @@ public class ArcherAttack : MonoBehaviour
     {
         if (!canAttack) return false;
         
-        //_effectSystem.AddEffect(new SlowEffect(1, 100000));
+        //TODO Fix moving while shooting
         _target = target;
         isAttacking = true;
         canAttack = false;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BTree;
@@ -68,5 +69,10 @@ public class Enemy : TreeAgent
     public virtual bool OnCheckIsIdle()
     {
         return true;
+    }
+
+    private void OnDestroy()
+    {
+        WaveManager.CheckForEnemies();
     }
 }

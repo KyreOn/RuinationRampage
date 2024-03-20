@@ -28,6 +28,7 @@ public class JumpAttack : MonoBehaviour
 
     public bool StartJump(GameObject target)
     {
+        //TODO Fix collider allocation
         if (!_canJump) return false;
         if (_navMeshAgent.path.corners.Length > 2) return false;
         _target = target;

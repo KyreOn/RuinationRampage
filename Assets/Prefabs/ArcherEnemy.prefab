@@ -575,8 +575,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395e1f77c73ee734288500003b049ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 6426867834108558357}
   effectTime: 0.1
+  models: []
+  health: 0
+  isInvincible: 0
 --- !u!114 &1485519534922683215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,7 +618,7 @@ MonoBehaviour:
   arrowObject: {fileID: 5336553875213618851, guid: 2964ffd3ada190c419d3c541eb28c5b4,
     type: 3}
   spawnPoint: {fileID: 1395147982714216028}
-  attackCooldown: 1
+  attackCooldown: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 1280

@@ -194,8 +194,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6369752059346599812}
+  - component: {fileID: 8853712322466654205}
   m_Layer: 0
-  m_Name: Arena
+  m_Name: Arena 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,6 +224,28 @@ Transform:
   - {fileID: 1278716898041482543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8853712322466654205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843683198188605920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98456374e40636449801d0af7eb51c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPatternsLevel0:
+  - {fileID: 5133835578692231969, guid: 57fde606e62e1ca4f8284a9ff55de545, type: 3}
+  - {fileID: 5133835578692231969, guid: d536c27bc3165434dba4d5c021747057, type: 3}
+  enemyPatternsLevel1: []
+  enemyPatternsLevel2: []
+  enemyPatternsLevel3: []
+  enemyPatternsLevel4: []
+  enemyPatternsLevel5: []
+  enemyPatternsLevel6: []
+  enemyPatternsLevel7: []
 --- !u!1 &4745870242075558368
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +675,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 04eb2690c7273284d9cb2ac73a7faa62, type: 2}
+  - {fileID: 2100000, guid: 9e844edca3b18ec43a3598f49f12cdaf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -773,7 +796,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 879b91e14a83dfe4f9017c4bae7f96c8, type: 2}
+  - {fileID: 2100000, guid: e7afaa929564bb94ba9b5d00eeb3311d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

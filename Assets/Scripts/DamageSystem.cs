@@ -34,9 +34,12 @@ public class DamageSystem : MonoBehaviour
         _isHit = true;
         _effectTimer = 0;
         health -= damage * _effectSystem.CalculateIncomeDamage();
-        Debug.Log(health);
+        
         if (health <= 0)
+        {
             Destroy(gameObject);
+        }
+            
         foreach (var renderer in _renderers)
         {
             renderer.materials.Last().SetInt("_Hit", 1);
