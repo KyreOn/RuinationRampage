@@ -20,7 +20,8 @@ public class ArenaPattern : MonoBehaviour
 
     public void LoadEnemies(int wave)
     {
-        var level = wave / 5;
+        //var level = wave / 5;
+        var level = 0;
         switch (level)
         {
             case 0: 

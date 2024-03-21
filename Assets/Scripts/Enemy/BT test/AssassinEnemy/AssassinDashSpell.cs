@@ -10,6 +10,7 @@ public class AssassinEnemyDash : MonoBehaviour
 
     private Collider[]   _playerCollider;
     private GameObject   _target;
+    private Vector3      _targetForward;
     private EffectSystem _effectSystem;
     private NavMeshAgent _navMeshAgent;
     private Animator     _animator;
@@ -29,8 +30,9 @@ public class AssassinEnemyDash : MonoBehaviour
     {
         if (!canCast) return false;
         var dot = Vector3.Dot(forward, transform.forward);
-        if (dot < 0.7) return false;
+        if (dot < 0.7 && !target.GetComponent<EffectSystem>().CheckIfRooted() && !target.GetComponent<EffectSystem>().CheckIfStunned()) return false;
         _target = target;
+        _targetForward = forward;
         _playerCollider = new []{_target.GetComponent<Collider>()};
         canCast = false;
         //_animator.SetTrigger("DashCast");
@@ -42,7 +44,8 @@ public class AssassinEnemyDash : MonoBehaviour
 
     public void DashCast()
     {
-        transform.position = _target.transform.position - transform.forward * 1.5f;
+        transform.position = _target.transform.position - _targetForward * 1.5f;
+        transform.forward = _targetForward;
         //_effectSystem.AddEffect(new SlowEffect(1.5f, 100000));
         Strike();
     }

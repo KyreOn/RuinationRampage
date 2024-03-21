@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class JumpAttack : MonoBehaviour
 {
-    [SerializeField] private float jumpCooldown;
+    [SerializeField] private float     jumpCooldown;
+    [SerializeField] private LayerMask playerLayer;
     
     private float               _jumpCooldownTimer;
     private bool                _isPreparing;
@@ -17,7 +18,8 @@ public class JumpAttack : MonoBehaviour
     private CharacterController _targetController;
     private Vector3             _jumpTarget;
     
-    public bool isJump;
+    public bool       isJump;
+    public Collider[] _playerCollider;
 
     private void Awake()
     {
@@ -28,11 +30,11 @@ public class JumpAttack : MonoBehaviour
 
     public bool StartJump(GameObject target)
     {
-        //TODO Fix collider allocation
         if (!_canJump) return false;
         if (_navMeshAgent.path.corners.Length > 2) return false;
         _target = target;
         _targetController = target.GetComponent<CharacterController>();
+        _playerCollider = new []{_target.GetComponent<Collider>()};
         _navMeshAgent.speed = 0;
         _animator.SetTrigger("isJumping");
         _animator.speed = 0.3f;
@@ -51,6 +53,15 @@ public class JumpAttack : MonoBehaviour
         _animator.speed = 1;
         _isPreparing = false;
         _navMeshAgent.enabled = false;
+    }
+    
+    void StrongAttack()
+    { 
+        var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(1.5f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
+        if (size >= 1)
+        {
+            _target.GetComponent<DamageSystem>().ApplyDamage(10);
+        }
     }
 
     void EndJump()

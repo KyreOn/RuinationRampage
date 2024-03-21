@@ -16,6 +16,8 @@ public class GiantEnemy : Enemy
         _animator = GetComponent<Animator>();
         _giantSimpleAttack = GetComponent<GiantSimpleAttack>();
         _giantStrongAttack = GetComponent<GiantStrongAttack>();
+        _effectSystem.AddEffect(new StunImmuneEffect(-1));
+        _effectSystem.AddEffect(new UnstoppableEffect(-1));
     }
 
     public override bool OnCheckIsIdle()

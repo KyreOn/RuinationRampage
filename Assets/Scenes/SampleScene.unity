@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Follow: {fileID: 758640436}
   m_Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 6
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1036,7 +1036,7 @@ MonoBehaviour:
   - {fileID: 913566138}
   - {fileID: 1782571585}
   - {fileID: 1463634188}
-  health: 1000
+  health: 100
   isInvincible: 0
 --- !u!136 &211484867
 CapsuleCollider:
@@ -1333,7 +1333,7 @@ Camera:
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1989,7 +1989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &543863600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2280,7 +2280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &592955616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6d2a1cd8f9f2540aec77ca432733e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactionCooldown: 15
+  reactionCooldown: 1000
   player: {fileID: 0}
   reactionRadius: 3
   reactLayerMask:
@@ -2341,7 +2341,7 @@ MonoBehaviour:
   effectTime: 0.1
   models:
   - {fileID: 452978919}
-  health: 0
+  health: 1000
   isInvincible: 0
 --- !u!114 &592955621
 MonoBehaviour:
@@ -3476,7 +3476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &787833765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3495,7 +3495,7 @@ MonoBehaviour:
   arenaMaterials:
   - {fileID: 2100000, guid: e7afaa929564bb94ba9b5d00eeb3311d, type: 2}
   - {fileID: 2100000, guid: 9e844edca3b18ec43a3598f49f12cdaf, type: 2}
-  loadSpeed: 0.3
+  loadSpeed: 0.4
   startPoint: {fileID: 1269087914}
   player: {fileID: 1136273660}
 --- !u!4 &787833766
@@ -3723,7 +3723,7 @@ PrefabInstance:
     - target: {fileID: 3843683198188605920, guid: bc59e2107a523934cbfbeb3bd60a6f40,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6369752059346599812, guid: bc59e2107a523934cbfbeb3bd60a6f40,
         type: 3}
@@ -6371,7 +6371,7 @@ MonoBehaviour:
   - {fileID: 972222950}
   - {fileID: 400154577}
   - {fileID: 824496634}
-  health: 0
+  health: 1000
   isInvincible: 0
 --- !u!114 &1241996795
 MonoBehaviour:
@@ -6713,7 +6713,7 @@ MonoBehaviour:
   effectTime: 0.1
   models:
   - {fileID: 1435436029}
-  health: 0
+  health: 1000
   isInvincible: 0
 --- !u!114 &1342245940
 MonoBehaviour:
@@ -6806,7 +6806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca521763158cbd43a9003db47042f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 5
+  attackCooldown: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -7447,7 +7447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reactionCooldown: 10
   player: {fileID: 0}
-  reactionRadius: 3
+  reactionRadius: 4
   reactLayerMask:
     serializedVersion: 2
     m_Bits: 3328
@@ -9094,6 +9094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4790276057363479667, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
         type: 3}
+      propertyPath: health
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790276057363479667, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
       propertyPath: isInvincible
       value: 0
       objectReference: {fileID: 0}
@@ -9190,6 +9195,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3405268920857568317, guid: 3517c8d3912f4fb4c87fc918e0647b82,
+        type: 3}
+      propertyPath: health
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 3405268920857568317, guid: 3517c8d3912f4fb4c87fc918e0647b82,
         type: 3}
       propertyPath: models.Array.size
@@ -9291,6 +9301,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3656116775105261157, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: baseSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047129259590286614, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: isJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047129259590286614, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4831975920440211917, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
       propertyPath: m_Name
@@ -12129,8 +12154,8 @@ SceneRoots:
   - {fileID: 1269087918}
   - {fileID: 833087695}
   - {fileID: 1558340632}
-  - {fileID: 3286816517886104442}
   - {fileID: 7458537732623299105}
+  - {fileID: 3286816517886104442}
   - {fileID: 5235536449868481712}
   - {fileID: 8355497294515197600}
   - {fileID: 592955626}
