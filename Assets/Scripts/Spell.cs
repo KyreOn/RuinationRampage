@@ -9,14 +9,17 @@ public class Spell : MonoBehaviour
     [SerializeField] private float baseCooldown;
     [SerializeField] private int   maxCharges = 1;
 
-    private   float _effectedCooldown;
-    private   float _cooldownTimer;
-    private   int   curCharges;
-    protected bool  isPreparing;
+    private float _effectedCooldown;
+    private float _cooldownTimer;
+    private int   _curCharges;
+    
+    protected bool isPreparing;
+
+    public int level;
     
     public void Prepare()
     {
-        if (curCharges == 0) return;
+        if (_curCharges == 0 || level == 0) return;
         isPreparing = true;
         OnPrepare();
     }
@@ -28,9 +31,9 @@ public class Spell : MonoBehaviour
     
     public void Cast()
     {
-        if (curCharges == 0 || !isPreparing) return;
+        if (_curCharges == 0 || !isPreparing) return;
         isPreparing = false;
-        curCharges--;
+        _curCharges--;
         OnCast();
     }
     
@@ -46,7 +49,7 @@ public class Spell : MonoBehaviour
 
     private void Start()
     {
-        curCharges = maxCharges;
+        _curCharges = maxCharges;
         _effectedCooldown = baseCooldown;
     }
 
@@ -57,10 +60,10 @@ public class Spell : MonoBehaviour
     protected virtual void Update()
     {
         OnUpdate();
-        if (curCharges == maxCharges) return;
+        if (_curCharges == maxCharges) return;
         _cooldownTimer = Mathf.Clamp(_cooldownTimer + Time.deltaTime, 0, _effectedCooldown);
         if (_cooldownTimer < _effectedCooldown) return;
-        curCharges++;
+        _curCharges++;
         _cooldownTimer = 0;
     }
 }

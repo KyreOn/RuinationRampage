@@ -5,14 +5,26 @@ using UnityEngine;
 
 public class ArcherSpellR : Spell
 {
-    [SerializeField] private GameObject indicator;
-    [SerializeField] private LayerMask  wallLayer;
-    [SerializeField] private LayerMask  enemyLayer;
+    [SerializeField] private GameObject   indicator;
+    [SerializeField] private LayerMask    wallLayer;
+    [SerializeField] private LayerMask    enemyLayer;
+    [SerializeField] private LineRenderer laserBeam;
+    [SerializeField] private Transform    laserSpawnPoint;
 
-    private GameObject _indicator;
-    private Vector3    _clampedPosition;
-    private GameObject _model;
-    
+    private CharacterController _controller;
+    private Animator            _animator;
+    private GameObject          _indicator;
+    private Vector3             _clampedPosition;
+    private GameObject          _model;
+    private bool                _isShoot;
+    private float               _beamProgress;
+
+    private void Awake()
+    {
+        _controller = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
+    }
+
     protected override void OnPrepare()
     {
     }
@@ -24,11 +36,43 @@ public class ArcherSpellR : Spell
     
     protected override void OnCast()
     {
+        _controller.enabled = false;
+        _animator.SetBool("RSpell", true);
+        
+    }
+
+    protected override void OnUpdate()
+    {
+        if (_isShoot)
+        {
+            _beamProgress += Time.deltaTime * 20;
+            laserBeam.widthMultiplier = Mathf.Sin(_beamProgress);
+            if (Mathf.Sin(_beamProgress) < 0)
+            {
+                _isShoot = false;
+                _beamProgress = 0;
+                laserBeam.enabled = false;
+            }
+        }
+    }
+
+    public void RSpellDraw()
+    {
+        _animator.speed = 0.4f;
+    }
+    
+    public void RSpellShoot()
+    {
+        _animator.speed = 1f;
+        laserBeam.enabled = true;
+        _isShoot = true;
         var playerTransform = _model.transform;
-        var ray             = new Ray(playerTransform.position, _model.transform.forward);
+        var ray             = new Ray(laserSpawnPoint.position, _model.transform.forward);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, wallLayer))
         {
-            var position = playerTransform.position;
+            laserBeam.SetPosition(0, laserSpawnPoint.position);
+            laserBeam.SetPosition(1, hit.point);
+            var position     = playerTransform.position;
             var halfDistance = (hit.point - position) / 2;
             var enemies = Physics.OverlapBox(position + halfDistance,
                 new Vector3(1, 2, halfDistance.magnitude), playerTransform.rotation, enemyLayer);
@@ -39,8 +83,9 @@ public class ArcherSpellR : Spell
         }
     }
 
-    protected override void OnUpdate()
+    public void ShootEnd()
     {
-        
+        _controller.enabled = true;
+        _animator.SetBool("RSpell", false);
     }
 }

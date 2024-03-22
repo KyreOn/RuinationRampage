@@ -64,7 +64,7 @@ public class WaveManager : MonoBehaviour
         _shaderProgress += Time.deltaTime * loadSpeed * (_isLoading ? 1 : -1);
         foreach (var material in arenaMaterials)
         {
-            material.SetFloat("_Cutoff_Height", 50 * Mathf.Abs(Mathf.Sin(_shaderProgress)));
+            material.SetFloat("_Cutoff_Height", 100 * Mathf.Abs(Mathf.Sin(_shaderProgress)));
         }
     }
 
@@ -92,6 +92,7 @@ public class WaveManager : MonoBehaviour
     {
         _isLoading = false;
         _isLoaded = false;
+        _shaderProgress = 0.5f;
         _collider.enabled = false;
         //_cc.enabled = false;
     }

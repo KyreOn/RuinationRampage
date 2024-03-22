@@ -18,7 +18,8 @@ public class CombatSystem : MonoBehaviour
     private bool                _isWeakAttacking;
     private bool                _isStrongAttacking;
     private CharacterController _controller;
-    private MovementSystem      _movementSystem;
+    private ArcherWeakAttack    _archerWeakAttack;
+    private ArcherStrongAttack  _archerStrongAttack;
     private ArcherSpellQ        _archerSpellQ;
     private ArcherSpellE        _archerSpellE;
     private ArcherSpellR        _archerSpellR;
@@ -28,7 +29,8 @@ public class CombatSystem : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _effectSystem = GetComponent<EffectSystem>();
-        _movementSystem = GetComponent<MovementSystem>();
+        _archerWeakAttack = GetComponent<ArcherWeakAttack>();
+        _archerStrongAttack = GetComponent<ArcherStrongAttack>();
         _archerSpellQ = GetComponent<ArcherSpellQ>();
         _archerSpellE = GetComponent<ArcherSpellE>();
         _archerSpellR = GetComponent<ArcherSpellR>();
@@ -36,38 +38,24 @@ public class CombatSystem : MonoBehaviour
 
     public void StartWeak()
     {
-        _isWeakAttacking = true;
-        _animator.SetBool("isAttacking", _isWeakAttacking);
-        _movementSystem.isAttacking = true;
+        _archerWeakAttack.Prepare();
     }
     
     public void StopWeak()
     {
-        _isWeakAttacking = false;
-        _animator.SetBool("isAttacking", _isWeakAttacking);
-        _movementSystem.isAttacking = false;
+        _archerWeakAttack.Cast();
     }
 
     public void StartStrong()
     {
-        _isStrongAttacking = true;
-        _animator.SetBool("isStrongAttack", _isStrongAttacking);
-        _movementSystem.isAttacking = true;
+        _archerStrongAttack.Prepare();
     }
 
     public void StopStrong()
     {
-        _isStrongAttacking = false;
-        _animator.SetBool("isStrongAttack", _isStrongAttacking);
-        _movementSystem.isAttacking = false;
+        _archerStrongAttack.Cast();
     }
-
-    public void Weak()
-    {
-        _isWeakAttacking = !_isWeakAttacking;
-        _animator.SetBool("isAttacking", _isWeakAttacking);
-    }
-
+    
     public void Draw()
     {
         _controller.enabled = false;
@@ -83,17 +71,6 @@ public class CombatSystem : MonoBehaviour
     {
         _controller.enabled = true;
         _animator.speed = 1;
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    public void Strong()
-    {
-        _isWeakAttacking = !_isWeakAttacking;
-        _animator.SetBool("isStrongAttack", _isWeakAttacking);
     }
 
     public void StrongDraw()
