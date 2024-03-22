@@ -83,7 +83,7 @@ public class ArcherSpellR : Spell
         }
     }
 
-    public void ShootEnd()
+    public void RShootEnd()
     {
         _controller.enabled = true;
         _animator.SetBool("RSpell", false);

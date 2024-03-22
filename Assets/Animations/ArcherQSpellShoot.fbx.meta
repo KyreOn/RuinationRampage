@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9088596ab36c24b41bf3ced374735e71
+guid: 560f920d1dcd5204ebdca12366f9f242
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: RSpellShoot
+      name: QSpellShoot
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -58,14 +58,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.2874016
-        functionName: RSpellShoot
+        functionName: QSpellShoot
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: RShootEnd
+        functionName: QShootEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

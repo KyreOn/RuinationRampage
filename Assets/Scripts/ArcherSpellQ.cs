@@ -11,9 +11,17 @@ public class ArcherSpellQ : Spell
     [SerializeField] private float      minCastRange;
     [SerializeField] private float      maxCastRange;
 
-    private GameObject _indicator;
-    private bool       _isCasting;
-    private Vector3    _clampedPosition;
+    private CharacterController _controller;
+    private Animator            _animator;
+    private GameObject          _indicator;
+    private bool                _isCasting;
+    private Vector3             _clampedPosition;
+    
+    private void Awake()
+    {
+        _controller = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
+    }
     
     protected override void OnPrepare()
     {
@@ -22,9 +30,10 @@ public class ArcherSpellQ : Spell
     
     protected override void OnCast()
     {
+        _controller.enabled = false;
+        _animator.SetBool("QSpell", true);
         Destroy(_indicator);
         _indicator = null;
-        Instantiate(projectile, _clampedPosition, Quaternion.identity);
     }
 
     protected override void OnUpdate()
@@ -41,5 +50,22 @@ public class ArcherSpellQ : Spell
             _clampedPosition = playerPos + direction * distance;
             _indicator.transform.position = _clampedPosition;
         }
+    }
+    
+    public void QSpellDraw()
+    {
+        _animator.speed = 2.5f;
+    }
+    
+    public void QSpellShoot()
+    {
+        _animator.speed = 1f;
+        Instantiate(projectile, _clampedPosition, Quaternion.identity);
+    }
+    
+    public void QShootEnd()
+    {
+        _controller.enabled = true;
+        _animator.SetBool("QSpell", false);
     }
 }
