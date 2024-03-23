@@ -9,7 +9,15 @@ public class ArcherSpellEProjectile : MonoBehaviour
     [SerializeField] private float     lifeSpan;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float     searchAngle;
-    [SerializeField] private int       maxTargets;
+
+    private float _stunLength;
+    private int   _maxTargets;
+    
+    public void Init(float stunLength, int targets)
+    {
+        _stunLength = stunLength;
+        _maxTargets = targets;
+    }
     
     private void Update()
     {
@@ -33,21 +41,21 @@ public class ArcherSpellEProjectile : MonoBehaviour
         
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(3));
-            maxTargets--;
-            if (maxTargets > 0)
+            other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(_stunLength));
+            _maxTargets--;
+            if (_maxTargets > 0)
             {
                 var nearEnemies = Physics.OverlapSphere(other.transform.position, 3, enemyLayer);
                 foreach (var enemy in nearEnemies)
                 {
-                    if (maxTargets == 0) break;
+                    if (_maxTargets == 0) break;
                     if (enemy      == other) continue;
 
                     var direction = enemy.transform.position - other.transform.position;
                     var dot       = Vector3.Dot(transform.forward, direction.normalized);
                     if (dot < Mathf.Cos(Mathf.Deg2Rad * searchAngle)) continue;
-                    enemy.GetComponent<EffectSystem>().AddEffect(new StunEffect(3));
-                    maxTargets--;
+                    enemy.GetComponent<EffectSystem>().AddEffect(new StunEffect(_stunLength));
+                    _maxTargets--;
                 }
             }
         }

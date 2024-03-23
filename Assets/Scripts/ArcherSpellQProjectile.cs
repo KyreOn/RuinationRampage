@@ -9,9 +9,13 @@ public class ArcherSpellQProjectile : MonoBehaviour
     [SerializeField] private float     timeBetweenTicks;
 
     private float _tickTimer;
-    void Start()
+    private float _damage;
+    private float _slowPower;
+    
+    public void Init(float damage, float slowPower)
     {
-        
+        _damage = damage;
+        _slowPower = slowPower;
     }
 
     // Update is called once per frame
@@ -25,8 +29,8 @@ public class ArcherSpellQProjectile : MonoBehaviour
         var enemiesInRange = Physics.OverlapSphere(transform.position, 2, enemyLayer);
         foreach (var enemy in enemiesInRange)
         {
-            enemy.gameObject.GetComponent<DamageSystem>().ApplyDamage(10);
-            enemy.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1,2), false);
+            if (enemy.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage))
+                enemy.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(timeBetweenTicks,_slowPower), false);
         }
 
         _tickTimer = timeBetweenTicks;

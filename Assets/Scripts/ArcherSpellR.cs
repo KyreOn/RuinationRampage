@@ -11,7 +11,13 @@ public class ArcherSpellR : Spell
     [SerializeField] private LineRenderer laserBeam;
     [SerializeField] private Transform    laserSpawnPoint;
 
+    [SerializeField] private float[] cooldown    = new float[3];
+    [SerializeField] private float[] prepareTime = new float[3];
+    [SerializeField] private float[] damage      = new float[3];
+    [SerializeField] private int[]   charges     = new int[3];
+    
     private CharacterController _controller;
+    private EffectSystem        _effectSystem;
     private Animator            _animator;
     private GameObject          _indicator;
     private Vector3             _clampedPosition;
@@ -22,6 +28,7 @@ public class ArcherSpellR : Spell
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
+        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
     }
 
@@ -36,6 +43,8 @@ public class ArcherSpellR : Spell
     
     protected override void OnCast()
     {
+        baseCooldown = cooldown[level - 1];
+        maxCharges = charges[level    - 1];
         _controller.enabled = false;
         _animator.SetBool("RSpell", true);
         
@@ -58,7 +67,7 @@ public class ArcherSpellR : Spell
 
     public void RSpellDraw()
     {
-        _animator.speed = 0.4f;
+        _animator.speed = 0.4f * prepareTime[level-1];
     }
     
     public void RSpellShoot()
@@ -78,7 +87,7 @@ public class ArcherSpellR : Spell
                 new Vector3(1, 2, halfDistance.magnitude), playerTransform.rotation, enemyLayer);
             foreach (var enemy in enemies)
             {
-                enemy.GetComponent<DamageSystem>().ApplyDamage(10);
+                enemy.GetComponent<DamageSystem>().ApplyDamage(damage[level-1] * _effectSystem.CalculateOutcomeDamage());
             }
         }
     }

@@ -10,8 +10,14 @@ public class ArcherSpellQ : Spell
     [SerializeField] private LayerMask  groundLayer;
     [SerializeField] private float      minCastRange;
     [SerializeField] private float      maxCastRange;
+    
+    [SerializeField] private float[] cooldown   = new float[5];
+    [SerializeField] private float[] slowPower  = new float[5];
+    [SerializeField] private float[] tickDamage = new float[5];
+    [SerializeField] private int[]   charges = new int[5];
 
     private CharacterController _controller;
+    private EffectSystem        _effectSystem;
     private Animator            _animator;
     private GameObject          _indicator;
     private bool                _isCasting;
@@ -20,6 +26,7 @@ public class ArcherSpellQ : Spell
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
+        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
     }
     
@@ -31,6 +38,8 @@ public class ArcherSpellQ : Spell
     protected override void OnCast()
     {
         _controller.enabled = false;
+        baseCooldown = cooldown[level - 1];
+        maxCharges = charges[level    - 1];
         _animator.SetBool("QSpell", true);
         Destroy(_indicator);
         _indicator = null;
@@ -60,7 +69,8 @@ public class ArcherSpellQ : Spell
     public void QSpellShoot()
     {
         _animator.speed = 1f;
-        Instantiate(projectile, _clampedPosition, Quaternion.identity);
+        var proj = Instantiate(projectile, _clampedPosition, Quaternion.identity);
+        proj.GetComponent<ArcherSpellQProjectile>().Init(tickDamage[level-1] * _effectSystem.CalculateOutcomeDamage(), slowPower[level-1]);
     }
     
     public void QShootEnd()

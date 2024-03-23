@@ -7,6 +7,10 @@ public class ArcherSpellE : Spell
 {
     [SerializeField] private GameObject projectile;
 
+    [SerializeField] private float[] cooldown   = new float[5];
+    [SerializeField] private float[] stunLength = new float[5];
+    [SerializeField] private int[]   targets    = new int[5];
+    
     private GameObject _indicator;
     private bool       _isCasting;
     private Vector3    _clampedPosition;
@@ -19,7 +23,9 @@ public class ArcherSpellE : Spell
 
     protected override void OnCast()
     {
-        Instantiate(projectile, transform.position, _spawnTransform.rotation);
+        baseCooldown = cooldown[level - 1];
+        var proj = Instantiate(projectile, transform.position, _spawnTransform.rotation);
+        proj.GetComponent<ArcherSpellEProjectile>().Init(stunLength[level-1], targets[level-1]);
     }
 
     public void SetSpawnTransform(Transform spawnTransform)

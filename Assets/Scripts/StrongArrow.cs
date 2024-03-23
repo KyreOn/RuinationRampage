@@ -7,8 +7,20 @@ public class StrongArrow : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float lifeSpan;
-    [SerializeField] private int   pierceCount;
 
+    private float _damage;
+    private float _bleedDuration;
+    private float _bleedDamage;
+    private int   _pierceCount;
+    
+    public void Init(float damage, float bleedDuration, float bleedDamage, int pierceCount)
+    {
+        _damage = damage;
+        _bleedDuration = bleedDuration;
+        _bleedDamage = bleedDamage;
+        _pierceCount = pierceCount;
+    }
+    
     private void Update()
     {
         lifeSpan -= Time.deltaTime;
@@ -31,16 +43,19 @@ public class StrongArrow : MonoBehaviour
         
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<DamageSystem>().ApplyDamage(10);
-            other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
-            other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
-            other.gameObject.GetComponent<EffectSystem>().AddEffect(new DOTEffect(5, 0.5f, 10), false);
-            pierceCount--;
+            if (other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage))
+            {
+                other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
+                other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f),    false);
+                other.gameObject.GetComponent<EffectSystem>().AddEffect(new DOTEffect(_bleedDuration, 0.5f, _bleedDamage), false);
+            }
+            
+            _pierceCount--;
         }
         else
-            pierceCount = 0;
+            _pierceCount = 0;
 
-        if (pierceCount == 0)
+        if (_pierceCount == 0)
             Destroy(gameObject);
     }
 }

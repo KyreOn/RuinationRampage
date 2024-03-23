@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour
 {
-    [SerializeField] private float baseCooldown;
-    [SerializeField] private int   maxCharges = 1;
+    [SerializeField] protected float baseCooldown;
+    [SerializeField] protected int   maxCharges = 1;
 
     private float _effectedCooldown;
     private float _cooldownTimer;
     private int   _curCharges;
     
-    protected bool isPreparing;
+    protected bool  isPreparing;
 
     public int level;
     
@@ -61,8 +61,8 @@ public class Spell : MonoBehaviour
     {
         OnUpdate();
         if (_curCharges == maxCharges) return;
-        _cooldownTimer = Mathf.Clamp(_cooldownTimer + Time.deltaTime, 0, _effectedCooldown);
-        if (_cooldownTimer < _effectedCooldown) return;
+        _cooldownTimer = Mathf.Clamp(_cooldownTimer + Time.deltaTime, 0, baseCooldown);
+        if (_cooldownTimer < baseCooldown) return;
         _curCharges++;
         _cooldownTimer = 0;
     }

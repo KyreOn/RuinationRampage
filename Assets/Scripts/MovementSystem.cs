@@ -23,14 +23,14 @@ public class MovementSystem : MonoBehaviour
     private EffectSystem        _effectSystem;
     private Vector3             _movementDir;
     private Camera              _camera;
-    private bool                _canMove;
-    private bool                _canRotate;
     private Vector3             _inputBuffer;
     private float               _dodgeCooldownTimer;
     private bool                _isDisplaced;
     
     public float curSpeed;
     public bool  isAttacking;
+    public bool  canMove;
+    public bool  canRotate;
 
     private void Awake()
     {
@@ -40,13 +40,13 @@ public class MovementSystem : MonoBehaviour
         _effectSystem = GetComponent<EffectSystem>();
         Cursor.lockState = CursorLockMode.Confined;
         _camera = Camera.main;
-        _canMove = true;
-        _canRotate = true;
+        canMove = true;
+        canRotate = true;
     }
     
     private void Move(Vector3 direction)
     {
-        if (_canMove)
+        if (canMove)
             _movementDir = _inputBuffer;
         if (!_controller.enabled || _isDisplaced) return;
         _controller.Move(direction * (curSpeed * Time.fixedDeltaTime));
@@ -55,7 +55,7 @@ public class MovementSystem : MonoBehaviour
     private void FixedUpdate()
     {
         Move(_movementDir);
-        if (!_canRotate) return;
+        if (!canRotate) return;
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, aimLayer))
         {
@@ -109,40 +109,46 @@ public class MovementSystem : MonoBehaviour
         _animator.SetTrigger("Dodge");
     }
 
-    public void DodgeStart()
-    {
-        _controller.enabled = true;
-        _animator.speed = 1;
-        _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f), false);
-        _canMove = false;
-        _canRotate = false;
-        if (_movementDir == Vector3.zero)
-        {
-            _movementDir = model.transform.forward;
-        }
-        //DodgeRotate();
-        _damageSystem.SetInvincible(true);
-        _controller.excludeLayers = dodgeLayer;
-    }
     private void DodgeRotate()
     {
         var toRotation = Quaternion.LookRotation(_movementDir, Vector3.up);
         model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, toRotation, 1000);
     }
-    public void DodgeEnd()
-    {
-        _animator.speed = 1;
-        _canMove = true;
-        _canRotate = true;
-        _damageSystem.SetInvincible(false);
-        _effectSystem.AddEffect(new SlowEffect(1f, 0.8f), false);
-        _controller.excludeLayers = aimLayer;
-    }
-
+    
     public float GetSpeed() => curSpeed;
 
     private void CalculateSpeed()
     {
         curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfStunned() ? 0 : 1);
+    }
+
+    public void SetMovementDir(Vector3 dir)
+    {
+        _movementDir = dir;
+    }
+
+    public void OnDodgeStart()
+    {
+        _controller.enabled = true;
+        _animator.speed = 1;
+        _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f), false);
+        canMove = false;
+        canRotate = false;
+        if (_movementDir == Vector3.zero)
+        {
+            _movementDir = model.transform.forward; 
+        }
+        _damageSystem.SetInvincible(true);
+        _controller.excludeLayers = dodgeLayer;
+    }
+
+    public void OnDodgeEnd(float boostStrength)
+    {
+        _animator.speed = 1;
+        canMove = true;
+        canRotate = true;
+        _damageSystem.SetInvincible(false);
+        _effectSystem.AddEffect(new SlowEffect(1f, boostStrength), false);
+        _controller.excludeLayers = aimLayer;
     }
 }

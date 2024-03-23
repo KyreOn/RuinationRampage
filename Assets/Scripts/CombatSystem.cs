@@ -9,7 +9,6 @@ using UnityEngine;
 public class CombatSystem : MonoBehaviour
 {
     [SerializeField] private GameObject model;
-    [SerializeField] private GameObject arrowObject;
     [SerializeField] private GameObject strongArrowObject;
     [SerializeField] private Transform  spawnPoint;
     
@@ -20,6 +19,7 @@ public class CombatSystem : MonoBehaviour
     private CharacterController _controller;
     private ArcherWeakAttack    _archerWeakAttack;
     private ArcherStrongAttack  _archerStrongAttack;
+    private ArcherDodge         _archerDodge;
     private ArcherSpellQ        _archerSpellQ;
     private ArcherSpellE        _archerSpellE;
     private ArcherSpellR        _archerSpellR;
@@ -31,6 +31,7 @@ public class CombatSystem : MonoBehaviour
         _effectSystem = GetComponent<EffectSystem>();
         _archerWeakAttack = GetComponent<ArcherWeakAttack>();
         _archerStrongAttack = GetComponent<ArcherStrongAttack>();
+        _archerDodge = GetComponent<ArcherDodge>();
         _archerSpellQ = GetComponent<ArcherSpellQ>();
         _archerSpellE = GetComponent<ArcherSpellE>();
         _archerSpellR = GetComponent<ArcherSpellR>();
@@ -56,32 +57,13 @@ public class CombatSystem : MonoBehaviour
         _archerStrongAttack.Cast();
     }
     
-    public void Draw()
+    public void PrepareDodge()
     {
-        _controller.enabled = false;
-        _animator.speed = 2.5f;
+        _archerDodge.Prepare();
     }
-    public void Shoot()
+    public void CastDodge()
     {
-        var arrow = Instantiate(arrowObject, spawnPoint.position, model.transform.rotation);
-        arrow.GetComponent<Arrow>().Init(20 * _effectSystem.CalculateOutcomeDamage());
-    }
-
-    public void ShootEnd()
-    {
-        _controller.enabled = true;
-        _animator.speed = 1;
-    }
-
-    public void StrongDraw()
-    {
-        _controller.enabled = false;
-        _animator.speed = 1.2f;
-    }
-    
-    public void StrongShoot()
-    {
-        Instantiate(strongArrowObject, spawnPoint.position, model.transform.rotation);
+        _archerDodge.Cast();
     }
 
     public void PrepareSpellQ()
