@@ -112,15 +112,15 @@ public class MovementSystem : MonoBehaviour
     public void DodgeStart()
     {
         _controller.enabled = true;
-        _animator.speed = 2;
-        _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f));
+        _animator.speed = 1;
+        _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f), false);
         _canMove = false;
         _canRotate = false;
         if (_movementDir == Vector3.zero)
         {
             _movementDir = model.transform.forward;
         }
-        DodgeRotate();
+        //DodgeRotate();
         _damageSystem.SetInvincible(true);
         _controller.excludeLayers = dodgeLayer;
     }
@@ -135,7 +135,7 @@ public class MovementSystem : MonoBehaviour
         _canMove = true;
         _canRotate = true;
         _damageSystem.SetInvincible(false);
-        _effectSystem.AddEffect(new SlowEffect(1f, 0.8f));
+        _effectSystem.AddEffect(new SlowEffect(1f, 0.8f), false);
         _controller.excludeLayers = aimLayer;
     }
 
