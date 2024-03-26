@@ -3,19 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Spell : MonoBehaviour
 {
-    [SerializeField] protected float baseCooldown;
-    [SerializeField] protected int   maxCharges = 1;
+    [SerializeField] protected float  baseCooldown;
+    [SerializeField] protected int    maxCharges = 1;
+    [SerializeField] public    string title;
+    [SerializeField] public    int    maxLevel;
 
-    private float _effectedCooldown;
-    private float _cooldownTimer;
-    private int   _curCharges;
+    private LevelSystem _levelSystem;
+    private float       _effectedCooldown;
+    private float       _cooldownTimer;
+    private int         _curCharges;
     
     protected bool  isPreparing;
-
-    public int level;
+    
+    public int    level;
+    public bool   isUlt;
     
     public void Prepare()
     {
@@ -49,6 +54,7 @@ public class Spell : MonoBehaviour
 
     private void Start()
     {
+        _levelSystem = GetComponent<LevelSystem>();
         _curCharges = maxCharges;
         _effectedCooldown = baseCooldown;
     }
@@ -65,5 +71,16 @@ public class Spell : MonoBehaviour
         if (_cooldownTimer < baseCooldown) return;
         _curCharges++;
         _cooldownTimer = 0;
+    }
+
+    public virtual string GetDescription()
+    {
+        return "";
+    }
+
+    public void Upgrade()
+    {
+        level++;
+        _levelSystem.OnUpgrade();
     }
 }

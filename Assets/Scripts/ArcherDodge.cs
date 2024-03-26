@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ArcherDodge : Spell
 {
-    [SerializeField] private float[] cooldown = new float[5];
-    [SerializeField] private float[] speedBoost = new float[5];
+    [SerializeField] private float[]        cooldown   = new float[5];
+    [SerializeField] private float[]        speedBoost = new float[5];
     
     private CharacterController _controller;
     private EffectSystem        _effectSystem;
@@ -47,5 +47,16 @@ public class ArcherDodge : Spell
     public void DodgeEnd()
     {
         _movementSystem.OnDodgeEnd(speedBoost[level-1]);
+    }
+
+    public override string GetDescription()
+    {
+        if (level == 0)
+            return "Герой совершает рывок в сторону движения. " +
+                   "Во время рывка герой неуязвим. "            +
+                   "В конце рывка герой получает небольшой бонус к скорости";
+        var cdDiff    = cooldown[level] - cooldown[level - 1];
+        var speedDiff = Mathf.Round((1 - speedBoost[level] - (1 - speedBoost[level - 1])) * 100);
+        return $"КД: {cdDiff}с\nУскорение: +{speedDiff}%";
     }
 }

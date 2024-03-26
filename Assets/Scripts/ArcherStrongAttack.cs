@@ -64,4 +64,13 @@ public class ArcherStrongAttack : Spell
         _controller.enabled = true;
         _animator.speed = 1;
     }
+
+    public override string GetDescription()
+    {
+        var damageDiff   = damage[level]        - damage[level        - 1];
+        var bleedDurDiff = bleedDuration[level] - bleedDuration[level - 1];
+        var bleedDmgDiff = bleedDamage[level]   - bleedDamage[level   - 1];
+        var pierceDiff   = (pierceCount[level] - pierceCount[level - 1]) == 0 ? "" : "Максимум целей: +1";
+        return $"Урон: +{damageDiff}\nДлительность кровотечения: +{bleedDurDiff}с\nУрон за тик: +{bleedDmgDiff}\n{pierceDiff}";
+    }
 }

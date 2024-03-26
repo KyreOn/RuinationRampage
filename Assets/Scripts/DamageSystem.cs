@@ -8,7 +8,6 @@ public class DamageSystem : MonoBehaviour
 {
     [SerializeField] private float        effectTime;
     [SerializeField] private GameObject[] models;
-    
     [SerializeField] public float        health;
     
     private EffectSystem   _effectSystem;
@@ -37,7 +36,8 @@ public class DamageSystem : MonoBehaviour
         
         if (health <= 0)
         {
-            Destroy(gameObject);
+            if (gameObject.CompareTag("Enemy"))
+                GetComponent<Enemy>().OnDeath();
         }
             
         foreach (var renderer in _renderers)

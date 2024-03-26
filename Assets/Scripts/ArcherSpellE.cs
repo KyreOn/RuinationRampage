@@ -37,4 +37,14 @@ public class ArcherSpellE : Spell
     {
         
     }
+
+    public override string GetDescription()
+    {
+        if (level == 0)
+            return "Герой выстреливает стрелой, которая связывает первого врага на пути и нескольких врагов за ним";
+        var cdDiff     = cooldown[level]   - cooldown[level   - 1];
+        var stunDiff   = stunLength[level] - stunLength[level - 1];
+        var targetDiff = (targets[level] - targets[level - 1]) == 0 ? "" : "Максимум целей: +1";
+        return $"КД: {cdDiff}с\nОглушение: +{stunDiff}с\n{targetDiff}";
+    }
 }

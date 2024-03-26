@@ -30,6 +30,7 @@ public class ArcherSpellR : Spell
         _controller = GetComponent<CharacterController>();
         _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
+        isUlt = true;
     }
 
     protected override void OnPrepare()
@@ -96,5 +97,16 @@ public class ArcherSpellR : Spell
     {
         _controller.enabled = true;
         _animator.SetBool("RSpell", false);
+    }
+
+    public override string GetDescription()
+    {
+        if (level == 0)
+            return "После небольшой подготовки герой выпускает мощный луч, поражающий всех врагов на своем пути";
+        var cdDiff      = cooldown[level] - cooldown[level - 1];
+        var prepareDiff = Mathf.Round((prepareTime[level] - prepareTime[level - 1]) * 100);
+        var damageDiff  = damage[level] - damage[level - 1];
+        var chargeDiff  = (charges[level] - charges[level - 1]) == 0 ? "" : "Заряды: +1";
+        return $"КД: {cdDiff}с\nВремя подготовки: -{prepareDiff}%\nУрон: +{damageDiff}\n{chargeDiff}";
     }
 }

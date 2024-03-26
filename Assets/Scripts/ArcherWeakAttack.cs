@@ -57,4 +57,10 @@ public class ArcherWeakAttack : Spell
         _controller.enabled = true;
         _animator.speed = 1;
     }
+
+    public override string GetDescription()
+    {
+        var damageDiff = damage[level] - damage[level - 1];
+        return $"Урон: +{damageDiff}";
+    }
 }

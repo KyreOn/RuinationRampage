@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float            loadSpeed;
     [SerializeField] private GameObject       startPoint;
     [SerializeField] private GameObject       player;
+    [SerializeField] private GameObject       upgradeWindow;
     
     private static List<GameObject>    _arenas;
     private static GameObject          _curArena;
@@ -21,6 +22,9 @@ public class WaveManager : MonoBehaviour
     private static bool                _isLoaded;
     private static Collider            _collider;
     private static CharacterController _cc;
+    private static LevelSystem         _levelSystem;
+    private static UpgradeWindow       _upgradeWindow;
+    private static bool                _readyToLoad = true;
     
     public static WaveManager Instance { get; private set; }
     public static int         currentWave;
@@ -44,6 +48,8 @@ public class WaveManager : MonoBehaviour
         _arenas = arenaPatterns;
         _collider = startPoint.GetComponent<Collider>();
         //_cc = player.GetComponent<CharacterController>();
+        _levelSystem = player.GetComponent<LevelSystem>();
+        _upgradeWindow = upgradeWindow.GetComponent<UpgradeWindow>();
         LoadArena();
     }
 
@@ -61,7 +67,7 @@ public class WaveManager : MonoBehaviour
             currentWave++;
             LoadArena();
         }
-        _shaderProgress += Time.deltaTime * loadSpeed * (_isLoading ? 1 : -1);
+        _shaderProgress += Time.deltaTime * loadSpeed * (_isLoading ? 1 : -1) * (_readyToLoad ? 1 : 0);
         foreach (var material in arenaMaterials)
         {
             material.SetFloat("_Cutoff_Height", 100 * Mathf.Abs(Mathf.Sin(_shaderProgress)));
@@ -80,7 +86,7 @@ public class WaveManager : MonoBehaviour
     public static void CheckForEnemies()
     {
         var count = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        if (count == 0)
+        if (_curArena.GetComponent<ArenaPattern>().onEnemyDeath())
         {
             //_isLoading = false;
             _collider.enabled = true;
@@ -95,5 +101,18 @@ public class WaveManager : MonoBehaviour
         _shaderProgress = 0.5f;
         _collider.enabled = false;
         //_cc.enabled = false;
+        //Time.timeScale = 0;
+        CheckForUpgrade();
+    }
+
+    public static void CheckForUpgrade()
+    {
+        if (_levelSystem.CheckForUpgrades())
+        {
+            _readyToLoad = false;
+            _upgradeWindow.Open();
+        }
+        else
+            _readyToLoad = true;
     }
 }

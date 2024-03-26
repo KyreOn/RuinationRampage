@@ -9,8 +9,9 @@ public class Enemy : TreeAgent
 {
     [SerializeField] protected float baseSpeed;
     
-    protected NavMeshAgent navMeshAgent;
-    protected EffectSystem effectSystem;
+    protected NavMeshAgent   navMeshAgent;
+    protected EffectSystem   effectSystem;
+    protected ParticleSystem particleSys;
     
     public PlayerTest Player         { get; set; }
     public bool       MovingToPlayer { get; set; }
@@ -22,7 +23,9 @@ public class Enemy : TreeAgent
         base.Awake();
         navMeshAgent = GetComponent<NavMeshAgent>();
         effectSystem = GetComponent<EffectSystem>();
+        particleSys = FindObjectOfType<XPCollector>().GetComponent<ParticleSystem>();
         Player = FindObjectOfType<PlayerTest>();
+        particleSys.trigger.SetCollider(0, Player.GetComponent<Collider>());
         RotateOnMove = true;
     }
 
@@ -71,8 +74,11 @@ public class Enemy : TreeAgent
         return true;
     }
 
-    private void OnDestroy()
+    public void OnDeath()
     {
+        particleSys.transform.position = transform.position + Vector3.up;
+        particleSys.Emit(20);
+        Destroy(gameObject);
         WaveManager.CheckForEnemies();
     }
 }

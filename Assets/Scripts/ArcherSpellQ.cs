@@ -78,4 +78,15 @@ public class ArcherSpellQ : Spell
         _controller.enabled = true;
         _animator.SetBool("QSpell", false);
     }
+
+    public override string GetDescription()
+    {
+        if (level == 0)
+            return "Герой поражает выбранную область градом стрел, нанося урон всем зхадетым врагам и замедляя их";
+        var cdDiff     = cooldown[level] - cooldown[level - 1];
+        var slowDiff   = Mathf.Round((1 - slowPower[level] - (1 - slowPower[level - 1])) * 100);
+        var tickDiff   = tickDamage[level] - tickDamage[level - 1];
+        var chargeDiff = (charges[level] - charges[level - 1]) == 0 ? "" : "Заряды: +1";
+        return $"КД: {cdDiff}с\nЗамедление: +{slowDiff}%\nУрон за тик: +{tickDiff}\n{chargeDiff}";
+    }
 }

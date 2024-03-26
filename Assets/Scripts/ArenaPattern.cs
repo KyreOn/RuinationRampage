@@ -17,6 +17,7 @@ public class ArenaPattern : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPatternsLevel7;
 
     private GameObject _enemies;
+    private int        _enemyCount;
 
     public void LoadEnemies(int wave)
     {
@@ -55,11 +56,13 @@ public class ArenaPattern : MonoBehaviour
     private void LoadEnemiesFromLevel(IReadOnlyList<GameObject> patterns)
     {
         var pattern = Random.Range(0, patterns.Count);
-        _enemies = Instantiate(patterns[pattern], Vector3.zero, Quaternion.identity);
+        _enemies = Instantiate(patterns[pattern], transform);
+        _enemyCount = _enemies.transform.childCount;
     }
     
-    private void OnDestroy()
+    public bool onEnemyDeath()
     {
-        Destroy(_enemies);
+        _enemyCount--;
+        return _enemyCount == 0;
     }
 }
