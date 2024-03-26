@@ -53,7 +53,6 @@ public class UpgradeWindow : MonoBehaviour
 
         _availableCount = Mathf.Clamp(_availableForUpgrade.Count, 0, 3);
         _spellsForUpgrade.Clear();
-        Debug.Log(_availableCount);
         while (_spellsForUpgrade.Count < _availableCount)
         {
             var spellId = Random.Range(0, _availableForUpgrade.Count);

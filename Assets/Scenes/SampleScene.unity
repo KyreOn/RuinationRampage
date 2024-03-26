@@ -1674,6 +1674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 309518688}
+  - component: {fileID: 309518689}
   m_Layer: 5
   m_Name: GameHUD
   m_TagString: Untagged
@@ -1701,6 +1702,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &309518689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309518687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2fe6327bea690e4490d39d9a2c1e89b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xpBar: {fileID: 1039624646}
 --- !u!4 &313740470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2899422035419094908, guid: b481ad783bd106e4a8564f9c3fd61726,
@@ -4473,8 +4487,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -2.500061, y: 0}
+  m_SizeDelta: {x: 5.000072, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &785604610
 GameObject:
@@ -4523,7 +4537,7 @@ ParticleSystemForceField:
   m_Parameters:
     m_Shape: 0
     m_StartRange: 0
-    m_EndRange: 2
+    m_EndRange: 20
     m_Length: 1
     m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
@@ -7306,7 +7320,7 @@ GameObject:
   - component: {fileID: 1039624645}
   - component: {fileID: 1039624646}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: XPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7331,8 +7345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -530}
-  m_SizeDelta: {x: 1920, y: 20}
+  m_AnchoredPosition: {x: 0, y: -532}
+  m_SizeDelta: {x: 1920, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1039624646
 MonoBehaviour:
@@ -7419,8 +7433,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_AnchoredPosition: {x: 2.5, y: 0}
+  m_SizeDelta: {x: -5.000086, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1048716546
 MonoBehaviour:
@@ -7442,8 +7456,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c323c99ea00c04b4b96ba9e83f42b897, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8303,6 +8317,7 @@ MonoBehaviour:
   - 2600
   - 2700
   - 2800
+  gameHUD: {fileID: 309518689}
 --- !u!1 &1136718752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1964969127713009085, guid: 3517c8d3912f4fb4c87fc918e0647b82,
