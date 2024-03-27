@@ -9,18 +9,20 @@ public class DamageSystem : MonoBehaviour
     [SerializeField] private float        effectTime;
     [SerializeField] private GameObject[] models;
     [SerializeField] public float        health;
-    
-    private EffectSystem   _effectSystem;
-    private bool           _isHit;
-    private float          _effectTimer;
-    private List<Renderer> _renderers = new();
-    private GameHUD        _gameHUD;
-    private float          _curHealth;
+
+    private CameraController _camera;
+    private EffectSystem     _effectSystem;
+    private bool             _isHit;
+    private float            _effectTimer;
+    private List<Renderer>   _renderers = new();
+    private GameHUD          _gameHUD;
+    private float            _curHealth;
     
     public bool  isInvincible;
     
     private void Awake()
     {
+        
         _effectSystem = GetComponent<EffectSystem>();
         foreach (var model in models)
         {
@@ -29,7 +31,11 @@ public class DamageSystem : MonoBehaviour
         _gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
         _curHealth = health;
         if (gameObject.CompareTag("Player"))
+        {
+            _camera = FindObjectOfType<CameraController>();
             _gameHUD.UpdateHP(_curHealth, health);
+        }
+            
     }
 
     public bool ApplyDamage(float damage)
@@ -46,6 +52,12 @@ public class DamageSystem : MonoBehaviour
         {
             if (gameObject.CompareTag("Enemy"))
                 GetComponent<Enemy>().OnDeath();
+            else
+            {
+                _camera.OnDeath();
+                _gameHUD.OnDeath();
+            }
+                
         }
             
         foreach (var renderer in _renderers)

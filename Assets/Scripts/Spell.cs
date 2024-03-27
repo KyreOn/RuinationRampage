@@ -12,8 +12,8 @@ public class Spell : MonoBehaviour
     [SerializeField] public    string title;
     [SerializeField] public    int    maxLevel;
     [SerializeField] protected int    id;
-    [SerializeField] private   Sprite disabledSprite;
-    [SerializeField] private   Sprite enabledSprite;
+    [SerializeField] public   Sprite disabledSprite;
+    [SerializeField] public   Sprite enabledSprite;
     
     private LevelSystem _levelSystem;
     private float       _effectedCooldown;

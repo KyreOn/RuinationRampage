@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class Enemy : TreeAgent
 {
     [SerializeField] protected float baseSpeed;
+    [SerializeField] protected int   id;
     
     protected NavMeshAgent   navMeshAgent;
     protected EffectSystem   effectSystem;
@@ -88,5 +89,6 @@ public class Enemy : TreeAgent
         hpParticleSys.Emit((int)count);
         Destroy(gameObject);
         WaveManager.CheckForEnemies();
+        StatsManager.AddKill(id);
     }
 }

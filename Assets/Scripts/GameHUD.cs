@@ -6,9 +6,10 @@ using Slider = UnityEngine.UI.Slider;
 
 public class GameHUD : MonoBehaviour
 {
-    [SerializeField] private Slider  xpBar;
-    [SerializeField] private Skill[] skills;
-    [SerializeField] private HPBar   hpBar;
+    [SerializeField] private Slider     xpBar;
+    [SerializeField] private Skill[]    skills;
+    [SerializeField] private HPBar      hpBar;
+    [SerializeField] private GameObject resultScreen;
     
     void Start()
     {
@@ -38,5 +39,10 @@ public class GameHUD : MonoBehaviour
     public void UpdateHP(float curHP, float maxHP)
     {
         hpBar.HPUpdate(curHP, maxHP);
+    }
+
+    public void OnDeath()
+    {
+        resultScreen.SetActive(true);
     }
 }
