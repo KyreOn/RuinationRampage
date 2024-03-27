@@ -44,8 +44,6 @@ public class ArcherSpellR : Spell
     
     protected override void OnCast()
     {
-        baseCooldown = cooldown[level - 1];
-        maxCharges = charges[level    - 1];
         _controller.enabled = false;
         _animator.SetBool("RSpell", true);
         
@@ -108,5 +106,11 @@ public class ArcherSpellR : Spell
         var damageDiff  = damage[level] - damage[level - 1];
         var chargeDiff  = (charges[level] - charges[level - 1]) == 0 ? "" : "Заряды: +1";
         return $"КД: {cdDiff}с\nВремя подготовки: -{prepareDiff}%\nУрон: +{damageDiff}\n{chargeDiff}";
+    }
+
+    protected override void OnUpgrade()
+    {
+        baseCooldown = cooldown[level - 1];
+        maxCharges = charges[level    - 1];
     }
 }

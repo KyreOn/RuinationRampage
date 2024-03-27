@@ -11,17 +11,21 @@ public class Spell : MonoBehaviour
     [SerializeField] protected int    maxCharges = 1;
     [SerializeField] public    string title;
     [SerializeField] public    int    maxLevel;
-
+    [SerializeField] protected int    id;
+    [SerializeField] private   Sprite disabledSprite;
+    [SerializeField] private   Sprite enabledSprite;
+    
     private LevelSystem _levelSystem;
     private float       _effectedCooldown;
     private float       _cooldownTimer;
     private int         _curCharges;
-    
-    protected bool  isPreparing;
-    
-    public int    level;
-    public bool   isUlt;
-    
+
+    protected GameHUD gameHUD;
+    protected bool    isPreparing;
+
+    public int  level;
+    public bool isUlt;
+
     public void Prepare()
     {
         if (_curCharges == 0 || level == 0) return;
@@ -31,9 +35,9 @@ public class Spell : MonoBehaviour
 
     protected virtual void OnPrepare()
     {
-        
+
     }
-    
+
     public void Cast()
     {
         if (_curCharges == 0 || !isPreparing) return;
@@ -41,10 +45,10 @@ public class Spell : MonoBehaviour
         _curCharges--;
         OnCast();
     }
-    
+
     protected virtual void OnCast()
     {
-        
+
     }
 
     public void CalculateCooldown(float cdModifier)
@@ -55,16 +59,20 @@ public class Spell : MonoBehaviour
     private void Start()
     {
         _levelSystem = GetComponent<LevelSystem>();
+        gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
+        gameHUD.InitSkill(id, disabledSprite, enabledSprite, level);
         _curCharges = maxCharges;
         _effectedCooldown = baseCooldown;
     }
 
     protected virtual void OnUpdate()
     {
-        
+
     }
+
     protected virtual void Update()
     {
+        gameHUD.UpdateSkill(id, _cooldownTimer, baseCooldown, _curCharges, maxCharges);
         OnUpdate();
         if (_curCharges == maxCharges) return;
         _cooldownTimer = Mathf.Clamp(_cooldownTimer + Time.deltaTime, 0, baseCooldown);
@@ -81,6 +89,14 @@ public class Spell : MonoBehaviour
     public void Upgrade()
     {
         level++;
+        OnUpgrade();
+        gameHUD.InitSkill(id, disabledSprite, enabledSprite, level);
         _levelSystem.OnUpgrade();
     }
+
+    protected virtual void OnUpgrade()
+    {
+        
+    }
+
 }

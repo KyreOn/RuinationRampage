@@ -8,6 +8,7 @@ TagManager:
   - Reaction
   - Projectile
   - Start
+  - HUD
   layers:
   - Default
   - TransparentFX

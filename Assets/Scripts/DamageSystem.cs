@@ -14,6 +14,8 @@ public class DamageSystem : MonoBehaviour
     private bool           _isHit;
     private float          _effectTimer;
     private List<Renderer> _renderers = new();
+    private GameHUD        _gameHUD;
+    private float          _curHealth;
     
     public bool  isInvincible;
     
@@ -24,6 +26,10 @@ public class DamageSystem : MonoBehaviour
         {
             _renderers.Add(model.GetComponent<Renderer>());
         }
+        _gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
+        _curHealth = health;
+        if (gameObject.CompareTag("Player"))
+            _gameHUD.UpdateHP(_curHealth, health);
     }
 
     public bool ApplyDamage(float damage)
@@ -32,9 +38,11 @@ public class DamageSystem : MonoBehaviour
         if (_effectSystem.CheckForInvincibility()) return false;
         _isHit = true;
         _effectTimer = 0;
-        health -= damage * _effectSystem.CalculateIncomeDamage();
+        _curHealth -= damage * _effectSystem.CalculateIncomeDamage();
+        if (gameObject.CompareTag("Player"))
+            _gameHUD.UpdateHP(_curHealth, health);
         
-        if (health <= 0)
+        if (_curHealth <= 0)
         {
             if (gameObject.CompareTag("Enemy"))
                 GetComponent<Enemy>().OnDeath();

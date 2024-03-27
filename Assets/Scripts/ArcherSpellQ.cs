@@ -38,8 +38,6 @@ public class ArcherSpellQ : Spell
     protected override void OnCast()
     {
         _controller.enabled = false;
-        baseCooldown = cooldown[level - 1];
-        maxCharges = charges[level    - 1];
         _animator.SetBool("QSpell", true);
         Destroy(_indicator);
         _indicator = null;
@@ -88,5 +86,11 @@ public class ArcherSpellQ : Spell
         var tickDiff   = tickDamage[level] - tickDamage[level - 1];
         var chargeDiff = (charges[level] - charges[level - 1]) == 0 ? "" : "Заряды: +1";
         return $"КД: {cdDiff}с\nЗамедление: +{slowDiff}%\nУрон за тик: +{tickDiff}\n{chargeDiff}";
+    }
+
+    protected override void OnUpgrade()
+    {
+        baseCooldown = cooldown[level - 1];
+        maxCharges = charges[level    - 1];
     }
 }

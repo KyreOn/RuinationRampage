@@ -25,7 +25,6 @@ public class ArcherDodge : Spell
 
     protected override void OnPrepare()
     {
-        baseCooldown = cooldown[level - 1];
         _animator.SetTrigger("Dodge");
         Cast();
     }
@@ -58,5 +57,10 @@ public class ArcherDodge : Spell
         var cdDiff    = cooldown[level] - cooldown[level - 1];
         var speedDiff = Mathf.Round((1 - speedBoost[level] - (1 - speedBoost[level - 1])) * 100);
         return $"КД: {cdDiff}с\nУскорение: +{speedDiff}%";
+    }
+
+    protected override void OnUpgrade()
+    {
+        baseCooldown = cooldown[level - 1];
     }
 }
