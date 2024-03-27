@@ -24,7 +24,8 @@ public class ArcherSpellR : Spell
     private GameObject          _model;
     private bool                _isShoot;
     private float               _beamProgress;
-
+    private bool                _isCharging;
+    
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -35,6 +36,9 @@ public class ArcherSpellR : Spell
 
     protected override void OnPrepare()
     {
+        _controller.enabled = false;
+        _animator.SetBool("RSpell", true);
+        _animator.SetBool("Charging", true);
     }
 
     public void SetModel(GameObject model)
@@ -44,9 +48,7 @@ public class ArcherSpellR : Spell
     
     protected override void OnCast()
     {
-        _controller.enabled = false;
-        _animator.SetBool("RSpell", true);
-        
+        _animator.SetBool("Charging", false);
     }
 
     protected override void OnUpdate()

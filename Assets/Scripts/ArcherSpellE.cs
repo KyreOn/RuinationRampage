@@ -11,10 +11,18 @@ public class ArcherSpellE : Spell
     [SerializeField] private float[] stunLength = new float[5];
     [SerializeField] private int[]   targets    = new int[5];
     
+    private CharacterController _controller;
+    private Animator            _animator;
     private GameObject _indicator;
     private bool       _isCasting;
     private Vector3    _clampedPosition;
-    private Transform    _spawnTransform;
+    private Transform  _spawnTransform;
+    
+    private void Awake()
+    {
+        _controller = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
+    }
     
     protected override void OnPrepare()
     {
@@ -23,8 +31,8 @@ public class ArcherSpellE : Spell
 
     protected override void OnCast()
     {
-        var proj = Instantiate(projectile, transform.position, _spawnTransform.rotation);
-        proj.GetComponent<ArcherSpellEProjectile>().Init(stunLength[level-1], targets[level-1]);
+        _controller.enabled = false;
+        _animator.SetBool("ESpell", true);
     }
 
     public void SetSpawnTransform(Transform spawnTransform)
@@ -35,6 +43,24 @@ public class ArcherSpellE : Spell
     protected override void OnUpdate()
     {
         
+    }
+    
+    public void ESpellDraw()
+    {
+        _animator.speed = 2.5f;
+    }
+    
+    public void ESpellShoot()
+    {
+        _animator.speed = 1f;
+        var proj = Instantiate(projectile, transform.position, _spawnTransform.rotation);
+        proj.GetComponent<ArcherSpellEProjectile>().Init(stunLength[level -1], targets[level -1]);
+    }
+    
+    public void EShootEnd()
+    {
+        _controller.enabled = true;
+        _animator.SetBool("ESpell", false);
     }
 
     public override string GetDescription()
