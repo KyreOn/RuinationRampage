@@ -57,6 +57,14 @@ public class DamageSystem : MonoBehaviour
         return true;
     }
 
+    public bool ApplyHeal(float heal)
+    {
+        _curHealth = Mathf.Clamp(_curHealth + heal, 0, health);
+        if (gameObject.CompareTag("Player"))
+            _gameHUD.UpdateHP(_curHealth, health);
+        return true;
+    }
+
     public void Update()
     {
         _effectTimer = Mathf.Clamp(_effectTimer + Time.deltaTime, 0, effectTime);

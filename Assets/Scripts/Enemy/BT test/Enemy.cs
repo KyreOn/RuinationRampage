@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BTree;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Enemy : TreeAgent
 {
@@ -11,7 +12,8 @@ public class Enemy : TreeAgent
     
     protected NavMeshAgent   navMeshAgent;
     protected EffectSystem   effectSystem;
-    protected ParticleSystem particleSys;
+    protected ParticleSystem xpParticleSys;
+    protected ParticleSystem hpParticleSys;
     
     public PlayerTest Player         { get; set; }
     public bool       MovingToPlayer { get; set; }
@@ -23,9 +25,11 @@ public class Enemy : TreeAgent
         base.Awake();
         navMeshAgent = GetComponent<NavMeshAgent>();
         effectSystem = GetComponent<EffectSystem>();
-        particleSys = FindObjectOfType<XPCollector>().GetComponent<ParticleSystem>();
+        xpParticleSys = FindObjectOfType<XPCollector>().GetComponent<ParticleSystem>();
+        hpParticleSys = FindObjectOfType<HPCollector>().GetComponent<ParticleSystem>();
         Player = FindObjectOfType<PlayerTest>();
-        particleSys.trigger.SetCollider(0, Player.GetComponent<Collider>());
+        xpParticleSys.trigger.SetCollider(0, Player.GetComponent<Collider>());
+        hpParticleSys.trigger.SetCollider(0, Player.GetComponent<Collider>());
         RotateOnMove = true;
     }
 
@@ -76,8 +80,12 @@ public class Enemy : TreeAgent
 
     public void OnDeath()
     {
-        particleSys.transform.position = transform.position + Vector3.up;
-        particleSys.Emit(20);
+        xpParticleSys.transform.position = transform.position + Vector3.up;
+        hpParticleSys.transform.position = transform.position + Vector3.up;
+        xpParticleSys.Emit(20);
+        var choice = Random.value - 0.6f;
+        var count  = choice > 0 ? Random.Range(1, 6) : 0;
+        hpParticleSys.Emit((int)count);
         Destroy(gameObject);
         WaveManager.CheckForEnemies();
     }
