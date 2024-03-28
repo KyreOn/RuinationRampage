@@ -28,11 +28,13 @@ public class ResultScreen : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
 
     public void Exit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 }

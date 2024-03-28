@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class ArcherSpellR : Spell
 {
-    [SerializeField] private GameObject   indicator;
-    [SerializeField] private LayerMask    wallLayer;
-    [SerializeField] private LayerMask    enemyLayer;
-    [SerializeField] private LineRenderer laserBeam;
-    [SerializeField] private Transform    laserSpawnPoint;
-
+    [SerializeField] private GameObject     indicator;
+    [SerializeField] private LayerMask      wallLayer;
+    [SerializeField] private LayerMask      enemyLayer;
+    [SerializeField] private LineRenderer   laserBeam;
+    [SerializeField] private Transform      laserSpawnPoint;
+    [SerializeField] private ParticleSystem effect;
+    
     [SerializeField] private float[] cooldown    = new float[3];
     [SerializeField] private float[] prepareTime = new float[3];
     [SerializeField] private float[] damage      = new float[3];
@@ -49,6 +50,7 @@ public class ArcherSpellR : Spell
     protected override void OnCast()
     {
         _animator.SetBool("Charging", false);
+        _animator.speed = 1f;
     }
 
     protected override void OnUpdate()
@@ -73,7 +75,6 @@ public class ArcherSpellR : Spell
     
     public void RSpellShoot()
     {
-        _animator.speed = 1f;
         laserBeam.enabled = true;
         _isShoot = true;
         var playerTransform = _model.transform;
@@ -82,6 +83,8 @@ public class ArcherSpellR : Spell
         {
             laserBeam.SetPosition(0, laserSpawnPoint.position);
             laserBeam.SetPosition(1, hit.point);
+            effect.transform.position = hit.point;
+            effect.Emit(1);
             var position     = playerTransform.position;
             var halfDistance = (hit.point - position) / 2;
             var enemies = Physics.OverlapBox(position + halfDistance,
