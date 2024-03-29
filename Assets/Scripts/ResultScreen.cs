@@ -16,6 +16,10 @@ public class ResultScreen : MonoBehaviour
         timeText.text = FormatTime(StatsManager.timer);
         waveText.text = WaveManager.currentWave.ToString();
         killsText.text = StatsManager.GetKills().ToString();
+        var charId = PlayerPrefs.GetInt("LastSelected");
+        var xp     = PlayerPrefs.HasKey($"Xp{charId}") ? PlayerPrefs.GetInt($"Xp{charId}") : 0;
+        xp += 50;
+        PlayerPrefs.SetInt($"Xp{charId}", xp);
     }
 
     private string FormatTime(float time)

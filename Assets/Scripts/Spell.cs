@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class Spell : MonoBehaviour
@@ -11,9 +12,9 @@ public class Spell : MonoBehaviour
     [SerializeField] protected int    maxCharges = 1;
     [SerializeField] public    string title;
     [SerializeField] public    int    maxLevel;
-    [SerializeField] protected int    id;
-    [SerializeField] public   Sprite disabledSprite;
-    [SerializeField] public   Sprite enabledSprite;
+    [SerializeField] public    int    id;
+    [SerializeField] public    Sprite disabledSprite;
+    [SerializeField] public    Sprite enabledSprite;
     
     private LevelSystem _levelSystem;
     private float       _effectedCooldown;
@@ -58,6 +59,7 @@ public class Spell : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
         _levelSystem = GetComponent<LevelSystem>();
         gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
         gameHUD.InitSkill(id, disabledSprite, enabledSprite, level);
@@ -72,6 +74,7 @@ public class Spell : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
         gameHUD.UpdateSkill(id, _cooldownTimer, baseCooldown, _curCharges, maxCharges);
         OnUpdate();
         if (_curCharges == maxCharges) return;
