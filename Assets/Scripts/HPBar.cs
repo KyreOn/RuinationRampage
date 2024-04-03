@@ -7,11 +7,12 @@ using UnityEngine.UI;
 
 public class HPBar : MonoBehaviour
 {
-    [SerializeField] private TMP_Text currentHP;
-    [SerializeField] private TMP_Text maximumHP;
+    [SerializeField] private TMP_Text   currentHP;
+    [SerializeField] private TMP_Text   maximumHP;
+    [SerializeField] private GameObject hpCount;
 
     private Slider hpBar;
-
+    
     private void Awake()
     {
         hpBar = GetComponent<Slider>();
@@ -22,5 +23,15 @@ public class HPBar : MonoBehaviour
         currentHP.text = curHP.ToString();
         maximumHP.text = maxHP.ToString();
         hpBar.value = curHP / maxHP;
+    }
+
+    public void ShowHP()
+    {
+        hpBar.enabled = true;
+    }
+    
+    public void HideHP()
+    {
+        hpBar.enabled = false;
     }
 }
