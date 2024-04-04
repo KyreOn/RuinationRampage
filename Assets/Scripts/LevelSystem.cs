@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelSystem : MonoBehaviour
 {
     [SerializeField] private float[] xpForLevel = new float[28];
     
     private GameHUD _gameHUD;
-    private int _curLevel ;
     private int _upgradeLevel;
     private int _curXP;
+    
+    public int curLevel;
 
     private void Awake()
     {
@@ -31,20 +33,20 @@ public class LevelSystem : MonoBehaviour
     public void CollectXP(int amount)
     {
         _curXP += amount;
-        var needXP  = xpForLevel[_curLevel] - _curXP;
-        var levelXP = xpForLevel[_curLevel] - (_curLevel == 0 ? 0 : xpForLevel[_curLevel - 1]);
+        var needXP  = xpForLevel[curLevel] - _curXP;
+        var levelXP = xpForLevel[curLevel] - (curLevel == 0 ? 0 : xpForLevel[curLevel - 1]);
         _gameHUD.UpdateXP(1 - (needXP / levelXP));
-        if (_curLevel == xpForLevel.Length) return;
-        if (!(_curXP >= xpForLevel[_curLevel])) return;
-        if (_curLevel < 26) _curLevel++;
-        needXP  = xpForLevel[_curLevel] - _curXP;
-        levelXP = xpForLevel[_curLevel] - (_curLevel == 0 ? 0 : xpForLevel[_curLevel - 1]);
+        if (curLevel == xpForLevel.Length) return;
+        if (!(_curXP >= xpForLevel[curLevel])) return;
+        if (curLevel < 26) curLevel++;
+        needXP  = xpForLevel[curLevel] - _curXP;
+        levelXP = xpForLevel[curLevel] - (curLevel == 0 ? 0 : xpForLevel[curLevel - 1]);
         _gameHUD.UpdateXP(1 - (needXP / levelXP));
     }
 
     public bool CheckForUpgrades()
     {
-        return _curLevel > _upgradeLevel;
+        return curLevel > _upgradeLevel;
     }
 
     public void OnUpgrade()

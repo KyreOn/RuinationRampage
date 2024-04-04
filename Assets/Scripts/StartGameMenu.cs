@@ -112,7 +112,6 @@ public class StartGameMenu : MonoBehaviour
     public void SetXP(int charId)
     {
         var xp = PlayerPrefs.HasKey($"Xp{charId}") ? PlayerPrefs.GetInt($"Xp{charId}") : 0;
-        Debug.Log(xp);
         for (var i = 0; i < xpToLvlUp.Length; i++)
         {
             if (xp >= xpToLvlUp[i]) continue;

@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject       startPoint;
     [SerializeField] private GameObject       player;
     [SerializeField] private GameObject       upgradeWindow;
+    [SerializeField] private GameObject       particleSystem;
     
     private static List<GameObject>    _arenas;
     private static GameObject          _curArena;
@@ -24,6 +25,7 @@ public class WaveManager : MonoBehaviour
     private static CharacterController _cc;
     private static LevelSystem         _levelSystem;
     private static UpgradeWindow       _upgradeWindow;
+    private static ParticleSystem      _particleSystem;
     private static bool                _readyToLoad = true;
     
     public static WaveManager Instance { get; private set; }
@@ -50,6 +52,7 @@ public class WaveManager : MonoBehaviour
         //_cc = player.GetComponent<CharacterController>();
         _levelSystem = player.GetComponent<LevelSystem>();
         _upgradeWindow = upgradeWindow.GetComponent<UpgradeWindow>();
+        _particleSystem = particleSystem.GetComponent<ParticleSystem>();
         LoadArena();
     }
 
@@ -81,6 +84,7 @@ public class WaveManager : MonoBehaviour
         var pattern = Random.Range(0, _arenas.Count);
         _curArena = Instantiate(_arenas[pattern], Vector3.zero, Quaternion.identity);
         _curArena.GetComponent<ArenaPattern>().LoadEnemies(currentWave);
+        CheckForUpgrade();
     }
     
     public static void CheckForEnemies()
@@ -102,7 +106,6 @@ public class WaveManager : MonoBehaviour
         _collider.enabled = false;
         //_cc.enabled = false;
         //Time.timeScale = 0;
-        CheckForUpgrade();
     }
 
     public static void CheckForUpgrade()
@@ -111,8 +114,12 @@ public class WaveManager : MonoBehaviour
         {
             _readyToLoad = false;
             _upgradeWindow.Open();
+            Time.timeScale = 0;
         }
         else
+        {
             _readyToLoad = true;
+            Time.timeScale = 1;
+        }
     }
 }

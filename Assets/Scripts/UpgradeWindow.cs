@@ -8,6 +8,7 @@ public class UpgradeWindow : MonoBehaviour
     
     private GameObject  _player;
     private Spell[]     _playerSpells;
+    private LevelSystem _playerLevelSystem;
     private List<Spell> _availableForUpgrade = new List<Spell>();
     private List<int>   _spellsForUpgrade;
     private int         _selectedSkill;
@@ -17,6 +18,8 @@ public class UpgradeWindow : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player");
         _playerSpells = _player.GetComponents<Spell>();
+        _playerLevelSystem = _player.GetComponent<LevelSystem>();
+        
         foreach (var spell in _playerSpells)
         {
             _availableForUpgrade.Add(spell);
@@ -53,13 +56,21 @@ public class UpgradeWindow : MonoBehaviour
 
         _availableCount = Mathf.Clamp(_availableForUpgrade.Count, 0, 3);
         _spellsForUpgrade.Clear();
-        while (_spellsForUpgrade.Count < _availableCount)
+        var count = _availableCount;
+        while (_spellsForUpgrade.Count < count)
         {
             var spellId = Random.Range(0, _availableForUpgrade.Count);
             if (_spellsForUpgrade.Contains(spellId)) continue;
-            //if (_availableForUpgrade[spellId].isUlt && _availableForUpgrade[spellId].level >= WaveManager.currentWave / 10) continue;
+            if (_availableForUpgrade[spellId].isUlt &&
+                _availableForUpgrade[spellId].level >= _playerLevelSystem.curLevel / 7)
+            {
+                count = _availableForUpgrade.Count > 3 ? 3 : _availableForUpgrade.Count - 1;
+                continue;
+            }
             _spellsForUpgrade.Add(spellId);
         }
+
+        _availableCount = count;
     }
 
     public void SetSelectedSkill(int id)

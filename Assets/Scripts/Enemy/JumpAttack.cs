@@ -87,7 +87,7 @@ public class JumpAttack : MonoBehaviour
                 var distance = _target.transform.position - transform.position;
                 distance.Scale(new Vector3(0.8f, 0, 0.8f));
                 var speed = _targetController.velocity;
-                _jumpTarget = transform.position + distance + 0.5f * speed;
+                _jumpTarget = transform.position + distance;
                 var rotation = Quaternion.LookRotation(_jumpTarget - transform.position);
                 transform.rotation = rotation;
                 _navMeshAgent.SetDestination(_jumpTarget);
