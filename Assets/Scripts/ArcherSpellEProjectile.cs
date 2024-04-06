@@ -41,11 +41,11 @@ public class ArcherSpellEProjectile : MonoBehaviour
         
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(_stunLength));
+            other.gameObject.GetComponent<EffectSystem>().AddEffect(PlayerPrefs.GetString($"ChosenPerks0").Contains('5') ? new StunEffect(_stunLength) : new RootEffect(_stunLength));
             _maxTargets--;
             if (_maxTargets > 0)
             {
-                var nearEnemies = Physics.OverlapSphere(other.transform.position, 3, enemyLayer);
+                var nearEnemies = Physics.OverlapSphere(other.transform.position, PlayerPrefs.GetString($"ChosenPerks0").Contains('6') ? 4 : 3, enemyLayer);
                 foreach (var enemy in nearEnemies)
                 {
                     if (_maxTargets == 0) break;
@@ -54,7 +54,7 @@ public class ArcherSpellEProjectile : MonoBehaviour
                     var direction = enemy.transform.position - other.transform.position;
                     var dot       = Vector3.Dot(transform.forward, direction.normalized);
                     if (dot < Mathf.Cos(Mathf.Deg2Rad * searchAngle)) continue;
-                    enemy.GetComponent<EffectSystem>().AddEffect(new StunEffect(_stunLength));
+                    enemy.GetComponent<EffectSystem>().AddEffect(PlayerPrefs.GetString($"ChosenPerks0").Contains('5') ? new StunEffect(_stunLength) : new RootEffect(_stunLength));
                     _maxTargets--;
                 }
             }

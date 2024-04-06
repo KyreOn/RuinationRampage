@@ -5,18 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject[] rightParts;
+
+    public void ShowRightPart(int id)
     {
-        
+        foreach (var part in rightParts)
+        {
+            part.SetActive(false);
+        }
+        rightParts[id].SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Exit()
     {
-        
+        Application.Quit();
     }
-
+    
     public void StartGame()
     {
         SceneManager.LoadScene(1);

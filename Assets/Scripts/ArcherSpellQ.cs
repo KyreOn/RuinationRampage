@@ -33,6 +33,9 @@ public class ArcherSpellQ : Spell
     protected override void OnPrepare()
     {
         _indicator = Instantiate(indicator);
+        if (PlayerPrefs.GetString($"ChosenPerks0").Contains('3'))
+            _indicator.transform.localScale = new Vector3(1.5f, 0.02f, 1.5f);
+        isBlocked = true;
     }
     
     protected override void OnCast()
@@ -75,6 +78,7 @@ public class ArcherSpellQ : Spell
     {
         _controller.enabled = true;
         _animator.SetBool("QSpell", false);
+        isBlocked = false;
     }
 
     public override string GetDescription()

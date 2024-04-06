@@ -26,6 +26,7 @@ public class ArcherDodge : Spell
     protected override void OnPrepare()
     {
         _animator.SetTrigger("Dodge");
+        isBlocked = true;
         Cast();
     }
     
@@ -46,6 +47,7 @@ public class ArcherDodge : Spell
     public void DodgeEnd()
     {
         _movementSystem.OnDodgeEnd(speedBoost[level-1]);
+        isBlocked = false;
     }
 
     public override string GetDescription()

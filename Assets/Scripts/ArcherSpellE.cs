@@ -26,7 +26,7 @@ public class ArcherSpellE : Spell
     
     protected override void OnPrepare()
     {
-        
+        isBlocked = true;
     }
 
     protected override void OnCast()
@@ -61,6 +61,7 @@ public class ArcherSpellE : Spell
     {
         _controller.enabled = true;
         _animator.SetBool("ESpell", false);
+        isBlocked = false;
     }
 
     public override string GetDescription()

@@ -18,4 +18,10 @@ public class CasterEnemy : Enemy
     {
         return !(_casterSimpleAttack.isAttacking || _attackCasterSpell.isAttacking);
     }
+    
+    protected override void OnStun()
+    {
+        _casterSimpleAttack.isAttacking = false;
+        _attackCasterSpell.isAttacking = false;
+    }
 }

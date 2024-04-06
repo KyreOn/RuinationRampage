@@ -16,4 +16,9 @@ public class ControllerEnemy : Enemy
     {
         return !_controllerStunSpell.isAttacking;
     }
+    
+    protected override void OnStun()
+    {
+        _controllerStunSpell.isAttacking = false;
+    }
 }

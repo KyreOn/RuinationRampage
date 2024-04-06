@@ -15,7 +15,6 @@ public class ArcherSpellR : Spell
     [SerializeField] private float[] cooldown    = new float[3];
     [SerializeField] private float[] prepareTime = new float[3];
     [SerializeField] private float[] damage      = new float[3];
-    [SerializeField] private int[]   charges     = new int[3];
     
     private CharacterController _controller;
     private EffectSystem        _effectSystem;
@@ -40,6 +39,7 @@ public class ArcherSpellR : Spell
         _controller.enabled = false;
         _animator.SetBool("RSpell", true);
         _animator.SetBool("Charging", true);
+        isBlocked = true;
     }
 
     public void SetModel(GameObject model)
@@ -70,7 +70,7 @@ public class ArcherSpellR : Spell
 
     public void RSpellDraw()
     {
-        _animator.speed = 0.4f * prepareTime[level-1];
+        _animator.speed = 0.4f * prepareTime[level-1] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('7') ? 1.5f : 1);
     }
     
     public void RSpellShoot()
@@ -100,6 +100,7 @@ public class ArcherSpellR : Spell
     {
         _controller.enabled = true;
         _animator.SetBool("RSpell", false);
+        isBlocked = false;
     }
 
     public override string GetDescription()
@@ -109,13 +110,13 @@ public class ArcherSpellR : Spell
         var cdDiff      = cooldown[level] - cooldown[level - 1];
         var prepareDiff = Mathf.Round((prepareTime[level] - prepareTime[level - 1]) * 100);
         var damageDiff  = damage[level] - damage[level - 1];
-        var chargeDiff  = (charges[level] - charges[level - 1]) == 0 ? "" : "Заряды: +1";
+        var chargeDiff  = "Заряды: +1";
         return $"КД: {cdDiff}с\nВремя подготовки: -{prepareDiff}%\nУрон: +{damageDiff}\n{chargeDiff}";
     }
 
     protected override void OnUpgrade()
     {
         baseCooldown = cooldown[level - 1];
-        maxCharges = charges[level    - 1];
+        _animator.SetInteger("RSpellLevel", level);
     }
 }

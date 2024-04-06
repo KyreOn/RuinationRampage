@@ -119,7 +119,7 @@ public class MovementSystem : MonoBehaviour
 
     private void CalculateSpeed()
     {
-        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfStunned() ? 0 : 1);
+        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfStunned() ? 0 : 1) * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 1.2f : 1);
     }
 
     public void SetMovementDir(Vector3 dir)
@@ -148,7 +148,7 @@ public class MovementSystem : MonoBehaviour
         canMove = true;
         canRotate = true;
         _damageSystem.SetInvincible(false);
-        _effectSystem.AddEffect(new SlowEffect(1f, boostStrength), false);
+        _effectSystem.AddEffect(new SlowEffect(PlayerPrefs.GetString($"ChosenPerks0").Contains('2') ? 1.5f : 1, boostStrength), false);
         _controller.excludeLayers = aimLayer;
     }
 }

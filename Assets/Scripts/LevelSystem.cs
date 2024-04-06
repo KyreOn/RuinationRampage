@@ -8,15 +8,17 @@ public class LevelSystem : MonoBehaviour
 {
     [SerializeField] private float[] xpForLevel = new float[28];
     
-    private GameHUD _gameHUD;
-    private int _upgradeLevel;
-    private int _curXP;
+    private GameHUD      _gameHUD;
+    private int          _upgradeLevel;
+    private int          _curXP;
+    private DamageSystem _damageSystem;
     
     public int curLevel;
 
     private void Awake()
     {
         _gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
+        _damageSystem = GetComponent<DamageSystem>();
     }
 
     void Start()
@@ -52,5 +54,6 @@ public class LevelSystem : MonoBehaviour
     public void OnUpgrade()
     {
         _upgradeLevel++;
+        _damageSystem.OnUpgrade(_upgradeLevel);
     }
 }

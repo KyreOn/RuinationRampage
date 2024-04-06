@@ -11,16 +11,6 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private HPBar      hpBar;
     [SerializeField] private GameObject resultScreen;
     
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void UpdateXP(float value)
     {
         xpBar.value = value;
@@ -42,6 +32,11 @@ public class GameHUD : MonoBehaviour
     }
 
     public void OnDeath()
+    {
+        resultScreen.SetActive(true);
+    }
+
+    public void OnComplete()
     {
         resultScreen.SetActive(true);
     }

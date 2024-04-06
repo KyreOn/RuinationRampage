@@ -60,7 +60,7 @@ public class ArenaPattern : MonoBehaviour
         _enemyCount = _enemies.transform.childCount;
     }
     
-    public bool onEnemyDeath()
+    public bool OnEnemyDeath()
     {
         _enemyCount--;
         return _enemyCount == 0;

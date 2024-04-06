@@ -33,10 +33,12 @@ public class Enemy : TreeAgent
         hpParticleSys.trigger.SetCollider(0, Player.GetComponent<Collider>());
         RotateOnMove = true;
     }
-
+    
     protected override void OnUpdate()
     {
         base.OnUpdate();
+        if (effectSystem.CheckIfStunned())
+            OnStun();
         navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (CheckIsIdle() ? 1 : 0);
     }
 
@@ -77,6 +79,11 @@ public class Enemy : TreeAgent
     public virtual bool OnCheckIsIdle()
     {
         return true;
+    }
+    
+    protected virtual void OnStun()
+    {
+        
     }
 
     public void OnDeath()

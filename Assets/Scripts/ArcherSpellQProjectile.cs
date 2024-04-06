@@ -16,6 +16,10 @@ public class ArcherSpellQProjectile : MonoBehaviour
     {
         _damage = damage;
         _slowPower = slowPower;
+        if (PlayerPrefs.GetString($"ChosenPerks0").Contains('3'))
+            transform.localScale = new Vector3(1.5f, 0.06f, 1.5f);
+        if (PlayerPrefs.GetString($"ChosenPerks0").Contains('4'))
+            lifeSpan *= 1.5f;
     }
 
     // Update is called once per frame

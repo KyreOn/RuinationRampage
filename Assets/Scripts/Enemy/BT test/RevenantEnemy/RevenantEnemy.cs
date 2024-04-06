@@ -56,4 +56,10 @@ public class RevenantEnemy : Enemy
         _effectSystem.AddEffect(new RevenantRageEffect(-1));
         _effectSystem.AddEffect(new UnstoppableEffect(-1));
     }
+    
+    protected override void OnStun()
+    {
+        _revenantSimpleAttack.isAttacking = false;
+        _revenantStrongAttack.isAttacking = false;
+    }
 }

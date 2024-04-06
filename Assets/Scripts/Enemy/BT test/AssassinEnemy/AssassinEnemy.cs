@@ -24,4 +24,9 @@ public class AssassinEnemy : Enemy
     {
         Restart();
     }
+    
+    protected override void OnStun()
+    {
+        _assassinEnemyDash.isAttacking = false;
+    }
 }

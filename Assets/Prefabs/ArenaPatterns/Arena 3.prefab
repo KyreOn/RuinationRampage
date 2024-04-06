@@ -2230,8 +2230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPatternsLevel0:
-  - {fileID: 5133835578692231969, guid: 57fde606e62e1ca4f8284a9ff55de545, type: 3}
-  - {fileID: 5133835578692231969, guid: d536c27bc3165434dba4d5c021747057, type: 3}
+  - {fileID: 1732981279244836446, guid: 1dce315de5dbd174e98d9d71c1510a8b, type: 3}
+  - {fileID: 5133835578692231969, guid: 9925b140f8e6ed1478c11d823b3dcc9d, type: 3}
   enemyPatternsLevel1: []
   enemyPatternsLevel2: []
   enemyPatternsLevel3: []

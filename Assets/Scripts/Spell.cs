@@ -23,13 +23,14 @@ public class Spell : MonoBehaviour
 
     protected GameHUD gameHUD;
     protected bool    isPreparing;
+    protected bool    isBlocked;
 
     public int  level;
     public bool isUlt;
 
     public void Prepare()
     {
-        if (_curCharges == 0 || level == 0) return;
+        if (_curCharges == 0 || level == 0 || isBlocked) return;
         isPreparing = true;
         OnPrepare();
     }

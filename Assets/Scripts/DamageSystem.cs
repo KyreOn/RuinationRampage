@@ -8,8 +8,10 @@ public class DamageSystem : MonoBehaviour
 {
     [SerializeField] private float        effectTime;
     [SerializeField] private GameObject[] models;
-    [SerializeField] public float        health;
-
+    [SerializeField] public  float        health;
+    [SerializeField] public  float[]      healthOnLevel = new float[28];
+    
+    
     private CameraController _camera;
     private EffectSystem     _effectSystem;
     private bool             _isHit;
@@ -29,13 +31,15 @@ public class DamageSystem : MonoBehaviour
             _renderers.Add(model.GetComponent<Renderer>());
         }
         _gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
-        _curHealth = health;
         if (gameObject.CompareTag("Player"))
         {
+            health = healthOnLevel[0] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1);
             _camera = FindObjectOfType<CameraController>();
+            _curHealth = health;
             _gameHUD.UpdateHP(_curHealth, health);
         }
-            
+        else
+            _curHealth = health;
     }
 
     public bool ApplyDamage(float damage)
@@ -64,7 +68,7 @@ public class DamageSystem : MonoBehaviour
         {
             renderer.materials.Last().SetInt("_Hit", 1);
         }
-        _effectSystem.AddEffect(new StunEffect(0.2f));
+        _effectSystem.AddEffect(new SlowEffect(0.2f, 1.5f));
         _effectSystem.AddEffect(new DamageEffect(0.2f, 1.25f), false);
         return true;
     }
@@ -97,5 +101,11 @@ public class DamageSystem : MonoBehaviour
     public void SetInvincible(bool status)
     {
         isInvincible = status;
+    }
+
+    public void OnUpgrade(int level)
+    {
+        health = healthOnLevel[level]      * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1);
+        _curHealth *= healthOnLevel[level] / healthOnLevel[level - 1];
     }
 }

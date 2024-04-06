@@ -19,6 +19,7 @@ public class ArcherStrongAttack : Spell
     private Animator            _animator;
     private MovementSystem      _movementSystem;
     private bool                _isStrongAttacking;
+    private float               _damageMultiplier;
 
     private void Awake()
     {
@@ -50,13 +51,15 @@ public class ArcherStrongAttack : Spell
     public void StrongDraw()
     {
         _controller.enabled = false;
-        _animator.speed = 1.2f;
+        _animator.speed = 1.2f * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 0.8f : 1);
     }
     
     public void StrongShoot()
     {
         var arrow = Instantiate(strongArrowObject, spawnPoint.position, model.transform.rotation);
-        arrow.GetComponent<StrongArrow>().Init(damage[level-1] * _effectSystem.CalculateOutcomeDamage(), bleedDuration[level-1], bleedDamage[level-1], pierceCount[level-1]);
+        arrow.GetComponent<StrongArrow>().Init(gameObject, damage[level-1] * _effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1), bleedDuration[level-1], bleedDamage[level-1], pierceCount[level-1]);
+        if (PlayerPrefs.GetString($"ChosenPerks0").Contains('0'))
+            _effectSystem.AddEffect(new SlowEffect(1, 0.5f));
     }
     
     public void ShootEnd()
@@ -72,5 +75,16 @@ public class ArcherStrongAttack : Spell
         var bleedDmgDiff = bleedDamage[level]   - bleedDamage[level   - 1];
         var pierceDiff   = (pierceCount[level] - pierceCount[level - 1]) == 0 ? "" : "Максимум целей: +1";
         return $"Урон: +{damageDiff}\nДлительность кровотечения: +{bleedDurDiff}с\nУрон за тик: +{bleedDmgDiff}\n{pierceDiff}";
+    }
+    
+    public void OnHit()
+    {
+        if (PlayerPrefs.GetString($"ChosenPerks0").Contains('1'))
+            _damageMultiplier = Mathf.Clamp(_damageMultiplier + 0.1f, 1, 1.5f);
+    }
+    
+    public void OnMiss()
+    {
+        _damageMultiplier = 1;
     }
 }

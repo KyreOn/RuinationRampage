@@ -1253,8 +1253,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51366706}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.54491353, y: -0.00000002885484, z: 0.000000018751987, w: 0.8384923}
-  m_LocalPosition: {x: 2.84, y: 19, z: -8}
+  m_LocalRotation: {x: 0.54491353, y: 0.00000002885483, z: -0.00000001875198, w: 0.8384923}
+  m_LocalPosition: {x: 0, y: 19, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2371,6 +2371,7 @@ MonoBehaviour:
   - {fileID: 1782571585}
   - {fileID: 1463634188}
   health: 100
+  healthOnLevel: []
   isInvincible: 0
 --- !u!136 &211484867
 CapsuleCollider:
@@ -3517,8 +3518,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.54491353, y: -0.00000002885484, z: 0.000000018751987, w: 0.8384923}
-  m_LocalPosition: {x: 2.84, y: 19, z: -8}
+  m_LocalRotation: {x: 0.54491353, y: 0.00000002885483, z: -0.00000001875198, w: 0.8384923}
+  m_LocalPosition: {x: 0, y: 19, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5813,6 +5814,7 @@ MonoBehaviour:
   models:
   - {fileID: 452978919}
   health: 1000
+  healthOnLevel: []
   isInvincible: 0
 --- !u!114 &592955621
 MonoBehaviour:
@@ -17495,6 +17497,7 @@ MonoBehaviour:
   - {fileID: 400154577}
   - {fileID: 824496634}
   health: 1000
+  healthOnLevel: []
   isInvincible: 0
 --- !u!114 &1241996795
 MonoBehaviour:
@@ -18623,6 +18626,7 @@ MonoBehaviour:
   models:
   - {fileID: 1435436029}
   health: 1000
+  healthOnLevel: []
   isInvincible: 0
 --- !u!114 &1342245940
 MonoBehaviour:
@@ -30890,10 +30894,155 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.size
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[0]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[1]
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[2]
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[3]
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[4]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[5]
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[6]
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[7]
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[8]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[9]
+      value: 550
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[10]
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[11]
+      value: 650
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[12]
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[13]
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[14]
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[15]
+      value: 850
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[16]
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[17]
+      value: 950
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[18]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[19]
+      value: 1050
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[20]
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[21]
+      value: 1150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[22]
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[23]
+      value: 1250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[24]
+      value: 1300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[25]
+      value: 1350
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[26]
+      value: 1400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194060478319931251, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: healthOnLevel.Array.data[27]
+      value: 1450
+      objectReference: {fileID: 0}
     - target: {fileID: 4093255320089107520, guid: 94aefb41a9641cc44ab700891b070a55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.84
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4093255320089107520, guid: 94aefb41a9641cc44ab700891b070a55,
         type: 3}
@@ -30945,10 +31094,25 @@ PrefabInstance:
       propertyPath: baseCooldown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6579642279133075655, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: prepareTime.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579642279133075655, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: prepareTime.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8861808881359021254, guid: 94aefb41a9641cc44ab700891b070a55,
         type: 3}
       propertyPath: m_Name
       value: ArcherHero
+      objectReference: {fileID: 0}
+    - target: {fileID: 8861808881359021254, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33060,6 +33224,7 @@ MonoBehaviour:
   models:
   - {fileID: 8358588854234680750}
   health: 0
+  healthOnLevel: []
   isInvincible: 0
 --- !u!114 &8357606956738603632
 MonoBehaviour:

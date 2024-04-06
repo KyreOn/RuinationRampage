@@ -13,6 +13,7 @@ public class JumpAttack : MonoBehaviour
     private bool                _isPreparing;
     private bool                _canJump = true;
     private NavMeshAgent        _navMeshAgent;
+    private EffectSystem        _effectSystem;
     private Animator            _animator;
     private GameObject          _target;
     private CharacterController _targetController;
@@ -24,6 +25,7 @@ public class JumpAttack : MonoBehaviour
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
         _jumpCooldownTimer = jumpCooldown;
     }
@@ -35,7 +37,6 @@ public class JumpAttack : MonoBehaviour
         _target = target;
         _targetController = target.GetComponent<CharacterController>();
         _playerCollider = new []{_target.GetComponent<Collider>()};
-        _navMeshAgent.speed = 0;
         _animator.SetTrigger("isJumping");
         _animator.speed = 0.3f;
         _canJump = false;
@@ -48,11 +49,9 @@ public class JumpAttack : MonoBehaviour
     
     void Jump()
     {
-        _navMeshAgent.speed = 100;
-        _navMeshAgent.angularSpeed = 0;
         _animator.speed = 1;
         _isPreparing = false;
-        _navMeshAgent.enabled = false;
+        _effectSystem.AddEffect(new StunImmuneEffect(1));
     }
     
     void StrongAttack()
@@ -66,11 +65,7 @@ public class JumpAttack : MonoBehaviour
 
     void EndJump()
     {
-        _navMeshAgent.speed = 4;
-        _navMeshAgent.angularSpeed = 10000;
-        _navMeshAgent.radius = 0.2f;
         isJump = false;
-        _navMeshAgent.enabled = true;
     }
 
     public bool IsInAir()

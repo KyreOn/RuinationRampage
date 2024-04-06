@@ -8,10 +8,12 @@ public class Arrow : MonoBehaviour
     [SerializeField] private float    speed;
     [SerializeField] private float    lifeSpan;
 
+    private GameObject _player;
     private float _damage;
 
-    public void Init(float damage)
+    public void Init(GameObject player, float damage)
     {
+        _player = player;
         _damage = damage;
     }
     
@@ -29,13 +31,26 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Reaction")
+        var weakAttack   = _player.GetComponent<ArcherWeakAttack>();
+        var strongAttack = _player.GetComponent<ArcherStrongAttack>();
+        switch (other.gameObject.tag)
         {
-            other.gameObject.GetComponentInParent<Reaction>().TryReact(gameObject);
-            return;
+            case "Reaction":
+                other.gameObject.GetComponentInParent<Reaction>().TryReact(gameObject);
+                weakAttack.OnHit();
+                strongAttack.OnHit();
+                return;
+            case "Enemy":
+                other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage);
+                weakAttack.OnHit();
+                strongAttack.OnHit();
+                break;
+            default:
+                weakAttack.OnMiss();
+                strongAttack.OnMiss();
+                break;
         }
-        if (other.gameObject.tag == "Enemy") 
-            other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage);
+
         Destroy(gameObject);
     }
 }

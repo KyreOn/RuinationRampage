@@ -112,10 +112,12 @@ public class StartGameMenu : MonoBehaviour
     public void SetXP(int charId)
     {
         var xp = PlayerPrefs.HasKey($"Xp{charId}") ? PlayerPrefs.GetInt($"Xp{charId}") : 0;
+        xp = Mathf.Clamp(xp, 0, 1000);
         for (var i = 0; i < xpToLvlUp.Length; i++)
         {
             if (xp >= xpToLvlUp[i]) continue;
             _level = i;
+            Debug.Log(i);
             break;
         }
 
@@ -175,5 +177,10 @@ public class StartGameMenu : MonoBehaviour
         sb.AppendJoin(',', _unlockedPerks.Select(x => x.ToString()));
         PlayerPrefs.SetString($"UnlockedPerks{_curChar}", sb.ToString());
         SetPerks(_curChar);
+    }
+
+    public void Test()
+    {
+        Debug.Log("test");
     }
 }

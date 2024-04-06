@@ -22,7 +22,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        //_animator.SetBool("Stunned", isStunned);
+        var isStunned = _effectSystem.CheckIfStunned();
+        _animator.SetBool("Stunned", isStunned);
         _animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);
     }
 }

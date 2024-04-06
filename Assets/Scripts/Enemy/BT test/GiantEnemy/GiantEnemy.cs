@@ -29,4 +29,10 @@ public class GiantEnemy : Enemy
     {
         base.OnUpdate();
     }
+    
+    protected override void OnStun()
+    {
+        _giantSimpleAttack.isAttacking = false;
+        _giantStrongAttack.isAttacking = false;
+    }
 }

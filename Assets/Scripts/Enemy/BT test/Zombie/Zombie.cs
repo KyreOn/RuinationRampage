@@ -21,4 +21,10 @@ public class Zombie : Enemy
     {
         return !(_simpleAttack.isAttacking || _jumpAttack.isJump);
     }
+
+    protected override void OnStun()
+    {
+        _simpleAttack.isAttacking = false;
+        _jumpAttack.isJump = false;
+    }
 }
