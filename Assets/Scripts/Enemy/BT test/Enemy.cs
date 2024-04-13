@@ -8,8 +8,11 @@ using Random = UnityEngine.Random;
 
 public class Enemy : TreeAgent
 {
-    [SerializeField] protected float baseSpeed;
-    [SerializeField] protected int   id;
+    [SerializeField] protected float     baseSpeed;
+    [SerializeField] protected int       id;
+    [SerializeField] public    BossHPBar hpBar;
+    
+    private bool _isDisplaced;
     
     protected NavMeshAgent   navMeshAgent;
     protected EffectSystem   effectSystem;
@@ -31,7 +34,7 @@ public class Enemy : TreeAgent
         Player = FindObjectOfType<PlayerTest>();
         xpParticleSys.trigger.SetCollider(0, Player.GetComponent<Collider>());
         hpParticleSys.trigger.SetCollider(0, Player.GetComponent<Collider>());
-        RotateOnMove = true;
+        RotateOnMove = false;
     }
     
     protected override void OnUpdate()
@@ -39,6 +42,37 @@ public class Enemy : TreeAgent
         base.OnUpdate();
         if (effectSystem.CheckIfStunned())
             OnStun();
+        var pullEffect = effectSystem.CheckForPulled();
+        var isPulled = pullEffect is not null;
+        if (isPulled)
+        {
+            var position  = transform.position;
+            var target    = ((PullingEffect)pullEffect).target;
+            var direction = target - position;
+            direction.y = 0;
+            if (direction.magnitude < 0.5f)
+                effectSystem.RemoveEffectById(16);
+            direction.Normalize();
+            transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * ((PullingEffect)pullEffect).speed);
+        }
+        _isDisplaced = effectSystem.CheckForDisplacementEffect();
+        if (_isDisplaced)
+        {
+            var position  = transform.position;
+            var direction = effectSystem.GetDisplacementDirection();
+            if (Physics.Raycast(position, direction, 1))
+                _isDisplaced = false;
+            else
+                transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * effectSystem.GetDisplacementSpeed());
+        }
+        
+        
+        var dir = Player.Position - transform.position;
+        dir.y = 0;
+        var rot = Quaternion.LookRotation(dir);
+        transform.forward = dir;
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, 10);
+        
         navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (CheckIsIdle() ? 1 : 0);
     }
 
@@ -56,15 +90,9 @@ public class Enemy : TreeAgent
             pos = Vector3.zero;
         }
 
-        navMeshAgent.updateRotation = RotateOnMove;
+        navMeshAgent.updateRotation = false;
         
-        if (!RotateOnMove)
-        {
-            var dir = Player.Position - transform.position;
-            dir.y = 0;
-            var rot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, 10);
-        }
+        
         
         navMeshAgent.SetDestination(pos);
         Debug.DrawLine(transform.position, pos, Color.red, 2f);

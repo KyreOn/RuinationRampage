@@ -20,6 +20,7 @@ public class StartGameMenu : MonoBehaviour
     [SerializeField] private TMP_Text     level;
     [SerializeField] private TMP_Text     nextLevel;
     [SerializeField] private Slider       levelProgress;
+    [SerializeField] private GameObject   abilityToolTip;
     
     [SerializeField] private int[] xpToLvlUp = new int[10];
     
@@ -28,6 +29,7 @@ public class StartGameMenu : MonoBehaviour
     private Perk[]    _perks;
     private List<int> _chosenPerks;
     private List<int> _unlockedPerks;
+    private Spell[]   _spells;
     
     private void Awake()
     {
@@ -54,12 +56,12 @@ public class StartGameMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("LastSelected", id);
         _curChar = id;
-        var spells     = characters[id].GetComponents<Spell>();
+        _spells     = characters[id].GetComponents<Spell>();
         var prefString = PlayerPrefs.HasKey($"UnlockedPerks{id}") ? PlayerPrefs.GetString($"UnlockedPerks{id}") : "";
         _unlockedPerks = prefString == "" ? new List<int>() : prefString.Split(",").Select(int.Parse).ToList();
         for (var i = 0; i < 6; i++)
         {
-            abilities[i].sprite = spells.First(x => x.id == i).enabledSprite;
+            abilities[i].sprite = _spells.First(x => x.id == i).enabledSprite;
         }
     }
 
@@ -179,8 +181,14 @@ public class StartGameMenu : MonoBehaviour
         SetPerks(_curChar);
     }
 
-    public void Test()
+    public void ShowAbilityToolTip(int id)
     {
-        Debug.Log("test");
+        abilityToolTip.SetActive(true);
+        Debug.Log(_spells[id].title);
+    }
+
+    public void HideAbilityToolTip()
+    {
+        abilityToolTip.SetActive(false);
     }
 }

@@ -6,26 +6,23 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(CharacterController))]
 public class MovementSystem : MonoBehaviour
 {
-    [SerializeField] private float      baseSpeed;
-    [SerializeField] private float      rotationSpeed;
-    [SerializeField] private Transform  playerModel; 
-    [SerializeField] private Transform  cameraOffset;
-    [SerializeField] private float      offsetStrength;
-    [SerializeField] private GameObject model;
-    [SerializeField] private LayerMask  aimLayer;
-    [SerializeField] private LayerMask  dodgeLayer;
-    [SerializeField] private Transform  shootPoint;
-    [SerializeField] private float      dodgeCooldown;
+    [SerializeField] private   float      baseSpeed;
+    [SerializeField] private   Transform  cameraOffset;
+    [SerializeField] private   float      offsetStrength;
+    [SerializeField] protected GameObject model;
+    [SerializeField] private   Transform  shootPoint;
+    [SerializeField] protected LayerMask  aimLayer;
     
-    private CharacterController _controller;
-    private DamageSystem        _damageSystem;
-    private Animator            _animator;
-    private EffectSystem        _effectSystem;
-    private Vector3             _movementDir;
-    private Camera              _camera;
-    private Vector3             _inputBuffer;
-    private float               _dodgeCooldownTimer;
-    private bool                _isDisplaced;
+    protected CharacterController _controller;
+    protected DamageSystem        _damageSystem;
+    protected Animator            _animator;
+    protected EffectSystem        _effectSystem;
+    protected Vector3             _movementDir;
+    protected Camera              _camera;
+    protected Vector3             _inputBuffer;
+    protected float               _dodgeCooldownTimer;
+    protected bool                _isDisplaced;
+    protected bool                _isPulled;
     
     public float curSpeed;
     public bool  isAttacking;
@@ -48,7 +45,7 @@ public class MovementSystem : MonoBehaviour
     {
         if (canMove)
             _movementDir = _inputBuffer;
-        if (!_controller.enabled || _isDisplaced) return;
+        if (!_controller.enabled || _isDisplaced || _isPulled) return;
         _controller.Move(direction * (curSpeed * Time.fixedDeltaTime));
     }
 
@@ -70,12 +67,25 @@ public class MovementSystem : MonoBehaviour
 
     private void Update()
     {
+        var pullEffect = _effectSystem.CheckForPulled();
+        _isPulled = pullEffect is not null;
+        if (_isPulled)
+        {
+            var position  = transform.position;
+            var target    = ((PullingEffect)pullEffect).target;
+            var direction = target - position;
+            direction.y = 0;
+            if (direction.magnitude < 0.5f)
+                _effectSystem.RemoveEffectById(16);
+            direction.Normalize();
+            transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * ((PullingEffect)pullEffect).speed);
+        }
         _isDisplaced = _effectSystem.CheckForDisplacementEffect();
         if (_isDisplaced)
         {
             var position  = transform.position;
             var direction = _effectSystem.GetDisplacementDirection();
-            if (Physics.Raycast(position, direction, 1))
+            if (Physics.Raycast(position, direction, 1, (1 << 10)))
                 _isDisplaced = false;
             else
                 transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * _effectSystem.GetDisplacementSpeed());
@@ -85,7 +95,7 @@ public class MovementSystem : MonoBehaviour
         var offset   = new Vector3(Screen.width / 2 - mousePos.x, 0, Screen.height / 2 - mousePos.y);
         offset.Scale(new Vector3(-0.01f * offsetStrength * 9,     0, -0.01f * offsetStrength * 16));
         cameraOffset.localPosition = offset;
-        if (_movementDir == Vector3.zero)
+        if (_movementDir == Vector3.zero || _effectSystem.CheckIfStunned())
         {
             _animator.SetFloat("Direction", 0);
             _animator.SetFloat("Strafe",    0);
@@ -103,52 +113,9 @@ public class MovementSystem : MonoBehaviour
     {
         _inputBuffer = new Vector3(direction.x, 0, direction.y);
     }
-    
-    public void Dodge()
-    {
-        _animator.SetTrigger("Dodge");
-    }
-
-    private void DodgeRotate()
-    {
-        var toRotation = Quaternion.LookRotation(_movementDir, Vector3.up);
-        model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, toRotation, 1000);
-    }
-    
-    public float GetSpeed() => curSpeed;
 
     private void CalculateSpeed()
     {
         curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfStunned() ? 0 : 1) * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 1.2f : 1);
-    }
-
-    public void SetMovementDir(Vector3 dir)
-    {
-        _movementDir = dir;
-    }
-
-    public void OnDodgeStart()
-    {
-        _controller.enabled = true;
-        _animator.speed = 1;
-        _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f), false);
-        canMove = false;
-        canRotate = false;
-        if (_movementDir == Vector3.zero)
-        {
-            _movementDir = model.transform.forward; 
-        }
-        _damageSystem.SetInvincible(true);
-        _controller.excludeLayers = dodgeLayer;
-    }
-
-    public void OnDodgeEnd(float boostStrength)
-    {
-        _animator.speed = 1;
-        canMove = true;
-        canRotate = true;
-        _damageSystem.SetInvincible(false);
-        _effectSystem.AddEffect(new SlowEffect(PlayerPrefs.GetString($"ChosenPerks0").Contains('2') ? 1.5f : 1, boostStrength), false);
-        _controller.excludeLayers = aimLayer;
     }
 }

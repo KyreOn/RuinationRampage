@@ -153,7 +153,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   searchAngle: 30
-  maxTargets: 2
+  chainEffect: {fileID: 7120088048207297954, guid: 3ed9fdb5114c6064cb5cc07bb708a246,
+    type: 3}
 --- !u!1001 &2708047402108755639
 PrefabInstance:
   m_ObjectHideFlags: 0

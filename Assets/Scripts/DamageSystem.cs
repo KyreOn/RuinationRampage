@@ -10,21 +10,22 @@ public class DamageSystem : MonoBehaviour
     [SerializeField] private GameObject[] models;
     [SerializeField] public  float        health;
     [SerializeField] public  float[]      healthOnLevel = new float[28];
-    
-    
+
+    private Animator         _animator;
     private CameraController _camera;
     private EffectSystem     _effectSystem;
     private bool             _isHit;
     private float            _effectTimer;
     private List<Renderer>   _renderers = new();
     private GameHUD          _gameHUD;
-    private float            _curHealth;
     
+    public float curHealth;
+    public float tempHealth;
     public bool  isInvincible;
     
-    private void Awake()
+    private void Start()
     {
-        
+        _animator = GetComponent<Animator>();
         _effectSystem = GetComponent<EffectSystem>();
         foreach (var model in models)
         {
@@ -35,24 +36,40 @@ public class DamageSystem : MonoBehaviour
         {
             health = healthOnLevel[0] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1);
             _camera = FindObjectOfType<CameraController>();
-            _curHealth = health;
-            _gameHUD.UpdateHP(_curHealth, health);
+            curHealth = health;
+            tempHealth = _effectSystem.CalculateTempHealth();
+            _gameHUD.UpdateHP(curHealth, tempHealth, health);
         }
         else
-            _curHealth = health;
+            curHealth = health;
     }
 
-    public bool ApplyDamage(float damage)
+    public bool ApplyDamage(float damage, Transform source = null)
     {
         if (isInvincible) return false;
         if (_effectSystem.CheckForInvincibility()) return false;
+        _animator.SetTrigger("Hit");
+        var parryEffect = _effectSystem.CheckForParry();
+        if (parryEffect is not null && source is not null)
+        {
+            if (source.CompareTag("Enemy") || source.CompareTag("Player"))
+                source.GetComponent<EffectSystem>().AddEffect(new StunEffect(parryEffect.ApplyEffect()));
+            return false;
+        }
         _isHit = true;
         _effectTimer = 0;
-        _curHealth -= damage * _effectSystem.CalculateIncomeDamage();
+        curHealth -= _effectSystem.DamageTempHealth(damage) * _effectSystem.CalculateIncomeDamage();
+        tempHealth = _effectSystem.CalculateTempHealth();
         if (gameObject.CompareTag("Player"))
-            _gameHUD.UpdateHP(_curHealth, health);
+            _gameHUD.UpdateHP(curHealth, tempHealth, health);
+        if (gameObject.CompareTag("Enemy"))
+        {
+            var hpBar = GetComponent<Enemy>().hpBar;
+            if (hpBar is not null)
+                hpBar.UpdateHP(curHealth, health);
+        }
         
-        if (_curHealth <= 0)
+        if (curHealth <= 0)
         {
             if (gameObject.CompareTag("Enemy"))
                 GetComponent<Enemy>().OnDeath();
@@ -75,9 +92,10 @@ public class DamageSystem : MonoBehaviour
 
     public bool ApplyHeal(float heal)
     {
-        _curHealth = Mathf.Clamp(_curHealth + heal, 0, health);
+        curHealth = Mathf.Clamp(curHealth + heal, 0, health);
+        tempHealth = _effectSystem.CalculateTempHealth();
         if (gameObject.CompareTag("Player"))
-            _gameHUD.UpdateHP(_curHealth, health);
+            _gameHUD.UpdateHP(curHealth,  tempHealth, health);
         return true;
     }
 
@@ -106,6 +124,6 @@ public class DamageSystem : MonoBehaviour
     public void OnUpgrade(int level)
     {
         health = healthOnLevel[level]      * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1);
-        _curHealth *= healthOnLevel[level] / healthOnLevel[level - 1];
+        curHealth *= healthOnLevel[level] / healthOnLevel[level - 1];
     }
 }

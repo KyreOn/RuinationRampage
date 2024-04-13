@@ -16,10 +16,11 @@ public class Spell : MonoBehaviour
     [SerializeField] public    Sprite disabledSprite;
     [SerializeField] public    Sprite enabledSprite;
     
-    private LevelSystem _levelSystem;
-    private float       _effectedCooldown;
-    private float       _cooldownTimer;
-    private int         _curCharges;
+    private   LevelSystem  _levelSystem;
+    private float        _effectedCooldown;
+    private   float        _cooldownTimer;
+    private   int          _curCharges;
+    protected   EffectSystem _effectSystem;
 
     protected GameHUD gameHUD;
     protected bool    isPreparing;
@@ -30,7 +31,7 @@ public class Spell : MonoBehaviour
 
     public void Prepare()
     {
-        if (_curCharges == 0 || level == 0 || isBlocked) return;
+        if (_curCharges == 0 || level == 0 || isBlocked || _effectSystem.CheckIfStunned()) return;
         isPreparing = true;
         OnPrepare();
     }
@@ -66,6 +67,7 @@ public class Spell : MonoBehaviour
         gameHUD.InitSkill(id, disabledSprite, enabledSprite, level);
         _curCharges = maxCharges;
         _effectedCooldown = baseCooldown;
+        _effectSystem = GetComponent<EffectSystem>();
     }
 
     protected virtual void OnUpdate()

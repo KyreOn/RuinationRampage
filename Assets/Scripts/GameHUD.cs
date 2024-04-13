@@ -9,6 +9,7 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private Slider     xpBar;
     [SerializeField] private Skill[]    skills;
     [SerializeField] private HPBar      hpBar;
+    [SerializeField] private HPBar      tempHpBar;
     [SerializeField] private GameObject resultScreen;
     
     public void UpdateXP(float value)
@@ -26,9 +27,10 @@ public class GameHUD : MonoBehaviour
         skills[id].UpdateData(cd, maxCD, charges, maxCharges);
     }
 
-    public void UpdateHP(float curHP, float maxHP)
+    public void UpdateHP(float curHP, float tempHP, float maxHP)
     {
         hpBar.HPUpdate(curHP, maxHP);
+        tempHpBar.HPUpdate(tempHP, maxHP);
     }
 
     public void OnDeath()

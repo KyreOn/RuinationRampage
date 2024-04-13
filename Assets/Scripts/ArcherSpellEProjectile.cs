@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class ArcherSpellEProjectile : MonoBehaviour
 {
-    [SerializeField] private float     speed;
-    [SerializeField] private float     lifeSpan;
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float     searchAngle;
+    [SerializeField] private float      speed;
+    [SerializeField] private float      lifeSpan;
+    [SerializeField] private LayerMask  enemyLayer;
+    [SerializeField] private float      searchAngle;
+    [SerializeField] private GameObject chainEffect;
 
     private float _stunLength;
     private int   _maxTargets;
@@ -41,6 +42,7 @@ public class ArcherSpellEProjectile : MonoBehaviour
         
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("hit");
             other.gameObject.GetComponent<EffectSystem>().AddEffect(PlayerPrefs.GetString($"ChosenPerks0").Contains('5') ? new StunEffect(_stunLength) : new RootEffect(_stunLength));
             _maxTargets--;
             if (_maxTargets > 0)
@@ -55,6 +57,8 @@ public class ArcherSpellEProjectile : MonoBehaviour
                     var dot       = Vector3.Dot(transform.forward, direction.normalized);
                     if (dot < Mathf.Cos(Mathf.Deg2Rad * searchAngle)) continue;
                     enemy.GetComponent<EffectSystem>().AddEffect(PlayerPrefs.GetString($"ChosenPerks0").Contains('5') ? new StunEffect(_stunLength) : new RootEffect(_stunLength));
+                    var effect = Instantiate(chainEffect, transform.position, Quaternion.LookRotation(direction));
+                    effect.GetComponent<ArcherEChain>().Init(other.transform.position, enemy.transform.position, _stunLength);
                     _maxTargets--;
                 }
             }

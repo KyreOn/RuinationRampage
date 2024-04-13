@@ -55,7 +55,7 @@ public class EffectSystem : MonoBehaviour
 
     public bool CheckForDisplacementEffect()
     {
-        return _effects.Any(effect => effect.effectType == EffectType.DISPLACEMENT);
+        return _effects.Any(effect => effect.effectType == EffectType.DISPLACEMENT) && !CheckForDisableImmune();
     }
 
     public Vector3 GetDisplacementDirection()
@@ -76,6 +76,11 @@ public class EffectSystem : MonoBehaviour
                 return ((DisplacementEffect)effect).speed;
         }
         return 0;
+    }
+
+    public Effect CheckForPulled()
+    {
+        return _effects.FirstOrDefault(effect => effect.effectType == EffectType.PULLING);
     }
 
     public bool CheckForInvincibility()
@@ -106,6 +111,45 @@ public class EffectSystem : MonoBehaviour
             .Aggregate(1f, (current, effect) => 
                 current * effect.ApplyEffect());
     }
+
+    public Effect CheckForParry()
+    {
+        return _effects.FirstOrDefault(effect => effect.effectType == EffectType.PARRY);
+    }
+
+    public float CalculateTempHealth()
+    {
+        var result = 0f;
+        foreach (var effect in _effects)
+        {
+            if (effect.effectType != EffectType.TEMPORARY_HEALTH) continue;
+            result += effect.ApplyEffect();
+        }
+
+        return result;
+    }
+    
+    public float DamageTempHealth(float damage)
+    {
+        foreach (var effect in _effects)
+        {
+            if (damage            <= 0) break;
+            if (effect.effectType != EffectType.TEMPORARY_HEALTH) continue;
+            var hp = effect.ApplyEffect();
+            if (hp >= damage)
+            {
+                ((TemporaryHealthEffect)effect).ApplyDamage(damage);
+                damage = 0;
+            }
+            else
+            {
+                damage -= hp;
+                ((TemporaryHealthEffect)effect).ApplyDamage(hp);
+            }
+        }
+
+        return damage;
+    }
     
     private Effect GetEffectById(int id)
     {
@@ -127,5 +171,14 @@ public class EffectSystem : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void RemoveEffectById(int id)
+    {
+        foreach (var effect in _effects)
+        {
+            if (effect.effectId == id)
+                _markedForDelete.Add(effect);
+        }
     }
 }

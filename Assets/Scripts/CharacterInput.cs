@@ -31,7 +31,8 @@ public class CharacterInput : MonoBehaviour
         weakAttack.action.canceled += WeakAttackStop;
         strongAttack.action.started += StrongAttackStart;
         strongAttack.action.canceled += StrongAttackStop;
-        dodge.action.performed += OnPrepareDodge;
+        dodge.action.started += OnPrepareDodge;
+        dodge.action.canceled += OnCastDodge;
         spellQ.action.started += OnPrepareSpellQ;
         spellQ.action.canceled += OnCastSpellQ;
         spellE.action.started += OnPrepareSpellE;
@@ -47,7 +48,8 @@ public class CharacterInput : MonoBehaviour
         weakAttack.action.canceled -= WeakAttackStop;
         strongAttack.action.started -= StrongAttackStart;
         strongAttack.action.canceled -= StrongAttackStop;
-        dodge.action.performed -= OnPrepareDodge;
+        dodge.action.started -= OnPrepareDodge;
+        dodge.action.canceled -= OnCastDodge;
         spellQ.action.started -= OnPrepareSpellQ;
         spellQ.action.canceled -= OnCastSpellQ;
         spellE.action.started -= OnPrepareSpellE;
@@ -79,6 +81,11 @@ public class CharacterInput : MonoBehaviour
     private void OnPrepareDodge(InputAction.CallbackContext obj)
     {
         _combatSystem.PrepareDodge();
+    }
+    
+    private void OnCastDodge(InputAction.CallbackContext obj)
+    {
+        _combatSystem.CastDodge();
     }
 
     private void OnPrepareSpellQ(InputAction.CallbackContext obj)

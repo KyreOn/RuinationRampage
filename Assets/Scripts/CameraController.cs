@@ -12,6 +12,9 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         _camera = GetComponent<CinemachineVirtualCamera>();
+        var offset = GameObject.Find("CameraOffset").transform;
+        _camera.Follow = offset;
+        _camera.LookAt = offset;
     }
 
     public void OnDeath()

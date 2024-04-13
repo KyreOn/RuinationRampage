@@ -1,0 +1,1860 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8851350836245521735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a1ec25a3f86c04db6c7ac592b0653b, type: 3}
+  m_Name: Doctor Blink Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1816, y: -520}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: -8851350836245521735}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: 473716315960384521}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+--- !u!114 &-7759896776568247590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6550016bb346e4f92153756890a060, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -984, y: -184}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    values:
+    - _fieldName: input
+      _node: {fileID: -7759896776568247590}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -7759896776568247590}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 2
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: -7759896776568247590}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: -7759896776568247590}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 106704983836732012}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: -7759896776568247590}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 2670358344598546158}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+--- !u!114 &-7735639355305673980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e1e85d50c46c0bd95b7c69be08502, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -376, y: -328}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    - input 2
+    - input 3
+    - input 4
+    - input 5
+    - input 6
+    - input 7
+    values:
+    - _fieldName: input
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 1038854855001114116}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 6475832876002972548}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 455454322927859805}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 2
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -7759896776568247590}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 3
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 2231302880736105229}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 4
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -2052982885619584408}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 5
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -6722010605599546989}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 6
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 215252394788133752}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 7
+      _node: {fileID: -7735639355305673980}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -7635740004483998358}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  haltOnFailure: 1
+--- !u!114 &-7635740004483998358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -368.50287, y: 284.94928}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: -7635740004483998358}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 7
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 2
+--- !u!114 &-6919052117293631736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1352, y: -424}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: -6919052117293631736}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: 6475832876002972548}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 0
+--- !u!114 &-6722010605599546989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -632, y: 184}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: -6722010605599546989}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 5
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 2
+--- !u!114 &-2770237449297069500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e1e85d50c46c0bd95b7c69be08502, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1384, y: 680}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    - input 2
+    values:
+    - _fieldName: input
+      _node: {fileID: -2770237449297069500}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -2770237449297069500}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: 215252394788133752}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: -2770237449297069500}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: -2770237449297069500}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 6042313119349548698}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: -2770237449297069500}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 2693429650459366277}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 2
+      _node: {fileID: -2770237449297069500}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 9084049234212348816}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  haltOnFailure: 1
+--- !u!114 &-2052982885619584408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6550016bb346e4f92153756890a060, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -984, y: 104}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    values:
+    - _fieldName: input
+      _node: {fileID: -2052982885619584408}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -2052982885619584408}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 4
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: -2052982885619584408}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: -2052982885619584408}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -1999322903926842525}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: -2052982885619584408}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 8238480543263884899}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+--- !u!114 &-1999322903926842525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e1e85d50c46c0bd95b7c69be08502, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1352, y: 136}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    - input 2
+    values:
+    - _fieldName: input
+      _node: {fileID: -1999322903926842525}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -1999322903926842525}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: -2052982885619584408}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: -1999322903926842525}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: -1999322903926842525}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -1666930155997000410}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: -1999322903926842525}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 8165804827327856530}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 2
+      _node: {fileID: -1999322903926842525}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -1338038200103764036}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  haltOnFailure: 1
+--- !u!114 &-1666930155997000410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6550016bb346e4f92153756890a060, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1832, y: -136}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    values:
+    - _fieldName: input
+      _node: {fileID: -1666930155997000410}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -1666930155997000410}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: -1999322903926842525}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: -1666930155997000410}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: -1666930155997000410}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 7388555762486774432}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: -1666930155997000410}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -1332411344322620209}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+--- !u!114 &-1338038200103764036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a68c410d931d52478259a1649c48107, type: 3}
+  m_Name: Doctor Burst Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1736, y: 328}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: -1338038200103764036}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 2
+        node: {fileID: -1999322903926842525}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+--- !u!114 &-1332411344322620209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2200, y: 88}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: -1332411344322620209}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: -1666930155997000410}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 0
+--- !u!114 &-1022921176865653106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a1ec25a3f86c04db6c7ac592b0653b, type: 3}
+  m_Name: Doctor Blink Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2664, y: -8}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: -1022921176865653106}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: 7388555762486774432}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8b250ec42cdf940b99a7c24943190a, type: 3}
+  m_Name: DoctorBoss
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 1038854855001114116}
+  - {fileID: 106704983836732012}
+  - {fileID: -8851350836245521735}
+  - {fileID: -7735639355305673980}
+  - {fileID: 473716315960384521}
+  - {fileID: 5342269000377150828}
+  - {fileID: 6475832876002972548}
+  - {fileID: -7759896776568247590}
+  - {fileID: -2052982885619584408}
+  - {fileID: 8165804827327856530}
+  - {fileID: -1999322903926842525}
+  - {fileID: -1338038200103764036}
+  - {fileID: 215252394788133752}
+  - {fileID: -2770237449297069500}
+  - {fileID: 2693429650459366277}
+  - {fileID: 9084049234212348816}
+  - {fileID: -6919052117293631736}
+  - {fileID: 2670358344598546158}
+  - {fileID: 8238480543263884899}
+  - {fileID: 5267347573105316363}
+  - {fileID: -1022921176865653106}
+  - {fileID: 7388555762486774432}
+  - {fileID: 3372855086967256826}
+  - {fileID: -1666930155997000410}
+  - {fileID: -1332411344322620209}
+  - {fileID: 5880079797241553689}
+  - {fileID: 1478736022904304465}
+  - {fileID: 4220440985763589258}
+  - {fileID: 6042313119349548698}
+  - {fileID: 8861583303349674873}
+  - {fileID: 455454322927859805}
+  - {fileID: 2231302880736105229}
+  - {fileID: -6722010605599546989}
+  - {fileID: -7635740004483998358}
+--- !u!114 &106704983836732012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a68c410d931d52478259a1649c48107, type: 3}
+  m_Name: Doctor Burst Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1352, y: -232}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 106704983836732012}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: -7759896776568247590}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+--- !u!114 &215252394788133752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6550016bb346e4f92153756890a060, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -984, y: 632}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    values:
+    - _fieldName: input
+      _node: {fileID: 215252394788133752}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 215252394788133752}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 6
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: 215252394788133752}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: 215252394788133752}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -2770237449297069500}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: 215252394788133752}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 5267347573105316363}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+--- !u!114 &455454322927859805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -920, y: -408}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 455454322927859805}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 0
+--- !u!114 &473716315960384521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e1e85d50c46c0bd95b7c69be08502, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1352, y: -664}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - conditions 0
+    values:
+    - _fieldName: input
+      _node: {fileID: 473716315960384521}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 473716315960384521}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: 6475832876002972548}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: 473716315960384521}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: 473716315960384521}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -8851350836245521735}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: conditions 0
+      _node: {fileID: 473716315960384521}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 5342269000377150828}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  haltOnFailure: 1
+--- !u!114 &1038854855001114116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e477b6439e8644eb5daae12fb9a4eb, type: 3}
+  m_Name: Root (DoctorBoss)
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -120, y: -408}
+  ports:
+    keys:
+    - interruptions
+    - input
+    - output
+    values:
+    - _fieldName: interruptions
+      _node: {fileID: 1038854855001114116}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input
+      _node: {fileID: 1038854855001114116}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 1038854855001114116}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+--- !u!114 &1478736022904304465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e1e85d50c46c0bd95b7c69be08502, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2424, y: 440}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - conditions 0
+    values:
+    - _fieldName: input
+      _node: {fileID: 1478736022904304465}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 1478736022904304465}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: 6042313119349548698}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: 1478736022904304465}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: 1478736022904304465}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 5880079797241553689}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: conditions 0
+      _node: {fileID: 1478736022904304465}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 4220440985763589258}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  haltOnFailure: 1
+--- !u!114 &2231302880736105229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -760, y: -88}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 2231302880736105229}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 3
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 2
+--- !u!114 &2670358344598546158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1352, y: -72}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 2670358344598546158}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: -7759896776568247590}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 0
+--- !u!114 &2693429650459366277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb86f98879334923a023cac4ce086c56, type: 3}
+  m_Name: Doctor Hook Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1752, y: 664}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 2693429650459366277}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: -2770237449297069500}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+--- !u!114 &3372855086967256826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5e616d63d39164a987c43abfadab06, type: 3}
+  m_Name: Check Range
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2664, y: -136}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 3372855086967256826}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: conditions 0
+        node: {fileID: 7388555762486774432}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  invert: 0
+  minDistance: 0
+  maxDistance: 5
+--- !u!114 &4220440985763589258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5e616d63d39164a987c43abfadab06, type: 3}
+  m_Name: Check Range
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2888, y: 456}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 4220440985763589258}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: conditions 0
+        node: {fileID: 1478736022904304465}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  invert: 0
+  minDistance: 0
+  maxDistance: 5
+--- !u!114 &5267347573105316363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1384, y: 936}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 5267347573105316363}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: 215252394788133752}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 0
+--- !u!114 &5342269000377150828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5e616d63d39164a987c43abfadab06, type: 3}
+  m_Name: Check Range
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1816, y: -648}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 5342269000377150828}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: conditions 0
+        node: {fileID: 473716315960384521}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  invert: 0
+  minDistance: 0
+  maxDistance: 5
+--- !u!114 &5880079797241553689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a1ec25a3f86c04db6c7ac592b0653b, type: 3}
+  m_Name: Doctor Blink Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2888, y: 584}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 5880079797241553689}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: 1478736022904304465}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+--- !u!114 &6042313119349548698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6550016bb346e4f92153756890a060, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2056, y: 456}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    values:
+    - _fieldName: input
+      _node: {fileID: 6042313119349548698}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 6042313119349548698}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: -2770237449297069500}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: 6042313119349548698}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: 6042313119349548698}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 1478736022904304465}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: 6042313119349548698}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 8861583303349674873}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+--- !u!114 &6475832876002972548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6550016bb346e4f92153756890a060, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -984, y: -648}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - input 1
+    values:
+    - _fieldName: input
+      _node: {fileID: 6475832876002972548}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 6475832876002972548}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: -7735639355305673980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: 6475832876002972548}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: 6475832876002972548}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 473716315960384521}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: input 1
+      _node: {fileID: 6475832876002972548}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -6919052117293631736}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+--- !u!114 &7388555762486774432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857e1e85d50c46c0bd95b7c69be08502, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2200, y: -152}
+  ports:
+    keys:
+    - input
+    - output
+    - conditions
+    - input 0
+    - conditions 0
+    values:
+    - _fieldName: input
+      _node: {fileID: 7388555762486774432}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 7388555762486774432}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 0
+        node: {fileID: -1666930155997000410}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditions
+      _node: {fileID: 7388555762486774432}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input 0
+      _node: {fileID: 7388555762486774432}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -1022921176865653106}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: conditions 0
+      _node: {fileID: 7388555762486774432}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 3372855086967256826}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  haltOnFailure: 1
+--- !u!114 &8165804827327856530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0feb74b92917c26428903fd323364be2, type: 3}
+  m_Name: Doctor Cage Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1736, y: 152}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 8165804827327856530}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: -1999322903926842525}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+--- !u!114 &8238480543263884899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1352, y: 392}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 8238480543263884899}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: -2052982885619584408}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 0
+--- !u!114 &8861583303349674873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be76b14cd104844086593057ae50079, type: 3}
+  m_Name: Doctor Wait Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -2424, y: 680}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 8861583303349674873}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 1
+        node: {fileID: 6042313119349548698}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0
+  time: 0
+--- !u!114 &9084049234212348816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58306422bdd26d54587790924f515be8, type: 3}
+  m_Name: Doctor Blast Cast
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1752, y: 840}
+  ports:
+    keys:
+    - output
+    values:
+    - _fieldName: output
+      _node: {fileID: 9084049234212348816}
+      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input 2
+        node: {fileID: -2770237449297069500}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  maxDuration: -1
+  inContext: 
+  outContext: 
+  overwriteOut: 1
+  failNullCtx: 0

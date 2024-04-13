@@ -51,7 +51,7 @@ public class JumpAttack : MonoBehaviour
     {
         _animator.speed = 1;
         _isPreparing = false;
-        _effectSystem.AddEffect(new StunImmuneEffect(1));
+        //_effectSystem.AddEffect(new StunImmuneEffect(1));
     }
     
     void StrongAttack()
@@ -94,7 +94,7 @@ public class JumpAttack : MonoBehaviour
             _navMeshAgent.avoidancePriority = (int)(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime * 100);
         }
 
-        if (IsInAir())
+        if (IsInAir() && !_effectSystem.CheckForDisplacementEffect())
         {
             transform.position = Vector3.Lerp(transform.position, _jumpTarget, Time.deltaTime * 6);
         }

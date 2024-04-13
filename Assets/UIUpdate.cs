@@ -17,12 +17,10 @@ public class UIUpdate : MonoBehaviour
     private Tree         tree;
     private string       _btText;
     private string       _cdText;
-    private CombatSystem _combatSystem;
         
     void Start()
     {
         tree = enemy.GetComponent<Tree>();
-        _combatSystem = player.GetComponent<CombatSystem>();
     }
 
     // Update is called once per frame

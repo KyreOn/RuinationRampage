@@ -17,7 +17,6 @@ public class ArcherSpellR : Spell
     [SerializeField] private float[] damage      = new float[3];
     
     private CharacterController _controller;
-    private EffectSystem        _effectSystem;
     private Animator            _animator;
     private GameObject          _indicator;
     private Vector3             _clampedPosition;
@@ -29,7 +28,6 @@ public class ArcherSpellR : Spell
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
         isUlt = true;
     }

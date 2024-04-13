@@ -12,9 +12,12 @@ public enum EffectType
     DISABLE_IMMUNE,
     DOT,
     DISPLACEMENT,
+    PULLING,
     INVINCIBILITY,
     INCOME_DAMAGE,
     OUTCOME_DAMAGE,
+    PARRY,
+    TEMPORARY_HEALTH
 }
 public class Effect
 {

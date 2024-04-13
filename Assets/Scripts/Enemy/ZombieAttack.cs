@@ -40,7 +40,7 @@ public class ZombieAttack : MonoBehaviour
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(1.5f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
-            _target.GetComponent<DamageSystem>().ApplyDamage(10);
+            _target.GetComponent<DamageSystem>().ApplyDamage(10, transform);
         }
     }
 

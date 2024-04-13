@@ -11,7 +11,6 @@ public class ArcherWeakAttack : Spell
     [SerializeField] private float[]    damage = new float[5];
     
     private CharacterController _controller;
-    private EffectSystem        _effectSystem;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
     private float               _damageMultiplier;
@@ -19,7 +18,6 @@ public class ArcherWeakAttack : Spell
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
         _movementSystem = GetComponent<MovementSystem>();
     }

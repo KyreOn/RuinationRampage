@@ -35,7 +35,7 @@ public class RevenantEnemy : Enemy
     {
         base.OnUpdate();
         _reviveTimer += Time.deltaTime;
-        if (_damageSystem.health <= 60)
+        if (_damageSystem.curHealth <= 60)
             toRevive = true;
         
         if (revived) return;

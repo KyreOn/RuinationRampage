@@ -9,18 +9,16 @@ public class ArcherDodge : Spell
     [SerializeField] private float[]        speedBoost = new float[5];
     
     private CharacterController _controller;
-    private EffectSystem        _effectSystem;
     private Animator            _animator;
     private DamageSystem        _damageSystem;
-    private MovementSystem      _movementSystem;
+    private ArcherMovementSystem      _movementSystem;
 
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
         _damageSystem = GetComponent<DamageSystem>();
-        _movementSystem = GetComponent<MovementSystem>();
+        _movementSystem = GetComponent<ArcherMovementSystem>();
     }
 
     protected override void OnPrepare()

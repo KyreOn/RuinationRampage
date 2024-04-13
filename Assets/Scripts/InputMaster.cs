@@ -162,7 +162,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""2cf7c759-11cf-48d7-a5b1-91cabbd1403c"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""MnK"",
                     ""action"": ""dodge"",

@@ -17,16 +17,16 @@ public class ArcherSpellQ : Spell
     [SerializeField] private int[]   charges = new int[5];
 
     private CharacterController _controller;
-    private EffectSystem        _effectSystem;
     private Animator            _animator;
     private GameObject          _indicator;
     private bool                _isCasting;
     private Vector3             _clampedPosition;
-    
+    private Camera              _camera;
+
     private void Awake()
     {
+        _camera = Camera.main;
         _controller = GetComponent<CharacterController>();
-        _effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
     }
     
@@ -45,11 +45,11 @@ public class ArcherSpellQ : Spell
         Destroy(_indicator);
         _indicator = null;
     }
-
+    
     protected override void OnUpdate()
     {
         if (!isPreparing) return;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
         {
             var position  = hit.point;
