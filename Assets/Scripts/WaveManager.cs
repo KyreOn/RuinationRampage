@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> arenaPatterns;
     [SerializeField] private List<Material>   arenaMaterials;
+    [SerializeField] private GameObject       bossArena;
     [SerializeField] private float            loadSpeed;
     [SerializeField] private GameObject       startPoint;
     [SerializeField] private GameObject       player;
@@ -19,6 +20,7 @@ public class WaveManager : MonoBehaviour
     private static CameraController    _camera;
     private static GameHUD             _gameHUD;
     private static List<GameObject>    _arenas;
+    private static GameObject          _bossArena;
     private static GameObject          _curArena;
     private static float               _shaderProgress;
     private static bool                _isLoading;
@@ -50,9 +52,10 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         _arenas = arenaPatterns;
+        _bossArena = bossArena;
         _collider = startPoint.GetComponent<Collider>();
         //_cc = player.GetComponent<CharacterController>();
-        _levelSystem = player.GetComponent<LevelSystem>();
+        _levelSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<LevelSystem>();
         _upgradeWindow = upgradeWindow.GetComponent<UpgradeWindow>();
         _particleSystem = particleSystem.GetComponent<ParticleSystem>();
         _camera = FindObjectOfType<CameraController>();
@@ -72,6 +75,10 @@ public class WaveManager : MonoBehaviour
         {
             Destroy(_curArena);
             currentWave++;
+            if (currentWave == 20)
+                currentWave = 41;
+            if (currentWave == 42)
+                currentWave = 20;
             LoadArena();
         }
         _shaderProgress += Time.deltaTime * loadSpeed * (_isLoading ? 1 : -1) * (_readyToLoad ? 1 : 0);
@@ -86,8 +93,13 @@ public class WaveManager : MonoBehaviour
         _isLoading = true;
         _isLoaded = false;
         var pattern = Random.Range(0, _arenas.Count);
-        _curArena = Instantiate(_arenas[pattern], Vector3.zero, Quaternion.identity);
-        _curArena.GetComponent<ArenaPattern>().LoadEnemies(currentWave);
+        if (currentWave == 41)
+            _curArena = Instantiate(_bossArena, Vector3.zero, Quaternion.identity);
+        else
+        {
+            _curArena = Instantiate(_arenas[pattern], Vector3.zero, Quaternion.identity);
+            _curArena.GetComponent<ArenaPattern>().LoadEnemies(currentWave);
+        }
         CheckForUpgrade();
     }
     

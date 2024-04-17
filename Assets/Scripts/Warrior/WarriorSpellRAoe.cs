@@ -26,7 +26,7 @@ public class WarriorSpellRAoe : MonoBehaviour
             Destroy(gameObject);
         _tickTimer -= Time.deltaTime;
         if (_tickTimer >= 0) return;
-        var enemiesInRange = Physics.OverlapSphere(transform.position, 5f, enemyLayer);
+        var enemiesInRange = Physics.OverlapSphere(transform.position, 2.5f, enemyLayer);
         foreach (var enemy in enemiesInRange)
         {
             if (enemy.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage))

@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5a60048-8c00-46fb-baaa-dbeef02788a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""spellR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""643f6245-fa2d-4905-9b4c-d9f01d8922a6"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""MnK"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -244,6 +264,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Character_spellQ = m_Character.FindAction("spellQ", throwIfNotFound: true);
         m_Character_spellE = m_Character.FindAction("spellE", throwIfNotFound: true);
         m_Character_spellR = m_Character.FindAction("spellR", throwIfNotFound: true);
+        m_Character_Pause = m_Character.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -312,6 +333,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_spellQ;
     private readonly InputAction m_Character_spellE;
     private readonly InputAction m_Character_spellR;
+    private readonly InputAction m_Character_Pause;
     public struct CharacterActions
     {
         private @PlayerInput m_Wrapper;
@@ -323,6 +345,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @spellQ => m_Wrapper.m_Character_spellQ;
         public InputAction @spellE => m_Wrapper.m_Character_spellE;
         public InputAction @spellR => m_Wrapper.m_Character_spellR;
+        public InputAction @Pause => m_Wrapper.m_Character_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -353,6 +376,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @spellR.started += instance.OnSpellR;
             @spellR.performed += instance.OnSpellR;
             @spellR.canceled += instance.OnSpellR;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -378,6 +404,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @spellR.started -= instance.OnSpellR;
             @spellR.performed -= instance.OnSpellR;
             @spellR.canceled -= instance.OnSpellR;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -413,5 +442,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSpellQ(InputAction.CallbackContext context);
         void OnSpellE(InputAction.CallbackContext context);
         void OnSpellR(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

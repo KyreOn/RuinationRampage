@@ -34,7 +34,7 @@ public class DamageSystem : MonoBehaviour
         _gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
         if (gameObject.CompareTag("Player"))
         {
-            health = healthOnLevel[0] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1);
+            health = healthOnLevel[0] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1) * (PlayerPrefs.GetString($"ChosenPerks1").Contains('9') ? 1.2f : 1);
             _camera = FindObjectOfType<CameraController>();
             curHealth = health;
             tempHealth = _effectSystem.CalculateTempHealth();
@@ -52,9 +52,22 @@ public class DamageSystem : MonoBehaviour
         var parryEffect = _effectSystem.CheckForParry();
         if (parryEffect is not null && source is not null)
         {
-            if (source.CompareTag("Enemy") || source.CompareTag("Player"))
-                source.GetComponent<EffectSystem>().AddEffect(new StunEffect(parryEffect.ApplyEffect()));
-            return false;
+            var dot = Vector3.Dot(transform.forward, source.forward);
+            if (dot <= -Mathf.Cos(Mathf.Deg2Rad * (PlayerPrefs.GetString($"ChosenPerks0").Contains('2') ? 90 : 60)))
+            {
+                GetComponent<WarriorBlock>().CdReset();
+                if (source.CompareTag("Enemy") || source.CompareTag("Player"))
+                {
+                    if (PlayerPrefs.GetString($"ChosenPerks0").Contains('3'))
+                        source.GetComponent<DamageSystem>().ApplyDamage(damage);
+                    source.GetComponent<EffectSystem>().AddEffect(new StunEffect(parryEffect.ApplyEffect()));
+                }
+                if (source.CompareTag("Projectile") || source.CompareTag("Player"))
+                {
+                    
+                }
+                return false;
+            }
         }
         _isHit = true;
         _effectTimer = 0;
@@ -123,7 +136,7 @@ public class DamageSystem : MonoBehaviour
 
     public void OnUpgrade(int level)
     {
-        health = healthOnLevel[level]      * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1);
+        health = healthOnLevel[level]      * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1) * (PlayerPrefs.GetString($"ChosenPerks1").Contains('9') ? 1.2f : 1);
         curHealth *= healthOnLevel[level] / healthOnLevel[level - 1];
     }
 }

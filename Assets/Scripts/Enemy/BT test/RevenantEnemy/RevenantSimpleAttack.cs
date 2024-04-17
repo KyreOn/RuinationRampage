@@ -46,7 +46,7 @@ public class RevenantSimpleAttack : MonoBehaviour
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(2f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
-            if (_target.GetComponent<DamageSystem>().ApplyDamage(10) && _revenantEnemy.revived)
+            if (_target.GetComponent<DamageSystem>().ApplyDamage(10, transform) && _revenantEnemy.revived)
                 _target.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.25f));
         }
     }

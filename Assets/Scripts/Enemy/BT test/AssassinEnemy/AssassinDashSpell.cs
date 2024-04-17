@@ -60,7 +60,7 @@ public class AssassinEnemyDash : MonoBehaviour
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(1.5f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
-            _target.GetComponent<DamageSystem>().ApplyDamage(10);
+            _target.GetComponent<DamageSystem>().ApplyDamage(10, transform);
             _target.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 2));
             _target.GetComponent<EffectSystem>().AddEffect(new DOTEffect(2, 0.5f, 10));
         }

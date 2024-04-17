@@ -11,7 +11,7 @@ public class Enemy : TreeAgent
     [SerializeField] protected float     baseSpeed;
     [SerializeField] protected int       id;
     [SerializeField] public    BossHPBar hpBar;
-    
+
     private bool _isDisplaced;
     
     protected NavMeshAgent   navMeshAgent;
@@ -73,7 +73,7 @@ public class Enemy : TreeAgent
         transform.forward = dir;
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, 10);
         
-        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (CheckIsIdle() ? 1 : 0);
+        navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (CheckIsIdle() ? 1 : 0) * (effectSystem.CheckIfStunned() || effectSystem.CheckIfRooted() ? 0 : 1);
     }
 
     public Vector3 MoveTo(Vector3 position)

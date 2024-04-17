@@ -46,7 +46,7 @@ public class GiantStrongAttack : MonoBehaviour
         var size = Physics.OverlapSphereNonAlloc(hitPoint.position, 2.5f, _playerCollider, playerLayer);
         if (size >= 1)
         {
-            if (_target.GetComponent<DamageSystem>().ApplyDamage(10))
+            if (_target.GetComponent<DamageSystem>().ApplyDamage(10, transform))
             {
                 var direction = _playerCollider[0].transform.position - hitPoint.position;
                 direction.y = 0;

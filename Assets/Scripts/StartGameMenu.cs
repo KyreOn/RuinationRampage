@@ -38,7 +38,6 @@ public class StartGameMenu : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetString("AvailableChars",    "0");
         var availableChars = PlayerPrefs.GetString("AvailableChars");
         var chars          = availableChars.Split(",").Select(int.Parse);
         for (var i = 0; i < availableCharacters.Length; i++)
@@ -67,9 +66,9 @@ public class StartGameMenu : MonoBehaviour
 
     public void SetCharacter(int id)
     {
+        SetAbilities(id);
         SetPerks(id);
         SetChosenPerks(id);
-        SetAbilities(id);
         SetGoldCount(id);
         SetXP(id);
         SetPerkCount(id);
@@ -183,8 +182,7 @@ public class StartGameMenu : MonoBehaviour
 
     public void ShowAbilityToolTip(int id)
     {
-        abilityToolTip.SetActive(true);
-        Debug.Log(_spells[id].title);
+        //abilityToolTip.SetActive(true);
     }
 
     public void HideAbilityToolTip()

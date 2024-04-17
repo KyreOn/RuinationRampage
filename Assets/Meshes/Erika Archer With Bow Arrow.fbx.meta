@@ -3,7 +3,82 @@ guid: b481ad783bd106e4a8564f9c3fd61726
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Akai_MAT1
+    second: {fileID: 2100000, guid: 6b62437c474599344ac4acf591c10a90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arrow_MAT
+    second: {fileID: 2100000, guid: 4cf5be23fd4912349906009386629e74, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_MAT1
+    second: {fileID: 2100000, guid: 6eaaf7d15a410864fbbdb4e5b9114be9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bow_MAT
+    second: {fileID: 2100000, guid: 3b25b564afb5b5a4ea4b0d418961018e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EyeSpec_MAT1
+    second: {fileID: 2100000, guid: fd2bda07dda6c9840a0f83bedd615eb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong1
+    second: {fileID: 2100000, guid: 2035da3cf5e0a914f97c390619e5f606, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Arrow_DIFF
+    second: {fileID: 2800000, guid: 363262aa7583348419dd0b88614820b6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Arrow_NM
+    second: {fileID: 2800000, guid: 975bccd31edf093498720e25b684403e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bow_DIFF
+    second: {fileID: 2800000, guid: 66e82699314ea7944bb3fc5aa7e54720, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bow_NM
+    second: {fileID: 2800000, guid: 9223cdeae926a3745bace21c33d7fb50, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Erika_Archer_Clothes_diffuse
+    second: {fileID: 2800000, guid: 79db8078f27bf2847aeb97e73294ae0b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Erika_Archer_Clothes_normal
+    second: {fileID: 2800000, guid: f16066959829ec043836577ec1665844, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FemaleFitA_Body_diffuse
+    second: {fileID: 2800000, guid: f4570922dc9f5f44180a58f79f9a856d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FemaleFitA_StdNM
+    second: {fileID: 2800000, guid: 704e057335da0c647b4d36f241c10dae, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FemaleFitA_eyelash_diffuse
+    second: {fileID: 2800000, guid: fa487a05adeb8204990437e6b6799334, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

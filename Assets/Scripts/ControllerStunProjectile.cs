@@ -30,7 +30,7 @@ public class ControllerStunProjectile : MonoBehaviour
         {
             var damageSystem = other.gameObject.GetComponent<DamageSystem>();
             if (damageSystem.isInvincible) return;
-            damageSystem.ApplyDamage(10);
+            damageSystem.ApplyDamage(10, transform);
             other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(1));
             var pos = other.transform.position;
             pos.y = 0.1f;

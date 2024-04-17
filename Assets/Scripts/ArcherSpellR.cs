@@ -30,6 +30,7 @@ public class ArcherSpellR : Spell
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         isUlt = true;
+        _animator.SetInteger("RSpellLevel", level);
     }
 
     protected override void OnPrepare()
@@ -98,6 +99,7 @@ public class ArcherSpellR : Spell
     {
         _controller.enabled = true;
         _animator.SetBool("RSpell", false);
+        _animator.speed = 1;
         isBlocked = false;
     }
 

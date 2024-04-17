@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(MovementSystem))]
 [RequireComponent(typeof(CombatSystem))]
@@ -15,6 +16,7 @@ public class CharacterInput : MonoBehaviour
     [SerializeField] private InputActionReference spellQ;
     [SerializeField] private InputActionReference spellE;
     [SerializeField] private InputActionReference spellR;
+    [SerializeField] private InputActionReference pause;
     
     private MovementSystem _movementSystem;
     private CombatSystem   _combatSystem;
@@ -39,7 +41,7 @@ public class CharacterInput : MonoBehaviour
         spellE.action.canceled += OnCastSpellE;
         spellR.action.started += OnPrepareSpellR;
         spellR.action.canceled += OnCastSpellR;
-        
+        pause.action.performed += OnPause;
     }
 
     private void OnDisable()
@@ -56,6 +58,7 @@ public class CharacterInput : MonoBehaviour
         spellE.action.canceled -= OnCastSpellE;
         spellR.action.started -= OnPrepareSpellR;
         spellR.action.canceled -= OnCastSpellR;
+        pause.action.performed -= OnPause;
     }
     
     private void WeakAttackStart(InputAction.CallbackContext obj)
@@ -116,6 +119,11 @@ public class CharacterInput : MonoBehaviour
     private void OnCastSpellR(InputAction.CallbackContext obj)
     {
         _combatSystem.CastSpellR();
+    }
+
+    private void OnPause(InputAction.CallbackContext obj)
+    {
+        SceneManager.LoadScene(0);
     }
     
     private void Update()

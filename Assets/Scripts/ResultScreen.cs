@@ -10,6 +10,7 @@ public class ResultScreen : MonoBehaviour
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text killsText;
+    [SerializeField] private TMP_Text result;
 
     private void OnEnable()
     {
@@ -18,7 +19,8 @@ public class ResultScreen : MonoBehaviour
         killsText.text = StatsManager.GetKills().ToString();
         var charId = PlayerPrefs.GetInt("LastSelected");
         var xp     = PlayerPrefs.HasKey($"Xp{charId}") ? PlayerPrefs.GetInt($"Xp{charId}") : 0;
-        xp += 50;
+        xp += StatsManager.GetKills() + 2 * WaveManager.currentWave;
+        result.text = $"+{StatsManager.GetKills() + 2 * WaveManager.currentWave} ОМ";
         PlayerPrefs.SetInt($"Xp{charId}", xp);
     }
 

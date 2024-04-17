@@ -60,7 +60,7 @@ public class ArcherStrongAttack : Spell
             _effectSystem.AddEffect(new SlowEffect(1, 0.5f));
     }
     
-    public void ShootEnd()
+    public void StrongShootEnd()
     {
         _controller.enabled = true;
         _animator.speed = 1;

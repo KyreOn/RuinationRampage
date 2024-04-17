@@ -85,10 +85,7 @@ public class MovementSystem : MonoBehaviour
         {
             var position  = transform.position;
             var direction = _effectSystem.GetDisplacementDirection();
-            if (Physics.Raycast(position, direction, 1, (1 << 10)))
-                _isDisplaced = false;
-            else
-                transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * _effectSystem.GetDisplacementSpeed());
+            transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * _effectSystem.GetDisplacementSpeed());
         }
         CalculateSpeed();
         var mousePos = Input.mousePosition;
@@ -116,6 +113,6 @@ public class MovementSystem : MonoBehaviour
 
     private void CalculateSpeed()
     {
-        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfStunned() ? 0 : 1) * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 1.2f : 1);
+        curSpeed = baseSpeed * _effectSystem.CalculateSpeedModifiers() * (_effectSystem.CheckIfStunned() || _effectSystem.CheckIfRooted() ? 0 : 1) * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 1.2f : 1) * (PlayerPrefs.GetString($"ChosenPerks1").Contains('9') ? 0.8f : 1);
     }
 }

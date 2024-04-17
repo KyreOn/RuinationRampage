@@ -18,7 +18,7 @@ public class Spell : MonoBehaviour
     
     private   LevelSystem  _levelSystem;
     private float        _effectedCooldown;
-    private   float        _cooldownTimer;
+    protected   float        _cooldownTimer;
     private   int          _curCharges;
     protected   EffectSystem _effectSystem;
 

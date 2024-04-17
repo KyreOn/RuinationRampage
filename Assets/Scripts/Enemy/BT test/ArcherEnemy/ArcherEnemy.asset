@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1643.4578, y: 870.0825}
+  position: {x: -1928, y: 920}
   ports:
     keys:
     - input
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: Check In Sight
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2312, y: 312}
+  position: {x: -2200, y: 376}
   ports:
     keys:
     - output
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: Check Range
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2728, y: 344}
+  position: {x: -2504, y: 392}
   ports:
     keys:
     - output
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: Move To Player
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2056, y: 1080}
+  position: {x: -2232, y: 1048}
   ports:
     keys:
     - output
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: Strafe
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2744, y: 1080}
+  position: {x: -2536, y: 1016}
   ports:
     keys:
     - output
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: Selector
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1944, y: 456}
+  position: {x: -1912, y: 456}
   ports:
     keys:
     - input
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2296, y: 696}
+  position: {x: -2200, y: 680}
   ports:
     keys:
     - input
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Name: Move In Range
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2728, y: 504}
+  position: {x: -2504, y: 520}
   ports:
     keys:
     - output
@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Name: Root (ArcherEnemy)
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1208, y: 216}
+  position: {x: -1352, y: 568}
   ports:
     keys:
     - interruptions
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Name: Check Range
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2744, y: 744}
+  position: {x: -2536, y: 728}
   ports:
     keys:
     - output
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Name: Archer Simple Attack
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2744, y: 904}
+  position: {x: -2536, y: 856}
   ports:
     keys:
     - output
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Name: Selector
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1560, y: 424}
+  position: {x: -1640, y: 664}
   ports:
     keys:
     - input
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -2296, y: 456}
+  position: {x: -2200, y: 456}
   ports:
     keys:
     - input
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_Name: Check In Sight
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1976, y: 952}
+  position: {x: -2232, y: 968}
   ports:
     keys:
     - output

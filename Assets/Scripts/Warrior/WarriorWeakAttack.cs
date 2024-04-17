@@ -6,6 +6,7 @@ public class WarriorWeakAttack : Spell
 {
     [SerializeField] private LayerMask  _enemyLayer;
     [SerializeField] private GameObject model;
+    [SerializeField] private float[]    damage = new float[5];
     
     private CharacterController _controller;
     private Animator            _animator;
@@ -45,10 +46,15 @@ public class WarriorWeakAttack : Spell
         _animator.SetBool("WeakAttackCombo", _attackCombo);
         var collider = Physics.OverlapBox(transform.position + model.transform.forward * 2, Vector3.one * 2, model.transform.rotation,
             _enemyLayer);
+        var stunMod = PlayerPrefs.GetString($"ChosenPerks1").Contains('0') ? 1.2f : 1;
         foreach (var col in collider)
         {
-            if (col.GetComponent<DamageSystem>().ApplyDamage(10))
-                _rSpell.StackDamage(1);
+            var dmg = damage[level - 1] * _effectSystem.CalculateOutcomeDamage() *
+                         (col.GetComponent<EffectSystem>().CheckIfStunned()
+                ? stunMod
+                : 1);
+            if (col.GetComponent<DamageSystem>().ApplyDamage(dmg))
+                _rSpell.StackDamage(dmg);
         }
     }
 
@@ -58,5 +64,11 @@ public class WarriorWeakAttack : Spell
         _effectSystem.RemoveEffectById(12);
         _effectSystem.RemoveEffectById(13);
         _animator.speed = 1;
+    }
+    
+    public override string GetDescription()
+    {
+        var damageDiff = damage[level] - damage[level - 1];
+        return $"Урон: +{damageDiff}";
     }
 }

@@ -6,15 +6,19 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private CinemachineVirtualCamera _camera;
-    private bool                     _isDead;
+    [SerializeField] private List<GameObject>         characters;
+    
+    private                  CinemachineVirtualCamera _camera;
+    private                  bool                     _isDead;
 
     private void Awake()
     {
         _camera = GetComponent<CinemachineVirtualCamera>();
+        characters[PlayerPrefs.GetInt("LastSelected")].SetActive(true);
         var offset = GameObject.Find("CameraOffset").transform;
         _camera.Follow = offset;
         _camera.LookAt = offset;
+        
     }
 
     public void OnDeath()
