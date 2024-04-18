@@ -140,7 +140,8 @@ MonoBehaviour:
   - {fileID: -1878332245247344467}
   - {fileID: -8485548622517506450}
   - {fileID: -7266178389425908012}
-  m_RendererFeatureMap: adc0de57c6d2eee56eee89767c463d8ad416a6af4059299b
+  - {fileID: 979127760482440376}
+  m_RendererFeatureMap: adc0de57c6d2eee56eee89767c463d8ad416a6af4059299bb89447b1828f960d
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -183,3 +184,19 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &979127760482440376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7955e6806cfe0bf4f95dec3697ef5543, type: 3}
+  m_Name: StylizedBloomPostProcessRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_bloomShader: {fileID: 4800000, guid: 5e8309e2fa8647d47a2e7badc7b750ab, type: 3}
+  m_compositeShader: {fileID: -6465566751694194690, guid: 4b0cdc7c90c9844478cdf997a703f3d0,
+    type: 3}
