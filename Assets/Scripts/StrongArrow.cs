@@ -48,16 +48,19 @@ public class StrongArrow : MonoBehaviour
                 return;
             case "Enemy":
             {
-                weakAttack.OnHit();
-                strongAttack.OnHit();
-                if (other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage))
+                if (_pierceCount > 0)
                 {
-                    other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
-                    other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
-                    other.gameObject.GetComponent<EffectSystem>().AddEffect(new DOTEffect(_bleedDuration, 0.5f, _bleedDamage), false);
-                }
+                    weakAttack.OnHit();
+                    strongAttack.OnHit();
+                    if (other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage))
+                    {
+                        other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
+                        other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
+                        other.gameObject.GetComponent<EffectSystem>().AddEffect(new DOTEffect(_bleedDuration, 0.5f, _bleedDamage), false);
+                    }
             
-                _pierceCount--;
+                    _pierceCount--;
+                }
                 break;
             }
             default:

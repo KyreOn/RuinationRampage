@@ -9,12 +9,14 @@ public class Arrow : MonoBehaviour
     [SerializeField] private float    lifeSpan;
 
     private GameObject _player;
-    private float _damage;
+    private float      _damage;
+    private int        _pierceCount;
 
     public void Init(GameObject player, float damage)
     {
         _player = player;
         _damage = damage;
+        _pierceCount = 1;
     }
     
     private void Update()
@@ -41,9 +43,13 @@ public class Arrow : MonoBehaviour
                 strongAttack.OnHit();
                 return;
             case "Enemy":
-                other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage);
-                weakAttack.OnHit();
-                strongAttack.OnHit();
+                if (_pierceCount > 0)
+                {
+                    other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage);
+                    weakAttack.OnHit();
+                    strongAttack.OnHit();
+                    _pierceCount--;
+                }
                 break;
             default:
                 weakAttack.OnMiss();
