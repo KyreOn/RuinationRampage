@@ -54,6 +54,11 @@ public class Spell : MonoBehaviour
 
     }
 
+    public void Use()
+    {
+        
+    }
+
     public void CalculateCooldown(float cdModifier)
     {
         _effectedCooldown = baseCooldown * cdModifier;

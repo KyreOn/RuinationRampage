@@ -141,7 +141,7 @@ MonoBehaviour:
     LayerMask:
       serializedVersion: 2
       m_Bits: 768
-    RenderPassEvent: 300
+    RenderPassEvent: 400
     SortingCriteria: 59
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: RenderObjects
-    Event: 350
+    Event: 450
     filterSettings:
       RenderQueueType: 0
       LayerMask:

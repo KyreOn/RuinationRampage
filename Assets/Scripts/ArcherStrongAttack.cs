@@ -48,6 +48,8 @@ public class ArcherStrongAttack : Spell
     
     public void StrongDraw()
     {
+        _animator.SetBool("StrongCast", true);
+        _movementSystem.isAttacking = true;
         _controller.enabled = false;
         _animator.speed = 1.2f * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 0.8f : 1);
     }
@@ -62,6 +64,8 @@ public class ArcherStrongAttack : Spell
     
     public void StrongShootEnd()
     {
+        _animator.SetBool("StrongCast", false);
+        _movementSystem.isAttacking = false;
         _controller.enabled = true;
         _animator.speed = 1;
     }

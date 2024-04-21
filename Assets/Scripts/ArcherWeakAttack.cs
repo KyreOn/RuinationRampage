@@ -14,6 +14,7 @@ public class ArcherWeakAttack : Spell
     private Animator            _animator;
     private MovementSystem      _movementSystem;
     private float               _damageMultiplier;
+    private bool                _isAttack;
 
     private void Awake()
     {
@@ -25,13 +26,11 @@ public class ArcherWeakAttack : Spell
     protected override void OnPrepare()
     {
         _animator.SetBool("isAttacking", true);
-        _movementSystem.isAttacking = true;
     }
     
     protected override void OnCast()
     {
         _animator.SetBool("isAttacking", false);
-        _movementSystem.isAttacking = false;
     }
 
     protected override void OnUpdate()
@@ -41,8 +40,10 @@ public class ArcherWeakAttack : Spell
     
     public void Draw()
     {
-        _controller.enabled = false;
-        _animator.speed = 2.5f * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 0.8f : 1);
+        _animator.SetBool("WeakCast", true);
+        _effectSystem.AddEffect(new WeakAttackEffect(1.75f));
+        _animator.SetFloat("AttackSpeed", 2.5f * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 0.8f : 1));
+        //_animator.speed = 2.5f * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 0.8f : 1);
     }
 
     public void Shoot()
@@ -55,7 +56,8 @@ public class ArcherWeakAttack : Spell
     
     public void ShootEnd()
     {
-        _controller.enabled = true;
+        _animator.SetBool("WeakCast", false);
+        _effectSystem.RemoveEffectById(12);
         _animator.speed = 1;
     }
 

@@ -18,6 +18,7 @@ public class ArcherMovementSystem : MovementSystem
             _movementDir = model.transform.forward;
         }
 
+        //model.transform.rotation = Quaternion.LookRotation(_movementDir);
         _damageSystem.SetInvincible(true);
         _controller.excludeLayers = dodgeLayer;
     }

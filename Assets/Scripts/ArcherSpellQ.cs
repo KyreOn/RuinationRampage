@@ -17,6 +17,7 @@ public class ArcherSpellQ : Spell
     [SerializeField] private int[]   charges = new int[5];
 
     private CharacterController _controller;
+    private MovementSystem      _movementSystem;
     private Animator            _animator;
     private GameObject          _indicator;
     private bool                _isCasting;
@@ -28,6 +29,7 @@ public class ArcherSpellQ : Spell
         _camera = Camera.main;
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _movementSystem = GetComponent<MovementSystem>();
     }
     
     protected override void OnPrepare()
@@ -64,7 +66,9 @@ public class ArcherSpellQ : Spell
     
     public void QSpellDraw()
     {
-        _animator.speed = 2.5f;
+        _animator.SetBool("QCast", true);
+        _movementSystem.isAttacking = true;
+        //_animator.speed = 2.5f;
     }
     
     public void QSpellShoot()
@@ -76,6 +80,8 @@ public class ArcherSpellQ : Spell
     
     public void QShootEnd()
     {
+        _animator.SetBool("QCast", false);
+        _movementSystem.isAttacking = false;
         _controller.enabled = true;
         _animator.SetBool("QSpell", false);
         isBlocked = false;

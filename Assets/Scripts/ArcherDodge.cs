@@ -25,7 +25,6 @@ public class ArcherDodge : Spell
     {
         _animator.SetTrigger("Dodge");
         isBlocked = true;
-        Cast();
     }
     
     protected override void OnCast()
@@ -40,6 +39,7 @@ public class ArcherDodge : Spell
     public void DodgeStart()
     {
         _movementSystem.OnDodgeStart();
+        Cast();
     }
     
     public void DodgeEnd()

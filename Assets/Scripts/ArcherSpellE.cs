@@ -5,23 +5,26 @@ using UnityEngine;
 
 public class ArcherSpellE : Spell
 {
+    [SerializeField] private GameObject model;
     [SerializeField] private GameObject projectile;
-
-    [SerializeField] private float[] cooldown   = new float[5];
-    [SerializeField] private float[] stunLength = new float[5];
-    [SerializeField] private int[]   targets    = new int[5];
+    [SerializeField] private Transform  spawnPoint;
+    [SerializeField] private float[]    cooldown   = new float[5];
+    [SerializeField] private float[]    stunLength = new float[5];
+    [SerializeField] private int[]      targets    = new int[5];
     
     private CharacterController _controller;
     private Animator            _animator;
-    private GameObject _indicator;
-    private bool       _isCasting;
-    private Vector3    _clampedPosition;
-    private Transform  _spawnTransform;
+    private MovementSystem      _movementSystem;
+    private GameObject          _indicator;
+    private bool                _isCasting;
+    private Vector3             _clampedPosition;
+    private Transform           _spawnTransform;
     
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _movementSystem = GetComponent<MovementSystem>();
     }
     
     protected override void OnPrepare()
@@ -47,18 +50,22 @@ public class ArcherSpellE : Spell
     
     public void ESpellDraw()
     {
+        _animator.SetBool("ECast", true);
+        _movementSystem.isAttacking = true;
         _animator.speed = 2.5f;
     }
     
     public void ESpellShoot()
     {
         _animator.speed = 1f;
-        var proj = Instantiate(projectile, transform.position, _spawnTransform.rotation);
+        var proj = Instantiate(projectile, spawnPoint.position, model.transform.rotation);
         proj.GetComponent<ArcherSpellEProjectile>().Init(stunLength[level -1], targets[level -1]);
     }
     
     public void EShootEnd()
     {
+        _animator.SetBool("ECast", false);
+        _movementSystem.isAttacking = false;
         _controller.enabled = true;
         _animator.SetBool("ESpell", false);
         isBlocked = false;

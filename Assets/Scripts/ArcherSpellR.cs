@@ -18,6 +18,8 @@ public class ArcherSpellR : Spell
     
     private CharacterController _controller;
     private Animator            _animator;
+    private MovementSystem      _movementSystem;
+    private EffectSystem        _effectSystem;
     private GameObject          _indicator;
     private Vector3             _clampedPosition;
     private GameObject          _model;
@@ -29,13 +31,14 @@ public class ArcherSpellR : Spell
     {
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _movementSystem = GetComponent<MovementSystem>();
+        _effectSystem = GetComponent<EffectSystem>();
         isUlt = true;
         _animator.SetInteger("RSpellLevel", level);
     }
 
     protected override void OnPrepare()
     {
-        _controller.enabled = false;
         _animator.SetBool("RSpell", true);
         _animator.SetBool("Charging", true);
         isBlocked = true;
@@ -69,11 +72,20 @@ public class ArcherSpellR : Spell
 
     public void RSpellDraw()
     {
-        _animator.speed = 0.4f * prepareTime[level-1] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('7') ? 1.5f : 1);
+        _movementSystem.isAttacking = true;
+        _controller.enabled = false;
+        _animator.SetFloat("RSpeed", 2 * prepareTime[level-1] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('7') ? 1.5f : 1));
+    }
+
+    public void RSpellHold()
+    {
+        _movementSystem.isAttacking = true;
+        _controller.enabled = false;
     }
     
     public void RSpellShoot()
     {
+        _animator.speed = 1;
         laserBeam.enabled = true;
         _isShoot = true;
         var playerTransform = _model.transform;
@@ -97,9 +109,9 @@ public class ArcherSpellR : Spell
 
     public void RShootEnd()
     {
+        _movementSystem.isAttacking = false;
         _controller.enabled = true;
         _animator.SetBool("RSpell", false);
-        _animator.speed = 1;
         isBlocked = false;
     }
 

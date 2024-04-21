@@ -34,6 +34,7 @@ public class ArcherSpellEProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
         if (other.gameObject.tag == "Reaction")
         {
             other.gameObject.GetComponentInParent<Reaction>().TryReact(gameObject);

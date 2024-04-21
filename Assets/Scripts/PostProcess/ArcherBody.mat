@@ -50,7 +50,7 @@ Material:
     - _QueueOffset: 0
     - _Smoothness: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.60843015, b: 0.06132078, a: 0}
+    - _Color: {r: 1, g: 0.82829404, b: 0.5896226, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &9002794079978346350

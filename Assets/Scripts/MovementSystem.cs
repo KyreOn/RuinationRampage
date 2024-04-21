@@ -95,7 +95,7 @@ public class MovementSystem : MonoBehaviour
         var offset   = new Vector3(Screen.width / 2 - mousePos.x, 0, Screen.height / 2 - mousePos.y);
         offset.Scale(new Vector3(-0.01f * offsetStrength * 9,     0, -0.01f * offsetStrength * 16));
         cameraOffset.localPosition = offset;
-        if (_movementDir == Vector3.zero || _effectSystem.CheckIfStunned())
+        if (_movementDir == Vector3.zero || _effectSystem.CheckIfStunned() || isAttacking)
         {
             _animator.SetFloat("Direction", 0);
             _animator.SetFloat("Strafe",    0);

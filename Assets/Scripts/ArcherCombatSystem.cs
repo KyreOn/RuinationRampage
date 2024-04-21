@@ -61,7 +61,7 @@ public class ArcherCombatSystem : CombatSystem
     }
     public override void CastDodge()
     {
-        _archerDodge.Cast();
+        //_archerDodge.Cast();
     }
 
     public override void PrepareSpellQ()
