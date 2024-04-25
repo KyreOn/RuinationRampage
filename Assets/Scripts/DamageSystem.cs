@@ -52,10 +52,8 @@ public class DamageSystem : MonoBehaviour
         var parryEffect = _effectSystem.CheckForParry();
         if (parryEffect is not null && source is not null)
         {
-            var dot = Vector3.Dot(transform.forward, source.forward);
-            if (dot <= -Mathf.Cos(Mathf.Deg2Rad * (PlayerPrefs.GetString($"ChosenPerks0").Contains('2') ? 90 : 60)))
+            if (GetComponent<WarriorBlock>().CheckForParry(source))
             {
-                GetComponent<WarriorBlock>().CdReset();
                 if (source.CompareTag("Enemy") || source.CompareTag("Player"))
                 {
                     if (PlayerPrefs.GetString($"ChosenPerks0").Contains('3'))
@@ -90,6 +88,7 @@ public class DamageSystem : MonoBehaviour
             {
                 _camera.OnDeath();
                 _gameHUD.OnDeath();
+                WaveManager.currentWave = 0;
             }
                 
         }

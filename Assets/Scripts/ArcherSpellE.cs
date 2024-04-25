@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class ArcherSpellE : Spell
 {
+    [SerializeField] private GameObject indicator;
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform  spawnPoint;
+    [SerializeField] private LayerMask  groundLayer;
     [SerializeField] private float[]    cooldown   = new float[5];
     [SerializeField] private float[]    stunLength = new float[5];
     [SerializeField] private int[]      targets    = new int[5];
@@ -19,9 +21,11 @@ public class ArcherSpellE : Spell
     private bool                _isCasting;
     private Vector3             _clampedPosition;
     private Transform           _spawnTransform;
+    private Camera              _camera;
     
     private void Awake()
     {
+        _camera = Camera.main;
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _movementSystem = GetComponent<MovementSystem>();
@@ -29,11 +33,13 @@ public class ArcherSpellE : Spell
     
     protected override void OnPrepare()
     {
+        _indicator = Instantiate(indicator);
         isBlocked = true;
     }
 
     protected override void OnCast()
     {
+        Destroy(_indicator);
         _controller.enabled = false;
         _animator.SetBool("ESpell", true);
     }
@@ -45,7 +51,19 @@ public class ArcherSpellE : Spell
 
     protected override void OnUpdate()
     {
-        
+        if (!isPreparing) return;
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
+        {
+            var position  = hit.point;
+            var playerPos = transform.position;
+            playerPos.Scale(new Vector3(1, 0, 1));
+            var direction = (position - playerPos).normalized;
+            //var distance  = Mathf.Clamp((position - playerPos).magnitude, 0, 6);
+            _clampedPosition = playerPos + direction * 10;
+            _indicator.transform.position = transform.position - transform.up;
+            _indicator.transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
     
     public void ESpellDraw()
@@ -59,7 +77,7 @@ public class ArcherSpellE : Spell
     {
         _animator.speed = 1f;
         var proj = Instantiate(projectile, spawnPoint.position, model.transform.rotation);
-        proj.GetComponent<ArcherSpellEProjectile>().Init(stunLength[level -1], targets[level -1]);
+        proj.GetComponent<ArcherSpellEProjectile>().Init(stunLength[level -1], targets[level -1], transform);
     }
     
     public void EShootEnd()

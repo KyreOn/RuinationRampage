@@ -6,7 +6,8 @@ using UnityEngine;
 public class ControllerEnemyReaction : Reaction
 {
     [SerializeField] private LayerMask  layerMask;
-
+    [SerializeField] private GameObject field;
+    
     private Collider[] _colliders;
     private Animator   _animator;
 
@@ -17,12 +18,12 @@ public class ControllerEnemyReaction : Reaction
 
     protected override void OnReact(GameObject stimuli)
     {
+        Destroy(stimuli);
         var rotationDir = stimuli.transform.position - transform.position;
         rotationDir.y = 0;
         var rotation = Quaternion.LookRotation(rotationDir);
         transform.rotation = rotation;
-        _colliders = Physics.OverlapBox(transform.position + transform.forward * 3,
-            new Vector3(3, 3, 3), transform.rotation, layerMask);
+        
         _animator.SetTrigger("React");
         _animator.speed = 4;
     }
@@ -30,12 +31,14 @@ public class ControllerEnemyReaction : Reaction
     public void CastReact()
     {
         _animator.speed = 1;
-        
+        field.SetActive(false);
+        _colliders = Physics.OverlapBox(transform.position + transform.forward * 3,
+            new Vector3(3, 3, 3), transform.rotation, layerMask);
         foreach (var collider in _colliders)
         {
             if (collider.CompareTag("Projectile"))
             {
-                collider.transform.rotation = Quaternion.Inverse(collider.transform.rotation);
+                Destroy(collider.gameObject);
             }
 
             if (collider.CompareTag("Player"))
@@ -44,5 +47,10 @@ public class ControllerEnemyReaction : Reaction
                 collider.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.15f, transform.forward));
             }
         }
+    }
+
+    protected override void OnReset()
+    {
+        field.SetActive(true);
     }
 }

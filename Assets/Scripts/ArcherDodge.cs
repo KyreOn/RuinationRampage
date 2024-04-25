@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class ArcherDodge : Spell
 {
-    [SerializeField] private float[]        cooldown   = new float[5];
-    [SerializeField] private float[]        speedBoost = new float[5];
+    [SerializeField] private float[]    cooldown   = new float[5];
+    [SerializeField] private float[]    speedBoost = new float[5];
+    [SerializeField] private GameObject trail;
     
-    private CharacterController _controller;
-    private Animator            _animator;
-    private DamageSystem        _damageSystem;
-    private ArcherMovementSystem      _movementSystem;
+    private CharacterController  _controller;
+    private Animator             _animator;
+    private DamageSystem         _damageSystem;
+    private ArcherMovementSystem _movementSystem;
+    private bool                 _spawned;
 
     private void Awake()
     {
@@ -40,12 +42,18 @@ public class ArcherDodge : Spell
     {
         _movementSystem.OnDodgeStart();
         Cast();
+        if (_spawned) return;
+        var trailObj = Instantiate(trail, Vector3.zero, Quaternion.identity);
+        trailObj.GetComponent<ArcherDodgeTrail>().Init(gameObject, PlayerPrefs.GetString($"ChosenPerks0").Contains('2') ? 1.7f : 1.2f);
+        Destroy(trailObj, 2);
+        _spawned = true;
     }
     
     public void DodgeEnd()
     {
         _movementSystem.OnDodgeEnd(speedBoost[level-1]);
         isBlocked = false;
+        _spawned = false;
     }
 
     public override string GetDescription()

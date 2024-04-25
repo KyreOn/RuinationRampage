@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class WarriorSpellQ : Spell
 {
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private int       enemyLayer;
-    [SerializeField] private WarriorSpellQCollider  collider;
+    [SerializeField] private LayerMask             groundLayer;
+    [SerializeField] private int                   enemyLayer;
+    [SerializeField] private GameObject            model;
+    [SerializeField] private WarriorSpellQCollider collider;
     
-    [SerializeField] private float[] cooldown = new float[5];
-    [SerializeField] private float[] damage   = new float[5];
-    [SerializeField] private float[] distanceModifier  = new float[5];
+    [SerializeField] private float[]    cooldown         = new float[5];
+    [SerializeField] private float[]    damage           = new float[5];
+    [SerializeField] private float[]    distanceModifier = new float[5];
+    [SerializeField] private GameObject dashEffect;
+    [SerializeField] private GameObject indicator;
     
+    private GameObject            _dashEffect;
     private CharacterController   _controller;
     private Animator              _animator;
     private WarriorMovementSystem _movementSystem;
+    private GameObject            _indicator;
     private bool                  _isAiming;
     private Camera                _camera;
     private Vector3               _direction;
+    private bool                  _effectSpawned;
     
     private void Awake()
     {
@@ -30,14 +36,25 @@ public class WarriorSpellQ : Spell
     
     protected override void OnPrepare()
     {
+        _indicator = Instantiate(indicator);
+        isBlocked = true;
         _isAiming = true;
     }
     
     protected override void OnCast()
     {
+        Destroy(_indicator);
         _animator.SetTrigger("SpellQ");
+        _animator.SetFloat("QSpellSpeed", distanceModifier[level - 1]);
     }
 
+    public void PrepareCharge()
+    {
+        if (_effectSpawned) return;
+        _dashEffect = Instantiate(dashEffect, model.transform);
+        _effectSpawned = true;
+    }
+    
     public void Charge()
     {
         _isAiming = false;
@@ -48,8 +65,11 @@ public class WarriorSpellQ : Spell
 
     public void ChargeEnd()
     {
+        isBlocked = false;
         _controller.excludeLayers &= ~(1 << enemyLayer);
         collider.Disable();
+        Destroy(_dashEffect);
+        _effectSpawned = false;
     }
 
     protected override void OnUpdate()
@@ -62,6 +82,9 @@ public class WarriorSpellQ : Spell
             var playerPos = transform.position;
             playerPos.Scale(new Vector3(1, 0, 1));
             _direction = (position - playerPos).normalized;
+            _indicator.transform.position = transform.position - transform.up;
+            _indicator.transform.rotation = Quaternion.LookRotation(_direction);
+            _indicator.transform.localScale = new Vector3(1, 1, distanceModifier[level - 1]);
         }
     }
     

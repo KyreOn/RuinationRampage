@@ -13,7 +13,7 @@ public class ArcherWeakAttack : Spell
     private CharacterController _controller;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
-    private float               _damageMultiplier;
+    private float               _damageMultiplier = 1;
     private bool                _isAttack;
 
     private void Awake()

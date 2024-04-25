@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class StrongArrow : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float lifeSpan;
+    [SerializeField] private float        speed     = 15f;
+    [SerializeField] private float        hitOffset = 0f;
+    [SerializeField] private bool         UseFirePointRotation;
+    [SerializeField] private Vector3      rotationOffset = new Vector3(0, 0, 0);
+    [SerializeField] private GameObject   hit;
+    [SerializeField] private GameObject   flash;
+    [SerializeField] private GameObject[] Detached;
 
+    private Rigidbody  _rb;
     private GameObject _player;
     private float      _damage;
     private float      _bleedDuration;
@@ -23,28 +29,87 @@ public class StrongArrow : MonoBehaviour
         _pierceCount = pierceCount;
     }
     
-    private void Update()
+    void Start()
     {
-        lifeSpan -= Time.deltaTime;
-        if (lifeSpan <= 0)
-            Destroy(gameObject);
+        _rb = GetComponent<Rigidbody>();
+        if (flash != null)
+        {
+            var flashInstance = Instantiate(flash, transform.position, Quaternion.identity);
+            flashInstance.transform.forward = gameObject.transform.forward;
+            var flashPs = flashInstance.GetComponent<ParticleSystem>();
+            if (flashPs != null)
+            {
+                Destroy(flashInstance, flashPs.main.duration);
+            }
+            else
+            {
+                var flashPsParts = flashInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+                Destroy(flashInstance, flashPsParts.main.duration);
+            }
+        }
+        Destroy(gameObject, 5);
     }
-
+    
     void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * speed);
+        if (speed != 0)
+        {
+            _rb.velocity = transform.forward * speed;
+            //transform.position += transform.forward * (speed * Time.deltaTime);         
+        }
     }
+    
+    void OnTriggerEnter(Collider col)
+    {
+        //Lock all axes movement and rotation
+        //rb.constraints = RigidbodyConstraints.FreezeAll;
+        //speed = 0;
 
-    private void OnTriggerEnter(Collider other)
+        //GetComponent<ParticleSystem>().GetParticles(particles, 1);
+        //ContactPoint contact = collision.contacts[0];
+        //Quaternion   rot     = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        //Vector3      pos     = contact.point + contact.normal * hitOffset;
+
+        if (hit != null)
+        {
+            var hitInstance = Instantiate(hit, transform.position, Quaternion.identity);
+            if (UseFirePointRotation) { hitInstance.transform.rotation = gameObject.transform.rotation * Quaternion.Euler(0, 180f, 0); }
+            else if (rotationOffset != Vector3.zero) { hitInstance.transform.rotation = Quaternion.Euler(rotationOffset); }
+            else { hitInstance.transform.LookAt(transform.position + transform.forward); }
+
+            var hitPs = hitInstance.GetComponent<ParticleSystem>();
+            if (hitPs != null)
+            {
+                Destroy(hitInstance, hitPs.main.duration);
+            }
+            else
+            {
+                var hitPsParts = hitInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+                Destroy(hitInstance, hitPsParts.main.duration);
+            }
+        }
+
+        OnHit(col.gameObject);
+        foreach (var detachedPrefab in Detached)
+        {
+            if (detachedPrefab != null)
+            {
+                detachedPrefab.transform.parent = null;
+            }
+        }
+        //Destroy(gameObject);
+    }
+    
+    private void OnHit(GameObject hit)
     {
         var weakAttack   = _player.GetComponent<ArcherWeakAttack>();
         var strongAttack = _player.GetComponent<ArcherStrongAttack>();
-        switch (other.gameObject.tag)
+        switch (hit.tag)
         {
             case "Reaction":
                 weakAttack.OnHit();
                 strongAttack.OnHit();
-                other.gameObject.GetComponentInParent<Reaction>().TryReact(gameObject);
+                hit.GetComponentInParent<Reaction>().TryReact(gameObject);
                 return;
             case "Enemy":
             {
@@ -52,11 +117,11 @@ public class StrongArrow : MonoBehaviour
                 {
                     weakAttack.OnHit();
                     strongAttack.OnHit();
-                    if (other.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage))
+                    if (hit.GetComponent<DamageSystem>().ApplyDamage(_damage))
                     {
-                        other.gameObject.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
-                        other.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
-                        other.gameObject.GetComponent<EffectSystem>().AddEffect(new DOTEffect(_bleedDuration, 0.5f, _bleedDamage), false);
+                        hit.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
+                        hit.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
+                        hit.GetComponent<EffectSystem>().AddEffect(new DOTEffect(_bleedDuration, 0.5f, _bleedDamage), false);
                     }
             
                     _pierceCount--;

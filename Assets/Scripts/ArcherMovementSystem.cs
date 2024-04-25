@@ -10,7 +10,7 @@ public class ArcherMovementSystem : MovementSystem
     {
         _controller.enabled = true;
         _animator.speed = 1;
-        _effectSystem.AddEffect(new SlowEffect(0.5f, 0.5f), false);
+        _effectSystem.AddEffect(new SlowEffect(0.2f, 0.2f), false);
         canMove = false;
         canRotate = false;
         if (_movementDir == Vector3.zero)

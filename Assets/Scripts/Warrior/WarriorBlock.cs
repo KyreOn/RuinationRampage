@@ -11,8 +11,11 @@ public class WarriorBlock : Spell
     private bool                _isBlocking;
     private bool                _isReset;
     
-    [SerializeField] private float[] cooldown = new float[5];
-    [SerializeField] private float[] cooldownReduction = new float[5];
+    [SerializeField] private float[]    cooldown          = new float[5];
+    [SerializeField] private float[]    cooldownReduction = new float[5];
+    [SerializeField] private GameObject shield;
+    [SerializeField] private GameObject model;
+    [SerializeField] private GameObject hitEffect;
 
     private void Awake()
     {
@@ -29,14 +32,20 @@ public class WarriorBlock : Spell
         _animator.SetBool("Block",  true);
         _animator.SetBool("Slowed", true);
         _effectSystem.AddEffect(new SlowEffect(1, 2), false);
-        _effectSystem.AddEffect(new ParryEffect(2 * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1), 1), false);
+        _effectSystem.AddEffect(new ParryEffect(2 * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1), 1.5f), false);
         Cast();
     }
-    
-    protected override void OnCast()
+
+    public void BlockStart()
+    {
+        shield.SetActive(true);
+    }
+
+    public void StopAttack()
     {
         
     }
+    
 
     protected override void OnUpdate()
     {
@@ -44,12 +53,27 @@ public class WarriorBlock : Spell
         _blockTimer += Time.deltaTime;
         if (_blockTimer >= 1)
         {
+            shield.SetActive(false);
             _animator.SetBool("Block",  false);
             _animator.SetBool("Slowed", false);
             _isBlocking = false;
         }
     }
 
+    public bool CheckForParry(Transform source)
+    {
+        var dot = Vector3.Dot(model.transform.forward, source.forward);
+        if (dot <= -Mathf.Cos(Mathf.Deg2Rad * (PlayerPrefs.GetString($"ChosenPerks0").Contains('2') ? 90 : 60)))
+        {
+            CdReset();
+            var hit = Instantiate(hitEffect, transform.position + model.transform.forward * 0.5f, model.transform.rotation);
+            Destroy(hit, 1);
+            return true;
+        }
+
+        return false;
+    }
+    
     public void CdReset()
     {
         _cooldownTimer = Mathf.Clamp(_cooldownTimer + cooldownReduction[level - 1], 0, baseCooldown);

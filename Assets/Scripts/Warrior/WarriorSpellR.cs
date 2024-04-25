@@ -7,6 +7,7 @@ public class WarriorSpellR : Spell
     [SerializeField] private LayerMask  groundLayer;
     [SerializeField] private int        enemyLayer;
     [SerializeField] private GameObject aoe;
+    [SerializeField] private GameObject indicator;
     
     [SerializeField] private float[] cooldown   = new float[5];
     [SerializeField] private float[] damage     = new float[5];
@@ -16,6 +17,7 @@ public class WarriorSpellR : Spell
     private CharacterController   _controller;
     private Animator              _animator;
     private WarriorMovementSystem _movementSystem;
+    private GameObject            _indicator;
     private Camera                _camera;
     private float                 _aoeTimer;
     public  bool                  _isCharging;
@@ -32,10 +34,12 @@ public class WarriorSpellR : Spell
     
     protected override void OnPrepare()
     {
+        _indicator = Instantiate(indicator);
     }
     
     protected override void OnCast()
     {
+        Destroy(_indicator);
         _animator.SetTrigger("SpellR");
     }
 
@@ -47,6 +51,7 @@ public class WarriorSpellR : Spell
         var cols = Physics.OverlapSphere(transform.position, 5, 1 << 9);
         _aoe = Instantiate(aoe, transform);
         _aoe.GetComponent<WarriorSpellRAoe>().Init(0.5f * _effectSystem.CalculateOutcomeDamage() * (PlayerPrefs.GetString($"ChosenPerks1").Contains('8') ? 0.5f : 1), 1.5f);
+        
         foreach (var enemy in cols)
         {
             var vectorDir = enemy.transform.position - transform.position;
@@ -56,7 +61,7 @@ public class WarriorSpellR : Spell
             var distance  = 1 - (vectorDir.magnitude / 5);
             if (Physics.Raycast(new Ray(transform.position, direction), distance + 1, 1 << 10)) return;
             enemy.GetComponent<DamageSystem>().ApplyDamage(damage[level - 1] * _effectSystem.CalculateOutcomeDamage() * (PlayerPrefs.GetString($"ChosenPerks1").Contains('8') ? 0.5f : 1));
-            enemy.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.15f * distance, direction, 0.75f), false);
+            enemy.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.1f * distance, direction, 0.75f), false);
             enemy.GetComponent<EffectSystem>().AddEffect(new StunEffect(2f * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1)), false);
         }
         _effectSystem.AddEffect(new SlowEffect(10, 0.75f), false);
@@ -72,19 +77,22 @@ public class WarriorSpellR : Spell
         var cols = Physics.OverlapSphere(transform.position, 5, 1 << 9);
         foreach (var enemy in cols)
         {
-            var vectorDir = enemy.transform.position - transform.position;
-            
-            var direction = vectorDir.normalized;
-            direction.y = 0;
-            var distance = 1                                                     - (vectorDir.magnitude / 5);
-            if (Physics.Raycast(new Ray(transform.position, direction), distance + 1, 1 << 10)) return;
-            
+            //var vectorDir = enemy.transform.position - transform.position;
+            //
+            //var direction = vectorDir.normalized;
+            //direction.y = 0;
+            //var distance = 1                                                     - (vectorDir.magnitude / 5);
+            //if (Physics.Raycast(new Ray(transform.position, direction), distance + 1, 1 << 10)) return;
             enemy.GetComponent<DamageSystem>().ApplyDamage(_stackedDamage * secondDamage[level - 1] * _effectSystem.CalculateOutcomeDamage() * (PlayerPrefs.GetString($"ChosenPerks1").Contains('8') ? 0.5f : 1));
         }
     }
     
     protected override void OnUpdate()
     {
+        if (isPreparing)
+        {
+            _indicator.transform.position = transform.position + Vector3.down;
+        }
         if (!_isCharging) return;
         _aoeTimer += Time.deltaTime;
         if (_aoeTimer >= 10)

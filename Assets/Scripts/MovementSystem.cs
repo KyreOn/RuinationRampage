@@ -85,7 +85,7 @@ public class MovementSystem : MonoBehaviour
         {
             var position  = transform.position;
             var direction = _effectSystem.GetDisplacementDirection();
-            if (Physics.Raycast(position, direction, 1))
+            if (Physics.Raycast(position, direction, 1, 1 << 10))
                 _isDisplaced = false;
             else
                 transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * _effectSystem.GetDisplacementSpeed());

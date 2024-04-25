@@ -7,13 +7,17 @@ public class WarriorSpellE : Spell
     [SerializeField] private LayerMask  groundLayer;
     [SerializeField] private GameObject model;
     
-    [SerializeField] private float[] cooldown         = new float[5];
-    [SerializeField] private float[] damage           = new float[5];
-    [SerializeField] private float[] healModifier = new float[5];
+    [SerializeField] private float[]    cooldown     = new float[5];
+    [SerializeField] private float[]    damage       = new float[5];
+    [SerializeField] private float[]    healModifier = new float[5];
+    [SerializeField] private GameObject burstEffect;
+    [SerializeField] private GameObject hitEffect;
+    [SerializeField] private GameObject indicator;
     
     private CharacterController   _controller;
     private Animator              _animator;
     private WarriorMovementSystem _movementSystem;
+    private GameObject            _indicator;
     private bool                  _isAiming;
     private Camera                _camera;
     private Vector3               _direction;
@@ -31,14 +35,22 @@ public class WarriorSpellE : Spell
     
     protected override void OnPrepare()
     {
+        _indicator = Instantiate(indicator);
         _isAiming = true;
     }
     
     protected override void OnCast()
     {
+        Destroy(_indicator);
         _animator.SetTrigger("SpellE");
     }
 
+    public void StartBash()
+    {
+        var burst = Instantiate(burstEffect, transform.position + model.transform.forward, model.transform.rotation);
+        Destroy(burst, 1);
+    }
+    
     public void Bash()
     {
         _tempHpTimer = 0;
@@ -53,6 +65,9 @@ public class WarriorSpellE : Spell
             if (Physics.Raycast(new Ray(transform.position, direction), distance + 1, 1 << 10)) return;
             if (col.GetComponent<DamageSystem>().ApplyDamage(damage[level - 1] * _effectSystem.CalculateOutcomeDamage()))
             {
+                var hit = Instantiate(hitEffect, col.transform.position + Vector3.up - 0.5f * model.transform.forward,
+                    Quaternion.Inverse(model.transform.rotation));
+                Destroy(hit, 1);
                 direction.y = 0;
                 col.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.075f, direction, 0.5f));
                 col.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.175f * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1)));
@@ -76,6 +91,8 @@ public class WarriorSpellE : Spell
             var playerPos = transform.position;
             playerPos.Scale(new Vector3(1, 0, 1));
             _direction = (position - playerPos).normalized;
+            _indicator.transform.position = transform.position - transform.up;
+            _indicator.transform.rotation = Quaternion.LookRotation(_direction);
         }
     }
     

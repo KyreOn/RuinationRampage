@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WarriorSpellRAoe : MonoBehaviour
 {
-    [SerializeField] private float     lifeSpan;
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float     timeBetweenTicks;
-
+    [SerializeField] private float      lifeSpan;
+    [SerializeField] private LayerMask  enemyLayer;
+    [SerializeField] private float      timeBetweenTicks;
+    [SerializeField] private GameObject aftershockEffect;
+    
     private float _tickTimer;
     private float _damage;
     private float _slowPower;
@@ -23,7 +24,12 @@ public class WarriorSpellRAoe : MonoBehaviour
     {
         lifeSpan -= Time.deltaTime;
         if (lifeSpan <= 0)
+        {
+            var aftershock = Instantiate(aftershockEffect, transform.position, Quaternion.identity);
+            Destroy(aftershock, 1);
             Destroy(gameObject);
+        }
+            
         _tickTimer -= Time.deltaTime;
         if (_tickTimer >= 0) return;
         var enemiesInRange = Physics.OverlapSphere(transform.position, 2.5f, enemyLayer);

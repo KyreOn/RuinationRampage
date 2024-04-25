@@ -5,17 +5,23 @@ using UnityEngine;
 
 public class ArcherSpellR : Spell
 {
-    [SerializeField] private GameObject     indicator;
-    [SerializeField] private LayerMask      wallLayer;
-    [SerializeField] private LayerMask      enemyLayer;
-    [SerializeField] private LineRenderer   laserBeam;
-    [SerializeField] private Transform      laserSpawnPoint;
-    [SerializeField] private ParticleSystem effect;
+    [SerializeField] private GameObject   indicator;
+    [SerializeField] private LayerMask    wallLayer;
+    [SerializeField] private LayerMask    enemyLayer;
+    [SerializeField] private LineRenderer laserBeam;
+    [SerializeField] private Transform    laserSpawnPoint;
+    [SerializeField] private GameObject   flashEffect;
+    [SerializeField] private GameObject   enemyHitEffect;
+    [SerializeField] private GameObject   hitEffect;
+    [SerializeField] private float        length;
+    [SerializeField] private float        tickLength;
+    [SerializeField] private LayerMask    groundLayer;
     
     [SerializeField] private float[] cooldown    = new float[3];
     [SerializeField] private float[] prepareTime = new float[3];
     [SerializeField] private float[] damage      = new float[3];
     
+    private Camera              _camera;
     private CharacterController _controller;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
@@ -26,9 +32,12 @@ public class ArcherSpellR : Spell
     private bool                _isShoot;
     private float               _beamProgress;
     private bool                _isCharging;
+    private float               _lengthTimer;
+    private float               _tickTimer;
     
     private void Awake()
     {
+        _camera = Camera.main;
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _movementSystem = GetComponent<MovementSystem>();
@@ -41,7 +50,9 @@ public class ArcherSpellR : Spell
     {
         _animator.SetBool("RSpell", true);
         _animator.SetBool("Charging", true);
+        _indicator = Instantiate(indicator);
         isBlocked = true;
+        _isCharging = true;
     }
 
     public void SetModel(GameObject model)
@@ -57,15 +68,63 @@ public class ArcherSpellR : Spell
 
     protected override void OnUpdate()
     {
+        if (_isCharging)
+        {
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
+            {
+                var position  = hit.point;
+                var playerPos = transform.position;
+                playerPos.Scale(new Vector3(1, 0, 1));
+                var direction = (position - playerPos).normalized;
+                //var distance  = Mathf.Clamp((position - playerPos).magnitude, 0, 6);
+                _clampedPosition = playerPos                       + direction * 10;
+                _indicator.transform.position = transform.position - transform.up;
+                _indicator.transform.rotation = Quaternion.LookRotation(direction);
+            }
+        }
         if (_isShoot)
         {
-            _beamProgress += Time.deltaTime * 20;
+            var playerTransform = _model.transform;
+            var ray             = new Ray(laserSpawnPoint.position, _model.transform.forward);
+            if (Physics.Raycast(ray, out var hit, float.MaxValue, wallLayer))
+            {
+                laserBeam.SetPosition(0, laserSpawnPoint.position);
+                laserBeam.SetPosition(1, hit.point);
+                var flash = Instantiate(flashEffect, laserSpawnPoint.position, Quaternion.identity);
+                Destroy(flash, 0.1f);
+                var hitEff = Instantiate(hitEffect,   hit.point,                Quaternion.identity);
+                Destroy(hitEff, 0.5f);
+            }
+
+            _tickTimer += Time.deltaTime;
+            if (_tickTimer > tickLength)
+            {
+                _tickTimer = 0;
+                var position     = playerTransform.position;
+                var halfDistance = (hit.point - position) / 2;
+                var enemies = Physics.OverlapBox(position + halfDistance,
+                    new Vector3(1, 2, halfDistance.magnitude), playerTransform.rotation, enemyLayer);
+                foreach (var enemy in enemies)
+                {
+                    var enemyHit = Instantiate(enemyHitEffect, enemy.transform.position + Vector3.up, Quaternion.identity);
+                    Destroy(enemyHit, 0.3f);
+                    enemy.GetComponent<DamageSystem>().ApplyDamage(damage[level-1] * _effectSystem.CalculateOutcomeDamage());
+                }
+            }
+
+            _lengthTimer += Time.deltaTime;
+            if (_lengthTimer > length)
+            {
+                _isShoot = false;
+                laserBeam.enabled = false;
+                return;
+            }
+            _beamProgress = (_lengthTimer / length) * Mathf.PI;
             laserBeam.widthMultiplier = Mathf.Sin(_beamProgress);
             if (Mathf.Sin(_beamProgress) < 0)
             {
-                _isShoot = false;
                 _beamProgress = 0;
-                laserBeam.enabled = false;
             }
         }
     }
@@ -85,17 +144,21 @@ public class ArcherSpellR : Spell
     
     public void RSpellShoot()
     {
+        Destroy(_indicator);
+        _isCharging = false;
+        _animator.SetFloat("RSpeed", 0.7f / length);
         _animator.speed = 1;
         laserBeam.enabled = true;
         _isShoot = true;
+        _lengthTimer = 0;
         var playerTransform = _model.transform;
         var ray             = new Ray(laserSpawnPoint.position, _model.transform.forward);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, wallLayer))
         {
             laserBeam.SetPosition(0, laserSpawnPoint.position);
             laserBeam.SetPosition(1, hit.point);
-            effect.transform.position = hit.point;
-            effect.Emit(1);
+            var hitEff = Instantiate(hitEffect, hit.point, Quaternion.identity);
+            Destroy(hitEff, 0.5f);
             var position     = playerTransform.position;
             var halfDistance = (hit.point - position) / 2;
             var enemies = Physics.OverlapBox(position + halfDistance,

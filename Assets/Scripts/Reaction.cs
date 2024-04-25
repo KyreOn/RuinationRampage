@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Reaction : MonoBehaviour
 {
+    [SerializeField] private Collider   reactCollider;
     [SerializeField] private float      reactionCooldown;
     [SerializeField] private GameObject player;
     [SerializeField] private float      reactionRadius;
@@ -27,6 +28,7 @@ public class Reaction : MonoBehaviour
         }
             
         OnReact(stimuli);
+        reactCollider.enabled = false;
         _canReact = false;
         return true;
     }
@@ -47,6 +49,11 @@ public class Reaction : MonoBehaviour
         OnAwake();
     }
 
+    protected virtual void OnReset()
+    {
+        
+    }
+    
     private void Update()
     {
         if (Vector3.Distance(transform.position, player.transform.position) <= reactionRadius)
@@ -55,8 +62,10 @@ public class Reaction : MonoBehaviour
         _cooldownTimer = Mathf.Clamp(_cooldownTimer + Time.deltaTime, 0, reactionCooldown);
         if (_cooldownTimer >= reactionCooldown)
         {
+            reactCollider.enabled = true;
             _canReact = true;
             _cooldownTimer = 0;
+            OnReset();
         }
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine;
 public class ArcherSpellQ : Spell
 {
     [SerializeField] private GameObject indicator;
+    [SerializeField] private GameObject radiusIndicator;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject spellArea;
     [SerializeField] private LayerMask  groundLayer;
     [SerializeField] private float      minCastRange;
     [SerializeField] private float      maxCastRange;
@@ -20,6 +22,8 @@ public class ArcherSpellQ : Spell
     private MovementSystem      _movementSystem;
     private Animator            _animator;
     private GameObject          _indicator;
+    private GameObject          _radiusIndicator;
+    private GameObject          _spellArea;
     private bool                _isCasting;
     private Vector3             _clampedPosition;
     private Camera              _camera;
@@ -35,6 +39,7 @@ public class ArcherSpellQ : Spell
     protected override void OnPrepare()
     {
         _indicator = Instantiate(indicator);
+        _radiusIndicator = Instantiate(radiusIndicator);
         if (PlayerPrefs.GetString($"ChosenPerks0").Contains('3'))
             _indicator.transform.localScale = new Vector3(1.5f, 0.02f, 1.5f);
         isBlocked = true;
@@ -44,6 +49,7 @@ public class ArcherSpellQ : Spell
     {
         _controller.enabled = false;
         _animator.SetBool("QSpell", true);
+        Destroy(_radiusIndicator);
         Destroy(_indicator);
         _indicator = null;
     }
@@ -51,6 +57,7 @@ public class ArcherSpellQ : Spell
     protected override void OnUpdate()
     {
         if (!isPreparing) return;
+        _radiusIndicator.transform.position = transform.position + Vector3.down;
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
         {
@@ -68,6 +75,8 @@ public class ArcherSpellQ : Spell
     {
         _animator.SetBool("QCast", true);
         _movementSystem.isAttacking = true;
+        _spellArea = Instantiate(spellArea, _clampedPosition, Quaternion.identity);
+        Destroy(_spellArea, PlayerPrefs.GetString($"ChosenPerks0").Contains('4') ? 8.5f : 6);
         //_animator.speed = 2.5f;
     }
     
