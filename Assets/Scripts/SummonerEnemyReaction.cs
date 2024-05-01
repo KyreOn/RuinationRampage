@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class SummonerEnemyReaction : Reaction
 {
+    [SerializeField] private GameObject circleEffect;
+    
     private Animator     _animator;
     private Vector3      _direction;
     private NavMeshAgent _navMeshAgent;
@@ -24,7 +26,6 @@ public class SummonerEnemyReaction : Reaction
         var rotation = Quaternion.LookRotation(rotationDir);
         transform.rotation = rotation;
         _animator.SetTrigger("React");
-        _animator.speed = 4;
         var hor       = Math.Sign(Random.value - 0.5f);
         var direction = Vector3.zero - transform.position;
         direction.y = 0;
@@ -34,8 +35,12 @@ public class SummonerEnemyReaction : Reaction
     public void CastReact()
     {
         _animator.speed = 1;
+        var circle = Instantiate(circleEffect, transform.position, Quaternion.identity);
+        Destroy(circle, 1);
         NavMesh.SamplePosition(transform.position + _direction, out var hit, 4f, NavMesh.AllAreas);
         transform.position = hit.position;
+        circle = Instantiate(circleEffect, transform.position, Quaternion.identity);
+        Destroy(circle, 1);
         _navMeshAgent.ResetPath();
     }
 }

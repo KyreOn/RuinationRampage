@@ -57,7 +57,7 @@ public class WarriorStrongAttack : Spell
                       (col.GetComponent<EffectSystem>().CheckIfStunned()
                           ? stunMod
                           : 1);
-            if (col.GetComponent<DamageSystem>().ApplyDamage(dmg))
+            if (col.GetComponent<DamageSystem>().ApplyDamage(dmg, transform))
             {
                 var hit = Instantiate(hitEffect, col.transform.position + Vector3.up - 0.5f * model.transform.forward,
                     Quaternion.Inverse(model.transform.rotation));

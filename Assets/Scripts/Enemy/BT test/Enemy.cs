@@ -23,6 +23,7 @@ public class Enemy : TreeAgent
     public bool       MovingToPlayer { get; set; }
     public bool       PlayerInSight  { get; set; }
     public bool       RotateOnMove   { get; set; }
+    public bool       BlockRotation  { get; set; }
     
     protected override void Awake()
     {
@@ -66,12 +67,14 @@ public class Enemy : TreeAgent
                 transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * effectSystem.GetDisplacementSpeed());
         }
         
-        
-        var dir = Player.Position - transform.position;
-        dir.y = 0;
-        var rot = Quaternion.LookRotation(dir);
-        transform.forward = dir;
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, 10);
+        if (!BlockRotation)
+        {
+            var dir = Player.Position - transform.position;
+            dir.y = 0;
+            var rot = Quaternion.LookRotation(dir);
+            transform.forward = dir;
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, 10);
+        }
         
         navMeshAgent.speed = baseSpeed * effectSystem.CalculateSpeedModifiers() * (CheckIsIdle() ? 1 : 0) * (effectSystem.CheckIfStunned() || effectSystem.CheckIfRooted() ? 0 : 1);
     }

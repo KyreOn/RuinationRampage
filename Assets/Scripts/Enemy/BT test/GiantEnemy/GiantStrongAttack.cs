@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class GiantStrongAttack : MonoBehaviour
 {
-    [SerializeField] private float     attackCooldown;
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private Transform hitPoint;
+    [SerializeField] private float      attackCooldown;
+    [SerializeField] private LayerMask  playerLayer;
+    [SerializeField] private Transform  hitPoint;
+    [SerializeField] private GameObject hitIndicator;
+    [SerializeField] private GameObject shockwaveEffect;
+    
     
     private GameObject    _target;
     private Animator      _animator;
@@ -37,13 +40,17 @@ public class GiantStrongAttack : MonoBehaviour
         var rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;
         _animator.SetTrigger("StrongAttack");
+        GetComponent<Enemy>().BlockRotation = true;
         //_effectSystem.AddEffect(new SlowEffect(1.5f, 10000));
+        Instantiate(hitIndicator, transform.position + transform.forward * 4 + 0.3f * transform.right, Quaternion.identity);
         return true;
     }
 
     void StrongAttack()
-    { 
-        var size = Physics.OverlapSphereNonAlloc(hitPoint.position, 2.5f, _playerCollider, playerLayer);
+    {
+        var shockwave = Instantiate(shockwaveEffect, hitPoint.position, Quaternion.identity);
+        Destroy(shockwave, 0.5f);
+        var size      = Physics.OverlapSphereNonAlloc(hitPoint.position, 4f, _playerCollider, playerLayer);
         if (size >= 1)
         {
             if (_target.GetComponent<DamageSystem>().ApplyDamage(10, transform))
@@ -61,6 +68,7 @@ public class GiantStrongAttack : MonoBehaviour
     {
         isAttacking = false;
         _animator.speed = 1;
+        GetComponent<Enemy>().BlockRotation = false;
     }
     
     private void Update()

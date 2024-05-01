@@ -5,6 +5,7 @@ using UnityEngine;
 public class CasterEnemyReaction : Reaction
 {
     [SerializeField] private GameObject illusion;
+    [SerializeField] private GameObject spawnEffect;
     
     private Animator   _animator;
 
@@ -49,5 +50,8 @@ public class CasterEnemyReaction : Reaction
                 Instantiate(illusion, thirdPos,  transform.rotation);
                 break;
         }
+        Destroy(Instantiate(spawnEffect, firstPos,  Quaternion.identity), 0.3f);
+        Destroy(Instantiate(spawnEffect, secondPos, Quaternion.identity), 0.3f);
+        Destroy(Instantiate(spawnEffect, thirdPos,  Quaternion.identity), 0.3f);
     }
 }

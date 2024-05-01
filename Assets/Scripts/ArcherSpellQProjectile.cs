@@ -33,7 +33,7 @@ public class ArcherSpellQProjectile : MonoBehaviour
         var enemiesInRange = Physics.OverlapSphere(transform.position, 2, enemyLayer);
         foreach (var enemy in enemiesInRange)
         {
-            if (enemy.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage))
+            if (enemy.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage, transform))
                 enemy.gameObject.GetComponent<EffectSystem>().AddEffect(new SlowEffect(timeBetweenTicks,_slowPower), false);
         }
 

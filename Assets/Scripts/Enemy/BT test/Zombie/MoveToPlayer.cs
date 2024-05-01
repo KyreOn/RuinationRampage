@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BTree;
 using UnityEngine;
+// ReSharper disable CommentTypo
 
 public class MoveToPlayer : Leaf<ITreeContext>
 {
@@ -30,22 +31,22 @@ public class MoveToPlayer : Leaf<ITreeContext>
 
     protected override void OnExecute()
     {
-        if (_enemy.Player == null)
+        //Проверка наличия ссылки на игрока у игровой сущности
+        if (_enemy.Player is null)
         {
-            Response.Result = Result.Failure;
+            Response.Result = Result.Failure;//Установка неудачного результата
             return;
         }
-
+        //Обновление точки назначения если игрок отошел от нее на определенное расстояние
         if ((_target - _enemy.Player.Position).magnitude > 0.25f)
         {
-            var pos = GetPlayerPos();
-            _target = _enemy.MoveTo(pos);
-            Debug.DrawLine(_enemy.Position, _target, Color.black, 1f);
+            var pos = _enemy.Player.Position;//Получение координат игрока
+            _target = _enemy.MoveTo(pos);//Установка новой точки назначения
         }
-
+        //Проверка расстояния между игроком и игровой сущностью
         if ((_enemy.transform.position - _enemy.Player.Position).magnitude <= 2)
         {
-            Response.Result = Result.Success;
+            Response.Result = Result.Success;//Установка успешного результата
         }
     }
 

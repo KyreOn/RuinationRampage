@@ -74,7 +74,7 @@ public class WarriorSpellQ : Spell
 
     protected override void OnUpdate()
     {
-        if (!_isAiming) return;
+        if (!isPreparing) return;
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
         {

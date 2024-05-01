@@ -7,6 +7,7 @@ public class ControllerEnemyReaction : Reaction
 {
     [SerializeField] private LayerMask  layerMask;
     [SerializeField] private GameObject field;
+    [SerializeField] private GameObject burstEffect;
     
     private Collider[] _colliders;
     private Animator   _animator;
@@ -18,7 +19,10 @@ public class ControllerEnemyReaction : Reaction
 
     protected override void OnReact(GameObject stimuli)
     {
-        Destroy(stimuli);
+        if (stimuli.CompareTag("Projectile"))
+        {
+            Destroy(stimuli);
+        }
         var rotationDir = stimuli.transform.position - transform.position;
         rotationDir.y = 0;
         var rotation = Quaternion.LookRotation(rotationDir);
@@ -26,6 +30,8 @@ public class ControllerEnemyReaction : Reaction
         
         _animator.SetTrigger("React");
         _animator.speed = 4;
+        var burst = Instantiate(burstEffect, transform.position, transform.rotation);
+        Destroy(burst, 1);
     }
 
     public void CastReact()

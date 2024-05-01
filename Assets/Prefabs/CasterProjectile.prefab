@@ -99,5 +99,5 @@ MonoBehaviour:
   speed: 1
   maxHeight: 15
   explosionRadius: 1
-  indicator: {fileID: 7889806527387032674, guid: 2658034ff1342f145a6b893619be7258,
+  indicator: {fileID: 6768026626465332967, guid: 33339b6df01a6bb4d9af2803abf8bbb0,
     type: 3}

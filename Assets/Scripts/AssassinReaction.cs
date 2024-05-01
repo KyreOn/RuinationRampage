@@ -7,8 +7,9 @@ using Random = UnityEngine.Random;
 
 public class AssassinReaction : Reaction
 {
-    [SerializeField] private float     strafeLength;
-    [SerializeField] private LayerMask wall;
+    [SerializeField] private float      strafeLength;
+    [SerializeField] private LayerMask  wall;
+    [SerializeField] private GameObject smokeEffect;
     
     private Animator          _animator;
     private Vector3           _direction;
@@ -37,6 +38,8 @@ public class AssassinReaction : Reaction
         _direction = direction;
         NavMesh.SamplePosition(transform.position + _direction, out var hit, strafeLength, NavMesh.AllAreas);
         transform.position = hit.position;
+        var smoke = Instantiate(smokeEffect, transform.position, Quaternion.identity);
+        Destroy(smoke, 1);
         effectSystem.AddEffect(new SlowEffect(0.25f, 10000));
         effectSystem.AddEffect(new InvincibilityEffect(0.5f));
         _assassinEnemy.Reset();

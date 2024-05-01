@@ -53,6 +53,7 @@ public class WarriorSpellE : Spell
     
     public void Bash()
     {
+        _isAiming = false;
         _tempHpTimer = 0;
         var collider = Physics.OverlapBox(transform.position + model.transform.forward * 2, Vector3.one * 2, model.transform.rotation,
             1 << 9);
@@ -63,7 +64,7 @@ public class WarriorSpellE : Spell
             direction.y = 0;
             var distance = 1                                                     - (vectorDir.magnitude / 5);
             if (Physics.Raycast(new Ray(transform.position, direction), distance + 1, 1 << 10)) return;
-            if (col.GetComponent<DamageSystem>().ApplyDamage(damage[level - 1] * _effectSystem.CalculateOutcomeDamage()))
+            if (col.GetComponent<DamageSystem>().ApplyDamage(damage[level - 1] * _effectSystem.CalculateOutcomeDamage(), transform))
             {
                 var hit = Instantiate(hitEffect, col.transform.position + Vector3.up - 0.5f * model.transform.forward,
                     Quaternion.Inverse(model.transform.rotation));
@@ -79,21 +80,23 @@ public class WarriorSpellE : Spell
 
     protected override void OnUpdate()
     {
+        if (isPreparing)
+        {
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
+            {
+                var position  = hit.point;
+                var playerPos = transform.position;
+                playerPos.Scale(new Vector3(1, 0, 1));
+                _direction = (position - playerPos).normalized;
+                _indicator.transform.position = transform.position - transform.up;
+                _indicator.transform.rotation = Quaternion.LookRotation(_direction);
+            }
+        }
         if (_tempHpTimer > 10) return;
         _tempHpTimer += Time.deltaTime;
         if (_tempHpTimer > 10)
             _damageSystem.ApplyHeal(0);
-        if (!_isAiming) return;
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
-        {
-            var position  = hit.point;
-            var playerPos = transform.position;
-            playerPos.Scale(new Vector3(1, 0, 1));
-            _direction = (position - playerPos).normalized;
-            _indicator.transform.position = transform.position - transform.up;
-            _indicator.transform.rotation = Quaternion.LookRotation(_direction);
-        }
     }
     
     protected override void OnUpgrade()

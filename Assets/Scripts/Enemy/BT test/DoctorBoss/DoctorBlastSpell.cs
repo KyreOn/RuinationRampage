@@ -10,7 +10,8 @@ public class DoctorBlastSpell : MonoBehaviour
     [SerializeField] private Transform  spawnPoint;
     [SerializeField] private float      attackCooldown;
     [SerializeField] private LayerMask  layerMask;
-
+    [SerializeField] private GameObject blastEffect;
+    
     private GameObject   _target;
     private EffectSystem _effectSystem;
     private NavMeshAgent _navMeshAgent;
@@ -42,7 +43,11 @@ public class DoctorBlastSpell : MonoBehaviour
 
     public void BlastCast()
     {
-        var area = Instantiate(aoe, transform.position, transform.rotation);
+        var blast = Instantiate(blastEffect, transform.position, Quaternion.identity);
+        Destroy(blast, 1);
+        if (Physics.OverlapSphereNonAlloc(transform.position, 2.5f, _player, 1 << 8) == 1)
+            _player[0].gameObject.GetComponent<DamageSystem>().ApplyDamage(10);
+        var area  = Instantiate(aoe,         transform.position, transform.rotation);
         area.GetComponent<DoctorBlastAoe>().Init(10, 1.2f);
     }
 

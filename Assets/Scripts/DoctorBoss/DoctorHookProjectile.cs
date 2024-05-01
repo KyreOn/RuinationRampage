@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DoctorHookProjectile : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float range;
-
+    [SerializeField] private float      speed;
+    [SerializeField] private float      range;
+    
     private bool            _isReversed;
     private GameObject      _source;
     private DoctorHookSpell _spell;

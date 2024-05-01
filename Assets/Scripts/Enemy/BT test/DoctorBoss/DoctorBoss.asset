@@ -301,7 +301,8 @@ MonoBehaviour:
   outContext: 
   overwriteOut: 1
   failNullCtx: 0
-  time: 2
+  time: 1.5
+  deviation: 0.5
 --- !u!114 &-6919052117293631736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +339,7 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   time: 0
+  deviation: 0
 --- !u!114 &-6722010605599546989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,7 +375,8 @@ MonoBehaviour:
   outContext: 
   overwriteOut: 1
   failNullCtx: 0
-  time: 2
+  time: 1.5
+  deviation: 0.5
 --- !u!114 &-2770237449297069500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,6 +780,7 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   time: 0
+  deviation: 0
 --- !u!114 &-1022921176865653106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,6 +1010,7 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   time: 0
+  deviation: 0
 --- !u!114 &473716315960384521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,7 +1250,8 @@ MonoBehaviour:
   outContext: 
   overwriteOut: 1
   failNullCtx: 0
-  time: 2
+  time: 1.5
+  deviation: 0.5
 --- !u!114 &2670358344598546158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,6 +1288,7 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   time: 0
+  deviation: 0
 --- !u!114 &2693429650459366277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,6 +1426,7 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   time: 0
+  deviation: 0
 --- !u!114 &5342269000377150828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,6 +1795,7 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   time: 0
+  deviation: 0
 --- !u!114 &8861583303349674873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1823,6 +1832,7 @@ MonoBehaviour:
   overwriteOut: 1
   failNullCtx: 0
   time: 0
+  deviation: 0
 --- !u!114 &9084049234212348816
 MonoBehaviour:
   m_ObjectHideFlags: 0

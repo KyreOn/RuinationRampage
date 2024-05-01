@@ -45,7 +45,7 @@ public class SummonerRunAway : Leaf<ITreeContext>
             _summoner.runFromPlayer = true;
         }
 
-        if ((_summoner.transform.position - _summoner.Player.Position).magnitude >= 6)
+        if ((_summoner.transform.position - _summoner.Player.Position).magnitude >= 8)
         {
             Response.Result = Result.Success;
         }

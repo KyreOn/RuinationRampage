@@ -45,7 +45,7 @@ public class EffectSystem : MonoBehaviour
     
     public bool CheckIfRooted()
     {
-        return !CheckForDisableImmune() && _effects.Any(effect => effect.effectType == EffectType.ROOT);
+        return !CheckForDisableImmune() && _effects.Any(effect => effect.effectType is EffectType.ROOT or EffectType.STUN);
     }
 
     public float CalculateDOT()
@@ -149,6 +149,11 @@ public class EffectSystem : MonoBehaviour
         }
 
         return damage;
+    }
+
+    public bool CanAssassinDodge()
+    {
+        return _effects.Any(effect => effect.effectType == EffectType.ASSASSIN_DODGE);
     }
     
     private Effect GetEffectById(int id)

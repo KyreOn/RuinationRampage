@@ -369,6 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.6
   range: 10
+  hitEffect: {fileID: 1029544359644514, guid: 009e478b98eccd240af031879c6f5fed, type: 3}
 --- !u!54 &1806913982934255562
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -415,7 +416,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9999999, y: 1.9999999, z: 3}
+  m_Size: {x: 3.2, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!4 &8737306668628526350 stripped
 Transform:

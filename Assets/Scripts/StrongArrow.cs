@@ -117,7 +117,7 @@ public class StrongArrow : MonoBehaviour
                 {
                     weakAttack.OnHit();
                     strongAttack.OnHit();
-                    if (hit.GetComponent<DamageSystem>().ApplyDamage(_damage))
+                    if (hit.GetComponent<DamageSystem>().ApplyDamage(_damage, transform))
                     {
                         hit.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
                         hit.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);

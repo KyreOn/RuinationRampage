@@ -364,7 +364,7 @@ MonoBehaviour:
       _dynamic: 0
   invert: 1
   minDistance: 0
-  maxDistance: 4
+  maxDistance: 3
 --- !u!114 &4752431483070897532
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,8 +6,9 @@ using UnityEngine.AI;
 
 public class JumpAttack : MonoBehaviour
 {
-    [SerializeField] private float     jumpCooldown;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float      jumpCooldown;
+    [SerializeField] private LayerMask  playerLayer;
+    [SerializeField] private GameObject slashEffect;
     
     private float               _jumpCooldownTimer;
     private bool                _isPreparing;
@@ -52,6 +53,12 @@ public class JumpAttack : MonoBehaviour
         _animator.speed = 1;
         _isPreparing = false;
         //_effectSystem.AddEffect(new StunImmuneEffect(1));
+    }
+    
+    public void JumpSlash()
+    {
+        var slash = Instantiate(slashEffect, transform.position + Vector3.up + transform.forward, transform.rotation);
+        Destroy(slash, 1);
     }
     
     void StrongAttack()

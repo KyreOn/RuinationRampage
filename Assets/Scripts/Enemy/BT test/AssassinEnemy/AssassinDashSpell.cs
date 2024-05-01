@@ -7,7 +7,9 @@ public class AssassinEnemyDash : MonoBehaviour
 {
     [SerializeField] private float      attackCooldown;
     [SerializeField] private LayerMask  playerLayer;
-
+    [SerializeField] private GameObject dashEffect;
+    [SerializeField] private GameObject hitEffect;
+    
     private Collider[]   _playerCollider;
     private GameObject   _target;
     private Vector3      _targetForward;
@@ -47,6 +49,9 @@ public class AssassinEnemyDash : MonoBehaviour
         transform.position = _target.transform.position - _targetForward * 1.5f;
         transform.forward = _targetForward;
         //_effectSystem.AddEffect(new SlowEffect(1.5f, 100000));
+        var dash = Instantiate(dashEffect, transform.position, Quaternion.identity);
+        Destroy(dash, 1);
+        _effectSystem.RemoveEffectById(17);
         Strike();
     }
 
@@ -60,15 +65,21 @@ public class AssassinEnemyDash : MonoBehaviour
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(1.5f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
-            _target.GetComponent<DamageSystem>().ApplyDamage(10, transform);
-            _target.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 2));
-            _target.GetComponent<EffectSystem>().AddEffect(new DOTEffect(2, 0.5f, 10));
+            if (_target.GetComponent<DamageSystem>().ApplyDamage(10, transform))
+            {
+                var hit = Instantiate(hitEffect, _target.transform.position, Quaternion.identity);
+                Destroy(hit, 1);
+                _target.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 2));
+                _target.GetComponent<EffectSystem>().AddEffect(new DOTEffect(2, 0.5f, 10));
+            }
         }
+        _effectSystem.AddEffect(new RootEffect(1));
     }
     
     public void CastEnd()
     {
         isAttacking = false;
+        _effectSystem.AddEffect(new AssassinDodgeEffect());
     }
     
     private void Update()

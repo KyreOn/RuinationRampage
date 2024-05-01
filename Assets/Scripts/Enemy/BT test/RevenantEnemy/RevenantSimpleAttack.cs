@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class RevenantSimpleAttack : MonoBehaviour
 {
-    [SerializeField] private float     attackCooldown;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float      attackCooldown;
+    [SerializeField] private LayerMask  playerLayer;
+    [SerializeField] private GameObject slashEffect1;
+    [SerializeField] private GameObject slashEffect2;
+    [SerializeField] private GameObject rageSlashEffect1;
+    [SerializeField] private GameObject rageSlashEffect2;
+    [SerializeField] private GameObject lightingEffect;
     
     private GameObject    _target;
     private Animator      _animator;
@@ -13,6 +18,7 @@ public class RevenantSimpleAttack : MonoBehaviour
     private RevenantEnemy _revenantEnemy;
     private float         _attackCooldownTimer;
     private bool          _canAttack;
+    private bool          _combo;
     
     public bool       isAttacking;
     public Collider[] _playerCollider;
@@ -22,6 +28,13 @@ public class RevenantSimpleAttack : MonoBehaviour
         _animator = GetComponent<Animator>();
         _effectSystem = GetComponent<EffectSystem>();
         _revenantEnemy = GetComponent<RevenantEnemy>();
+    }
+    
+    public void Slash()
+    {
+        var slash = Instantiate(_combo ? (_revenantEnemy.revived ? rageSlashEffect1 : slashEffect1) : (_revenantEnemy.revived ? rageSlashEffect2 : slashEffect2), transform.position + Vector3.up, transform.rotation);
+        _combo = !_combo;
+        Destroy(slash, 1);
     }
 
     public bool StartAttack(GameObject target)
@@ -36,13 +49,19 @@ public class RevenantSimpleAttack : MonoBehaviour
         var rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;
         var random = Random.value;
-        _animator.SetTrigger(random > 0.5 ? "SimpleAttack1" : "SimpleAttack2");
+        _animator.SetTrigger(_combo ? "SimpleAttack1" : "SimpleAttack2");
         _animator.speed = _revenantEnemy.revived ? 1.5f : 1;
         return true;
     }
 
     void Attack()
     { 
+        if (_revenantEnemy.revived)
+        {
+            var lighting = Instantiate(lightingEffect, transform.position + transform.forward * 1.4f,
+                Quaternion.identity);
+            Destroy(lighting, 1);
+        }
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(2f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {

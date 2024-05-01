@@ -9,7 +9,8 @@ public class CasterProjectile : MonoBehaviour
     [SerializeField] private float      maxHeight;
     [SerializeField] private float      explosionRadius;
     [SerializeField] private GameObject indicator;
-
+    [SerializeField] private GameObject hitEffect;
+    
     private GameObject _indicatorInstance;
     private Vector3    _target;
     private float      _timer;
@@ -37,6 +38,8 @@ public class CasterProjectile : MonoBehaviour
 
         if (_timer >= 1)
         {
+            var hit = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Destroy(hit, 1);
             Destroy(gameObject);
             Destroy(_indicatorInstance);
             var hitTargets = Physics.OverlapSphere(transform.position, explosionRadius);

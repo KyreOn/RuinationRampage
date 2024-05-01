@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RevenantEnemy : Enemy
 {
+    [SerializeField] private GameObject rageEffect;
+    [SerializeField] private GameObject rageGlow;
+    
     private EffectSystem         _effectSystem;
     private DamageSystem         _damageSystem;
     private Animator             _animator;
@@ -49,6 +52,13 @@ public class RevenantEnemy : Enemy
             _effectSystem.AddEffect(new StunEffect(1.5f));
         }
         
+    }
+
+    public void Rage()
+    {
+        var rage = Instantiate(rageEffect, transform.position, Quaternion.identity);
+        Destroy(rage, 1);
+        var glow = Instantiate(rageGlow, transform);
     }
 
     public void ReviveEnd()

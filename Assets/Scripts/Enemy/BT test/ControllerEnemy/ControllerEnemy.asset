@@ -267,7 +267,7 @@ MonoBehaviour:
   outContext: 
   overwriteOut: 1
   failNullCtx: 0
-  strafeLength: 4
+  strafeLength: 2
 --- !u!114 &-1614756694221792680
 MonoBehaviour:
   m_ObjectHideFlags: 0

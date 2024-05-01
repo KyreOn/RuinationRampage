@@ -109,7 +109,7 @@ public class ArcherSpellR : Spell
                 {
                     var enemyHit = Instantiate(enemyHitEffect, enemy.transform.position + Vector3.up, Quaternion.identity);
                     Destroy(enemyHit, 0.3f);
-                    enemy.GetComponent<DamageSystem>().ApplyDamage(damage[level-1] * _effectSystem.CalculateOutcomeDamage());
+                    enemy.GetComponent<DamageSystem>().ApplyDamage(damage[level-1] * _effectSystem.CalculateOutcomeDamage(), transform);
                 }
             }
 

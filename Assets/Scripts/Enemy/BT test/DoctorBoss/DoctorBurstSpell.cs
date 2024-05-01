@@ -10,7 +10,8 @@ public class DoctorBurstSpell : MonoBehaviour
     [SerializeField] private Transform  spawnPoint;
     [SerializeField] private float      attackCooldown;
     [SerializeField] private LayerMask  layerMask;
-
+    [SerializeField] private GameObject indicator;
+    
     private GameObject          _target;
     private EffectSystem        _effectSystem;
     private NavMeshAgent        _navMeshAgent;
@@ -47,7 +48,9 @@ public class DoctorBurstSpell : MonoBehaviour
 
     public void BurstCast()
     {
-        Instantiate(aoe, _target.transform.position - Vector3.up, transform.rotation);
+        Instantiate(indicator, _target.transform.position - Vector3.up, transform.rotation);
+        var aoeInst = Instantiate(aoe,          _target.transform.position - Vector3.up, Quaternion.identity);
+        Destroy(aoeInst, 1.5f);
     }
 
     public void BurstCastEnd()

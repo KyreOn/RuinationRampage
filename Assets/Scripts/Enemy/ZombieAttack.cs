@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ZombieAttack : MonoBehaviour
 {
-    [SerializeField] private float     attackCooldown;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float      attackCooldown;
+    [SerializeField] private LayerMask  playerLayer;
+    [SerializeField] private GameObject slashEffect1;
+    [SerializeField] private GameObject slashEffect2;
     
     private GameObject _target;
     private Animator   _animator;
     private float      _attackCooldownTimer;
     private bool       _canAttack;
+    private bool       _combo;
     
     public bool       isAttacking;
     public Collider[] _playerCollider;
@@ -35,6 +38,13 @@ public class ZombieAttack : MonoBehaviour
         return true;
     }
 
+    public void Slash()
+    {
+        var slash = Instantiate(_combo ? slashEffect1 : slashEffect2, transform.position + Vector3.up, transform.rotation);
+        _combo = !_combo;
+        Destroy(slash, 1);
+    }
+    
     void Attack()
     { 
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(1.5f, 2, 2f), _playerCollider, transform.rotation, playerLayer);

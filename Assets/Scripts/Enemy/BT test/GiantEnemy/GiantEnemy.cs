@@ -28,6 +28,14 @@ public class GiantEnemy : Enemy
     protected override void OnUpdate()
     {
         base.OnUpdate();
+        if (Vector3.Distance(transform.position, Player.Position - Vector3.down) > 6)
+        {
+            baseSpeed = 5;
+        }
+        else
+        {
+            baseSpeed = 2;
+        }
     }
     
     protected override void OnStun()

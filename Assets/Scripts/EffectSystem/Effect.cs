@@ -17,7 +17,8 @@ public enum EffectType
     INCOME_DAMAGE,
     OUTCOME_DAMAGE,
     PARRY,
-    TEMPORARY_HEALTH
+    TEMPORARY_HEALTH,
+    ASSASSIN_DODGE,
 }
 public class Effect
 {

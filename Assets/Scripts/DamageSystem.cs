@@ -49,6 +49,11 @@ public class DamageSystem : MonoBehaviour
         if (isInvincible) return false;
         if (_effectSystem.CheckForInvincibility()) return false;
         _animator.SetTrigger("Hit");
+        if (_effectSystem.CanAssassinDodge() && source is not null && !_effectSystem.CheckIfRooted())
+        {
+            GetComponent<Reaction>().TryReact(source.gameObject);
+            return false;
+        }
         var parryEffect = _effectSystem.CheckForParry();
         if (parryEffect is not null && source is not null)
         {

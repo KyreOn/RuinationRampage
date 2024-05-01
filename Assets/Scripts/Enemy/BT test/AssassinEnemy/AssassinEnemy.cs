@@ -13,6 +13,7 @@ public class AssassinEnemy : Enemy
     {
         base.Awake();
         _assassinEnemyDash = GetComponent<AssassinEnemyDash>();
+        GetComponent<EffectSystem>().AddEffect(new AssassinDodgeEffect());
     }
 
     public override bool OnCheckIsIdle()

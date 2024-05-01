@@ -98,6 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.2
   maxHeight: 5
-  indicator: {fileID: 7889806527387032674, guid: 2658034ff1342f145a6b893619be7258,
+  indicator: {fileID: 6768026626465332967, guid: 33339b6df01a6bb4d9af2803abf8bbb0,
     type: 3}
-  trap: {fileID: 1035141902838786551, guid: 93b78ec646438794ca3c764f8dde8deb, type: 3}
+  trap: {fileID: 1308916267384556, guid: 19da6a7f4ff5ebd47b673cf5c0eafefe, type: 3}

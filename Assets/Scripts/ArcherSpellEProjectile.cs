@@ -119,9 +119,9 @@ public class ArcherSpellEProjectile : MonoBehaviour
         
         if (hit.CompareTag("Enemy"))
         {
-            Debug.Log("hit");
             var hitEffect = Instantiate(chainEffect, transform.position, Quaternion.identity);
             hitEffect.GetComponent<ArcherEChain>().Init(hit.transform, hit.transform, _stunLength);
+            hit.GetComponent<DamageSystem>().ApplyDamage(0, transform);
             hit.GetComponent<EffectSystem>().AddEffect(PlayerPrefs.GetString($"ChosenPerks0").Contains('5') ? new StunEffect(_stunLength) : new RootEffect(_stunLength));
             _maxTargets--;
             if (_maxTargets > 0)

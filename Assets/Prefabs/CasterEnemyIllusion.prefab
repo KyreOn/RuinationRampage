@@ -2503,6 +2503,8 @@ MonoBehaviour:
   treeAsset: {fileID: 11400000, guid: 1555daf4512a7454c8bb8a4cbc0d57b1, type: 2}
   debugTree: 0
   baseSpeed: 4
+  id: 0
+  hpBar: {fileID: 0}
   lifespan: 5
 --- !u!195 &5816601150969577774
 NavMeshAgent:
@@ -2550,8 +2552,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395e1f77c73ee734288500003b049ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 1964969127713009085}
   effectTime: 0.1
+  models: []
+  health: 0
+  healthOnLevel:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  curHealth: 0
+  tempHealth: 0
   isInvincible: 0
 --- !u!114 &7257144958504470458
 MonoBehaviour:
@@ -2568,6 +2602,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1280
+  sight: 0
 --- !u!114 &7483976490675370365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,8 +2615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad98cb8595a443d4287bbfd39c95fe19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1486242915857561789, guid: 8371a84311350784aaeab6ac6b77cb38,
-    type: 3}
+  projectile: {fileID: 1531814124222292, guid: edcd5986dbf56ca4787025dcd6c45ef6, type: 3}
   spawnPoint: {fileID: 5115364648296530396}
   attackCooldown: 5
   canCast: 1
@@ -2598,8 +2632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4fbd83bb19b0246bf5468cea7ad232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1486242915857561789, guid: b532c259dee486d49a0f2f0cb895437b,
-    type: 3}
+  projectile: {fileID: 1531814124222292, guid: 76801adec1c9aaf4ea366354be4ed025, type: 3}
   spawnPoint: {fileID: 5115364648296530396}
   attackCooldown: 1
   layerMask:

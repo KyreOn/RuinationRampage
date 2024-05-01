@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GiantSimpleAttack : MonoBehaviour
 {
-    [SerializeField] private float     attackCooldown;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float      attackCooldown;
+    [SerializeField] private LayerMask  playerLayer;
+    [SerializeField] private GameObject slashEffect;
+    [SerializeField] private GameObject burstEffect;
     
     private GameObject    _target;
     private Animator      _animator;
@@ -34,12 +36,15 @@ public class GiantSimpleAttack : MonoBehaviour
         var rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;
         _animator.SetTrigger("SimpleAttack");
+        GetComponent<Enemy>().BlockRotation = true;
         return true;
     }
 
     void SimpleAttack()
-    { 
-        var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(3f, 3, 3f), _playerCollider, transform.rotation, playerLayer);
+    {
+        var burst = Instantiate(burstEffect, transform.position + transform.forward, transform.rotation);
+        Destroy(burst, 1);
+        var size = Physics.OverlapBoxNonAlloc(transform.position + 2.5f * transform.forward + Vector3.up, new Vector3(2.5f, 1.5f, 2.5f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {
             if (_target.GetComponent<DamageSystem>().ApplyDamage(10, transform))
@@ -51,10 +56,24 @@ public class GiantSimpleAttack : MonoBehaviour
         }
     }
 
+    public void PrepareSimple()
+    {
+        _animator.SetFloat("SimpleSpeed", 0.5f);
+    }
+
+    public void Slash()
+    {
+        _animator.SetFloat("SimpleSpeed", 1.5f);
+        var slash = Instantiate(slashEffect, transform.position, transform.rotation);
+        Destroy(slash, 1);
+    }
+
     void StopAttack()
     {
         isAttacking = false;
+        GetComponent<Enemy>().BlockRotation = false;
         _animator.speed = 1;
+        _animator.SetFloat("SimpleSpeed", 1f);
     }
     
     private void Update()

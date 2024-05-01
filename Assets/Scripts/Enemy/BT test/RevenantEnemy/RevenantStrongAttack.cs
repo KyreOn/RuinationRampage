@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class RevenantStrongAttack : MonoBehaviour
 {
-    [SerializeField] private float     attackCooldown;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float      attackCooldown;
+    [SerializeField] private LayerMask  playerLayer;
+    [SerializeField] private GameObject slashEffect;
+    [SerializeField] private GameObject lightingEffect;
     
     private GameObject    _target;
     private Animator      _animator;
@@ -22,6 +24,12 @@ public class RevenantStrongAttack : MonoBehaviour
         _animator = GetComponent<Animator>();
         _effectSystem = GetComponent<EffectSystem>();
         _revenantEnemy = GetComponent<RevenantEnemy>();
+    }
+    
+    public void StrongSlash()
+    {
+        var slash = Instantiate(slashEffect, transform.position + Vector3.up, transform.rotation);
+        Destroy(slash, 1);
     }
 
     public bool StartAttack(GameObject target)
@@ -41,8 +49,10 @@ public class RevenantStrongAttack : MonoBehaviour
         return true;
     }
 
-    void Attack()
-    { 
+    void StrongAttack()
+    {
+        var lighting = Instantiate(lightingEffect, transform.position + transform.forward * 1.4f, Quaternion.identity);
+        Destroy(lighting, 1);
         var size = Physics.OverlapBoxNonAlloc(transform.position + transform.forward + Vector3.up, new Vector3(2f, 2, 2f), _playerCollider, transform.rotation, playerLayer);
         if (size >= 1)
         {

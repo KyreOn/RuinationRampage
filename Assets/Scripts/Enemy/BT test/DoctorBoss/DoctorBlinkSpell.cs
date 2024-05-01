@@ -43,6 +43,7 @@ public class DoctorBlinkSpell : MonoBehaviour
         var position = new Vector3(pos.x, -1, pos.y);
         _blinkTarget = _target.transform.position + position;
         _effectSystem.AddEffect(new PullingEffect(_blinkTarget, 1));
+        GetComponent<DoctorTrail>().StartTrail(0.15f);
         return true;
     }
 

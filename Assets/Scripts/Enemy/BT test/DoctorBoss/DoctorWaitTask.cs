@@ -6,7 +6,9 @@ using UnityEngine;
 public class DoctorWaitTask : Leaf <ITreeContext >
 {
     [SerializeField] private float time;
-    
+    [SerializeField] private float deviation = 0;
+
+    private float            _resultTime;
     private DoctorBoss       _doctor;
     private DoctorBlinkSpell _doctorBlinkSpell;
     private bool             _started;
@@ -20,12 +22,13 @@ public class DoctorWaitTask : Leaf <ITreeContext >
     protected override void OnEnter()
     {
         _started = true;
+        _resultTime = Random.Range(time - deviation, time + deviation);
     }
 
     protected override void OnExecute()
     {
         _timer += Time.deltaTime;
-        if (_timer >= time)
+        if (_timer >= _resultTime)
             Response.Result = Result.Success;
     }
 

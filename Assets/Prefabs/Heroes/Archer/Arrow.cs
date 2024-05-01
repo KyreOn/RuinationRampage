@@ -111,7 +111,7 @@ public class Arrow : MonoBehaviour
             case "Enemy":
                 if (_pierceCount > 0)
                 {
-                    hit.GetComponent<DamageSystem>().ApplyDamage(_damage);
+                    hit.GetComponent<DamageSystem>().ApplyDamage(_damage, transform);
                     //Debug.Log(hit.GetComponent<DamageSystem>().curHealth);
                     weakAttack.OnHit();
                     strongAttack.OnHit();
@@ -124,7 +124,6 @@ public class Arrow : MonoBehaviour
                 break;
         }
         
-        Debug.Log("Destroy");
         Destroy(gameObject);
     }
 }

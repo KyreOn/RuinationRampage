@@ -33,7 +33,7 @@ public class WarriorSpellQCollider : MonoBehaviour
         Debug.Log(other.tag);
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<DamageSystem>().ApplyDamage(_damage);
+            other.GetComponent<DamageSystem>().ApplyDamage(_damage, transform);
             other.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(_timer, transform.forward, 1));
             other.GetComponent<EffectSystem>().AddEffect(new StunEffect((PlayerPrefs.GetString($"ChosenPerks1").Contains('5') ? 2 * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1) : 1)));
         }
