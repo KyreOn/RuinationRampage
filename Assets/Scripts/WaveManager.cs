@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
     private static bool                _readyToLoad = true;
     
     public static WaveManager Instance { get; private set; }
-    public static int         currentWave;
+    public static int         currentWave = 4;
     
     
     void Awake()
@@ -94,7 +94,10 @@ public class WaveManager : MonoBehaviour
         _isLoaded = false;
         var pattern = Random.Range(0, _arenas.Count);
         if (currentWave == 41)
+        {
             _curArena = Instantiate(_bossArena, Vector3.zero, Quaternion.identity);
+            _curArena.GetComponent<ArenaPattern>().LoadEnemies(currentWave);
+        }
         else
         {
             _curArena = Instantiate(_arenas[pattern], Vector3.zero, Quaternion.identity);

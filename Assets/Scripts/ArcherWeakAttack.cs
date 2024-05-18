@@ -51,7 +51,7 @@ public class ArcherWeakAttack : Spell
         var arrow = Instantiate(arrowObject, spawnPoint.position, model.transform.rotation);
         arrow.GetComponent<Arrow>().Init(gameObject, damage[level-1] * _effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1));
         if (PlayerPrefs.GetString($"ChosenPerks0").Contains('0'))
-            _effectSystem.AddEffect(new SlowEffect(1, 0.5f));
+            _effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
     }
     
     public void ShootEnd()
@@ -62,7 +62,9 @@ public class ArcherWeakAttack : Spell
     }
 
     public override string GetDescription()
-    {
+    {   
+        if (level == 0)
+            return "Герой выпускает стрелу, урон первому задетому врагу";
         var damageDiff = damage[level] - damage[level - 1];
         return $"Урон: +{damageDiff}";
     }

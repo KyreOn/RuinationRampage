@@ -17,9 +17,10 @@ public class CharacterInput : MonoBehaviour
     [SerializeField] private InputActionReference spellE;
     [SerializeField] private InputActionReference spellR;
     [SerializeField] private InputActionReference pause;
-    
+        
     private MovementSystem _movementSystem;
     private CombatSystem   _combatSystem;
+    private bool           _isPaused;
 
     private void Awake()
     {
@@ -123,7 +124,7 @@ public class CharacterInput : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext obj)
     {
-        SceneManager.LoadScene(0);
+        PauseManager.OnPause();
     }
     
     private void Update()

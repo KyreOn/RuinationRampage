@@ -11,7 +11,8 @@ public class Enemy : TreeAgent
     [SerializeField] protected float     baseSpeed;
     [SerializeField] protected int       id;
     [SerializeField] public    BossHPBar hpBar;
-
+    [SerializeField] private   bool      isIllusion;
+    
     private bool _isDisplaced;
     
     protected NavMeshAgent   navMeshAgent;
@@ -126,6 +127,7 @@ public class Enemy : TreeAgent
         var count  = choice > 0 ? Random.Range(1, 6) : 0;
         hpParticleSys.Emit((int)count);
         Destroy(gameObject);
+        if (isIllusion) return;
         WaveManager.CheckForEnemies();
         StatsManager.AddKill(id);
     }

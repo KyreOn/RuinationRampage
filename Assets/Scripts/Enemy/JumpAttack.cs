@@ -38,7 +38,7 @@ public class JumpAttack : MonoBehaviour
         _target = target;
         _targetController = target.GetComponent<CharacterController>();
         _playerCollider = new []{_target.GetComponent<Collider>()};
-        _animator.SetTrigger("isJumping");
+        _animator.SetTrigger("Jump");
         _animator.speed = 0.3f;
         _canJump = false;
         _jumpCooldownTimer = 0;

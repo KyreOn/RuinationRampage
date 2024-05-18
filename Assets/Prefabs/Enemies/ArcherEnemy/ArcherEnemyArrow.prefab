@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 198415471719698134}
   - component: {fileID: 114713037173555398}
   - component: {fileID: 199500045511874794}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SparksLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4876,14 +4876,12 @@ GameObject:
   - component: {fileID: 198789892598184418}
   - component: {fileID: 114738880078527410}
   - component: {fileID: 199683473807085166}
-  - component: {fileID: 108547967348268218}
   - component: {fileID: 54289311587510892}
   - component: {fileID: 135160217757687602}
   - component: {fileID: -3541505257915936186}
-  - component: {fileID: -8010451667885174489}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ArcherEnemyArrow
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8783,7 +8781,7 @@ ParticleSystem:
   LightsModule:
     enabled: 1
     ratio: 1
-    light: {fileID: 108547967348268218}
+    light: {fileID: 0}
     randomDistribution: 1
     color: 0
     range: 0
@@ -9816,68 +9814,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!108 &108547967348268218
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481587283673810}
-  m_Enabled: 0
-  serializedVersion: 10
-  m_Type: 2
-  m_Shape: 0
-  m_Color: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}
-  m_Intensity: 1
-  m_Range: 4
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 4.5426e-41}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
 --- !u!54 &54289311587510892
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9918,7 +9854,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 2688
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -9945,29 +9881,6 @@ MonoBehaviour:
   hit: {fileID: 1120835270511274, guid: 33cfc2755a55b7e4c86c9d7018efbaaa, type: 3}
   flash: {fileID: 1795330392712688, guid: 7f11cfb7c95c8df45beb2209791430c4, type: 3}
   Detached: []
---- !u!114 &-8010451667885174489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481587283673810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!1 &1508716373653696
 GameObject:
   m_ObjectHideFlags: 0
@@ -9980,7 +9893,7 @@ GameObject:
   - component: {fileID: 198959666223819020}
   - component: {fileID: 114234834830393738}
   - component: {fileID: 199910608741135838}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SemicirclesDark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14835,7 +14748,7 @@ GameObject:
   - component: {fileID: 198550019022794002}
   - component: {fileID: 114004226562355556}
   - component: {fileID: 199082237920681430}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SemicirclesLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19690,7 +19603,7 @@ GameObject:
   - component: {fileID: 198026845042648310}
   - component: {fileID: 114496173795994964}
   - component: {fileID: 199956316012036242}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SparksDark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

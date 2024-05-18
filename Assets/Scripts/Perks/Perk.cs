@@ -8,6 +8,9 @@ public class Perk : MonoBehaviour
     [SerializeField] public int    id;
     [SerializeField] public Sprite disabledSprite;
     [SerializeField] public Sprite enabledSprite;
+    [SerializeField] public string title;
+    [SerializeField] public string desc;
+    
     void Start()
     {
         

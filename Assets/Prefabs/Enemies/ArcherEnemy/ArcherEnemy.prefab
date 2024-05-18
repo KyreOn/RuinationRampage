@@ -10,6 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1002372593869683785, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
         type: 3}
+      propertyPath: arrowObject
+      value: 
+      objectReference: {fileID: 1481587283673810, guid: dc0ff1f283dca93428f4ee01fd730fe2,
+        type: 3}
+    - target: {fileID: 1002372593869683785, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
       propertyPath: attackCooldown
       value: 2
       objectReference: {fileID: 0}

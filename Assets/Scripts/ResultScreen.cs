@@ -20,7 +20,7 @@ public class ResultScreen : MonoBehaviour
         var charId = PlayerPrefs.GetInt("LastSelected");
         var xp     = PlayerPrefs.HasKey($"Xp{charId}") ? PlayerPrefs.GetInt($"Xp{charId}") : 0;
         xp += StatsManager.GetKills() + 2 * WaveManager.currentWave;
-        result.text = $"+{StatsManager.GetKills() + 2 * WaveManager.currentWave} ОМ";
+        result.text = $"+{10 * StatsManager.GetKills() + 2 * WaveManager.currentWave + 0.5f * WaveManager.currentWave / StatsManager.timer} ОМ";
         PlayerPrefs.SetInt($"Xp{charId}", xp);
     }
 

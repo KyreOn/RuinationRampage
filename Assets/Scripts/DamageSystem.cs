@@ -46,6 +46,7 @@ public class DamageSystem : MonoBehaviour
 
     public bool ApplyDamage(float damage, Transform source = null)
     {
+        Debug.Log("here");
         if (isInvincible) return false;
         if (_effectSystem.CheckForInvincibility()) return false;
         _animator.SetTrigger("Hit");

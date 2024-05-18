@@ -474,6 +474,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6706940140002573416}
+    - targetCorrespondingSourceObject: {fileID: -516098083770646512, guid: e46dd93e6924d414fa8cb4840e699369,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8129733757494993281}
     - targetCorrespondingSourceObject: {fileID: 8416272007918961125, guid: e46dd93e6924d414fa8cb4840e699369,
         type: 3}
       insertIndex: -1
@@ -482,6 +486,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7372817255843641069}
+    - targetCorrespondingSourceObject: {fileID: 8416272007918961125, guid: e46dd93e6924d414fa8cb4840e699369,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8740933626538021564}
     - targetCorrespondingSourceObject: {fileID: -7146521406498821007, guid: e46dd93e6924d414fa8cb4840e699369,
         type: 3}
       insertIndex: -1
@@ -490,6 +498,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6334046505498098890}
+    - targetCorrespondingSourceObject: {fileID: -7146521406498821007, guid: e46dd93e6924d414fa8cb4840e699369,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 272546100809371501}
     - targetCorrespondingSourceObject: {fileID: -7640558969779515294, guid: e46dd93e6924d414fa8cb4840e699369,
         type: 3}
       insertIndex: -1
@@ -498,6 +510,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5455548044959078231}
+    - targetCorrespondingSourceObject: {fileID: -7640558969779515294, guid: e46dd93e6924d414fa8cb4840e699369,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1920958220810856841}
     - targetCorrespondingSourceObject: {fileID: -1599826595754709761, guid: e46dd93e6924d414fa8cb4840e699369,
         type: 3}
       insertIndex: -1
@@ -1022,6 +1038,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 2, z: -26.000002}
   m_TimeToStationary: 0.5
+--- !u!65 &8740933626538021564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449265116664673366}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 53.999992, y: 4, z: 2}
+  m_Center: {x: 0, y: 2, z: -26}
 --- !u!1 &1518043159348122571 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8485173162082002552, guid: e46dd93e6924d414fa8cb4840e699369,
@@ -1152,6 +1189,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 26.000002, y: 2, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &8129733757494993281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731136784381523363}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000095, y: 4, z: 53.999992}
+  m_Center: {x: 26, y: 2, z: 0}
 --- !u!1 &1825940853086475991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -466329591000292508, guid: e46dd93e6924d414fa8cb4840e699369,
@@ -2184,6 +2242,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -26.000002, y: 2, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &1920958220810856841
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441716181247026641}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 4, z: 53.999992}
+  m_Center: {x: -26, y: 2, z: 0}
 --- !u!1 &8602892543598836689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7515429101286732190, guid: e46dd93e6924d414fa8cb4840e699369,
@@ -2357,6 +2436,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 2, z: 26.000002}
   m_TimeToStationary: 0.5
+--- !u!65 &272546100809371501
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8935771235209632194}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 53.999992, y: 4, z: 2.0000095}
+  m_Center: {x: 0, y: 2, z: 26}
 --- !u!1 &9124524691379333321 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7029948723529949830, guid: e46dd93e6924d414fa8cb4840e699369,

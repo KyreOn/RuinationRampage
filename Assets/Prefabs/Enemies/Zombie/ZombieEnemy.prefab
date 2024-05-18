@@ -23,6 +23,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3656116775105261157, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: isIllusion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4047129259590286614, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
       propertyPath: isJump
@@ -43,6 +48,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5709915863786988743, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 143c47218285bcc4387360b28aaaaeeb, type: 2}
     - target: {fileID: 6486853099830924573, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
       propertyPath: m_LocalPosition.x

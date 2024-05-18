@@ -3516,7 +3516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8578303334725408975}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.6747022, z: -0, w: -0.7380901}
+  m_LocalRotation: {x: 0, y: 0.6747019, z: -0, w: -0.73809034}
   m_LocalPosition: {x: 5.493263, y: -0.1, z: -0.37576437}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3684,6 +3684,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  slashEffect: {fileID: 2795478608433497588, guid: 1a380e8407546ad48b37c66d1c02536b,
+    type: 3}
+  burstEffect: {fileID: 6599890107123542857, guid: 72ca24837d2dc4a4c9a46ce2fc4cbb7d,
+    type: 3}
   isAttacking: 0
   _playerCollider: []
 --- !u!114 &2686035877062070644
@@ -3703,6 +3707,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   hitPoint: {fileID: 3580147732284387972}
+  hitIndicator: {fileID: 6768026626465332967, guid: 09d553f9489dc7b42a7c3c28f3ff8eb6,
+    type: 3}
+  shockwaveEffect: {fileID: 1216020416843760, guid: 7839bcecdd9e0074da822afc3032db27,
+    type: 3}
   isAttacking: 0
   _playerCollider: []
 --- !u!1 &8759460254296781361

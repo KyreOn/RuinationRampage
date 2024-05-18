@@ -23,11 +23,11 @@ public class ControllerEnemyReaction : Reaction
         {
             Destroy(stimuli);
         }
+        
         var rotationDir = stimuli.transform.position - transform.position;
         rotationDir.y = 0;
         var rotation = Quaternion.LookRotation(rotationDir);
         transform.rotation = rotation;
-        
         _animator.SetTrigger("React");
         _animator.speed = 4;
         var burst = Instantiate(burstEffect, transform.position, transform.rotation);

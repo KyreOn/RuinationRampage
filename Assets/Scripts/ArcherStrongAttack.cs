@@ -59,7 +59,7 @@ public class ArcherStrongAttack : Spell
         var arrow = Instantiate(strongArrowObject, spawnPoint.position, model.transform.rotation);
         arrow.GetComponent<StrongArrow>().Init(gameObject, damage[level-1] * _effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1), bleedDuration[level-1], bleedDamage[level-1], pierceCount[level-1]);
         if (PlayerPrefs.GetString($"ChosenPerks0").Contains('0'))
-            _effectSystem.AddEffect(new SlowEffect(1, 0.5f));
+            _effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
     }
     
     public void StrongShootEnd()
@@ -72,6 +72,8 @@ public class ArcherStrongAttack : Spell
 
     public override string GetDescription()
     {
+        if (level == 0)
+            return "После небольшой задержки, герой выпускает стрелу, наносящая урон нескольким врагам на пути и накладывая на них кровотечение";
         var damageDiff   = damage[level]        - damage[level        - 1];
         var bleedDurDiff = bleedDuration[level] - bleedDuration[level - 1];
         var bleedDmgDiff = bleedDamage[level]   - bleedDamage[level   - 1];

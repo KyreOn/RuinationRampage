@@ -153,7 +153,7 @@ MonoBehaviour:
     m_Value: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.334
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -166,10 +166,10 @@ MonoBehaviour:
     hdr: 0
   dotsDensity:
     m_OverrideState: 1
-    m_Value: 73
+    m_Value: 60
   dotsCutoff:
     m_OverrideState: 1
-    m_Value: 0.13
+    m_Value: 0.583
   scrollDirection:
     m_OverrideState: 1
     m_Value: {x: 0, y: 0}

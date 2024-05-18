@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// ReSharper disable CompareOfFloatsByEqualityOperator
+// ReSharper disable CommentTypo
 
 
 public enum EffectType
@@ -22,30 +24,31 @@ public enum EffectType
 }
 public class Effect
 {
-    private float _duration;
-    private float _durationTimer;
-
-    public int        effectId;
-    public EffectType effectType;
+    private readonly float _duration;      //Длительность эффекта
+    private          float _durationTimer; //Таймер длительности
     
-    public Effect(float duration)
+    public int        effectId;//Идентификатор эффекта
+    public EffectType effectType;//Тип эффекта
+    //Конструктор класса
+    protected Effect(float duration)
     {
         _duration = duration;
     }
+    
     public void UpdateEffect()
     {
-        if (_duration == -1) return;
+        if (_duration == -1) return;//значение -1 используется для бесконечных эффектов
         _durationTimer += Time.deltaTime;
     }
 
     public virtual float ApplyEffect()
     {
-        return 1;
+        return 0;
     }
 
     public bool CheckForEnd()
     {
-        if (_duration         == -1) return false;
+        if (_duration         == -1) return false;//сразу возвращает результат ложь, если эффект бесконеный
         return _durationTimer >= _duration;
     }
 }

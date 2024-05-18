@@ -2094,7 +2094,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 85c9036657772d04fbe356f55127a3d8, type: 2}
+  - {fileID: 2100000, guid: 13b3ac76b93e4d94694e4bd8c293336d, type: 2}
   - {fileID: 2100000, guid: fe10b793c6ee6e844ac7711f2b86b2b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -3181,6 +3181,7 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   rageEffect: {fileID: 4291901760241891140, guid: 02ab525d08a93c2429558876759bd198,
     type: 3}
+  rageGlow: {fileID: 0}
   revived: 0
   toRevive: 0
 --- !u!136 &9032799902072830525
@@ -3276,6 +3277,9 @@ MonoBehaviour:
     type: 3}
   slashEffect2: {fileID: 2795478608433497588, guid: eeffc3947c7b2d74883d5e722ef94eaa,
     type: 3}
+  rageSlashEffect1: {fileID: 0}
+  rageSlashEffect2: {fileID: 0}
+  lightingEffect: {fileID: 0}
   isAttacking: 0
   _playerCollider: []
 --- !u!114 &5727805957670162557

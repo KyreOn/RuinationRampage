@@ -44,6 +44,7 @@ public class WarriorWeakAttack : Spell
 
     public void WeakSlash()
     {
+        AudioManager.PlaySFX(Mathf.RoundToInt(Random.value));
         var slash = Instantiate(_attackCombo ? slashEffect1 : slashEffect2, transform.position, model.transform.rotation);
         Destroy(slash, 1);
     }
@@ -82,6 +83,8 @@ public class WarriorWeakAttack : Spell
     
     public override string GetDescription()
     {
+        if (level == 0)
+            return "Герой выполняет легкую атаку, нанося урон всем задетым врагам";
         var damageDiff = damage[level] - damage[level - 1];
         return $"Урон: +{damageDiff}";
     }

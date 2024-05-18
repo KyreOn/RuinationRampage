@@ -2505,6 +2505,7 @@ MonoBehaviour:
   baseSpeed: 4
   id: 0
   hpBar: {fileID: 0}
+  isIllusion: 1
   lifespan: 5
 --- !u!195 &5816601150969577774
 NavMeshAgent:

@@ -12,7 +12,7 @@ public class DoctorBurstAoe : MonoBehaviour
     void Update()
     {
         _scale += Time.deltaTime * speed;
-        transform.localScale = new Vector3(_scale, 1, _scale);
+        //transform.localScale = new Vector3(_scale, 1, _scale);
         if (_scale > 3)
         {
             if (Physics.OverlapSphereNonAlloc(transform.position, 1.5f, _player, 1 << 8) == 1)

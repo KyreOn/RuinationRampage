@@ -17,7 +17,7 @@ public class GameHUD : MonoBehaviour
         xpBar.value = value;
     }
 
-    public void InitSkill(int id, Sprite disabledSprite, Sprite enabledSprite, int level)
+    public void UpdateSkill(int id, Sprite disabledSprite, Sprite enabledSprite, int level)
     {
         skills[id].Init(disabledSprite, enabledSprite, level);
     }

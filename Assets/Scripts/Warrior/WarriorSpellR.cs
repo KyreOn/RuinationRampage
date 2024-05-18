@@ -64,12 +64,12 @@ public class WarriorSpellR : Spell
             enemy.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.1f * distance, direction, 0.75f), false);
             enemy.GetComponent<EffectSystem>().AddEffect(new StunEffect(2f * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1)), false);
         }
-        _effectSystem.AddEffect(new SlowEffect(10, 0.75f), false);
-        _effectSystem.AddEffect(new OutcomeDamageEffect(10, damageBuff[level - 1]));
+        _effectSystem.AddEffect(new SlowEffect(5, 0.75f), false);
+        _effectSystem.AddEffect(new OutcomeDamageEffect(5, damageBuff[level - 1]));
         if (PlayerPrefs.GetString($"ChosenPerks1").Contains('7'))
-            _effectSystem.AddEffect(new IncomeDamageEffect(10, 1 / damageBuff[level - 1]));
+            _effectSystem.AddEffect(new IncomeDamageEffect(5, 1 / damageBuff[level - 1]));
         if (PlayerPrefs.GetString($"ChosenPerks1").Contains('8'))
-            _effectSystem.AddEffect(new StunImmuneEffect(10));
+            _effectSystem.AddEffect(new StunImmuneEffect(5));
     }
 
     public void SecondBlast()
@@ -83,7 +83,7 @@ public class WarriorSpellR : Spell
             //direction.y = 0;
             //var distance = 1                                                     - (vectorDir.magnitude / 5);
             //if (Physics.Raycast(new Ray(transform.position, direction), distance + 1, 1 << 10)) return;
-            enemy.GetComponent<DamageSystem>().ApplyDamage(_stackedDamage * secondDamage[level - 1] * _effectSystem.CalculateOutcomeDamage() * (PlayerPrefs.GetString($"ChosenPerks1").Contains('8') ? 0.5f : 1));
+            enemy.GetComponent<DamageSystem>().ApplyDamage(0.1f * _stackedDamage * secondDamage[level - 1] * _effectSystem.CalculateOutcomeDamage() * (PlayerPrefs.GetString($"ChosenPerks1").Contains('8') ? 0.5f : 1));
         }
     }
     

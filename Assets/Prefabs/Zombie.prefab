@@ -632,7 +632,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 01335cc2b86378541b1bc6a1754c759a, type: 2}
+  - {fileID: 2100000, guid: 143c47218285bcc4387360b28aaaaeeb, type: 2}
   - {fileID: 2100000, guid: fe10b793c6ee6e844ac7711f2b86b2b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -885,8 +885,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395e1f77c73ee734288500003b049ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 4548557281262759878}
   effectTime: 0.1
+  models:
+  - {fileID: 4548557281262759878}
+  health: 60
+  healthOnLevel:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  curHealth: 0
+  tempHealth: 0
   isInvincible: 0
 --- !u!114 &4047129259590286614
 MonoBehaviour:
@@ -901,7 +934,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCooldown: 5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  slashEffect: {fileID: 2795478608433497588, guid: f37601de8775cdf4ba7f1904e89147ed,
+    type: 3}
   isJump: 0
+  _playerCollider: []
 --- !u!114 &2246212130494178679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +957,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  slashEffect1: {fileID: 2795478608433497588, guid: dd6b8212389705840902bdf77f6cbdf2,
+    type: 3}
+  slashEffect2: {fileID: 2795478608433497588, guid: d180033c97942c14992b66d207a842da,
+    type: 3}
   isAttacking: 0
   _playerCollider: []
 --- !u!114 &5355806194290589258
@@ -962,6 +1005,8 @@ MonoBehaviour:
   treeAsset: {fileID: 11400000, guid: 569ff36cf0d291841aa3ee7833e3dfe2, type: 2}
   debugTree: 0
   baseSpeed: 4
+  id: 0
+  hpBar: {fileID: 0}
 --- !u!1 &4895326952586522043
 GameObject:
   m_ObjectHideFlags: 0

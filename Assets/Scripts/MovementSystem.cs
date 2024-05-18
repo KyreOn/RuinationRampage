@@ -23,6 +23,8 @@ public class MovementSystem : MonoBehaviour
     protected float               _dodgeCooldownTimer;
     protected bool                _isDisplaced;
     protected bool                _isPulled;
+
+    private bool _cameraCentered;
     
     public float curSpeed;
     public bool  isAttacking;
@@ -39,6 +41,10 @@ public class MovementSystem : MonoBehaviour
         _camera = Camera.main;
         canMove = true;
         canRotate = true;
+
+        if (!PlayerPrefs.HasKey("CameraCentered"))
+            _cameraCentered = true;
+        _cameraCentered = PlayerPrefs.GetInt("CameraCentered") == 0;
     }
     
     private void Move(Vector3 direction)
@@ -91,10 +97,23 @@ public class MovementSystem : MonoBehaviour
                 transform.position = Vector3.MoveTowards(position, position + direction, Time.deltaTime * 50 * _effectSystem.GetDisplacementSpeed());
         }
         CalculateSpeed();
-        var mousePos = Input.mousePosition;
-        var offset   = new Vector3(Screen.width / 2 - mousePos.x, 0, Screen.height / 2 - mousePos.y);
-        offset.Scale(new Vector3(-0.01f * offsetStrength * 9,     0, -0.01f * offsetStrength * 16));
-        cameraOffset.localPosition = offset;
+        
+        if (!PlayerPrefs.HasKey("CameraCentered"))
+            _cameraCentered = true;
+        _cameraCentered = PlayerPrefs.GetInt("CameraCentered") == 0;
+        
+        if (!_cameraCentered && Time.timeScale != 0)
+        {
+            var mousePos = Input.mousePosition;
+            var offset   = new Vector3(Screen.width / 2 - mousePos.x, 0, Screen.height / 2 - mousePos.y);
+            offset.Scale(new Vector3(-0.01f * offsetStrength * 9,     0, -0.01f * offsetStrength * 16));
+            cameraOffset.localPosition = offset;
+        }
+        else
+        {
+            cameraOffset.localPosition = Vector3.zero;
+        }
+        
         if (_movementDir == Vector3.zero || _effectSystem.CheckIfStunned() || isAttacking)
         {
             _animator.SetFloat("Direction", 0);

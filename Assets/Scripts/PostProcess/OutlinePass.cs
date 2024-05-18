@@ -25,11 +25,12 @@ public class OutlinePass : ScriptableRenderPass
     private static readonly int _axisWidthID = Shader.PropertyToID("_AxisWidth");
     private static readonly int _outlineColorID = Shader.PropertyToID("_OutlineColor");
     private static readonly int _outlineWidthID = Shader.PropertyToID("_OutlineWidth");
-    private readonly Material _bufferFillMaterial;
-    private readonly Material _outlineMaterial;
-    private readonly OutlineFeature.Settings _settings;
-    private RenderTargetIdentifier _cameraColor;
-    private FilteringSettings _filteringSettings;
+    private readonly        Material _bufferFillMaterial;
+    private readonly        Material _outlineMaterial;
+    private readonly        OutlineFeature.Settings _settings;
+    private                 RenderTargetIdentifier _cameraColor;
+    private                 RenderTargetIdentifier _cameraDepth;
+    private                 FilteringSettings _filteringSettings;
 
     public OutlinePass(OutlineFeature.Settings settings)
     {
@@ -71,6 +72,7 @@ public class OutlinePass : ScriptableRenderPass
         ConfigureClear(ClearFlag.All, Color.clear);
 
         _cameraColor = renderingData.cameraData.renderer.cameraColorTarget;
+        _cameraDepth = renderingData.cameraData.renderer.cameraDepthTarget;
     }
 
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)

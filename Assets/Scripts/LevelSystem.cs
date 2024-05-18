@@ -40,7 +40,7 @@ public class LevelSystem : MonoBehaviour
         _gameHUD.UpdateXP(1 - (needXP / levelXP));
         if (curLevel == xpForLevel.Length) return;
         if (!(_curXP >= xpForLevel[curLevel])) return;
-        if (curLevel < 26) curLevel++;
+        if (curLevel < 25) curLevel++;
         needXP  = xpForLevel[curLevel] - _curXP;
         levelXP = xpForLevel[curLevel] - (curLevel == 0 ? 0 : xpForLevel[curLevel - 1]);
         _gameHUD.UpdateXP(1 - (needXP / levelXP));

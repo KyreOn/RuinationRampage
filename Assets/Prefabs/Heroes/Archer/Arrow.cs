@@ -112,15 +112,16 @@ public class Arrow : MonoBehaviour
                 if (_pierceCount > 0)
                 {
                     hit.GetComponent<DamageSystem>().ApplyDamage(_damage, transform);
-                    //Debug.Log(hit.GetComponent<DamageSystem>().curHealth);
                     weakAttack.OnHit();
                     strongAttack.OnHit();
                     _pierceCount--;
+                    CameraShakeManager.ApplyNoise(0.9f, 0.1f);
                 }
                 break;
             default:
                 weakAttack.OnMiss();
                 strongAttack.OnMiss();
+                CameraShakeManager.ApplyNoise(0.9f, 0.1f);
                 break;
         }
         

@@ -15,6 +15,7 @@ public class ArenaPattern : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPatternsLevel5;
     [SerializeField] private List<GameObject> enemyPatternsLevel6;
     [SerializeField] private List<GameObject> enemyPatternsLevel7;
+    [SerializeField] private List<GameObject> bossPatterns;
 
     private GameObject _enemies;
     private int        _enemyCount;
@@ -22,6 +23,10 @@ public class ArenaPattern : MonoBehaviour
     public void LoadEnemies(int wave)
     {
         var level = wave / 5;
+        if (wave > 40)
+        {
+            LoadBoss(bossPatterns[wave - 41]);
+        }
         switch (level)
         {
             case 0: 
@@ -57,6 +62,12 @@ public class ArenaPattern : MonoBehaviour
         var pattern = Random.Range(0, patterns.Count);
         _enemies = Instantiate(patterns[pattern], transform);
         _enemyCount = _enemies.transform.childCount;
+    }
+
+    private void LoadBoss(GameObject pattern)
+    {
+        _enemies = Instantiate(pattern);
+        _enemyCount = 1;
     }
     
     public bool OnEnemyDeath()

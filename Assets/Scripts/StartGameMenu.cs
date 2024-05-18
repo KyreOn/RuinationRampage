@@ -20,7 +20,7 @@ public class StartGameMenu : MonoBehaviour
     [SerializeField] private TMP_Text     level;
     [SerializeField] private TMP_Text     nextLevel;
     [SerializeField] private Slider       levelProgress;
-    [SerializeField] private GameObject   abilityToolTip;
+    [SerializeField] private AbilitiesToolTip   abilityToolTip;
     
     [SerializeField] private int[] xpToLvlUp = new int[10];
     
@@ -38,7 +38,7 @@ public class StartGameMenu : MonoBehaviour
 
     private void Start()
     {
-        var availableChars = PlayerPrefs.GetString("AvailableChars");
+        var availableChars = PlayerPrefs.GetString("AvailableChars", "0,1");
         var chars          = availableChars.Split(",").Select(int.Parse);
         for (var i = 0; i < availableCharacters.Length; i++)
         {
@@ -47,7 +47,7 @@ public class StartGameMenu : MonoBehaviour
         var prefString = PlayerPrefs.HasKey($"UnlockedPerks{_curChar}") ? PlayerPrefs.GetString($"UnlockedPerks{_curChar}") : "";
         _unlockedPerks = prefString == "" ? new List<int>() : prefString.Split(",").Select(int.Parse).ToList();
 
-        var lastSelected = PlayerPrefs.GetInt("LastSelected");
+        var lastSelected = PlayerPrefs.GetInt("LastSelected", 0);
         SetCharacter(lastSelected);
     }
     
@@ -66,6 +66,12 @@ public class StartGameMenu : MonoBehaviour
 
     public void SetCharacter(int id)
     {
+        foreach (var character in availableCharacters)
+        {
+            character.GetComponent<Image>().color = Color.white;
+        }
+
+        availableCharacters[id].GetComponent<Image>().color = new Color(1, 244f / 255f, 155f / 255f);
         SetAbilities(id);
         SetPerks(id);
         SetChosenPerks(id);
@@ -100,6 +106,7 @@ public class StartGameMenu : MonoBehaviour
         for (var i = 0; i < 4; i++)
         {
             chosenPerksUI[i].GetComponent<Image>().sprite = null;
+            chosenPerksUI[i].GetComponent<Image>().color = new Color(0.1f, 0.1f, 0.1f);
         }
         
         for (var i = 0; i < _chosenPerks.Count; i++)
@@ -107,6 +114,7 @@ public class StartGameMenu : MonoBehaviour
             //Debug.Log(i);
             var perk = _perks.First(x => x.id == _chosenPerks[i]);
             chosenPerksUI[i].GetComponent<Image>().sprite = perk.enabledSprite;
+            chosenPerksUI[i].GetComponent<Image>().color = Color.white;
         }
     }
 
@@ -182,11 +190,38 @@ public class StartGameMenu : MonoBehaviour
 
     public void ShowAbilityToolTip(int id)
     {
-        //abilityToolTip.SetActive(true);
+        abilityToolTip.gameObject.SetActive(true);
+        abilityToolTip.transform.position = Vector3.one * -1000;
+        abilityToolTip.Init(_spells[id].title, _spells[id].GetDescription(), false);
     }
 
     public void HideAbilityToolTip()
     {
-        abilityToolTip.SetActive(false);
+        abilityToolTip.gameObject.SetActive(false);
+    }
+
+    public void ShowPerkToolTip(int id)
+    {
+        abilityToolTip.gameObject.SetActive(true);
+        abilityToolTip.transform.position = Vector3.one * -1000;
+        abilityToolTip.Init(_perks[id].title, _perks[id].desc, true);
+    }
+
+    public void HidePerkToolTip()
+    {
+        abilityToolTip.gameObject.SetActive(false);
+    }
+    
+    public void ShowChosenPerkToolTip(int id)
+    {
+        var perk = _perks.First(x => x.id == _chosenPerks[id]);
+        abilityToolTip.gameObject.SetActive(true);
+        abilityToolTip.transform.position = Vector3.one * -1000;
+        abilityToolTip.Init(perk.title, perk.desc, true);
+    }
+
+    public void HideChosenPerkToolTip()
+    {
+        abilityToolTip.gameObject.SetActive(false);
     }
 }

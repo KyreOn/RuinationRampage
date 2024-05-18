@@ -122,6 +122,7 @@ public class StrongArrow : MonoBehaviour
                         hit.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.2f));
                         hit.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
                         hit.GetComponent<EffectSystem>().AddEffect(new DOTEffect(_bleedDuration, 0.5f, _bleedDamage), false);
+                        CameraShakeManager.ApplyNoise(1f, 0.1f);
                     }
             
                     _pierceCount--;
@@ -132,6 +133,7 @@ public class StrongArrow : MonoBehaviour
                 weakAttack.OnMiss();
                 strongAttack.OnMiss();
                 _pierceCount = 0;
+                CameraShakeManager.ApplyNoise(1f, 0.1f);
                 break;
         }
 

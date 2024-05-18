@@ -69,6 +69,8 @@ public class WarriorStrongAttack : Spell
     
     public override string GetDescription()
     {
+        if (level == 0)
+            return "Герой выполняет тяжелую атаку, нанося урон всем задетым врагам в большом радиусе";
         var damageDiff = damage[level] - damage[level - 1];
         return $"Урон: +{damageDiff}";
     }

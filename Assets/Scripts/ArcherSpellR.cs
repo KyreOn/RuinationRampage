@@ -48,8 +48,6 @@ public class ArcherSpellR : Spell
 
     protected override void OnPrepare()
     {
-        _animator.SetBool("RSpell", true);
-        _animator.SetBool("Charging", true);
         _indicator = Instantiate(indicator);
         isBlocked = true;
         _isCharging = true;
@@ -62,7 +60,7 @@ public class ArcherSpellR : Spell
     
     protected override void OnCast()
     {
-        _animator.SetBool("Charging", false);
+        _animator.SetBool("RSpell",   true);
         _animator.speed = 1f;
     }
 
@@ -192,6 +190,5 @@ public class ArcherSpellR : Spell
     protected override void OnUpgrade()
     {
         baseCooldown = cooldown[level - 1];
-        _animator.SetInteger("RSpellLevel", level);
     }
 }

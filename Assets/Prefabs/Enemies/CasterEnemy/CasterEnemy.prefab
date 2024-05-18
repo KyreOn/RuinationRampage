@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5585782360489387343}
   - component: {fileID: 6141862165619368955}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ReactionField
   m_TagString: Reaction
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 7131359999095363080, guid: 3517c8d3912f4fb4c87fc918e0647b82,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.771922
+      value: 8.54
       objectReference: {fileID: 0}
     - target: {fileID: 7131359999095363080, guid: 3517c8d3912f4fb4c87fc918e0647b82,
         type: 3}
@@ -105,7 +105,7 @@ PrefabInstance:
     - target: {fileID: 7131359999095363080, guid: 3517c8d3912f4fb4c87fc918e0647b82,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.42729118
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7131359999095363080, guid: 3517c8d3912f4fb4c87fc918e0647b82,
         type: 3}
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf025db0ce2293469d469322731be62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactCollider: {fileID: 0}
+  reactCollider: {fileID: 6141862165619368955}
   reactionCooldown: 10
   player: {fileID: 0}
   reactionRadius: 4
@@ -209,4 +209,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3328
   illusion: {fileID: 8729420444889836169, guid: e2e76e027234926459c9595c131e845a,
+    type: 3}
+  spawnEffect: {fileID: 8050162104058630444, guid: 4634f69c9fa66de44aa3bd56ec19db81,
     type: 3}

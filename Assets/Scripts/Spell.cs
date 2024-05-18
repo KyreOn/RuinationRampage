@@ -54,32 +54,6 @@ public class Spell : MonoBehaviour
 
     }
 
-    public void Use()
-    {
-        
-    }
-
-    public void CalculateCooldown(float cdModifier)
-    {
-        _effectedCooldown = baseCooldown * cdModifier;
-    }
-
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 0) return;
-        _levelSystem = GetComponent<LevelSystem>();
-        gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
-        gameHUD.InitSkill(id, disabledSprite, enabledSprite, level);
-        _curCharges = maxCharges;
-        _effectedCooldown = baseCooldown;
-        _effectSystem = GetComponent<EffectSystem>();
-    }
-
-    protected virtual void OnUpdate()
-    {
-
-    }
-
     protected virtual void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0) return;
@@ -91,17 +65,17 @@ public class Spell : MonoBehaviour
         _curCharges++;
         _cooldownTimer = 0;
     }
-
-    public virtual string GetDescription()
+    
+    protected virtual void OnUpdate()
     {
-        return "";
+
     }
 
     public void Upgrade()
     {
         level++;
         OnUpgrade();
-        gameHUD.InitSkill(id, disabledSprite, enabledSprite, level);
+        gameHUD.UpdateSkill(id, disabledSprite, enabledSprite, level);
         _levelSystem.OnUpgrade();
     }
 
@@ -109,5 +83,22 @@ public class Spell : MonoBehaviour
     {
         
     }
+    
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
+        _levelSystem = GetComponent<LevelSystem>();
+        gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
+        gameHUD.UpdateSkill(id, disabledSprite, enabledSprite, level);
+        _curCharges = maxCharges;
+        _effectedCooldown = baseCooldown;
+        _effectSystem = GetComponent<EffectSystem>();
+    }
 
+    
+
+    public virtual string GetDescription()
+    {
+        return "";
+    }
 }

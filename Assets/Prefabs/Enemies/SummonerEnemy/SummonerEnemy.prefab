@@ -1757,6 +1757,7 @@ MonoBehaviour:
   baseSpeed: 5
   id: 0
   hpBar: {fileID: 0}
+  isIllusion: 0
   runFromPlayer: 0
 --- !u!195 &1130417406929754078
 NavMeshAgent:
@@ -1853,8 +1854,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   summonedCreatures:
-  - {fileID: 1477078130490765030, guid: b4ab3e6c5ff165441b40c036c36a0bdb, type: 3}
-  - {fileID: 1477078130490765030, guid: b4ab3e6c5ff165441b40c036c36a0bdb, type: 3}
+  - {fileID: 5306287206860651099, guid: 8c3a2fd323330974281cf43899bde3aa, type: 3}
+  - {fileID: 5306287206860651099, guid: 8c3a2fd323330974281cf43899bde3aa, type: 3}
   attackCooldown: 20
   layerMask:
     serializedVersion: 2
@@ -1874,13 +1875,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6d2a1cd8f9f2540aec77ca432733e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactCollider: {fileID: 0}
-  reactionCooldown: 1000
+  reactCollider: {fileID: 8415904476203831830}
+  reactionCooldown: 10
   player: {fileID: 0}
   reactionRadius: 3
   reactLayerMask:
     serializedVersion: 2
     m_Bits: 3328
+  circleEffect: {fileID: 5904635280244022151, guid: 49a91e063486514459d2d34eafde62f0,
+    type: 3}
 --- !u!114 &3089449195561517395
 MonoBehaviour:
   m_ObjectHideFlags: 0
