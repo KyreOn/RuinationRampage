@@ -890,6 +890,11 @@ MonoBehaviour:
   baseSpeed: 2
   id: 0
   hpBar: {fileID: 7394870132322418612}
+  isIllusion: 0
+  xpOnDeath: 200
+  minHpOnDeath: 50
+  maxHpOnDeath: 50
+  hpDropChance: 100
 --- !u!114 &5059125708421498586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,7 +910,7 @@ MonoBehaviour:
   effectTime: 0.06
   models:
   - {fileID: 9133330582051354759}
-  health: 500
+  health: 5000
   healthOnLevel:
   - 0
   - 0
@@ -935,6 +940,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  shieldSfx: {fileID: 0}
   curHealth: 0
   tempHealth: 0
   isInvincible: 0
@@ -1010,7 +1016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a68e87d533db1488b2ad74bd9fa225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aoe: {fileID: 5783432745877790439, guid: 6a6197287599c7645a09537c4d8b4430, type: 3}
   spawnPoint: {fileID: 0}
   attackCooldown: 0
   layerMask:
@@ -1038,7 +1043,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  canCast: 0
+  canCast: 1
   isAttacking: 0
 --- !u!114 &7686029868247748301
 MonoBehaviour:

@@ -20001,6 +20001,7 @@ MonoBehaviour:
   timeBetweenTicks: 0.5
   aftershockEffect: {fileID: 1067308968883129212, guid: 665fbdc9ec718c847b54581dd4092da4,
     type: 3}
+  spellSfx: {fileID: 8300000, guid: 7b8a885c457c99843a01e4002b40bedf, type: 3}
 --- !u!1 &5508471776799794116
 GameObject:
   m_ObjectHideFlags: 0

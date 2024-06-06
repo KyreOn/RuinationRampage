@@ -691,6 +691,7 @@ GameObject:
   - component: {fileID: 6334632799283713735}
   - component: {fileID: 7267352084331768213}
   - component: {fileID: 7686029868247748301}
+  - component: {fileID: -2103914682669057829}
   m_Layer: 9
   m_Name: DoctorEnemy
   m_TagString: Enemy
@@ -813,6 +814,11 @@ MonoBehaviour:
   baseSpeed: 2
   id: 0
   hpBar: {fileID: 0}
+  isIllusion: 0
+  xpOnDeath: 100
+  minHpOnDeath: 25
+  maxHpOnDeath: 25
+  hpDropChance: 100
 --- !u!114 &5059125708421498586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,7 +834,7 @@ MonoBehaviour:
   effectTime: 0.06
   models:
   - {fileID: 9133330582051354759}
-  health: 200
+  health: 2000
   healthOnLevel:
   - 0
   - 0
@@ -858,6 +864,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  shieldSfx: {fileID: 0}
   curHealth: 0
   tempHealth: 0
   isInvincible: 0
@@ -880,6 +887,10 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1280
+  indicator: {fileID: 2842149765739411917, guid: 63776eee83aff4746a056b6f662ded19,
+    type: 3}
+  doubleIndicator: {fileID: 2842149765739411917, guid: 505d9ef6d2400d34396cb76722e543f8,
+    type: 3}
   canCast: 1
   isAttacking: 0
   isHit: 0
@@ -913,6 +924,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  blastEffect: {fileID: 270978813720692685, guid: 1074f790629b1e54d8c84e4708a2f47c,
+    type: 3}
   canCast: 1
   isAttacking: 0
 --- !u!114 &6334632799283713735
@@ -927,12 +940,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a68e87d533db1488b2ad74bd9fa225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aoe: {fileID: 3976028289868756910, guid: 5fdfbd8490fd9ce46acceb50d273870d, type: 3}
   spawnPoint: {fileID: 0}
   attackCooldown: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  indicator: {fileID: 6768026626465332967, guid: a7f89b631f238054485f652cb72671e6,
+    type: 3}
   canCast: 1
   isAttacking: 0
 --- !u!114 &7267352084331768213
@@ -975,6 +989,21 @@ MonoBehaviour:
     m_Bits: 0
   canCast: 1
   isAttacking: 0
+--- !u!114 &-2103914682669057829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814408751895049041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0cae51fb2e3a346848dc5696fa11a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refreshRate: 0.01
+  body: {fileID: 1196643995690291876, guid: 142eeae0fb84d9f488fd8bf8f62e742f, type: 3}
+  material: {fileID: 2100000, guid: 3388c55713ef8be42b401cdb9d4de1b2, type: 2}
 --- !u!1 &3225046893646703845
 GameObject:
   m_ObjectHideFlags: 0

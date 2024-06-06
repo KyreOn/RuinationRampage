@@ -21,6 +21,7 @@ public class SummonerEnemyReaction : Reaction
 
     protected override void OnReact(GameObject stimuli)
     {
+        return;
         var rotationDir = stimuli.transform.position - transform.position;
         rotationDir.y = 0;
         var rotation = Quaternion.LookRotation(rotationDir);

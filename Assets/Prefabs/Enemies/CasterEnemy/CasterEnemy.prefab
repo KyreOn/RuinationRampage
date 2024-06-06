@@ -68,6 +68,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3405268920857568317, guid: 3517c8d3912f4fb4c87fc918e0647b82,
         type: 3}
+      propertyPath: hitSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: de21de3c598c4194ea25800555043a81, type: 3}
+    - target: {fileID: 3405268920857568317, guid: 3517c8d3912f4fb4c87fc918e0647b82,
+        type: 3}
       propertyPath: models.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -87,6 +92,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1531814124222292, guid: 76801adec1c9aaf4ea366354be4ed025,
         type: 3}
+    - target: {fileID: 5060809493489096158, guid: 3517c8d3912f4fb4c87fc918e0647b82,
+        type: 3}
+      propertyPath: xpOnDeath
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060809493489096158, guid: 3517c8d3912f4fb4c87fc918e0647b82,
+        type: 3}
+      propertyPath: hpDropChance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060809493489096158, guid: 3517c8d3912f4fb4c87fc918e0647b82,
+        type: 3}
+      propertyPath: maxHpOnDeath
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060809493489096158, guid: 3517c8d3912f4fb4c87fc918e0647b82,
+        type: 3}
+      propertyPath: minHpOnDeath
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6108400931640010216, guid: 3517c8d3912f4fb4c87fc918e0647b82,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -15,6 +15,8 @@ public class WarriorSpellQ : Spell
     [SerializeField] private GameObject dashEffect;
     [SerializeField] private GameObject indicator;
     
+    [Header("Sounds")] [SerializeField] private AudioClip spellSfx;
+    
     private GameObject            _dashEffect;
     private CharacterController   _controller;
     private Animator              _animator;
@@ -29,7 +31,7 @@ public class WarriorSpellQ : Spell
     {
         _camera = Camera.main;
         _controller = GetComponent<CharacterController>();
-        _effectSystem = GetComponent<EffectSystem>();
+        effectSystem = GetComponent<EffectSystem>();
         _animator = GetComponent<Animator>();
         _movementSystem = GetComponent<WarriorMovementSystem>();
     }
@@ -43,6 +45,7 @@ public class WarriorSpellQ : Spell
     
     protected override void OnCast()
     {
+        AudioManager.PlaySFX(spellSfx);
         Destroy(_indicator);
         _animator.SetTrigger("SpellQ");
         _animator.SetFloat("QSpellSpeed", distanceModifier[level - 1]);
@@ -57,10 +60,11 @@ public class WarriorSpellQ : Spell
     
     public void Charge()
     {
+        CameraShakeManager.ApplyNoise(2f, 0.2f);
         _isAiming = false;
-        _effectSystem.AddEffect(new DisplacementEffect(0.15f * distanceModifier[level - 1], _direction, 1), false);
+        effectSystem.AddEffect(new DisplacementEffect(0.15f * distanceModifier[level - 1], _direction, 1), false);
         _controller.excludeLayers |= 1 << enemyLayer;
-        collider.Enable(damage[level - 1] * _effectSystem.CalculateOutcomeDamage(), 0.15f * distanceModifier[level - 1]);
+        collider.Enable(damage[level - 1] * effectSystem.CalculateOutcomeDamage(), 0.15f * distanceModifier[level - 1]);
     }
 
     public void ChargeEnd()

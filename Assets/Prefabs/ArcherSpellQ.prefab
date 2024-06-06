@@ -4941,7 +4941,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  timeBetweenTicks: 0.5
+  timeBetweenTicks: 0.12
+  hitSfx:
+  - {fileID: 8300000, guid: 1016d4f5fdd7a17459b108dc1a5f7fc5, type: 3}
+  - {fileID: 8300000, guid: 1016d4f5fdd7a17459b108dc1a5f7fc5, type: 3}
 --- !u!1 &8264615888398466914
 GameObject:
   m_ObjectHideFlags: 0
@@ -5287,6 +5290,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802122403478031809, guid: f7f6437f999c86d48b999e1d9a0c4af2,
+        type: 3}
+      propertyPath: m_makeCount
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802122403478031809, guid: f7f6437f999c86d48b999e1d9a0c4af2,
+        type: 3}
+      propertyPath: m_makeDelay
+      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

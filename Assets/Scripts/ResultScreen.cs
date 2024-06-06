@@ -19,9 +19,14 @@ public class ResultScreen : MonoBehaviour
         killsText.text = StatsManager.GetKills().ToString();
         var charId = PlayerPrefs.GetInt("LastSelected");
         var xp     = PlayerPrefs.HasKey($"Xp{charId}") ? PlayerPrefs.GetInt($"Xp{charId}") : 0;
-        xp += StatsManager.GetKills() + 2 * WaveManager.currentWave;
-        result.text = $"+{10 * StatsManager.GetKills() + 2 * WaveManager.currentWave + 0.5f * WaveManager.currentWave / StatsManager.timer} ОМ";
+        var xpAdd = 10 * StatsManager.GetKills() + 2 * WaveManager.currentWave +
+                    (int)(0.5f * WaveManager.currentWave / StatsManager.timer);
+        xp += xpAdd;
         PlayerPrefs.SetInt($"Xp{charId}", xp);
+        var gold = PlayerPrefs.GetInt("Gold", 0);
+        gold += xpAdd / 10;
+        PlayerPrefs.SetInt("Gold", gold);
+        result.text = $"+{xpAdd/10}G +{xpAdd} ОМ";
     }
 
     private string FormatTime(float time)

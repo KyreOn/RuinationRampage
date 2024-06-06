@@ -13,6 +13,8 @@ public class Arrow : MonoBehaviour
     [SerializeField] private GameObject                flash;
     [SerializeField] private GameObject[]              Detached;
 
+    [Header("Sounds")] [SerializeField] private AudioClip hitSfx;
+    
     private ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[1];
     private Rigidbody                 _rb;
     private GameObject                _player;
@@ -116,12 +118,14 @@ public class Arrow : MonoBehaviour
                     strongAttack.OnHit();
                     _pierceCount--;
                     CameraShakeManager.ApplyNoise(0.9f, 0.1f);
+                    //AudioManager.PlaySFX(hitSfx);
                 }
                 break;
             default:
                 weakAttack.OnMiss();
                 strongAttack.OnMiss();
                 CameraShakeManager.ApplyNoise(0.9f, 0.1f);
+                //AudioManager.PlaySFX(hitSfx);
                 break;
         }
         

@@ -16,7 +16,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject       player;
     [SerializeField] private GameObject       upgradeWindow;
     [SerializeField] private GameObject       particleSystem;
-
+    [SerializeField] private GameObject       arrow;
+    
     private static CameraController    _camera;
     private static GameHUD             _gameHUD;
     private static List<GameObject>    _arenas;
@@ -31,9 +32,10 @@ public class WaveManager : MonoBehaviour
     private static UpgradeWindow       _upgradeWindow;
     private static ParticleSystem      _particleSystem;
     private static bool                _readyToLoad = true;
+    private static GameObject          _arrow;
     
     public static WaveManager Instance { get; private set; }
-    public static int         currentWave = 4;
+    public static int         currentWave;
     
     
     void Awake()
@@ -60,6 +62,7 @@ public class WaveManager : MonoBehaviour
         _particleSystem = particleSystem.GetComponent<ParticleSystem>();
         _camera = FindObjectOfType<CameraController>();
         _gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
+        _arrow = arrow;
         LoadArena();
     }
 
@@ -111,6 +114,7 @@ public class WaveManager : MonoBehaviour
         if (_curArena.GetComponent<ArenaPattern>().OnEnemyDeath())
         {
             //_isLoading = false;
+            _arrow.SetActive(true);
             _collider.enabled = true;
             if (currentWave == 39)
             {
@@ -126,6 +130,7 @@ public class WaveManager : MonoBehaviour
         _isLoaded = false;
         _shaderProgress = 0.5f;
         _collider.enabled = false;
+        _arrow.SetActive(false);
         //_cc.enabled = false;
         //Time.timeScale = 0;
     }

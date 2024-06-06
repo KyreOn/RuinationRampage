@@ -10,6 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2594090195461949613, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594090195461949613, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -25,8 +30,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3656116775105261157, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
+      propertyPath: xpOnDeath
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656116775105261157, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
       propertyPath: isIllusion
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656116775105261157, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: hpDropChance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656116775105261157, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: maxHpOnDeath
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656116775105261157, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: minHpOnDeath
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4047129259590286614, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
@@ -108,6 +133,11 @@ PrefabInstance:
       propertyPath: health
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 8364244729771357214, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
+        type: 3}
+      propertyPath: hitSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: de21de3c598c4194ea25800555043a81, type: 3}
     - target: {fileID: 8364244729771357214, guid: e2b4d9d1b65fe5f46b016cf920f6ab3b,
         type: 3}
       propertyPath: models.Array.size

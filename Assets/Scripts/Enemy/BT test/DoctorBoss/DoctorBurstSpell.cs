@@ -6,7 +6,6 @@ using UnityEngine.VFX;
 
 public class DoctorBurstSpell : MonoBehaviour
 {
-    [SerializeField] private GameObject aoe;
     [SerializeField] private Transform  spawnPoint;
     [SerializeField] private float      attackCooldown;
     [SerializeField] private LayerMask  layerMask;
@@ -49,8 +48,6 @@ public class DoctorBurstSpell : MonoBehaviour
     public void BurstCast()
     {
         Instantiate(indicator, _target.transform.position - Vector3.up, transform.rotation);
-        var aoeInst = Instantiate(aoe,          _target.transform.position - Vector3.up, Quaternion.identity);
-        Destroy(aoeInst, 1.5f);
     }
 
     public void BurstCastEnd()

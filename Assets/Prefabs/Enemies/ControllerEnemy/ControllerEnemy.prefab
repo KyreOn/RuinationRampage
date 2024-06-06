@@ -2339,6 +2339,11 @@ MonoBehaviour:
   baseSpeed: 4
   id: 0
   hpBar: {fileID: 0}
+  isIllusion: 0
+  xpOnDeath: 40
+  minHpOnDeath: 5
+  maxHpOnDeath: 10
+  hpDropChance: 50
 --- !u!195 &5943633799676054647
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2390,6 +2395,7 @@ MonoBehaviour:
   - {fileID: 4809866844869741696}
   health: 120
   healthOnLevel: []
+  shieldSfx: {fileID: 0}
   curHealth: 0
   tempHealth: 0
   isInvincible: 0
@@ -2454,7 +2460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactCollider: {fileID: 7648393832815299746}
-  reactionCooldown: 5
+  reactionCooldown: 10
   player: {fileID: 0}
   reactionRadius: 3
   reactLayerMask:

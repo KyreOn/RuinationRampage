@@ -21,10 +21,12 @@ public class ArcherSpellR : Spell
     [SerializeField] private float[] prepareTime = new float[3];
     [SerializeField] private float[] damage      = new float[3];
     
+    [Header("Sounds")] [SerializeField] private AudioClip spellSfx;
+    
     private Camera              _camera;
     private CharacterController _controller;
     private Animator            _animator;
-    private MovementSystem      _movementSystem;
+    private ArcherMovementSystem      _movementSystem;
     private EffectSystem        _effectSystem;
     private GameObject          _indicator;
     private Vector3             _clampedPosition;
@@ -35,12 +37,13 @@ public class ArcherSpellR : Spell
     private float               _lengthTimer;
     private float               _tickTimer;
     
+    
     private void Awake()
     {
         _camera = Camera.main;
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
-        _movementSystem = GetComponent<MovementSystem>();
+        _movementSystem = GetComponent<ArcherMovementSystem>();
         _effectSystem = GetComponent<EffectSystem>();
         isUlt = true;
         _animator.SetInteger("RSpellLevel", level);
@@ -68,6 +71,7 @@ public class ArcherSpellR : Spell
     {
         if (_isCharging)
         {
+            if (!_movementSystem.isDodge) _controller.enabled = false;
             var ray = _camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit, float.MaxValue, groundLayer))
             {
@@ -83,6 +87,7 @@ public class ArcherSpellR : Spell
         }
         if (_isShoot)
         {
+            if (!_movementSystem.isDodge) _controller.enabled = false;
             var playerTransform = _model.transform;
             var ray             = new Ray(laserSpawnPoint.position, _model.transform.forward);
             if (Physics.Raycast(ray, out var hit, float.MaxValue, wallLayer))
@@ -99,6 +104,7 @@ public class ArcherSpellR : Spell
             if (_tickTimer > tickLength)
             {
                 _tickTimer = 0;
+                CameraShakeManager.ApplyNoise(2f, 0.1f);
                 var position     = playerTransform.position;
                 var halfDistance = (hit.point - position) / 2;
                 var enemies = Physics.OverlapBox(position + halfDistance,
@@ -142,6 +148,7 @@ public class ArcherSpellR : Spell
     
     public void RSpellShoot()
     {
+        AudioManager.PlaySFX(spellSfx);
         Destroy(_indicator);
         _isCharging = false;
         _animator.SetFloat("RSpeed", 0.7f / length);

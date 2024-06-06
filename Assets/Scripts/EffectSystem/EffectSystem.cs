@@ -31,73 +31,46 @@ public class EffectSystem : MonoBehaviour
         _effects.Add(effect);
     }
 
-    public float CalculateSpeedModifiers()
-    {
-        return _effects.Where(effect => effect.effectType == EffectType.SPEED)
+    public float CalculateSpeedModifiers() =>
+        _effects.Where(effect => effect.effectType == EffectType.SPEED)
             .Aggregate(1f, (current, effect) => 
                 current * (CheckForSlowImmune() || CheckForDisableImmune() ? Math.Clamp(effect.ApplyEffect(), 1, float.MaxValue) : effect.ApplyEffect()));
-    }
 
-    public bool CheckIfStunned()
-    {
-        return !CheckForDisableImmune() && _effects.Any(effect => effect.effectType == EffectType.STUN);
-    }
-    
-    public bool CheckIfRooted()
-    {
-        return !CheckForDisableImmune() && _effects.Any(effect => effect.effectType is EffectType.ROOT or EffectType.STUN);
-    }
+    public bool CheckIfStunned() => 
+        !CheckForDisableImmune() && _effects.Any(effect => effect.effectType == EffectType.STUN);
 
-    public float CalculateDOT()
-    {
-        return _effects.Where(effect => effect.effectType == EffectType.DOT).Sum(effect => effect.ApplyEffect());
-    }
+    public bool CheckIfRooted() => 
+        !CheckForDisableImmune() && _effects.Any(effect => effect.effectType is EffectType.ROOT or EffectType.STUN);
 
-    public bool CheckForDisplacementEffect()
-    {
-        return _effects.Any(effect => effect.effectType == EffectType.DISPLACEMENT) && !CheckForDisableImmune();
-    }
+    public float CalculateDOT() => 
+        _effects.Where(effect => effect.effectType == EffectType.DOT).Sum(effect => effect.ApplyEffect());
+
+    public bool CheckForDisplacementEffect() => 
+        _effects.Any(effect => effect.effectType == EffectType.DISPLACEMENT) && !CheckForDisableImmune();
 
     public Vector3 GetDisplacementDirection()
     {
-        foreach (var effect in _effects)
-        {
-            if (effect.effectType == EffectType.DISPLACEMENT)
-                return ((DisplacementEffect)effect).direction.normalized;
-        }
+        foreach (var effect in _effects.Where(effect => effect.effectType == EffectType.DISPLACEMENT))
+            return ((DisplacementEffect)effect).direction.normalized;
         return Vector3.zero;
     }
     
-    public float GetDisplacementSpeed()
-    {
-        foreach (var effect in _effects)
-        {
-            if (effect.effectType == EffectType.DISPLACEMENT)
-                return ((DisplacementEffect)effect).speed;
-        }
-        return 0;
-    }
+    public float GetDisplacementSpeed() => 
+        (from effect in _effects where effect.effectType == EffectType.DISPLACEMENT select ((DisplacementEffect)effect).speed)
+        .FirstOrDefault();
 
-    public Effect CheckForPulled()
-    {
-        return _effects.FirstOrDefault(effect => effect.effectType == EffectType.PULLING);
-    }
+    public Effect CheckForPulled() => 
+        _effects.FirstOrDefault(effect => effect.effectType == EffectType.PULLING);
 
-    public bool CheckForInvincibility()
-    {
-        return _effects.Any(effect => effect.effectType == EffectType.INVINCIBILITY);
-    }
+    public bool CheckForInvincibility() => 
+        _effects.Any(effect => effect.effectType == EffectType.INVINCIBILITY);
 
-    public bool CheckForSlowImmune()
-    {
-        return _effects.Any(effect => effect.effectType == EffectType.SLOW_IMMUNE);
-    }
-    
-    public bool CheckForDisableImmune()
-    {
-        return _effects.Any(effect => effect.effectType == EffectType.DISABLE_IMMUNE);
-    }
-    
+    public bool CheckForSlowImmune() => 
+        _effects.Any(effect => effect.effectType == EffectType.SLOW_IMMUNE);
+
+    public bool CheckForDisableImmune() => 
+        _effects.Any(effect => effect.effectType == EffectType.DISABLE_IMMUNE);
+
     public float CalculateIncomeDamage()
     {
         return _effects.Where(effect => effect.effectType == EffectType.INCOME_DAMAGE)

@@ -21,8 +21,10 @@ public class DirectionArrow : MonoBehaviour
         var playerPos = _playerTransform.position;
         _image.enabled = playerPos.magnitude >= minDistance;
         var playerPosNormalized = playerPos.normalized;
-        var xPos      = -playerPosNormalized.x * 160 * 2  + Screen.width /2;
-        var yPos      = -playerPosNormalized.z * 90 * 2 + Screen.height /2;
-        transform.position = new Vector3(xPos, yPos);
+        var xPos                = -playerPosNormalized.x * 160 * 5;
+        var yPos                = -playerPosNormalized.z * 90  * 5;
+        var angle               = Vector2.SignedAngle(new Vector2(-xPos, yPos), Vector2.up);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.position = new Vector3(xPos + Screen.width /2, yPos + Screen.height /2);
     }
 }

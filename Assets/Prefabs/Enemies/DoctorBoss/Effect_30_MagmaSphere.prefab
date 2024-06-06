@@ -976,7 +976,7 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - serializedVersion: 2
-      time: 0.75
+      time: 0.05
       countCurve:
         serializedVersion: 2
         minMaxState: 0
@@ -5864,7 +5864,7 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - serializedVersion: 2
-      time: 0.75
+      time: 0.05
       countCurve:
         serializedVersion: 2
         minMaxState: 0
@@ -10753,7 +10753,7 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - serializedVersion: 2
-      time: 0.7
+      time: 0
       countCurve:
         serializedVersion: 2
         minMaxState: 0
@@ -15689,7 +15689,7 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - serializedVersion: 2
-      time: 0.7
+      time: 0
       countCurve:
         serializedVersion: 2
         minMaxState: 0
@@ -19646,7 +19646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b224160acc79fb4dab07440be2c8bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 1
 --- !u!1 &6188365616706324852
 GameObject:
   m_ObjectHideFlags: 0
@@ -20623,7 +20623,7 @@ ParticleSystem:
     m_BurstCount: 1
     m_Bursts:
     - serializedVersion: 2
-      time: 0.75
+      time: 0.05
       countCurve:
         serializedVersion: 2
         minMaxState: 0

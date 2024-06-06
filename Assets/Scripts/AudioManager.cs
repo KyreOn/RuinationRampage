@@ -31,8 +31,8 @@ public class AudioManager : MonoBehaviour
         _sfx = sfx;
     }
 
-    public static void PlaySFX(int id)
+    public static void PlaySFX(AudioClip sound)
     {
-        _source.PlayOneShot(_sfx[id], (float)PlayerPrefs.GetInt("SFXVolume", 100) / 100);
+        _source.PlayOneShot(sound, (float)PlayerPrefs.GetInt("SFXVolume", 100) / 100);
     }
 }

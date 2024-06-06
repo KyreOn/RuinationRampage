@@ -10147,7 +10147,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  searchAngle: 30
+  searchAngle: 60
   hitEffect: {fileID: 1065618375357958, guid: 22f500c9429222c4d872d8aedad3d77e, type: 3}
   chainEffect: {fileID: 7120088048207297954, guid: 3ed9fdb5114c6064cb5cc07bb708a246,
     type: 3}

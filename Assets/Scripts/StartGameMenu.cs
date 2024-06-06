@@ -75,7 +75,7 @@ public class StartGameMenu : MonoBehaviour
         SetAbilities(id);
         SetPerks(id);
         SetChosenPerks(id);
-        SetGoldCount(id);
+        SetGoldCount();
         SetXP(id);
         SetPerkCount(id);
     }
@@ -140,9 +140,9 @@ public class StartGameMenu : MonoBehaviour
         PlayerPrefs.SetInt($"Perk{charId}", perkCount);
     }
 
-    public void SetGoldCount(int charId)
+    public void SetGoldCount()
     {
-        goldCount.text = PlayerPrefs.HasKey($"Gold{charId}") ? PlayerPrefs.GetInt($"Gold{charId}").ToString() : "0";
+        goldCount.text = PlayerPrefs.HasKey($"Gold") ? PlayerPrefs.GetInt($"Gold").ToString() : "0";
     }
     
     public void SetPerkCount(int charId)

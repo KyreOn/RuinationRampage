@@ -179,9 +179,6 @@ namespace BTree
         /// Override this method to create checks that need to return a value while the tree is Evaluated.
         /// Returning Success/Failure will make the tree skip Enter/Execute/Exit methods when it's being run.
         /// </summary>
-        public sealed override object GetValue(NodePort port)
-        {
-            return Response;
-        }
+        public sealed override object GetValue(NodePort port) => Response;
     }
 }

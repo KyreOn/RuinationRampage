@@ -13,6 +13,8 @@ public class StrongArrow : MonoBehaviour
     [SerializeField] private GameObject   flash;
     [SerializeField] private GameObject[] Detached;
 
+    [Header("Sounds")] [SerializeField] private AudioClip hitSfx;
+    
     private Rigidbody  _rb;
     private GameObject _player;
     private float      _damage;
@@ -123,6 +125,7 @@ public class StrongArrow : MonoBehaviour
                         hit.GetComponent<EffectSystem>().AddEffect(new SlowEffect(1, 1.5f), false);
                         hit.GetComponent<EffectSystem>().AddEffect(new DOTEffect(_bleedDuration, 0.5f, _bleedDamage), false);
                         CameraShakeManager.ApplyNoise(1f, 0.1f);
+                        //AudioManager.PlaySFX(hitSfx);
                     }
             
                     _pierceCount--;
@@ -134,6 +137,7 @@ public class StrongArrow : MonoBehaviour
                 strongAttack.OnMiss();
                 _pierceCount = 0;
                 CameraShakeManager.ApplyNoise(1f, 0.1f);
+                //AudioManager.PlaySFX(hitSfx);
                 break;
         }
 

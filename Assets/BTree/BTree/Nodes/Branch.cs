@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Windows;
 
 namespace BTree
 {
     public abstract class Branch : TreeNode
     {
-        [SerializeField, Input(dynamicPortList: true, connectionType: ConnectionType.Override)]
-        private TreeResponse conditions;
-
-        protected List<Condition> conditionNodes = null;
-        protected TreeResponse storedResponse = null;
+        protected List<Condition> conditionNodes;
+        protected TreeResponse storedResponse;
 
         private bool CheckOwnConditions()
         {

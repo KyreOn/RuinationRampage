@@ -16,22 +16,20 @@ public class Spell : MonoBehaviour
     [SerializeField] public    Sprite disabledSprite;
     [SerializeField] public    Sprite enabledSprite;
     
-    private   LevelSystem  _levelSystem;
-    private float        _effectedCooldown;
-    protected   float        _cooldownTimer;
-    private   int          _curCharges;
-    protected   EffectSystem _effectSystem;
-
-    protected GameHUD gameHUD;
-    protected bool    isPreparing;
-    protected bool    isBlocked;
+    protected LevelSystem  levelSystem;
+    protected float        cooldownTimer;
+    protected int          curCharges;
+    protected EffectSystem effectSystem;
+    protected GameHUD      gameHUD;
+    protected bool         isPreparing;
+    protected bool         isBlocked;
 
     public int  level;
     public bool isUlt;
 
     public void Prepare()
     {
-        if (_curCharges == 0 || level == 0 || isBlocked || _effectSystem.CheckIfStunned()) return;
+        if (curCharges == 0 || level == 0 || isBlocked || effectSystem.CheckIfStunned()) return;
         isPreparing = true;
         OnPrepare();
     }
@@ -43,9 +41,9 @@ public class Spell : MonoBehaviour
 
     public void Cast()
     {
-        if (_curCharges == 0 || !isPreparing) return;
+        if (curCharges == 0 || !isPreparing) return;
         isPreparing = false;
-        _curCharges--;
+        curCharges--;
         OnCast();
     }
 
@@ -54,16 +52,16 @@ public class Spell : MonoBehaviour
 
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0) return;
-        gameHUD.UpdateSkill(id, _cooldownTimer, baseCooldown, _curCharges, maxCharges);
+        gameHUD.UpdateSkill(id, cooldownTimer, baseCooldown, curCharges, maxCharges);
         OnUpdate();
-        if (_curCharges == maxCharges) return;
-        _cooldownTimer = Mathf.Clamp(_cooldownTimer + Time.deltaTime, 0, baseCooldown);
-        if (_cooldownTimer < baseCooldown) return;
-        _curCharges++;
-        _cooldownTimer = 0;
+        if (curCharges == maxCharges) return;
+        cooldownTimer = Mathf.Clamp(cooldownTimer + Time.deltaTime, 0, baseCooldown);
+        if (cooldownTimer < baseCooldown) return;
+        curCharges++;
+        cooldownTimer = 0;
     }
     
     protected virtual void OnUpdate()
@@ -76,7 +74,7 @@ public class Spell : MonoBehaviour
         level++;
         OnUpgrade();
         gameHUD.UpdateSkill(id, disabledSprite, enabledSprite, level);
-        _levelSystem.OnUpgrade();
+        levelSystem.OnUpgrade();
     }
 
     protected virtual void OnUpgrade()
@@ -87,12 +85,11 @@ public class Spell : MonoBehaviour
     private void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0) return;
-        _levelSystem = GetComponent<LevelSystem>();
+        levelSystem = GetComponent<LevelSystem>();
         gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
         gameHUD.UpdateSkill(id, disabledSprite, enabledSprite, level);
-        _curCharges = maxCharges;
-        _effectedCooldown = baseCooldown;
-        _effectSystem = GetComponent<EffectSystem>();
+        curCharges = maxCharges;
+        effectSystem = GetComponent<EffectSystem>();
     }
 
     

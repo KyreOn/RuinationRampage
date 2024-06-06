@@ -12,6 +12,10 @@ public class Enemy : TreeAgent
     [SerializeField] protected int       id;
     [SerializeField] public    BossHPBar hpBar;
     [SerializeField] private   bool      isIllusion;
+    [SerializeField] private   int       xpOnDeath;
+    [SerializeField] private   int       minHpOnDeath;
+    [SerializeField] private   int       maxHpOnDeath;
+    [SerializeField] private   int       hpDropChance;
     
     private bool _isDisplaced;
     
@@ -122,10 +126,10 @@ public class Enemy : TreeAgent
     {
         xpParticleSys.transform.position = transform.position + Vector3.up;
         hpParticleSys.transform.position = transform.position + Vector3.up;
-        xpParticleSys.Emit(20);
-        var choice = Random.value - 0.6f;
-        var count  = choice > 0 ? Random.Range(1, 6) : 0;
-        hpParticleSys.Emit((int)count);
+        xpParticleSys.Emit(xpOnDeath);
+        var choice = hpDropChance - Random.value * 100;
+        var count  = choice >= 0 ? Random.Range(minHpOnDeath, maxHpOnDeath + 1) : 0;
+        hpParticleSys.Emit(count);
         Destroy(gameObject);
         if (isIllusion) return;
         WaveManager.CheckForEnemies();

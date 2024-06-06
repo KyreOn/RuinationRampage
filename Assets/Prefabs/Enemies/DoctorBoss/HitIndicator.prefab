@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef588ec0c0f41604ba967e5fde0f2bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aoe: {fileID: 5783432745877790439, guid: 6a6197287599c7645a09537c4d8b4430, type: 3}
   progressCircle: {fileID: 2568244651920915048}
   time: 0.75
   maxSize: 2

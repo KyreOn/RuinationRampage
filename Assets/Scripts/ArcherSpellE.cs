@@ -14,6 +14,8 @@ public class ArcherSpellE : Spell
     [SerializeField] private float[]    stunLength = new float[5];
     [SerializeField] private int[]      targets    = new int[5];
     
+    [Header("Sounds")] [SerializeField] private AudioClip spellSfx;
+    
     private CharacterController _controller;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
@@ -39,6 +41,7 @@ public class ArcherSpellE : Spell
 
     protected override void OnCast()
     {
+        AudioManager.PlaySFX(spellSfx);
         Destroy(_indicator);
         _controller.enabled = false;
         _animator.SetBool("ESpell", true);

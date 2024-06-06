@@ -6,8 +6,11 @@ public class ArcherMovementSystem : MovementSystem
 {
     [SerializeField] private LayerMask dodgeLayer;
 
+    public bool isDodge;
+    
     public void OnDodgeStart()
     {
+        isDodge = true;
         _controller.enabled = true;
         _animator.speed = 1;
         _effectSystem.AddEffect(new SlowEffect(0.2f, 0.2f), false);
@@ -25,6 +28,7 @@ public class ArcherMovementSystem : MovementSystem
 
     public void OnDodgeEnd(float boostStrength)
     {
+        isDodge = false;
         _animator.speed = 1;
         canMove = true;
         canRotate = true;

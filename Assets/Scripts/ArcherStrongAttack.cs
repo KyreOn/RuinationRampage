@@ -14,6 +14,9 @@ public class ArcherStrongAttack : Spell
     [SerializeField] private float[] bleedDamage   = new float[5];
     [SerializeField] private int[]   pierceCount   = new int[5];
     
+    [Header("Sounds")] [SerializeField] private AudioClip drawSfx;
+    [SerializeField]                    private AudioClip shootSfx;
+    
     private CharacterController _controller;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
@@ -48,6 +51,7 @@ public class ArcherStrongAttack : Spell
     
     public void StrongDraw()
     {
+        //AudioManager.PlaySFX(drawSfx);
         _animator.SetBool("StrongCast", true);
         _movementSystem.isAttacking = true;
         _controller.enabled = false;
@@ -56,10 +60,11 @@ public class ArcherStrongAttack : Spell
     
     public void StrongShoot()
     {
+        AudioManager.PlaySFX(shootSfx);
         var arrow = Instantiate(strongArrowObject, spawnPoint.position, model.transform.rotation);
-        arrow.GetComponent<StrongArrow>().Init(gameObject, damage[level-1] * _effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1), bleedDuration[level-1], bleedDamage[level-1], pierceCount[level-1]);
+        arrow.GetComponent<StrongArrow>().Init(gameObject, damage[level-1] * effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1), bleedDuration[level-1], bleedDamage[level-1], pierceCount[level-1]);
         if (PlayerPrefs.GetString($"ChosenPerks0").Contains('0'))
-            _effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
+            effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
     }
     
     public void StrongShootEnd()

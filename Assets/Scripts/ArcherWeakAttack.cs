@@ -10,6 +10,9 @@ public class ArcherWeakAttack : Spell
     [SerializeField] private Transform  spawnPoint;
     [SerializeField] private float[]    damage = new float[5];
     
+    [Header("Sounds")] [SerializeField] private AudioClip drawSfx;
+    [SerializeField]                    private AudioClip shootSfx;
+    
     private CharacterController _controller;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
@@ -40,24 +43,26 @@ public class ArcherWeakAttack : Spell
     
     public void Draw()
     {
+        //AudioManager.PlaySFX(drawSfx);
         _animator.SetBool("WeakCast", true);
-        _effectSystem.AddEffect(new WeakAttackEffect(1.75f));
+        effectSystem.AddEffect(new WeakAttackEffect(1.75f));
         _animator.SetFloat("AttackSpeed", 2.5f * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 0.8f : 1));
         //_animator.speed = 2.5f * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 0.8f : 1);
     }
 
     public void Shoot()
     {
+        AudioManager.PlaySFX(shootSfx);
         var arrow = Instantiate(arrowObject, spawnPoint.position, model.transform.rotation);
-        arrow.GetComponent<Arrow>().Init(gameObject, damage[level-1] * _effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1));
+        arrow.GetComponent<Arrow>().Init(gameObject, damage[level-1] * effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1));
         if (PlayerPrefs.GetString($"ChosenPerks0").Contains('0'))
-            _effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
+            effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
     }
     
     public void ShootEnd()
     {
         _animator.SetBool("WeakCast", false);
-        _effectSystem.RemoveEffectById(12);
+        effectSystem.RemoveEffectById(12);
         _animator.speed = 1;
     }
 

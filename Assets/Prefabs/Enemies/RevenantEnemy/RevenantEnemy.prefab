@@ -3179,6 +3179,11 @@ MonoBehaviour:
   baseSpeed: 3
   id: 0
   hpBar: {fileID: 0}
+  isIllusion: 0
+  xpOnDeath: 50
+  minHpOnDeath: 15
+  maxHpOnDeath: 20
+  hpDropChance: 60
   rageEffect: {fileID: 4291901760241891140, guid: 02ab525d08a93c2429558876759bd198,
     type: 3}
   rageGlow: {fileID: 0}
@@ -3230,6 +3235,7 @@ MonoBehaviour:
   - {fileID: 5246229029231349308}
   health: 150
   healthOnLevel: []
+  shieldSfx: {fileID: 0}
   curHealth: 0
   tempHealth: 0
   isInvincible: 0

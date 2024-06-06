@@ -8,6 +8,8 @@ public class ArcherSpellQProjectile : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float     timeBetweenTicks;
 
+    [Header("Sounds")] [SerializeField] private AudioClip[] hitSfx;
+    
     private float _tickTimer;
     private float _damage;
     private float _slowPower;
@@ -31,6 +33,8 @@ public class ArcherSpellQProjectile : MonoBehaviour
         _tickTimer -= Time.deltaTime;
         if (_tickTimer >= 0) return;
         var enemiesInRange = Physics.OverlapSphere(transform.position, 2, enemyLayer);
+        var choice         = Random.Range(0, 2);
+        AudioManager.PlaySFX(hitSfx[choice]);
         foreach (var enemy in enemiesInRange)
         {
             if (enemy.gameObject.GetComponent<DamageSystem>().ApplyDamage(_damage, transform))

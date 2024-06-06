@@ -53,7 +53,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     values:
@@ -75,15 +74,6 @@ MonoBehaviour:
         node: {fileID: -7735639355305673980}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: -7759896776568247590}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -129,7 +119,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     - input 2
@@ -157,15 +146,6 @@ MonoBehaviour:
         node: {fileID: 1038854855001114116}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: -7735639355305673980}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -395,7 +375,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     - input 2
@@ -418,15 +397,6 @@ MonoBehaviour:
         node: {fileID: 215252394788133752}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: -2770237449297069500}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -485,7 +455,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     values:
@@ -507,15 +476,6 @@ MonoBehaviour:
         node: {fileID: -7735639355305673980}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: -2052982885619584408}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -561,7 +521,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     - input 2
@@ -584,15 +543,6 @@ MonoBehaviour:
         node: {fileID: -2052982885619584408}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: -1999322903926842525}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -651,7 +601,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     values:
@@ -673,15 +622,6 @@ MonoBehaviour:
         node: {fileID: -1999322903926842525}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: -1666930155997000410}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -916,7 +856,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     values:
@@ -938,15 +877,6 @@ MonoBehaviour:
         node: {fileID: -7735639355305673980}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: 215252394788133752}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -1029,7 +959,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - conditions 0
     values:
@@ -1051,15 +980,6 @@ MonoBehaviour:
         node: {fileID: 6475832876002972548}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: 473716315960384521}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -1156,7 +1076,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - conditions 0
     values:
@@ -1178,15 +1097,6 @@ MonoBehaviour:
         node: {fileID: 6042313119349548698}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: 1478736022904304465}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -1513,7 +1423,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     values:
@@ -1535,15 +1444,6 @@ MonoBehaviour:
         node: {fileID: -2770237449297069500}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: 6042313119349548698}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -1589,7 +1489,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - input 1
     values:
@@ -1611,15 +1510,6 @@ MonoBehaviour:
         node: {fileID: -7735639355305673980}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: 6475832876002972548}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
@@ -1665,7 +1555,6 @@ MonoBehaviour:
     keys:
     - input
     - output
-    - conditions
     - input 0
     - conditions 0
     values:
@@ -1687,15 +1576,6 @@ MonoBehaviour:
         node: {fileID: -1666930155997000410}
         reroutePoints: []
       _direction: 1
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditions
-      _node: {fileID: 7388555762486774432}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0

@@ -11,6 +11,9 @@ public class WarriorStrongAttack : Spell
     [SerializeField] private GameObject slashEffect2;
     [SerializeField] private GameObject hitEffect;
     
+    [Header("Sounds")] [SerializeField] private AudioClip slashSfx;
+    [SerializeField]                    private AudioClip hitSfx;
+    
     private CharacterController _controller;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
@@ -29,7 +32,7 @@ public class WarriorStrongAttack : Spell
     {
         _animator.SetBool("StrongAttack", true);
         _animator.SetBool("Slowed", true);
-        _effectSystem.AddEffect(new WeakAttackEffect(2), false);
+        effectSystem.AddEffect(new WeakAttackEffect(2), false);
     }
     
     protected override void OnCast()
@@ -39,6 +42,7 @@ public class WarriorStrongAttack : Spell
 
     public void StrongSlash()
     {
+        AudioManager.PlaySFX(slashSfx);
         var slash = Instantiate(_attackCombo ? slashEffect1 : slashEffect2, transform.position, model.transform.rotation);
         Destroy(slash, 1);
     }
@@ -53,7 +57,7 @@ public class WarriorStrongAttack : Spell
         var stunMod = PlayerPrefs.GetString($"ChosenPerks1").Contains('0') ? 1.2f : 1;
         foreach (var col in collider)
         {
-            var dmg = damage[level - 1] * _effectSystem.CalculateOutcomeDamage() *
+            var dmg = damage[level - 1] * effectSystem.CalculateOutcomeDamage() *
                       (col.GetComponent<EffectSystem>().CheckIfStunned()
                           ? stunMod
                           : 1);
@@ -65,6 +69,9 @@ public class WarriorStrongAttack : Spell
                 _rSpell.StackDamage(dmg);
             }
         }
+        if (collider.Length == 0) return;
+        CameraShakeManager.ApplyNoise(2f, 0.1f);
+        AudioManager.PlaySFX(hitSfx);
     }
     
     public override string GetDescription()

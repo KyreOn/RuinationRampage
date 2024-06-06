@@ -18,6 +18,8 @@ public class ArcherSpellQ : Spell
     [SerializeField] private float[] tickDamage = new float[5];
     [SerializeField] private int[]   charges = new int[5];
 
+    [Header("Sounds")] [SerializeField] private AudioClip drawSfx;
+    
     private CharacterController _controller;
     private MovementSystem      _movementSystem;
     private Animator            _animator;
@@ -47,6 +49,7 @@ public class ArcherSpellQ : Spell
     
     protected override void OnCast()
     {
+        AudioManager.PlaySFX(drawSfx);
         _controller.enabled = false;
         _animator.SetBool("QSpell", true);
         Destroy(_radiusIndicator);
@@ -84,7 +87,7 @@ public class ArcherSpellQ : Spell
     {
         _animator.speed = 1f;
         var proj = Instantiate(projectile, _clampedPosition, Quaternion.identity);
-        proj.GetComponent<ArcherSpellQProjectile>().Init(tickDamage[level-1] * _effectSystem.CalculateOutcomeDamage(), slowPower[level-1]);
+        proj.GetComponent<ArcherSpellQProjectile>().Init(tickDamage[level-1] * effectSystem.CalculateOutcomeDamage(), slowPower[level-1]);
     }
     
     public void QShootEnd()

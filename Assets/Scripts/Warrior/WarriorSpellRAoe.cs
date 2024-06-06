@@ -9,6 +9,8 @@ public class WarriorSpellRAoe : MonoBehaviour
     [SerializeField] private float      timeBetweenTicks;
     [SerializeField] private GameObject aftershockEffect;
     
+    [Header("Sounds")] [SerializeField] private AudioClip spellSfx;
+    
     private float _tickTimer;
     private float _damage;
     private float _slowPower;
@@ -29,9 +31,11 @@ public class WarriorSpellRAoe : MonoBehaviour
             Destroy(aftershock, 1);
             Destroy(gameObject);
         }
-            
+        
         _tickTimer -= Time.deltaTime;
         if (_tickTimer >= 0) return;
+        CameraShakeManager.ApplyNoise(2f, 0.1f);
+        AudioManager.PlaySFX(spellSfx);
         var enemiesInRange = Physics.OverlapSphere(transform.position, 2.5f, enemyLayer);
         foreach (var enemy in enemiesInRange)
         {

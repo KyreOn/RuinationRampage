@@ -3618,6 +3618,11 @@ MonoBehaviour:
   baseSpeed: 2
   id: 0
   hpBar: {fileID: 0}
+  isIllusion: 0
+  xpOnDeath: 80
+  minHpOnDeath: 20
+  maxHpOnDeath: 30
+  hpDropChance: 80
 --- !u!114 &9045333580272599304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3653,6 +3658,7 @@ MonoBehaviour:
   - {fileID: 7585445792253701923}
   health: 200
   healthOnLevel: []
+  shieldSfx: {fileID: 0}
   curHealth: 0
   tempHealth: 0
   isInvincible: 0

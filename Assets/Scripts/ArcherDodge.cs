@@ -9,6 +9,8 @@ public class ArcherDodge : Spell
     [SerializeField] private float[]    speedBoost = new float[5];
     [SerializeField] private GameObject trail;
     
+    [Header("Sounds")] [SerializeField] private AudioClip spellSfx;
+    
     private CharacterController  _controller;
     private Animator             _animator;
     private DamageSystem         _damageSystem;
@@ -39,6 +41,10 @@ public class ArcherDodge : Spell
     
     public void DodgeStart()
     {
+        _animator.SetBool("WeakCast",   false);
+        _animator.SetBool("StrongCast", false);
+        _animator.SetBool("DodgeShoot", true);
+        AudioManager.PlaySFX(spellSfx);
         _movementSystem.OnDodgeStart();
         Cast();
         if (_spawned) return;
@@ -50,6 +56,7 @@ public class ArcherDodge : Spell
     
     public void DodgeEnd()
     {
+        _animator.SetBool("DodgeShoot", false);
         _movementSystem.OnDodgeEnd(speedBoost[level-1]);
         _spawned = false;
     }

@@ -11,6 +11,8 @@ public class DamageSystem : MonoBehaviour
     [SerializeField] public  float        health;
     [SerializeField] public  float[]      healthOnLevel = new float[28];
 
+    [Header("Sounds")] [SerializeField] private AudioClip shieldSfx;
+    
     private Animator         _animator;
     private CameraController _camera;
     private EffectSystem     _effectSystem;
@@ -46,7 +48,6 @@ public class DamageSystem : MonoBehaviour
 
     public bool ApplyDamage(float damage, Transform source = null)
     {
-        Debug.Log("here");
         if (isInvincible) return false;
         if (_effectSystem.CheckForInvincibility()) return false;
         _animator.SetTrigger("Hit");
@@ -60,6 +61,7 @@ public class DamageSystem : MonoBehaviour
         {
             if (GetComponent<WarriorBlock>().CheckForParry(source))
             {
+                AudioManager.PlaySFX(shieldSfx);
                 if (source.CompareTag("Enemy") || source.CompareTag("Player"))
                 {
                     if (PlayerPrefs.GetString($"ChosenPerks0").Contains('3'))

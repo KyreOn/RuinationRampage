@@ -14,6 +14,8 @@ public class WarriorSpellE : Spell
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private GameObject indicator;
     
+    [Header("Sounds")] [SerializeField] private AudioClip spellSfx;
+    
     private CharacterController   _controller;
     private Animator              _animator;
     private WarriorMovementSystem _movementSystem;
@@ -41,6 +43,7 @@ public class WarriorSpellE : Spell
     
     protected override void OnCast()
     {
+        AudioManager.PlaySFX(spellSfx);
         Destroy(_indicator);
         _animator.SetTrigger("SpellE");
     }
@@ -53,6 +56,7 @@ public class WarriorSpellE : Spell
     
     public void Bash()
     {
+        CameraShakeManager.ApplyNoise(2f, 0.1f);
         _isAiming = false;
         _tempHpTimer = 0;
         var collider = Physics.OverlapBox(transform.position + model.transform.forward * 2, Vector3.one * 2, model.transform.rotation,
@@ -64,7 +68,7 @@ public class WarriorSpellE : Spell
             direction.y = 0;
             var distance = 1                                                     - (vectorDir.magnitude / 5);
             if (Physics.Raycast(new Ray(transform.position, direction), distance + 1, 1 << 10)) return;
-            if (col.GetComponent<DamageSystem>().ApplyDamage(damage[level - 1] * _effectSystem.CalculateOutcomeDamage(), transform))
+            if (col.GetComponent<DamageSystem>().ApplyDamage(damage[level - 1] * effectSystem.CalculateOutcomeDamage(), transform))
             {
                 var hit = Instantiate(hitEffect, col.transform.position + Vector3.up - 0.5f * model.transform.forward,
                     Quaternion.Inverse(model.transform.rotation));
@@ -74,7 +78,7 @@ public class WarriorSpellE : Spell
                 col.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.175f * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1)));
             }
         }
-        _effectSystem.AddEffect(new TemporaryHealthEffect(damage[level - 1] * _effectSystem.CalculateOutcomeDamage() * healModifier[level - 1] * collider.Length, PlayerPrefs.GetString($"ChosenPerks1").Contains('6') ? 15 : 10));
+        effectSystem.AddEffect(new TemporaryHealthEffect(damage[level - 1] * effectSystem.CalculateOutcomeDamage() * healModifier[level - 1] * collider.Length, PlayerPrefs.GetString($"ChosenPerks1").Contains('6') ? 15 : 10));
         _damageSystem.ApplyHeal(0);
     }
 

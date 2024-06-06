@@ -31,14 +31,20 @@ public class WarriorBlock : Spell
         _blockTimer = 0;
         _animator.SetBool("Block",  true);
         _animator.SetBool("Slowed", true);
-        _effectSystem.AddEffect(new SlowEffect(1, 2), false);
-        _effectSystem.AddEffect(new ParryEffect(2 * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1), 1.5f), false);
+        effectSystem.AddEffect(new SlowEffect(1, 2), false);
+        effectSystem.AddEffect(new ParryEffect(2 * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1), 1.5f), false);
         Cast();
     }
 
     public void BlockStart()
     {
         shield.SetActive(true);
+        _animator.SetBool("BlockLoop", true);
+    }
+
+    public void BlockLoopStart()
+    {
+        
     }
 
     public void StopAttack()
@@ -55,6 +61,7 @@ public class WarriorBlock : Spell
         {
             shield.SetActive(false);
             _animator.SetBool("Block",  false);
+            _animator.SetBool("BlockLoop", false);
             _animator.SetBool("Slowed", false);
             _isBlocking = false;
         }
@@ -76,7 +83,7 @@ public class WarriorBlock : Spell
     
     public void CdReset()
     {
-        _cooldownTimer = Mathf.Clamp(_cooldownTimer + cooldownReduction[level - 1], 0, baseCooldown);
+        cooldownTimer = Mathf.Clamp(cooldownTimer + cooldownReduction[level - 1], 0, baseCooldown);
     }
     
     protected override void OnUpgrade()

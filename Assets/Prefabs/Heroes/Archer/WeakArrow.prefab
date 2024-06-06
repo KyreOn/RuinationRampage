@@ -4913,6 +4913,7 @@ MonoBehaviour:
   hit: {fileID: 1117273264044518, guid: 0086f961a7e18874aad7df351e98c8ae, type: 3}
   flash: {fileID: 1437680763721510, guid: 097e01dd11e4fa0498bb10ef879b8bb7, type: 3}
   Detached: []
+  hitSfx: {fileID: 8300000, guid: 8244ba1008702bb4784bd9f1098e6b63, type: 3}
 --- !u!198 &198161343025679248
 ParticleSystem:
   m_ObjectHideFlags: 0

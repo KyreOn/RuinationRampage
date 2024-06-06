@@ -73,6 +73,12 @@ public class MovementSystem : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y != 1)
+        {
+            var curPos = transform.position;
+            curPos.y = 1;
+            transform.position = curPos;
+        }
         var pullEffect = _effectSystem.CheckForPulled();
         _isPulled = pullEffect is not null;
         if (_isPulled)

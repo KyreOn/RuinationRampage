@@ -5,13 +5,6 @@ using UnityEngine;
 
 namespace BTree
 {
-    public class Context
-    {
-
-
-
-    }
-
     public class ContextMissingException : Exception
     {
         public ContextMissingException() { }

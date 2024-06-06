@@ -1758,6 +1758,10 @@ MonoBehaviour:
   id: 0
   hpBar: {fileID: 0}
   isIllusion: 0
+  xpOnDeath: 40
+  minHpOnDeath: 5
+  maxHpOnDeath: 10
+  hpDropChance: 50
   runFromPlayer: 0
 --- !u!195 &1130417406929754078
 NavMeshAgent:
@@ -1810,6 +1814,7 @@ MonoBehaviour:
   - {fileID: 3768871727425564522}
   health: 80
   healthOnLevel: []
+  shieldSfx: {fileID: 0}
   curHealth: 0
   tempHealth: 0
   isInvincible: 0
@@ -1870,7 +1875,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5685315880033616457}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a6d2a1cd8f9f2540aec77ca432733e8, type: 3}
   m_Name: 
@@ -2043,7 +2048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2101125386051144212
 Transform:
   m_ObjectHideFlags: 0

@@ -10,12 +10,16 @@ public class WarriorWeakAttack : Spell
     [SerializeField] private GameObject slashEffect1;
     [SerializeField] private GameObject slashEffect2;
     [SerializeField] private GameObject hitEffect;
+
+    [Header("Sounds")] [SerializeField] private AudioClip slashSfx;
+    [SerializeField]                    private AudioClip hitSfx;
     
     private CharacterController _controller;
     private Animator            _animator;
     private MovementSystem      _movementSystem;
     private bool                _attackCombo;
     private WarriorSpellR       _rSpell;
+    private bool                _isHit;
 
     private void Awake()
     {
@@ -39,12 +43,12 @@ public class WarriorWeakAttack : Spell
     public void StartWeak()
     {
         _animator.speed = 2;
-        _effectSystem.AddEffect(new WeakAttackEffect(2), false);
+        effectSystem.AddEffect(new WeakAttackEffect(2), false);
     }
 
     public void WeakSlash()
     {
-        AudioManager.PlaySFX(Mathf.RoundToInt(Random.value));
+        AudioManager.PlaySFX(slashSfx);
         var slash = Instantiate(_attackCombo ? slashEffect1 : slashEffect2, transform.position, model.transform.rotation);
         Destroy(slash, 1);
     }
@@ -59,25 +63,28 @@ public class WarriorWeakAttack : Spell
         var stunMod = PlayerPrefs.GetString($"ChosenPerks1").Contains('0') ? 1.2f : 1;
         foreach (var col in collider)
         {
-            var dmg = damage[level - 1] * _effectSystem.CalculateOutcomeDamage() *
+            var dmg = damage[level - 1] * effectSystem.CalculateOutcomeDamage() *
                          (col.GetComponent<EffectSystem>().CheckIfStunned()
                 ? stunMod
                 : 1);
             if (col.GetComponent<DamageSystem>().ApplyDamage(dmg, transform))
             {
                 var hit = Instantiate(hitEffect, col.transform.position + Vector3.up - 0.5f * model.transform.forward, Quaternion.Inverse(model.transform.rotation));
+                _isHit = true;
                 Destroy(hit, 1);
                 _rSpell.StackDamage(dmg);
             }
-                
         }
+        if (collider.Length == 0) return;
+        CameraShakeManager.ApplyNoise(1.5f, 0.1f);
+        AudioManager.PlaySFX(hitSfx);
     }
 
     public void StopAttack()
     {
         _animator.SetBool("Slowed", false);
-        _effectSystem.RemoveEffectById(12);
-        _effectSystem.RemoveEffectById(13);
+        effectSystem.RemoveEffectById(12);
+        effectSystem.RemoveEffectById(13);
         _animator.speed = 1;
     }
     

@@ -2753,7 +2753,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7024743418077598977}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2806,6 +2806,7 @@ MonoBehaviour:
   - {fileID: 2666120742323331557}
   health: 50
   healthOnLevel: []
+  shieldSfx: {fileID: 0}
   curHealth: 0
   tempHealth: 0
   isInvincible: 0
@@ -2841,6 +2842,11 @@ MonoBehaviour:
   baseSpeed: 4
   id: 0
   hpBar: {fileID: 0}
+  isIllusion: 0
+  xpOnDeath: 50
+  minHpOnDeath: 10
+  maxHpOnDeath: 15
+  hpDropChance: 60
 --- !u!114 &4036054127708196083
 MonoBehaviour:
   m_ObjectHideFlags: 0

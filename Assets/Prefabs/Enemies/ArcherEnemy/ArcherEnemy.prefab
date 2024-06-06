@@ -34,6 +34,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2395995753232267520, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3130993883583093558, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -54,6 +59,11 @@ PrefabInstance:
       propertyPath: health
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 4790276057363479667, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
+      propertyPath: hitSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: de21de3c598c4194ea25800555043a81, type: 3}
     - target: {fileID: 4790276057363479667, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
         type: 3}
       propertyPath: curHealth
@@ -154,6 +164,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3b25b564afb5b5a4ea4b0d418961018e, type: 2}
+    - target: {fileID: 7937502145246103059, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
+      propertyPath: xpOnDeath
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937502145246103059, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
+      propertyPath: hpDropChance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937502145246103059, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
+      propertyPath: maxHpOnDeath
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937502145246103059, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
+        type: 3}
+      propertyPath: minHpOnDeath
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9048534227098734636, guid: 55bb1ec192dc2b545bef6e84f8805bd5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
