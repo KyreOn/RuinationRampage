@@ -2887,7 +2887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca521763158cbd43a9003db47042f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 3
+  attackCooldown: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 256

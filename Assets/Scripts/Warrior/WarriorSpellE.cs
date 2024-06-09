@@ -75,7 +75,7 @@ public class WarriorSpellE : Spell
                 Destroy(hit, 1);
                 direction.y = 0;
                 col.GetComponent<EffectSystem>().AddEffect(new DisplacementEffect(0.075f, direction, 0.5f));
-                col.GetComponent<EffectSystem>().AddEffect(new StunEffect(0.175f * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1)));
+                col.GetComponent<EffectSystem>().AddEffect(new StunEffect(1f * (PlayerPrefs.GetString($"ChosenPerks1").Contains('1') ? 1.2f : 1)));
             }
         }
         effectSystem.AddEffect(new TemporaryHealthEffect(damage[level - 1] * effectSystem.CalculateOutcomeDamage() * healModifier[level - 1] * collider.Length, PlayerPrefs.GetString($"ChosenPerks1").Contains('6') ? 15 : 10));

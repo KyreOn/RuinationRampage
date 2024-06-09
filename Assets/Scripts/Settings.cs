@@ -28,7 +28,7 @@ public class Settings : MonoBehaviour
         _defaultSettings.Add("ResolutionWidth", nativeRes.width);
         _defaultSettings.Add("ResolutionHeight", nativeRes.height);
         _defaultSettings.Add("ScreenMode", 0);
-        _defaultSettings.Add("Quality", 0);
+        _defaultSettings.Add("Quality", 2);
         _defaultSettings.Add("FrameCap", 0);
         _defaultSettings.Add("MusicVolume", 100);
         _defaultSettings.Add("SFXVolume", 100);

@@ -15,13 +15,9 @@ namespace BTree
             if (response == null) { return null; }
 
             if (response.Result == Result.Failure)
-            {
                 response.Result = Result.Success;
-            }
             else if (response.Result == Result.Success)
-            {
                 response.Result = Result.Failure;
-            }
 
             return response;
         }

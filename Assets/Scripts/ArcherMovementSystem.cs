@@ -10,9 +10,10 @@ public class ArcherMovementSystem : MovementSystem
     
     public void OnDodgeStart()
     {
-        isDodge = true;
+        if (isDodge) return;
         _controller.enabled = true;
         _animator.speed = 1;
+        //_effectSystem.AddEffect(new UnstoppableEffect(0.2f));
         _effectSystem.AddEffect(new SlowEffect(0.2f, 0.2f), false);
         canMove = false;
         canRotate = false;
@@ -24,6 +25,7 @@ public class ArcherMovementSystem : MovementSystem
         //model.transform.rotation = Quaternion.LookRotation(_movementDir);
         _damageSystem.SetInvincible(true);
         _controller.excludeLayers = dodgeLayer;
+        isDodge = true;
     }
 
     public void OnDodgeEnd(float boostStrength)

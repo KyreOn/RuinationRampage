@@ -33,8 +33,9 @@ public class EffectSystem : MonoBehaviour
 
     public float CalculateSpeedModifiers() =>
         _effects.Where(effect => effect.effectType == EffectType.SPEED)
-            .Aggregate(1f, (current, effect) => 
-                current * (CheckForSlowImmune() || CheckForDisableImmune() ? Math.Clamp(effect.ApplyEffect(), 1, float.MaxValue) : effect.ApplyEffect()));
+            .Aggregate(1f, (current, effect) => current * (CheckForSlowImmune() || CheckForDisableImmune()
+                ? Math.Clamp(effect.ApplyEffect(), 1, float.MaxValue)
+                : effect.ApplyEffect()));
 
     public bool CheckIfStunned() => 
         !CheckForDisableImmune() && _effects.Any(effect => effect.effectType == EffectType.STUN);

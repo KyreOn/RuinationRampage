@@ -36,7 +36,7 @@ public class DamageSystem : MonoBehaviour
         _gameHUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<GameHUD>();
         if (gameObject.CompareTag("Player"))
         {
-            health = healthOnLevel[0] * (PlayerPrefs.GetString($"ChosenPerks0").Contains('8') ? 0.8f : 1) * (PlayerPrefs.GetString($"ChosenPerks1").Contains('9') ? 1.2f : 1);
+            health = healthOnLevel[0] * (PlayerPrefs.GetString($"ChosenPerks1").Contains('8') ? 0.8f : 1) * (PlayerPrefs.GetString($"ChosenPerks1").Contains('9') ? 1.2f : 1);
             _camera = FindObjectOfType<CameraController>();
             curHealth = health;
             tempHealth = _effectSystem.CalculateTempHealth();
@@ -64,8 +64,12 @@ public class DamageSystem : MonoBehaviour
                 AudioManager.PlaySFX(shieldSfx);
                 if (source.CompareTag("Enemy") || source.CompareTag("Player"))
                 {
-                    if (PlayerPrefs.GetString($"ChosenPerks0").Contains('3'))
+                    if (PlayerPrefs.GetString($"ChosenPerks1").Contains('3'))
+                    {
+                        Debug.Log(damage);
                         source.GetComponent<DamageSystem>().ApplyDamage(damage);
+                    }
+                        
                     source.GetComponent<EffectSystem>().AddEffect(new StunEffect(parryEffect.ApplyEffect()));
                 }
                 if (source.CompareTag("Projectile") || source.CompareTag("Player"))

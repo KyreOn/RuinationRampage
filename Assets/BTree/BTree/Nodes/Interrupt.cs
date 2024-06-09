@@ -27,9 +27,6 @@ namespace BTree
 
         internal TreeResponse Response => GetChildResponse();
 
-        public override object GetValue(NodePort port)
-        {
-            return GetChildResponse();
-        }
+        public override object GetValue(NodePort port) => GetChildResponse();
     }
 }

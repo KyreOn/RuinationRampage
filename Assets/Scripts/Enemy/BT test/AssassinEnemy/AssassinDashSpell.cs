@@ -73,7 +73,7 @@ public class AssassinEnemyDash : MonoBehaviour
                 _target.GetComponent<EffectSystem>().AddEffect(new DOTEffect(2, 0.5f, 10));
             }
         }
-        _effectSystem.AddEffect(new RootEffect(1));
+        _effectSystem.AddEffect(new RootEffect(2));
     }
     
     public void CastEnd()

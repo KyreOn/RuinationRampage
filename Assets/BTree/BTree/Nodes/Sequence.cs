@@ -4,10 +4,6 @@ using XNode;
 
 namespace BTree
 {
-    /// <summary>
-    /// Loops through child nodes. If any child fails, returns failure. Returns success after all nodes
-    /// succeeded and has repeated given times.
-    /// </summary>
     public class Sequence : Branch
     {
         [SerializeField]
@@ -37,26 +33,19 @@ namespace BTree
 
         private TreeResponse Resolve(TreeResponse response)
         {
-            if (response.Result == Result.Running) // || response.Result == Result.Waiting)
+            if (response.Result == Result.Running)
             {
-                // If child is running, send it on as is.
                 return response;
             }
 
-            if (response.Result == Result.Success
-                || (!haltOnFailure && response.Result == Result.Failure))
+            if (response.Result != Result.Success && (haltOnFailure || response.Result != Result.Failure)) return response;
+            if (HasNextChild)
             {
-                if (HasNextChild)
-                {
-                    // Child succeeded but there is more children to go through so check them.
-                    index++;
-                    response = GetChildResponseAtIndex(index);
-                    return Resolve(response);
-                }
-
-                // This is the last child, set success.
-                response.Result = Result.Success;
+                index++;
+                response = GetChildResponseAtIndex(index);
+                return Resolve(response);
             }
+            response.Result = Result.Success;
 
             return response;
         }

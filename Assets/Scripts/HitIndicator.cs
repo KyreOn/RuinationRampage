@@ -20,7 +20,10 @@ public class HitIndicator : MonoBehaviour
     {
         if (_timer >= time)
         {
-            var aoeInst = Instantiate(aoe, transform.position, Quaternion.identity);
+            if (aoe is not null)
+            {
+                var aoeInst = Instantiate(aoe, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
         _timer += Time.deltaTime;

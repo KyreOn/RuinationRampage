@@ -3,9 +3,6 @@ using XNode;
 
 namespace BTree
 {
-    /// <summary>
-    /// Repeats a single child a given number of times. If the child returns failure at any point, returns failure.
-    /// </summary>
     public class Repeater : Branch
     {
         [SerializeField, Input(dynamicPortList: false, connectionType: ConnectionType.Override)]
@@ -25,15 +22,11 @@ namespace BTree
         {
             var response = GetChildResponse();
 
-            if (response.Result != Result.Running)
-            {
-                if (repeat < 0 || _counter < repeat)
-                {
-                    _counter++;
-                    response.Result = Result.Running;
-                    RecursiveResetChildren();
-                }
-            }
+            if (response.Result == Result.Running || (repeat >= 0 && _counter >= repeat))
+                return ResolveConditions(response);
+            _counter++;
+            response.Result = Result.Running;
+            RecursiveResetChildren();
 
             return ResolveConditions(response);
         }

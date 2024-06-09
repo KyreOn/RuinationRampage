@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BTree
 {
-    /// <summary>
-    /// Wrapper to make node results nullable and transport the origin leaf and possible conditions through the tree.
-    /// </summary>
     [Serializable]
     public class TreeResponse : object
     {
@@ -19,18 +17,12 @@ namespace BTree
 
         public bool CheckConditions()
         {
-            foreach (var condition in Conditions)
+            foreach (var condition in Conditions.Where(condition => !condition.Check()))
             {
-                if (condition.Check()) { continue; }
-
-                if (condition.Host == null) // The condition is used as a Leaf
-                {
+                if (condition.Host == null)
                     Result = Result.Failure;
-                }
                 else
-                {
                     condition.Host.RecursiveFail();
-                }
 
                 return false;
             }

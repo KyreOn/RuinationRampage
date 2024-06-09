@@ -1,23 +1,16 @@
-﻿using UnityEngine;
-using XNode;
+﻿using XNode;
 
 namespace BTree
 {
-    /// <summary>
-    /// Chooses a child that is able to run and returns its result. If all children fail, returns failure.
-    /// </summary>
     public class Selector : Branch
     {
-        [SerializeField, Input(dynamicPortList: true, connectionType: ConnectionType.Override)]
-        protected TreeResponse input;
+        private int _index;
 
-        private int index;
-
-        private bool HasNextChild => index + 1 < children.Length;
+        private bool HasNextChild => _index + 1 < children.Length;
 
         internal override void ResetNode()
         {
-            index = 0;
+            _index = 0;
             storedResponse = null;
         }
 
@@ -25,12 +18,11 @@ namespace BTree
         {
             if (storedResponse != null) { return storedResponse; }
 
-            index = 0;
-            var response = GetChildResponseAtIndex(index);
+            _index = 0;
+            var response = GetChildResponseAtIndex(_index);
 
             if (response.Result == Result.Success)
             {
-                // Only allow a single success to return.
                 storedResponse = response;
                 return storedResponse;
             }
@@ -41,24 +33,17 @@ namespace BTree
 
         private TreeResponse Resolve(TreeResponse response)
         {
-            if (response.Result == Result.Running) // || response.Result == Result.Waiting)
+            switch (response.Result)
             {
-                // If child is running or waiting, send it on as is.
-                return response;
-            }
-
-            if (response.Result == Result.Failure)
-            {
-                if (HasNextChild)
-                {
-                    // Child failed but there is more children to go through so check them.
-                    index++;
-                    response = GetChildResponseAtIndex(index);
+                case Result.Running:
+                    return response;
+                case Result.Failure when HasNextChild:
+                    _index++;
+                    response = GetChildResponseAtIndex(_index);
                     return Resolve(response);
-                }
+                default:
+                    return response;
             }
-
-            return response;
         }
     }
 }

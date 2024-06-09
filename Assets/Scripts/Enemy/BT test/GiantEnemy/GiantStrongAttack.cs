@@ -17,6 +17,7 @@ public class GiantStrongAttack : MonoBehaviour
     private RevenantEnemy _revenantEnemy;
     private float         _attackCooldownTimer;
     private bool          _canAttack = true;
+    private GameObject    _indicator;
     
     public bool       isAttacking;
     public Collider[] _playerCollider;
@@ -42,12 +43,13 @@ public class GiantStrongAttack : MonoBehaviour
         _animator.SetTrigger("StrongAttack");
         GetComponent<Enemy>().BlockRotation = true;
         //_effectSystem.AddEffect(new SlowEffect(1.5f, 10000));
-        Instantiate(hitIndicator, transform.position + transform.forward * 4 + 0.3f * transform.right, Quaternion.identity);
+        _indicator = Instantiate(hitIndicator, transform.position + transform.forward * 4 + 0.3f * transform.right, Quaternion.identity);
         return true;
     }
 
     void StrongAttack()
     {
+        Destroy(_indicator);
         var shockwave = Instantiate(shockwaveEffect, hitPoint.position, Quaternion.identity);
         Destroy(shockwave, 0.5f);
         var size      = Physics.OverlapSphereNonAlloc(hitPoint.position, 4f, _playerCollider, playerLayer);

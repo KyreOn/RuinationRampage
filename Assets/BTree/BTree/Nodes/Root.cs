@@ -3,9 +3,6 @@ using UnityEngine;
 
 namespace BTree
 {
-    /// <summary>
-    /// The starting node of the behaviour tree. This is the first one accessed by the graph when evaluating.
-    /// </summary>
     public class Root : TreeNode
     {
         [SerializeField, Input(dynamicPortList: true, connectionType: ConnectionType.Override)]
@@ -24,25 +21,23 @@ namespace BTree
             {
                 return true;
             }
-            else if (Agent.debugTree)
+
+            if (Agent.debugTree)
             {
                 Debug.LogWarning($"{Agent}.{this} could not find interrupt {interruptId}");
             }
 
-            interrupt = null;
             return false;
         }
 
         protected override TreeNode[] GetChildNodes()
         {
-            List<TreeNode> connectedChildren = new List<TreeNode>();
+            var connectedChildren = new List<TreeNode>();
             interruptNodes = new Dictionary<string, Interrupt>();
 
             foreach (var port in Inputs)
             {
-                if (port.Connection == null) { continue; }
-
-                if (port.Connection.node is TreeNode node)
+                if (port.Connection?.node is TreeNode node)
                 {
                     if (node is Interrupt interrupt)    // add interrupts to a separate list.
                     {

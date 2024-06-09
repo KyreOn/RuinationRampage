@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.Windows;
 
 namespace BTree
@@ -9,63 +10,41 @@ namespace BTree
         protected List<Condition> conditionNodes;
         protected TreeResponse storedResponse;
 
-        private bool CheckOwnConditions()
-        {
-            foreach (var condition in conditionNodes)
-            {
-                if (!condition.Check())
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        private bool CheckOwnConditions() => conditionNodes.All(condition => condition.Check());
 
         protected TreeResponse ResolveConditions(TreeResponse response)
         {
-            if (response.Result != Result.Failure)
+            if (response.Result == Result.Failure) return response;
+            if (!CheckOwnConditions())
             {
-                // Not a failure, so check conditions
-                if (!CheckOwnConditions())
-                {
-                    // Conditions failed, so pass failure
-                    response.Result = Result.Failure;
-                    response.Conditions.Clear();
-                    storedResponse = response;
-                    return storedResponse;
-                }
-
-                // conditions passed
-                response.Conditions.AddRange(conditionNodes);
+                response.Result = Result.Failure;
+                response.Conditions.Clear();
+                storedResponse = response;
+                return storedResponse;
             }
+            response.Conditions.AddRange(conditionNodes);
 
             return response;
         }
 
-        protected override TreeNode[] GetChildNodes()    // Find all nodes connected to childPort ports.
+        protected override TreeNode[] GetChildNodes()
         {
-            List<TreeNode> connectedChildren = new List<TreeNode>();
+            var connectedChildren = new List<TreeNode>();
             conditionNodes = new List<Condition>();
 
             foreach (var port in Inputs)
             {
                 if (port.Connection == null) { continue; }
 
-                if (port.Connection.node is TreeNode node)
+                if (port.Connection.node is not TreeNode node) continue;
+                if (node is Condition condition)
                 {
-                    if (node is Condition condition)    // add conditions to a separate list.
-                    {
-                        condition.Host = this;
-                        conditionNodes.Add(condition);
-                    }
-                    else
-                    {
-                        connectedChildren.Add(node);
-                    }
+                    condition.Host = this;
+                    conditionNodes.Add(condition);
                 }
+                else
+                    connectedChildren.Add(node);
             }
-
             return connectedChildren.ToArray();
         }
     }

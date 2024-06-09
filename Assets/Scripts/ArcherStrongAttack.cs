@@ -64,7 +64,8 @@ public class ArcherStrongAttack : Spell
         var arrow = Instantiate(strongArrowObject, spawnPoint.position, model.transform.rotation);
         arrow.GetComponent<StrongArrow>().Init(gameObject, damage[level-1] * effectSystem.CalculateOutcomeDamage() * _damageMultiplier * (PlayerPrefs.GetString($"ChosenPerks0").Contains('9') ? 1.2f : 1), bleedDuration[level-1], bleedDamage[level-1], pierceCount[level-1]);
         if (PlayerPrefs.GetString($"ChosenPerks0").Contains('0'))
-            effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
+            if (effectSystem.CalculateSpeedModifiers() <= 2)
+                effectSystem.AddEffect(new SlowEffect(0.4f, 0.4f));
     }
     
     public void StrongShootEnd()

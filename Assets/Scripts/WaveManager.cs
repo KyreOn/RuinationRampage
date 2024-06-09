@@ -29,6 +29,7 @@ public class WaveManager : MonoBehaviour
     private static Collider            _collider;
     private static CharacterController _cc;
     private static LevelSystem         _levelSystem;
+    private static CharacterInput      _characterInput;
     private static UpgradeWindow       _upgradeWindow;
     private static ParticleSystem      _particleSystem;
     private static bool                _readyToLoad = true;
@@ -58,6 +59,7 @@ public class WaveManager : MonoBehaviour
         _collider = startPoint.GetComponent<Collider>();
         //_cc = player.GetComponent<CharacterController>();
         _levelSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<LevelSystem>();
+        _characterInput = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterInput>();
         _upgradeWindow = upgradeWindow.GetComponent<UpgradeWindow>();
         _particleSystem = particleSystem.GetComponent<ParticleSystem>();
         _camera = FindObjectOfType<CameraController>();
@@ -141,11 +143,13 @@ public class WaveManager : MonoBehaviour
         {
             _readyToLoad = false;
             _upgradeWindow.Open();
+            _characterInput.enabled = false;
             Time.timeScale = 0;
         }
         else
         {
             _readyToLoad = true;
+            _characterInput.enabled = true;
             Time.timeScale = 1;
         }
     }

@@ -44,6 +44,7 @@ public class SummonerBuffSpell : MonoBehaviour
         {
             if (enemy == gameObject) continue;
             enemy.GetComponent<EffectSystem>().AddEffect(new SlowEffect(0.5f, 0.5f), false);
+            
             var aura = Instantiate(buffAura, enemy.transform);
             Destroy(aura, 0.5f);
         }

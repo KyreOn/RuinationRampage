@@ -16994,6 +16994,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarriorHero
       objectReference: {fileID: 0}
+    - target: {fileID: 258499036566857041, guid: a3956794cc1648740bc3a20a7cfa5b54,
+        type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 2800000, guid: 87d28997275f30943a4bf1cdc156bb73, type: 3}
     - target: {fileID: 3655430566969808879, guid: a3956794cc1648740bc3a20a7cfa5b54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20050,6 +20055,11 @@ PrefabInstance:
       propertyPath: level
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4659800852150372196, guid: 94aefb41a9641cc44ab700891b070a55,
+        type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 2800000, guid: 87d28997275f30943a4bf1cdc156bb73, type: 3}
     - target: {fileID: 5985047450191343054, guid: 94aefb41a9641cc44ab700891b070a55,
         type: 3}
       propertyPath: m_Enabled

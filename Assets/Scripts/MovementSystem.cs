@@ -73,10 +73,10 @@ public class MovementSystem : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.y != 1)
+        if (transform.position.y > 1.08f)
         {
             var curPos = transform.position;
-            curPos.y = 1;
+            curPos.y = 1.08f;
             transform.position = curPos;
         }
         var pullEffect = _effectSystem.CheckForPulled();
