@@ -16,20 +16,10 @@ MonoBehaviour:
   position: {x: -376, y: -120}
   ports:
     keys:
-    - input
     - output
     - input 0
     - input 1
     values:
-    - _fieldName: input
-      _node: {fileID: -9160406704859759544}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: output
       _node: {fileID: -9160406704859759544}
       _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
@@ -204,7 +194,7 @@ MonoBehaviour:
   m_Name: Check In Sight
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1128, y: -232}
+  position: {x: -1048, y: -296}
   ports:
     keys:
     - output
@@ -274,20 +264,10 @@ MonoBehaviour:
   position: {x: -1544, y: 376}
   ports:
     keys:
-    - input
     - output
     - input 0
     - input 1
     values:
-    - _fieldName: input
-      _node: {fileID: -47100697364599686}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: output
       _node: {fileID: -47100697364599686}
       _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
@@ -433,7 +413,7 @@ MonoBehaviour:
   m_Name: Root (AttackCaster)
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 216, y: -152}
+  position: {x: -104, y: -200}
   ports:
     keys:
     - interruptions
@@ -584,24 +564,14 @@ MonoBehaviour:
   m_Name: Selector
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -760, y: -88}
+  position: {x: -680, y: -232}
   ports:
     keys:
-    - input
     - output
     - input 0
     - input 1
     - conditions 0
     values:
-    - _fieldName: input
-      _node: {fileID: 4752431483070897532}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: output
       _node: {fileID: 4752431483070897532}
       _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
@@ -663,7 +633,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -456, y: 328}
+  position: {x: -680, y: -56}
   ports:
     keys:
     - input

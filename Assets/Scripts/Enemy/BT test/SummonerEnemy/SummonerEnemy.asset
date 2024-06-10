@@ -361,22 +361,12 @@ MonoBehaviour:
   position: {x: -776, y: -264}
   ports:
     keys:
-    - input
     - output
     - input 0
     - input 1
     - conditions 0
     - input 2
     values:
-    - _fieldName: input
-      _node: {fileID: 4752431483070897532}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: output
       _node: {fileID: 4752431483070897532}
       _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,

@@ -218,21 +218,11 @@ MonoBehaviour:
   position: {x: -1912, y: 456}
   ports:
     keys:
-    - input
     - output
     - input 0
     - input 1
     - conditions 0
     values:
-    - _fieldName: input
-      _node: {fileID: -1203485996577707796}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: output
       _node: {fileID: -1203485996577707796}
       _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
@@ -569,20 +559,10 @@ MonoBehaviour:
   position: {x: -1640, y: 664}
   ports:
     keys:
-    - input
     - output
     - input 0
     - input 1
     values:
-    - _fieldName: input
-      _node: {fileID: 5944617706204842986}
-      _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: output
       _node: {fileID: 5944617706204842986}
       _typeQualifiedName: BTree.TreeResponse, BTree, Version=0.0.0.0, Culture=neutral,
